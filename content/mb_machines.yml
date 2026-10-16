@@ -1,0 +1,149 @@
+TR_YGYLS:
+  item_group: Tr_zzhcjg
+  item:
+    name: '{#3d0c6e}&l因{#7b2ff7}&l果{#c026d3}&l衍{#00e5ff}&l灵{#e0f7fa}&l梭'
+    material_type: skull_base64
+    material: eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvODAzM2ZlMmY4ZGYwMWE2YjE1NzFkODU1YWQ1MjhiYzk3YzdjYTEyMDFmNzIxMzE0NjBlZTI1YmI2NjhhMjhjMSJ9fX0=
+  recipe:
+    1:
+      material: gilded_blackstone
+    2:
+      material: sea_lantern
+    3:
+      material: gilded_blackstone
+    4:
+      material: red_sandstone_wall
+    5:
+      material: lectern
+    6:
+      material: red_sandstone_wall
+    7:
+      material: stripped_pale_oak_log
+    8:
+      material: dispenser
+    9:
+      material: stripped_pale_oak_log
+  work: 5
+  sound: FLASK_OF_KNOWLEDGE_FILLUP_SOUND
+  recipes:
+    wtyd:
+      input:
+        1:
+          material_type: mc
+          material: compass
+        2:
+          material_type: slimefun
+          material: Tr_jsllz
+          amount: 2
+      output:
+        material_type: slimefun
+        material: Tr_wtyd
+    kh:
+      input:
+        1:
+          material_type: slimefun
+          material: Tr_jsllz
+          amount: 4
+        2:
+          material_type: slimefun
+          material: Tr_fdsz13
+        3:
+          material_type: mc
+          material: dispenser
+      output:
+        material_type: slimefun
+        material: Tr_kh
+    txlll:
+      input:
+        1:
+          material_type: slimefun
+          material: TR_FDSZ15
+        3:
+          material_type: slimefun
+          material: TR_FDSZ15
+        4:
+          material_type: slimefun
+          material: TR_FDSZ15
+        5:
+          material_type: slimefun
+          material: TR_FDSZ10
+        6:
+          material_type: slimefun
+          material: TR_FDSZ15
+        7:
+          material_type: slimefun
+          material: TR_FDSZ15
+        8:
+          material_type: slimefun
+          material: TR_FDSZ20
+        9:
+          material_type: slimefun
+          material: TR_FDSZ15
+      output:
+        material_type: slimefun
+        material: Tr_txlll
+    glsk:
+      input:
+        1:
+          material_type: slimefun
+          material: TR_HMZQ
+        2:
+          material_type: slimefun
+          material: TR_JSLLZ
+        3:
+          material_type: slimefun
+          material: TR_HMZQ
+        4:
+          material_type: slimefun
+          material: TR_DY01
+        5:
+          material_type: slimefun
+          material: TR_FDSZ16
+        6:
+          material_type: slimefun
+          material: TR_DY01
+        7:
+          material_type: mc
+          material: polished_diorite_slab
+        8:
+          material_type: slimefun
+          material: TR_JSLLZ
+        9:
+          material_type: mc
+          material: polished_diorite_slab
+      output:
+        material_type: slimefun
+        material: Tr_glsk
+    dxjgtcb:
+      input:
+        1:
+          material_type: slimefun
+          material: STAFF_ELEMENTAL
+        2:
+          material_type: slimefun
+          material: Tr_tthj
+        3:
+          material_type: slimefun
+          material: STAFF_ELEMENTAL
+        4:
+          material_type: slimefun
+          material: STAFF_ELEMENTAL
+        5:
+          material_type: slimefun
+          material: Tr_fdsz17
+        6:
+          material_type: slimefun
+          material: STAFF_ELEMENTAL
+        7:
+          material_type: slimefun
+          material: STAFF_ELEMENTAL
+        8:
+          material_type: mc
+          material: heavy_core
+        9:
+          material_type: slimefun
+          material: STAFF_ELEMENTAL
+      output:
+        material_type: slimefun
+        material: Tr_dxjgtcb
+        amount: 1

@@ -1,0 +1,3580 @@
+Tr_zwxmg:
+  title: "&f&l&kTg{#7b2ff7}&l造{#5533d6}&l物{#2563eb}&l匣&f&l·&7木镐&f&l&kRn"
+  slots:
+    0:
+      name: ""
+      material: GREEN_STAINED_GLASS_PANE
+    9:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    18:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    27:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    36:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    45:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+Tr_zwxsg:
+  title: "&f&l&kTg{#7b2ff7}&l造{#5533d6}&l物{#2563eb}&l匣&f&l·&7石镐&f&l&kRn"
+  slots:
+    0:
+      name: ""
+      material: GREEN_STAINED_GLASS_PANE
+    9:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    18:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    27:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    36:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    45:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+Tr_zwxtg:
+  title: "&f&l&kTg{#7b2ff7}&l造{#5533d6}&l物{#2563eb}&l匣&f&l·&7铁镐&f&l&kRn"
+  slots:
+    0:
+      name: ""
+      material: GREEN_STAINED_GLASS_PANE
+    9:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    18:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    27:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    36:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    45:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+Tr_zwxjg:
+  title: "&f&l&kTg{#7b2ff7}&l造{#5533d6}&l物{#2563eb}&l匣&f&l·&7金镐&f&l&kRn"
+  slots:
+    0:
+      name: ""
+      material: GREEN_STAINED_GLASS_PANE
+    9:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    18:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    27:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    36:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    45:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+Tr_zwxzsg:
+  title: "&f&l&kTg{#7b2ff7}&l造{#5533d6}&l物{#2563eb}&l匣&f&l·&7钻石镐&f&l&kRn"
+  slots:
+    0:
+      name: ""
+      material: GREEN_STAINED_GLASS_PANE
+    9:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    18:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    27:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    36:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    45:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+Tr_zwxxjhjg:
+  title: "&f&l&kTg{#7b2ff7}&l造{#5533d6}&l物{#2563eb}&l匣&f&l·&7下界合金镐&f&l&kRn"
+  slots:
+    0:
+      name: ""
+      material: GREEN_STAINED_GLASS_PANE
+    9:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    18:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    27:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    36:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    45:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+Tr_zwxmf:
+  title: "&f&l&kTg{#7b2ff7}&l造{#5533d6}&l物{#2563eb}&l匣&f&l·&7木斧&f&l&kRn"
+  slots:
+    0:
+      name: ""
+      material: GREEN_STAINED_GLASS_PANE
+    9:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    18:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    27:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    36:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    45:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+Tr_zwxsf:
+  title: "&f&l&kTg{#7b2ff7}&l造{#5533d6}&l物{#2563eb}&l匣&f&l·&7石斧&f&l&kRn"
+  slots:
+    0:
+      name: ""
+      material: GREEN_STAINED_GLASS_PANE
+    9:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    18:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    27:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    36:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    45:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+Tr_zwxtf:
+  title: "&f&l&kTg{#7b2ff7}&l造{#5533d6}&l物{#2563eb}&l匣&f&l·&7铁斧&f&l&kRn"
+  slots:
+    0:
+      name: ""
+      material: GREEN_STAINED_GLASS_PANE
+    9:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    18:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    27:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    36:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    45:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+Tr_zwxjf:
+  title: "&f&l&kTg{#7b2ff7}&l造{#5533d6}&l物{#2563eb}&l匣&f&l·&7金斧&f&l&kRn"
+  slots:
+    0:
+      name: ""
+      material: GREEN_STAINED_GLASS_PANE
+    9:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    18:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    27:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    36:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    45:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+Tr_zwxzsf:
+  title: "&f&l&kTg{#7b2ff7}&l造{#5533d6}&l物{#2563eb}&l匣&f&l·&7钻石斧&f&l&kRn"
+  slots:
+    0:
+      name: ""
+      material: GREEN_STAINED_GLASS_PANE
+    9:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    18:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    27:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    36:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    45:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+Tr_zwxxjhjf:
+  title: "&f&l&kTg{#7b2ff7}&l造{#5533d6}&l物{#2563eb}&l匣&f&l·&7下界合金斧&f&l&kRn"
+  slots:
+    0:
+      name: ""
+      material: GREEN_STAINED_GLASS_PANE
+    9:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    18:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    27:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    36:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    45:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+Tr_zwxmq:
+  title: "&f&l&kTg{#7b2ff7}&l造{#5533d6}&l物{#2563eb}&l匣&f&l·&7木锹&f&l&kRn"
+  slots:
+    0:
+      name: ""
+      material: GREEN_STAINED_GLASS_PANE
+    9:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    18:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    27:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    36:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    45:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+Tr_zwxsq:
+  title: "&f&l&kTg{#7b2ff7}&l造{#5533d6}&l物{#2563eb}&l匣&f&l·&7石锹&f&l&kRn"
+  slots:
+    0:
+      name: ""
+      material: GREEN_STAINED_GLASS_PANE
+    9:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    18:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    27:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    36:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    45:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+Tr_zwxtq:
+  title: "&f&l&kTg{#7b2ff7}&l造{#5533d6}&l物{#2563eb}&l匣&f&l·&7铁锹&f&l&kRn"
+  slots:
+    0:
+      name: ""
+      material: GREEN_STAINED_GLASS_PANE
+    9:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    18:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    27:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    36:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    45:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+Tr_zwxjq:
+  title: "&f&l&kTg{#7b2ff7}&l造{#5533d6}&l物{#2563eb}&l匣&f&l·&7金锹&f&l&kRn"
+  slots:
+    0:
+      name: ""
+      material: GREEN_STAINED_GLASS_PANE
+    9:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    18:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    27:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    36:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    45:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+Tr_zwxzsq:
+  title: "&f&l&kTg{#7b2ff7}&l造{#5533d6}&l物{#2563eb}&l匣&f&l·&7钻石锹&f&l&kRn"
+  slots:
+    0:
+      name: ""
+      material: GREEN_STAINED_GLASS_PANE
+    9:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    18:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    27:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    36:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    45:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+Tr_zwxxjhjq:
+  title: "&f&l&kTg{#7b2ff7}&l造{#5533d6}&l物{#2563eb}&l匣&f&l·&7下界合金锹&f&l&kRn"
+  slots:
+    0:
+      name: ""
+      material: GREEN_STAINED_GLASS_PANE
+    9:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    18:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    27:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    36:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    45:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+Tr_zwxmc:
+  title: "&f&l&kTg{#7b2ff7}&l造{#5533d6}&l物{#2563eb}&l匣&f&l·&7木锄&f&l&kRn"
+  slots:
+    0:
+      name: ""
+      material: GREEN_STAINED_GLASS_PANE
+    9:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    18:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    27:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    36:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    45:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+Tr_zwxsc:
+  title: "&f&l&kTg{#7b2ff7}&l造{#5533d6}&l物{#2563eb}&l匣&f&l·&7石锄&f&l&kRn"
+  slots:
+    0:
+      name: ""
+      material: GREEN_STAINED_GLASS_PANE
+    9:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    18:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    27:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    36:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    45:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+Tr_zwxtc:
+  title: "&f&l&kTg{#7b2ff7}&l造{#5533d6}&l物{#2563eb}&l匣&f&l·&7铁锄&f&l&kRn"
+  slots:
+    0:
+      name: ""
+      material: GREEN_STAINED_GLASS_PANE
+    9:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    18:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    27:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    36:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    45:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+Tr_zwxjc:
+  title: "&f&l&kTg{#7b2ff7}&l造{#5533d6}&l物{#2563eb}&l匣&f&l·&7金锄&f&l&kRn"
+  slots:
+    0:
+      name: ""
+      material: GREEN_STAINED_GLASS_PANE
+    9:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    18:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    27:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    36:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    45:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+Tr_zwxzsc:
+  title: "&f&l&kTg{#7b2ff7}&l造{#5533d6}&l物{#2563eb}&l匣&f&l·&7钻石锄&f&l&kRn"
+  slots:
+    0:
+      name: ""
+      material: GREEN_STAINED_GLASS_PANE
+    9:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    18:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    27:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    36:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    45:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+Tr_zwxxjhjc:
+  title: "&f&l&kTg{#7b2ff7}&l造{#5533d6}&l物{#2563eb}&l匣&f&l·&7下界合金锄&f&l&kRn"
+  slots:
+    0:
+      name: ""
+      material: GREEN_STAINED_GLASS_PANE
+    9:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    18:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    27:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    36:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    45:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+Tr_zwxt:
+  title: "&f&l&kTg{#7b2ff7}&l造{#5533d6}&l物{#2563eb}&l匣&f&l·&7桶&f&l&kRn"
+  slots:
+    0:
+      name: ""
+      material: GREEN_STAINED_GLASS_PANE
+    9:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    18:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    27:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    36:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    45:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+Tr_zwxst:
+  title: "&f&l&kTg{#7b2ff7}&l造{#5533d6}&l物{#2563eb}&l匣&f&l·&7水桶&f&l&kRn"
+  slots:
+    0:
+      name: ""
+      material: GREEN_STAINED_GLASS_PANE
+    9:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    18:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    27:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    36:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    45:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+Tr_zwxyjt:
+  title: "&f&l&kTg{#7b2ff7}&l造{#5533d6}&l物{#2563eb}&l匣&f&l·&7岩浆桶&f&l&kRn"
+  slots:
+    0:
+      name: ""
+      material: GREEN_STAINED_GLASS_PANE
+    9:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    18:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    27:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    36:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    45:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+Tr_zwxnt:
+  title: "&f&l&kTg{#7b2ff7}&l造{#5533d6}&l物{#2563eb}&l匣&f&l·&7奶桶&f&l&kRn"
+  slots:
+    0:
+      name: ""
+      material: GREEN_STAINED_GLASS_PANE
+    9:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    18:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    27:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    36:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    45:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+Tr_zwxxyt:
+  title: "&f&l&kTg{#7b2ff7}&l造{#5533d6}&l物{#2563eb}&l匣&f&l·&7鳕鱼桶&f&l&kRn"
+  slots:
+    0:
+      name: ""
+      material: GREEN_STAINED_GLASS_PANE
+    9:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    18:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    27:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    36:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    45:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+Tr_zwxgyt:
+  title: "&f&l&kTg{#7b2ff7}&l造{#5533d6}&l物{#2563eb}&l匣&f&l·&7鲑鱼桶&f&l&kRn"
+  slots:
+    0:
+      name: ""
+      material: GREEN_STAINED_GLASS_PANE
+    9:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    18:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    27:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    36:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    45:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+Tr_zwxhtt:
+  title: "&f&l&kTg{#7b2ff7}&l造{#5533d6}&l物{#2563eb}&l匣&f&l·&7河豚桶&f&l&kRn"
+  slots:
+    0:
+      name: ""
+      material: GREEN_STAINED_GLASS_PANE
+    9:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    18:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    27:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    36:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    45:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+Tr_zwxrdyt:
+  title: "&f&l&kTg{#7b2ff7}&l造{#5533d6}&l物{#2563eb}&l匣&f&l·&7热带鱼桶&f&l&kRn"
+  slots:
+    0:
+      name: ""
+      material: GREEN_STAINED_GLASS_PANE
+    9:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    18:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    27:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    36:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    45:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+Tr_zwxkdt:
+  title: "&f&l&kTg{#7b2ff7}&l造{#5533d6}&l物{#2563eb}&l匣&f&l·&7蝌蚪桶&f&l&kRn"
+  slots:
+    0:
+      name: ""
+      material: GREEN_STAINED_GLASS_PANE
+    9:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    18:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    27:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    36:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    45:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+Tr_zwxmxyt:
+  title: "&f&l&kTg{#7b2ff7}&l造{#5533d6}&l物{#2563eb}&l匣&f&l·&7美西螈桶&f&l&kRn"
+  slots:
+    0:
+      name: ""
+      material: GREEN_STAINED_GLASS_PANE
+    9:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    18:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    27:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    36:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    45:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+Tr_zwxxxt:
+  title: "&f&l&kTg{#7b2ff7}&l造{#5533d6}&l物{#2563eb}&l匣&f&l·&7细雪桶&f&l&kRn"
+  slots:
+    0:
+      name: ""
+      material: GREEN_STAINED_GLASS_PANE
+    9:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    18:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    27:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    36:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    45:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+Tr_zwxdyg:
+  title: "&f&l&kTg{#7b2ff7}&l造{#5533d6}&l物{#2563eb}&l匣&f&l·&7钓鱼竿&f&l&kRn"
+  slots:
+    0:
+      name: ""
+      material: GREEN_STAINED_GLASS_PANE
+    9:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    18:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    27:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    36:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    45:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+Tr_zwxdhs:
+  title: "&f&l&kTg{#7b2ff7}&l造{#5533d6}&l物{#2563eb}&l匣&f&l·&7打火石&f&l&kRn"
+  slots:
+    0:
+      name: ""
+      material: GREEN_STAINED_GLASS_PANE
+    9:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    18:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    27:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    36:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    45:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+Tr_zwxjd:
+  title: "&f&l&kTg{#7b2ff7}&l造{#5533d6}&l物{#2563eb}&l匣&f&l·&7剪刀&f&l&kRn"
+  slots:
+    0:
+      name: ""
+      material: GREEN_STAINED_GLASS_PANE
+    9:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    18:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    27:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    36:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    45:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+Tr_zwxsz:
+  title: "&f&l&kTg{#7b2ff7}&l造{#5533d6}&l物{#2563eb}&l匣&f&l·&7刷子&f&l&kRn"
+  slots:
+    0:
+      name: ""
+      material: GREEN_STAINED_GLASS_PANE
+    9:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    18:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    27:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    36:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    45:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+Tr_zwxmmp:
+  title: "&f&l&kTg{#7b2ff7}&l造{#5533d6}&l物{#2563eb}&l匣&f&l·&7命名牌&f&l&kRn"
+  slots:
+    0:
+      name: ""
+      material: GREEN_STAINED_GLASS_PANE
+    9:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    18:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    27:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    36:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    45:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+Tr_zwxss:
+  title: "&f&l&kTg{#7b2ff7}&l造{#5533d6}&l物{#2563eb}&l匣&f&l·&7拴绳&f&l&kRn"
+  slots:
+    0:
+      name: ""
+      material: GREEN_STAINED_GLASS_PANE
+    9:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    18:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    27:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    36:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    45:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+Tr_zwxznz:
+  title: "&f&l&kTg{#7b2ff7}&l造{#5533d6}&l物{#2563eb}&l匣&f&l·&7指南针&f&l&kRn"
+  slots:
+    0:
+      name: ""
+      material: GREEN_STAINED_GLASS_PANE
+    9:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    18:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    27:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    36:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    45:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+Tr_zwxszh:
+  title: "&f&l&kTg{#7b2ff7}&l造{#5533d6}&l物{#2563eb}&l匣&f&l·&7时钟&f&l&kRn"
+  slots:
+    0:
+      name: ""
+      material: GREEN_STAINED_GLASS_PANE
+    9:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    18:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    27:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    36:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    45:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+Tr_zwx13:
+  title: "&f&l&kTg{#7b2ff7}&l造{#5533d6}&l物{#2563eb}&l匣&f&l·&713&f&l&kRn"
+  slots:
+    0:
+      name: ""
+      material: GREEN_STAINED_GLASS_PANE
+    9:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    18:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    27:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    36:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    45:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+Tr_zwxcat:
+  title: "&f&l&kTg{#7b2ff7}&l造{#5533d6}&l物{#2563eb}&l匣&f&l·&7Cat&f&l&kRn"
+  slots:
+    0:
+      name: ""
+      material: GREEN_STAINED_GLASS_PANE
+    9:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    18:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    27:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    36:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    45:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+Tr_zwxblocks:
+  title: "&f&l&kTg{#7b2ff7}&l造{#5533d6}&l物{#2563eb}&l匣&f&l·&7Blocks&f&l&kRn"
+  slots:
+    0:
+      name: ""
+      material: GREEN_STAINED_GLASS_PANE
+    9:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    18:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    27:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    36:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    45:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+Tr_zwxchirp:
+  title: "&f&l&kTg{#7b2ff7}&l造{#5533d6}&l物{#2563eb}&l匣&f&l·&7Chirp&f&l&kRn"
+  slots:
+    0:
+      name: ""
+      material: GREEN_STAINED_GLASS_PANE
+    9:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    18:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    27:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    36:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    45:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+Tr_zwxcreator:
+  title: "&f&l&kTg{#7b2ff7}&l造{#5533d6}&l物{#2563eb}&l匣&f&l·&7Creator&f&l&kRn"
+  slots:
+    0:
+      name: ""
+      material: GREEN_STAINED_GLASS_PANE
+    9:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    18:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    27:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    36:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    45:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+Tr_zwxcmb:
+  title: "&f&l&kTg{#7b2ff7}&l造{#5533d6}&l物{#2563eb}&l匣&f&l·&7Creator Music Box&f&l&kRn"
+  slots:
+    0:
+      name: ""
+      material: GREEN_STAINED_GLASS_PANE
+    9:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    18:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    27:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    36:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    45:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+Tr_zwxfar:
+  title: "&f&l&kTg{#7b2ff7}&l造{#5533d6}&l物{#2563eb}&l匣&f&l·&7Far&f&l&kRn"
+  slots:
+    0:
+      name: ""
+      material: GREEN_STAINED_GLASS_PANE
+    9:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    18:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    27:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    36:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    45:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+Tr_zwxmall:
+  title: "&f&l&kTg{#7b2ff7}&l造{#5533d6}&l物{#2563eb}&l匣&f&l·&7Mall&f&l&kRn"
+  slots:
+    0:
+      name: ""
+      material: GREEN_STAINED_GLASS_PANE
+    9:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    18:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    27:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    36:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    45:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+Tr_zwxmellohi:
+  title: "&f&l&kTg{#7b2ff7}&l造{#5533d6}&l物{#2563eb}&l匣&f&l·&7Mellohi&f&l&kRn"
+  slots:
+    0:
+      name: ""
+      material: GREEN_STAINED_GLASS_PANE
+    9:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    18:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    27:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    36:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    45:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+Tr_zwxotherside:
+  title: "&f&l&kTg{#7b2ff7}&l造{#5533d6}&l物{#2563eb}&l匣&f&l·&7Otherside&f&l&kRn"
+  slots:
+    0:
+      name: ""
+      material: GREEN_STAINED_GLASS_PANE
+    9:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    18:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    27:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    36:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    45:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+Tr_zwxpigstep:
+  title: "&f&l&kTg{#7b2ff7}&l造{#5533d6}&l物{#2563eb}&l匣&f&l·&7Pigstep&f&l&kRn"
+  slots:
+    0:
+      name: ""
+      material: GREEN_STAINED_GLASS_PANE
+    9:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    18:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    27:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    36:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    45:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+Tr_zwxprecipice:
+  title: "&f&l&kTg{#7b2ff7}&l造{#5533d6}&l物{#2563eb}&l匣&f&l·&7Precipice&f&l&kRn"
+  slots:
+    0:
+      name: ""
+      material: GREEN_STAINED_GLASS_PANE
+    9:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    18:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    27:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    36:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    45:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+Tr_zwxrelic:
+  title: "&f&l&kTg{#7b2ff7}&l造{#5533d6}&l物{#2563eb}&l匣&f&l·&7Relic&f&l&kRn"
+  slots:
+    0:
+      name: ""
+      material: GREEN_STAINED_GLASS_PANE
+    9:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    18:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    27:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    36:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    45:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+Tr_zwxstal:
+  title: "&f&l&kTg{#7b2ff7}&l造{#5533d6}&l物{#2563eb}&l匣&f&l·&7Stal&f&l&kRn"
+  slots:
+    0:
+      name: ""
+      material: GREEN_STAINED_GLASS_PANE
+    9:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    18:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    27:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    36:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    45:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+Tr_zwxstrad:
+  title: "&f&l&kTg{#7b2ff7}&l造{#5533d6}&l物{#2563eb}&l匣&f&l·&7Strad&f&l&kRn"
+  slots:
+    0:
+      name: ""
+      material: GREEN_STAINED_GLASS_PANE
+    9:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    18:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    27:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    36:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    45:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+Tr_zwxwait:
+  title: "&f&l&kTg{#7b2ff7}&l造{#5533d6}&l物{#2563eb}&l匣&f&l·&7Wait&f&l&kRn"
+  slots:
+    0:
+      name: ""
+      material: GREEN_STAINED_GLASS_PANE
+    9:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    18:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    27:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    36:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    45:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+Tr_zwxward:
+  title: "&f&l&kTg{#7b2ff7}&l造{#5533d6}&l物{#2563eb}&l匣&f&l·&7Ward&f&l&kRn"
+  slots:
+    0:
+      name: ""
+      material: GREEN_STAINED_GLASS_PANE
+    9:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    18:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    27:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    36:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    45:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+Tr_zwx5:
+  title: "&f&l&kTg{#7b2ff7}&l造{#5533d6}&l物{#2563eb}&l匣&f&l·&75&f&l&kRn"
+  slots:
+    0:
+      name: ""
+      material: GREEN_STAINED_GLASS_PANE
+    9:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    18:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    27:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    36:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    45:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+Tr_zwx11:
+  title: "&f&l&kTg{#7b2ff7}&l造{#5533d6}&l物{#2563eb}&l匣&f&l·&711&f&l&kRn"
+  slots:
+    0:
+      name: ""
+      material: GREEN_STAINED_GLASS_PANE
+    9:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    18:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    27:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    36:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    45:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+Tr_zwxkc:
+  title: "&f&l&kTg{#7b2ff7}&l造{#5533d6}&l物{#2563eb}&l匣&f&l·&7矿车&f&l&kRn"
+  slots:
+    0:
+      name: ""
+      material: GREEN_STAINED_GLASS_PANE
+    9:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    18:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    27:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    36:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    45:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+Tr_zwxxzkc:
+  title: "&f&l&kTg{#7b2ff7}&l造{#5533d6}&l物{#2563eb}&l匣&f&l·&7箱子矿车&f&l&kRn"
+  slots:
+    0:
+      name: ""
+      material: GREEN_STAINED_GLASS_PANE
+    9:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    18:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    27:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    36:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    45:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+Tr_zwxldkc:
+  title: "&f&l&kTg{#7b2ff7}&l造{#5533d6}&l物{#2563eb}&l匣&f&l·&7漏斗矿车&f&l&kRn"
+  slots:
+    0:
+      name: ""
+      material: GREEN_STAINED_GLASS_PANE
+    9:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    18:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    27:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    36:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    45:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+Tr_zwxtntkc:
+  title: "&f&l&kTg{#7b2ff7}&l造{#5533d6}&l物{#2563eb}&l匣&f&l·&7TNT矿车&f&l&kRn"
+  slots:
+    0:
+      name: ""
+      material: GREEN_STAINED_GLASS_PANE
+    9:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    18:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    27:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    36:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    45:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+Tr_zwxdlkc:
+  title: "&f&l&kTg{#7b2ff7}&l造{#5533d6}&l物{#2563eb}&l匣&f&l·&7动力矿车&f&l&kRn"
+  slots:
+    0:
+      name: ""
+      material: GREEN_STAINED_GLASS_PANE
+    9:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    18:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    27:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    36:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    45:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+Tr_zwxmj:
+  title: "&f&l&kTg{#7b2ff7}&l造{#5533d6}&l物{#2563eb}&l匣&f&l·&7木剑&f&l&kRn"
+  slots:
+    0:
+      name: ""
+      material: GREEN_STAINED_GLASS_PANE
+    9:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    18:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    27:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    36:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    45:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+Tr_zwxsj:
+  title: "&f&l&kTg{#7b2ff7}&l造{#5533d6}&l物{#2563eb}&l匣&f&l·&7石剑&f&l&kRn"
+  slots:
+    0:
+      name: ""
+      material: GREEN_STAINED_GLASS_PANE
+    9:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    18:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    27:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    36:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    45:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+Tr_zwxtj:
+  title: "&f&l&kTg{#7b2ff7}&l造{#5533d6}&l物{#2563eb}&l匣&f&l·&7铁剑&f&l&kRn"
+  slots:
+    0:
+      name: ""
+      material: GREEN_STAINED_GLASS_PANE
+    9:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    18:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    27:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    36:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    45:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+Tr_zwxjj:
+  title: "&f&l&kTg{#7b2ff7}&l造{#5533d6}&l物{#2563eb}&l匣&f&l·&7金剑&f&l&kRn"
+  slots:
+    0:
+      name: ""
+      material: GREEN_STAINED_GLASS_PANE
+    9:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    18:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    27:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    36:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    45:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+Tr_zwxzsj:
+  title: "&f&l&kTg{#7b2ff7}&l造{#5533d6}&l物{#2563eb}&l匣&f&l·&7钻石剑&f&l&kRn"
+  slots:
+    0:
+      name: ""
+      material: GREEN_STAINED_GLASS_PANE
+    9:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    18:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    27:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    36:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    45:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+Tr_zwxxjhjj:
+  title: "&f&l&kTg{#7b2ff7}&l造{#5533d6}&l物{#2563eb}&l匣&f&l·&7下界合金剑&f&l&kRn"
+  slots:
+    0:
+      name: ""
+      material: GREEN_STAINED_GLASS_PANE
+    9:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    18:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    27:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    36:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    45:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+Tr_zwxg:
+  title: "&f&l&kTg{#7b2ff7}&l造{#5533d6}&l物{#2563eb}&l匣&f&l·&7弓&f&l&kRn"
+  slots:
+    0:
+      name: ""
+      material: GREEN_STAINED_GLASS_PANE
+    9:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    18:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    27:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    36:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    45:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+Tr_zwxn:
+  title: "&f&l&kTg{#7b2ff7}&l造{#5533d6}&l物{#2563eb}&l匣&f&l·&7弩&f&l&kRn"
+  slots:
+    0:
+      name: ""
+      material: GREEN_STAINED_GLASS_PANE
+    9:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    18:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    27:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    36:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    45:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+Tr_zwxdp:
+  title: "&f&l&kTg{#7b2ff7}&l造{#5533d6}&l物{#2563eb}&l匣&f&l·&7盾牌&f&l&kRn"
+  slots:
+    0:
+      name: ""
+      material: GREEN_STAINED_GLASS_PANE
+    9:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    18:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    27:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    36:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    45:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+Tr_zwxscj:
+  title: "&f&l&kTg{#7b2ff7}&l造{#5533d6}&l物{#2563eb}&l匣&f&l·&7三叉戟&f&l&kRn"
+  slots:
+    0:
+      name: ""
+      material: GREEN_STAINED_GLASS_PANE
+    9:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    18:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    27:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    36:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    45:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+Tr_zwxlyb:
+  title: "&f&l&kTg{#7b2ff7}&l造{#5533d6}&l物{#2563eb}&l匣&f&l·&7重锤&f&l&kRn"
+  slots:
+    0:
+      name: ""
+      material: GREEN_STAINED_GLASS_PANE
+    9:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    18:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    27:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    36:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    45:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+Tr_zwxj:
+  title: "&f&l&kTg{#7b2ff7}&l造{#5533d6}&l物{#2563eb}&l匣&f&l·&7箭&f&l&kRn"
+  slots:
+    0:
+      name: ""
+      material: GREEN_STAINED_GLASS_PANE
+    9:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    18:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    27:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    36:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    45:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+Tr_zwxhsf:
+  title: "&f&l&kTg{#7b2ff7}&l造{#5533d6}&l物{#2563eb}&l匣&f&l·&7红石粉&f&l&kRn"
+  slots:
+    0:
+      name: ""
+      material: GREEN_STAINED_GLASS_PANE
+    9:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    18:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    27:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    36:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    45:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+Tr_zwxhsk:
+  title: "&f&l&kTg{#7b2ff7}&l造{#5533d6}&l物{#2563eb}&l匣&f&l·&7红石块&f&l&kRn"
+  slots:
+    0:
+      name: ""
+      material: GREEN_STAINED_GLASS_PANE
+    9:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    18:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    27:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    36:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    45:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+Tr_zwxhshb:
+  title: "&f&l&kTg{#7b2ff7}&l造{#5533d6}&l物{#2563eb}&l匣&f&l·&7红石火把&f&l&kRn"
+  slots:
+    0:
+      name: ""
+      material: GREEN_STAINED_GLASS_PANE
+    9:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    18:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    27:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    36:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    45:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+Tr_zwxhszjq:
+  title: "&f&l&kTg{#7b2ff7}&l造{#5533d6}&l物{#2563eb}&l匣&f&l·&7红石中继器&f&l&kRn"
+  slots:
+    0:
+      name: ""
+      material: GREEN_STAINED_GLASS_PANE
+    9:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    18:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    27:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    36:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    45:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+Tr_zwxhsbjq:
+  title: "&f&l&kTg{#7b2ff7}&l造{#5533d6}&l物{#2563eb}&l匣&f&l·&7红石比较器&f&l&kRn"
+  slots:
+    0:
+      name: ""
+      material: GREEN_STAINED_GLASS_PANE
+    9:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    18:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    27:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    36:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    45:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+Tr_zwxlg:
+  title: "&f&l&kTg{#7b2ff7}&l造{#5533d6}&l物{#2563eb}&l匣&f&l·&7拉杆&f&l&kRn"
+  slots:
+    0:
+      name: ""
+      material: GREEN_STAINED_GLASS_PANE
+    9:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    18:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    27:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    36:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    45:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+Tr_zwxzcq:
+  title: "&f&l&kTg{#7b2ff7}&l造{#5533d6}&l物{#2563eb}&l匣&f&l·&7侦测器&f&l&kRn"
+  slots:
+    0:
+      name: ""
+      material: GREEN_STAINED_GLASS_PANE
+    9:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    18:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    27:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    36:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    45:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+Tr_zwxfsq:
+  title: "&f&l&kTg{#7b2ff7}&l造{#5533d6}&l物{#2563eb}&l匣&f&l·&7发射器&f&l&kRn"
+  slots:
+    0:
+      name: ""
+      material: GREEN_STAINED_GLASS_PANE
+    9:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    18:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    27:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    36:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    45:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+Tr_zwxtzq:
+  title: "&f&l&kTg{#7b2ff7}&l造{#5533d6}&l物{#2563eb}&l匣&f&l·&7投掷器&f&l&kRn"
+  slots:
+    0:
+      name: ""
+      material: GREEN_STAINED_GLASS_PANE
+    9:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    18:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    27:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    36:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    45:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+Tr_zwxhs:
+  title: "&f&l&kTg{#7b2ff7}&l造{#5533d6}&l物{#2563eb}&l匣&f&l·&7活塞&f&l&kRn"
+  slots:
+    0:
+      name: ""
+      material: GREEN_STAINED_GLASS_PANE
+    9:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    18:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    27:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    36:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    45:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+Tr_zwxnxhs:
+  title: "&f&l&kTg{#7b2ff7}&l造{#5533d6}&l物{#2563eb}&l匣&f&l·&7粘性活塞&f&l&kRn"
+  slots:
+    0:
+      name: ""
+      material: GREEN_STAINED_GLASS_PANE
+    9:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    18:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    27:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    36:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    45:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+Tr_zwxyfh:
+  title: "&f&l&kTg{#7b2ff7}&l造{#5533d6}&l物{#2563eb}&l匣&f&l·&7音符盒&f&l&kRn"
+  slots:
+    0:
+      name: ""
+      material: GREEN_STAINED_GLASS_PANE
+    9:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    18:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    27:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    36:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    45:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+Tr_zwxhsd:
+  title: "&f&l&kTg{#7b2ff7}&l造{#5533d6}&l物{#2563eb}&l匣&f&l·&7红石灯&f&l&kRn"
+  slots:
+    0:
+      name: ""
+      material: GREEN_STAINED_GLASS_PANE
+    9:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    18:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    27:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    36:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    45:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+Tr_zwxbxg:
+  title: "&f&l&kTg{#7b2ff7}&l造{#5533d6}&l物{#2563eb}&l匣&f&l·&7绊线钩&f&l&kRn"
+  slots:
+    0:
+      name: ""
+      material: GREEN_STAINED_GLASS_PANE
+    9:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    18:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    27:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    36:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    45:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+Tr_zwxbb:
+  title: "&f&l&kTg{#7b2ff7}&l造{#5533d6}&l物{#2563eb}&l匣&f&l·&7标靶&f&l&kRn"
+  slots:
+    0:
+      name: ""
+      material: GREEN_STAINED_GLASS_PANE
+    9:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    18:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    27:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    36:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    45:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+Tr_zwxblz:
+  title: "&f&l&kTg{#7b2ff7}&l造{#5533d6}&l物{#2563eb}&l匣&f&l·&7避雷针&f&l&kRn"
+  slots:
+    0:
+      name: ""
+      material: GREEN_STAINED_GLASS_PANE
+    9:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    18:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    27:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    36:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    45:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+Tr_zwxygcgq:
+  title: "&f&l&kTg{#7b2ff7}&l造{#5533d6}&l物{#2563eb}&l匣&f&l·&7阳光传感器&f&l&kRn"
+  slots:
+    0:
+      name: ""
+      material: GREEN_STAINED_GLASS_PANE
+    9:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    18:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    27:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    36:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    45:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+Tr_zwxtnt:
+  title: "&f&l&kTg{#7b2ff7}&l造{#5533d6}&l物{#2563eb}&l匣&f&l·&7TNT&f&l&kRn"
+  slots:
+    0:
+      name: ""
+      material: GREEN_STAINED_GLASS_PANE
+    9:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    18:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    27:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    36:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    45:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+Tr_zwxld:
+  title: "&f&l&kTg{#7b2ff7}&l造{#5533d6}&l物{#2563eb}&l匣&f&l·&7漏斗&f&l&kRn"
+  slots:
+    0:
+      name: ""
+      material: GREEN_STAINED_GLASS_PANE
+    9:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    18:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    27:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    36:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    45:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+Tr_zwxdltg:
+  title: "&f&l&kTg{#7b2ff7}&l造{#5533d6}&l物{#2563eb}&l匣&f&l·&7动力铁轨&f&l&kRn"
+  slots:
+    0:
+      name: ""
+      material: GREEN_STAINED_GLASS_PANE
+    9:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    18:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    27:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    36:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    45:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+Tr_zwxtctg:
+  title: "&f&l&kTg{#7b2ff7}&l造{#5533d6}&l物{#2563eb}&l匣&f&l·&7探测铁轨&f&l&kRn"
+  slots:
+    0:
+      name: ""
+      material: GREEN_STAINED_GLASS_PANE
+    9:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    18:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    27:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    36:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    45:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+Tr_zwxjhtg:
+  title: "&f&l&kTg{#7b2ff7}&l造{#5533d6}&l物{#2563eb}&l匣&f&l·&7激活铁轨&f&l&kRn"
+  slots:
+    0:
+      name: ""
+      material: GREEN_STAINED_GLASS_PANE
+    9:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    18:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    27:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    36:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    45:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+Tr_zwxsylb:
+  title: "&f&l&kTg{#7b2ff7}&l造{#5533d6}&l物{#2563eb}&l匣&f&l·&7石压力板&f&l&kRn"
+  slots:
+    0:
+      name: ""
+      material: GREEN_STAINED_GLASS_PANE
+    9:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    18:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    27:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    36:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    45:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+Tr_zwxxmylb:
+  title: "&f&l&kTg{#7b2ff7}&l造{#5533d6}&l物{#2563eb}&l匣&f&l·&7橡木压力板&f&l&kRn"
+  slots:
+    0:
+      name: ""
+      material: GREEN_STAINED_GLASS_PANE
+    9:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    18:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    27:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    36:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    45:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+Tr_zwxysmylb:
+  title: "&f&l&kTg{#7b2ff7}&l造{#5533d6}&l物{#2563eb}&l匣&f&l·&7云杉木压力板&f&l&kRn"
+  slots:
+    0:
+      name: ""
+      material: GREEN_STAINED_GLASS_PANE
+    9:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    18:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    27:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    36:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    45:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+Tr_zwxbhmylb:
+  title: "&f&l&kTg{#7b2ff7}&l造{#5533d6}&l物{#2563eb}&l匣&f&l·&7白桦木压力板&f&l&kRn"
+  slots:
+    0:
+      name: ""
+      material: GREEN_STAINED_GLASS_PANE
+    9:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    18:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    27:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    36:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    45:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+Tr_zwxclmylb:
+  title: "&f&l&kTg{#7b2ff7}&l造{#5533d6}&l物{#2563eb}&l匣&f&l·&7丛林木压力板&f&l&kRn"
+  slots:
+    0:
+      name: ""
+      material: GREEN_STAINED_GLASS_PANE
+    9:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    18:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    27:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    36:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    45:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+Tr_zwxjhhmylb:
+  title: "&f&l&kTg{#7b2ff7}&l造{#5533d6}&l物{#2563eb}&l匣&f&l·&7金合欢木压力板&f&l&kRn"
+  slots:
+    0:
+      name: ""
+      material: GREEN_STAINED_GLASS_PANE
+    9:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    18:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    27:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    36:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    45:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+Tr_zwxssxmylb:
+  title: "&f&l&kTg{#7b2ff7}&l造{#5533d6}&l物{#2563eb}&l匣&f&l·&7深色橡木压力板&f&l&kRn"
+  slots:
+    0:
+      name: ""
+      material: GREEN_STAINED_GLASS_PANE
+    9:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    18:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    27:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    36:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    45:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+Tr_zwxhsmylb:
+  title: "&f&l&kTg{#7b2ff7}&l造{#5533d6}&l物{#2563eb}&l匣&f&l·&7红树木压力板&f&l&kRn"
+  slots:
+    0:
+      name: ""
+      material: GREEN_STAINED_GLASS_PANE
+    9:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    18:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    27:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    36:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    45:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+Tr_zwxyhmylb:
+  title: "&f&l&kTg{#7b2ff7}&l造{#5533d6}&l物{#2563eb}&l匣&f&l·&7樱花木压力板&f&l&kRn"
+  slots:
+    0:
+      name: ""
+      material: GREEN_STAINED_GLASS_PANE
+    9:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    18:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    27:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    36:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    45:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+Tr_zwxcsxmylb:
+  title: "&f&l&kTg{#7b2ff7}&l造{#5533d6}&l物{#2563eb}&l匣&f&l·&7苍色橡木压力板&f&l&kRn"
+  slots:
+    0:
+      name: ""
+      material: GREEN_STAINED_GLASS_PANE
+    9:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    18:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    27:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    36:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    45:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+Tr_zwxzylb:
+  title: "&f&l&kTg{#7b2ff7}&l造{#5533d6}&l物{#2563eb}&l匣&f&l·&7竹压力板&f&l&kRn"
+  slots:
+    0:
+      name: ""
+      material: GREEN_STAINED_GLASS_PANE
+    9:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    18:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    27:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    36:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    45:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+Tr_zwxfhmylb:
+  title: "&f&l&kTg{#7b2ff7}&l造{#5533d6}&l物{#2563eb}&l匣&f&l·&7绯红木压力板&f&l&kRn"
+  slots:
+    0:
+      name: ""
+      material: GREEN_STAINED_GLASS_PANE
+    9:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    18:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    27:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    36:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    45:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+Tr_zwxgymylb:
+  title: "&f&l&kTg{#7b2ff7}&l造{#5533d6}&l物{#2563eb}&l匣&f&l·&7诡异木压力板&f&l&kRn"
+  slots:
+    0:
+      name: ""
+      material: GREEN_STAINED_GLASS_PANE
+    9:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    18:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    27:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    36:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    45:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+Tr_zwxmzhsylb:
+  title: "&f&l&kTg{#7b2ff7}&l造{#5533d6}&l物{#2563eb}&l匣&f&l·&7磨制黑石压力板&f&l&kRn"
+  slots:
+    0:
+      name: ""
+      material: GREEN_STAINED_GLASS_PANE
+    9:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    18:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    27:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    36:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    45:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+Tr_zwxqzczylb:
+  title: "&f&l&kTg{#7b2ff7}&l造{#5533d6}&l物{#2563eb}&l匣&f&l·&7轻质测重压力板&f&l&kRn"
+  slots:
+    0:
+      name: ""
+      material: GREEN_STAINED_GLASS_PANE
+    9:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    18:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    27:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    36:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    45:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+Tr_zwxzzczylb:
+  title: "&f&l&kTg{#7b2ff7}&l造{#5533d6}&l物{#2563eb}&l匣&f&l·&7重质测重压力板&f&l&kRn"
+  slots:
+    0:
+      name: ""
+      material: GREEN_STAINED_GLASS_PANE
+    9:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    18:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    27:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    36:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    45:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+Tr_cjscjq:
+  title: "{#8dddd8}&l初{#6fbeb9}&l级&f&l生产机器"
+  slots:
+    0-2:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    9:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    11:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    12-17:
+      name: "&f&l↑输入槽↑"
+      material: WHITE_STAINED_GLASS_PANE
+    18-20:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    21-26:
+      name: "&f&l↓输出槽↓"
+      material: WHITE_STAINED_GLASS_PANE
+    27-29:
+      name: ""
+      material: LIGHT_BLUE_STAINED_GLASS_PANE
+    36:
+      name: ""
+      material: LIGHT_BLUE_STAINED_GLASS_PANE
+    37:
+      name: "&b进度栏"
+      material: "netherite_pickaxe"
+      glow: true
+      progressbar: true
+    38:
+      name: ""
+      material: LIGHT_BLUE_STAINED_GLASS_PANE
+    45-47:
+      name: ""
+      material: LIGHT_BLUE_STAINED_GLASS_PANE
+TR_CJHNSCYQ:
+  title: "{#8dddd8}&l初{#6fbeb9}&l级{#685a5a}&l黑奴{#8d1c1c}&l生产园区"
+  slots:
+    0:
+      name: "&b调教进度"
+      material: "lead"
+      glow: true
+      progressbar: true  
+    27-35:
+      name: "&f&l↑输入槽↑"
+      material: BLACK_STAINED_GLASS_PANE
+    36-44:
+      name: "&f&l↓输出槽↓"
+      material: RED_STAINED_GLASS_PANE
+    45:
+      name: "&f&l新鲜出炉的劳动力→"
+      material: GRAY_STAINED_GLASS_PANE
+Tr_cjws:
+  title: "{#8dddd8}&l初{#6fbeb9}&l级{#52a300}&l温{#69c40e}&l室"
+  slots:
+    0-2:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    9:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    11:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    12-17:
+      name: "&f&l↑输入槽↑"
+      material: WHITE_STAINED_GLASS_PANE
+    18-20:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    21-26:
+      name: "&f&l↓输出槽↓"
+      material: WHITE_STAINED_GLASS_PANE
+    27-29:
+      name: ""
+      material: LIGHT_BLUE_STAINED_GLASS_PANE
+    36:
+      name: ""
+      material: LIGHT_BLUE_STAINED_GLASS_PANE
+    37:
+      name: "&b进度栏"
+      material: "torch"
+      glow: true
+      progressbar: true
+    38:
+      name: ""
+      material: LIGHT_BLUE_STAINED_GLASS_PANE
+    45-47:
+      name: ""
+      material: LIGHT_BLUE_STAINED_GLASS_PANE
+Tr_cjzryhj:
+  title: "{#8dddd8}&l初{#6fbeb9}&l级{#52a300}&l自{#69c40e}&l然{#e19c5b}&l演化机"
+  slots:
+    18-26:
+      name: "&f&l↑输入槽↑"
+      material: BLUE_STAINED_GLASS_PANE
+    45-53:
+      name: "&f&l↑输出槽↑"
+      material: RED_STAINED_GLASS_PANE
+Tr_cjsc:
+  title: "{#8dddd8}&l初{#6fbeb9}&l级{#6ce4c0}&l树{#2ac093}&l厂"
+  slots:
+    0-2:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    9:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    11:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    12-17:
+      name: "&f&l↑输入槽↑"
+      material: WHITE_STAINED_GLASS_PANE
+    18-20:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    21-26:
+      name: "&f&l↓输出槽↓"
+      material: WHITE_STAINED_GLASS_PANE
+    27-29:
+      name: ""
+      material: LIGHT_BLUE_STAINED_GLASS_PANE
+    36:
+      name: ""
+      material: LIGHT_BLUE_STAINED_GLASS_PANE
+    37:
+      name: "&b进度栏"
+      material: "oak_sapling"
+      glow: true
+      progressbar: true
+    38:
+      name: ""
+      material: LIGHT_BLUE_STAINED_GLASS_PANE
+    45-47:
+      name: ""
+      material: LIGHT_BLUE_STAINED_GLASS_PANE
+Tr_cjhp:
+  title: "{#8dddd8}&l初{#6fbeb9}&l级{#6541c8}&l花{#361c7d}&l圃"
+  slots:
+    0-2:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    9:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    11:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    12-17:
+      name: "&f&l↑输入槽↑"
+      material: WHITE_STAINED_GLASS_PANE
+    18-20:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    21-26:
+      name: "&f&l↓输出槽↓"
+      material: WHITE_STAINED_GLASS_PANE
+    27-29:
+      name: ""
+      material: LIGHT_BLUE_STAINED_GLASS_PANE
+    36:
+      name: ""
+      material: LIGHT_BLUE_STAINED_GLASS_PANE
+    37:
+      name: "&b进度栏"
+      material: "flowering_azalea"
+      glow: true
+      progressbar: true
+    38:
+      name: ""
+      material: LIGHT_BLUE_STAINED_GLASS_PANE
+    45-47:
+      name: ""
+      material: LIGHT_BLUE_STAINED_GLASS_PANE
+Tr_cjshc:
+  title: "{#8dddd8}&l初{#6fbeb9}&l级{#099efb}&l珊{#2b66c5}&l瑚&l厂"
+  slots:
+    0-2:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    9:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    11:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    12-17:
+      name: "&f&l↑输入槽↑"
+      material: WHITE_STAINED_GLASS_PANE
+    18-20:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    21-26:
+      name: "&f&l↓输出槽↓"
+      material: WHITE_STAINED_GLASS_PANE
+    27-29:
+      name: ""
+      material: LIGHT_BLUE_STAINED_GLASS_PANE
+    36:
+      name: ""
+      material: LIGHT_BLUE_STAINED_GLASS_PANE
+    37:
+      name: "&b进度栏"
+      material: "flowering_azalea"
+      glow: true
+      progressbar: true
+    38:
+      name: ""
+      material: LIGHT_BLUE_STAINED_GLASS_PANE
+    45-47:
+      name: ""
+      material: LIGHT_BLUE_STAINED_GLASS_PANE
+Tr_cjdgc:
+  title: "{#8dddd8}&l初{#6fbeb9}&l级{#c6ff29}&l灯{#f5ff70}&l光&l厂"
+  slots:
+    0-2:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    9:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    11:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    12-17:
+      name: "&f&l↑输入槽↑"
+      material: WHITE_STAINED_GLASS_PANE
+    18-20:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    21-26:
+      name: "&f&l↓输出槽↓"
+      material: WHITE_STAINED_GLASS_PANE
+    27-29:
+      name: ""
+      material: LIGHT_BLUE_STAINED_GLASS_PANE
+    36:
+      name: ""
+      material: LIGHT_BLUE_STAINED_GLASS_PANE
+    37:
+      name: "&b进度栏"
+      material: "glowstone"
+      glow: true
+      progressbar: true
+    38:
+      name: ""
+      material: LIGHT_BLUE_STAINED_GLASS_PANE
+    45-47:
+      name: ""
+      material: LIGHT_BLUE_STAINED_GLASS_PANE
+Tr_cjbk:
+  title: "{#8dddd8}&l初{#6fbeb9}&l级{#18adec}&l冰{#0343d8}&l库"
+  slots:
+    0-2:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    9:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    11:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    12-17:
+      name: "&f&l↑输入槽↑"
+      material: WHITE_STAINED_GLASS_PANE
+    18-20:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    21-26:
+      name: "&f&l↓输出槽↓"
+      material: WHITE_STAINED_GLASS_PANE
+    27-29:
+      name: ""
+      material: LIGHT_BLUE_STAINED_GLASS_PANE
+    36:
+      name: ""
+      material: LIGHT_BLUE_STAINED_GLASS_PANE
+    37:
+      name: "&b进度栏"
+      material_type: slimefun
+      material: reactor_collant_cell
+      glow: true
+      progressbar: true
+    38:
+      name: ""
+      material: LIGHT_BLUE_STAINED_GLASS_PANE
+    45-47:
+      name: ""
+      material: LIGHT_BLUE_STAINED_GLASS_PANE
+Tr_cjhfyd:
+  title: "{#8dddd8}&l初{#6fbeb9}&l级{#2da215}&l核{#21810e}&l反{#0e5700}&l应{#568b4b}&l堆"
+  slots:
+    3:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    4:
+      name: ""
+      material: GREEN_STAINED_GLASS_PANE
+      progressbar: true
+    5:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    12-14:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    21-23:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    30-32:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    39-41:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    48-50:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+Tr_cjhzhq:
+  title: "{#8dddd8}&l初{#6fbeb9}&l级{#2da215}&l核{#21810e}&l转{#0e5700}&l换{#568b4b}&l器"
+  slots:
+    3:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    4:
+      name: ""
+      material: GREEN_STAINED_GLASS_PANE
+      progressbar: true
+    5:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    12-14:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    21-23:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    30-32:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    39-41:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    48-50:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+TR_CZJT:
+  title: "{#8dddd8}&l初{#6fbeb9}&l章{#c52b2b}&l祭{#cc0000}&l坛"
+  slots:
+    0-1:
+      name: ""
+      material: white_stained_glass_pane
+    3:
+      name: ""
+      material: magenta_stained_glass_pane
+    4:
+      name: "&7&l输出槽↓"
+      material: candle
+    5:
+      name: ""
+      material: magenta_stained_glass_pane
+    7-8:
+      name: ""
+      material: white_stained_glass_pane
+    10-11:
+      name: ""
+      material: white_stained_glass_pane
+    12:
+      name: ""
+      material: magenta_stained_glass_pane
+    14:
+      name: ""
+      material: magenta_stained_glass_pane
+    15-16:
+      name: ""
+      material: white_stained_glass_pane
+    18-20:
+      name: ""
+      material: white_stained_glass_pane
+    21:
+      name: ""
+      material: magenta_stained_glass_pane
+    23:
+      name: ""
+      material: magenta_stained_glass_pane
+    24-29:
+      name: ""
+      material: white_stained_glass_pane
+    30:
+      name: ""
+      material: magenta_stained_glass_pane
+    32:
+      name: ""
+      material: magenta_stained_glass_pane
+    33-35:
+      name: ""
+      material: white_stained_glass_pane
+    37-38:
+      name: ""
+      material: white_stained_glass_pane
+    39:
+      name: ""
+      material: magenta_stained_glass_pane
+    41:
+      name: ""
+      material: magenta_stained_glass_pane
+    42-43:
+      name: ""
+      material: white_stained_glass_pane
+    45-46:
+      name: ""
+      material: white_stained_glass_pane
+    48:
+      name: ""
+      material: magenta_stained_glass_pane
+    49:
+      name: "&7&l输出槽↑"
+      material: lectern
+      progressbar: true
+    50:
+      name: ""
+      material: magenta_stained_glass_pane
+    52-53:
+      name: ""
+      material: white_stained_glass_pane
+Tr_zzznq:
+  title: "{#5e2895}&l自{#691bb6}&l动{#f9a35d}&l注能器"
+  slots:
+    0:
+      name: ""
+      material: GREEN_STAINED_GLASS_PANE
+    9:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    18:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    27:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    36:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    45:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+Tr_zdspj:
+  title: "{#5e2895}&l自{#691bb6}&l动&f&l赛跑机"
+  slots:
+    0:
+      name: ""
+      material: GREEN_STAINED_GLASS_PANE
+    9:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    18:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    27:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    36:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    45:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+Tr_zdrlc:
+  title: "{#5e2895}&l自{#691bb6}&l动{#25b9bb}&l染{#df0c0c}&l料{#fffa66}&l厂"
+  slots:
+    0:
+      name: ""
+      material: GREEN_STAINED_GLASS_PANE
+    9:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    18:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    27:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    36:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    45:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+Tr_zdkj:
+  title: "{#5e2895}&l自{#691bb6}&l动&7&l矿机"
+  slots:
+    0:
+      name: ""
+      material: GREEN_STAINED_GLASS_PANE
+    9:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    18:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    27:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    36:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    45:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+Tr_zdxfq:
+  title: "{#5e2895}&l自{#691bb6}&l动&7&l析粉器"
+  slots:
+    0:
+      name: ""
+      material: GREEN_STAINED_GLASS_PANE
+    9:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    18:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    27:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    36:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    45:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+Tr_zddzc:
+  title: "{#5e2895}&l自{#691bb6}&l动&4&l锻造厂"
+  slots:
+    0:
+      name: ""
+      material: GREEN_STAINED_GLASS_PANE
+    9:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    18:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    27:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    36:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    45:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+Tr_zdylc:
+  title: "{#5e2895}&l自{#691bb6}&l动{#8a2828}&l冶炼厂"
+  slots:
+    0:
+      name: ""
+      material: GREEN_STAINED_GLASS_PANE
+    9:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    18:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    27:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    36:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    45:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+Tr_mgzjt:
+  title: "{#D9BFF0}&l命{#B78FE4}&l轨{#FFE9A8}&l铸{#FFC64D}&l金{#D98F00}&l台"
+  slots:
+    0:
+      name: ""
+      material: PURPLE_STAINED_GLASS_PANE
+    9:
+      name: ""
+      material: YELLOW_STAINED_GLASS_PANE
+    18:
+      name: ""
+      material: YELLOW_STAINED_GLASS_PANE
+    27:
+      name: ""
+      material: YELLOW_STAINED_GLASS_PANE
+    36:
+      name: ""
+      material: YELLOW_STAINED_GLASS_PANE
+    45:
+      name: ""
+      material: YELLOW_STAINED_GLASS_PANE
+Tr_mgzj:
+  title: "{#c4b5fd}&l命{#a78bfa}&l轨{#8b5cf6}&l织{#7c3aed}&l机"
+  slots:
+    0-2:
+      name: ""
+      material: GRAY_STAINED_GLASS_PANE
+    3:
+      name: "&a请在第五格放入命轨星屑"
+      material: GREEN_STAINED_GLASS_PANE
+    5:
+      name: "&a请在第五格放入命轨星屑"
+      material: GREEN_STAINED_GLASS_PANE
+    6-8:
+      name: ""
+      material: GRAY_STAINED_GLASS_PANE
+    45-48:
+      name: ""
+      material: GRAY_STAINED_GLASS_PANE
+    49:
+      name: "&b捕捞中..."
+      material: BARRIER
+      lore:
+      - "&7▮▮▮▮▮"
+    50-53:
+      name: ""
+      material: GRAY_STAINED_GLASS_PANE
+
+Tr_glsk:
+  title: "{#a5f3fc}&l甘{#67e8f9}&l霖{#22d3ee}&l神{#0ea5e9}&l龛"
+  slots:
+    0-3:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    4:
+      name: "&a&l开始凝聚"
+      material: LIME_STAINED_GLASS_PANE
+    5-8:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    45-53:
+      name: ""
+      material: GRAY_STAINED_GLASS_PANE
+    49:
+      name: "&c关闭"
+      material: BARRIER
+
+Tr_hqsjq:
+  title: "{#b8f2e6}&l哈{#8ad4e0}&l气{#5fb2d8}&l收{#3f8ec4}&l集{#2a5fa8}&l器"
+  slots:
+    0-3:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    4:
+      name: "&b&l看乐子ing&f&l..."
+      material: GREEN_STAINED_GLASS_PANE
+    5-20:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    24-29:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    33-47:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    48:
+      name: ""
+      material_type: skull_base64
+      material: eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvMmRiYWY0NzFkZWM1MjUzMjg3MzU3MmU1ZDdjZjAzM2VjNzlkNmI2NjA1MGViM2M0ZTMyN2JhM2IxNDAxODgxNiJ9fX0=
+    49:
+      name: "&4&l老吴~"
+      material: DIAMOND_SWORD
+    50:
+      name: ""
+      material_type: skull_base64
+      material: eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvMmRiYWY0NzFkZWM1MjUzMjg3MzU3MmU1ZDdjZjAzM2VjNzlkNmI2NjA1MGViM2M0ZTMyN2JhM2IxNDAxODgxNiJ9fX0=
+    51-53:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+Tr_zdhqj:
+  title: "{#5e2895}&l自{#691bb6}&l动{#b8f2e6}&l哈{#8ad4e0}&l气{#5fb2d8}&l机"
+  slots:
+    0-2:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    9:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    11:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    12-17:
+      name: "&f&l↑输入槽↑"
+      material: WHITE_STAINED_GLASS_PANE
+    18-20:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    21-26:
+      name: "&f&l↓输出槽↓"
+      material: WHITE_STAINED_GLASS_PANE
+    27-29:
+      name: ""
+      material: LIGHT_BLUE_STAINED_GLASS_PANE
+    36:
+      name: ""
+      material: LIGHT_BLUE_STAINED_GLASS_PANE
+    37:
+      name: "&6不关注塔菲喵?&b我要哈气了喵"
+      material_type: skull_base64
+      material: eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvMmRiYWY0NzFkZWM1MjUzMjg3MzU3MmU1ZDdjZjAzM2VjNzlkNmI2NjA1MGViM2M0ZTMyN2JhM2IxNDAxODgxNiJ9fX0=
+      progressbar: true
+    38:
+      name: ""
+      material: LIGHT_BLUE_STAINED_GLASS_PANE
+    45-47:
+      name: ""
+      material: LIGHT_BLUE_STAINED_GLASS_PANE
+Tr_syxrrl:
+  title: "{#2b1d3a}&l深{#3d2447}&l渊{#c9263b}&l血{#ff4d4d}&l肉{#ff7a1a}&l熔{#ffb347}&l炉"
+  slots:
+    1:
+      name: "&7&l(在左侧放置{#ffd166}&l哈{#f4a259}&l基{#e07a3f}&l仙&7&l) &4屠宰进度 "
+      material: "netherite_sword"
+      glow: true
+      progressbar: true
+    9-17:
+      name: "&1&l分割栏"
+      material: BLACK_STAINED_GLASS_PANE
+    53:
+      name: ""
+      material: LIGHT_GRAY_STAINED_GLASS_PANE
+Tr_xryyrl:
+  title: "{#c9f2dd}&l息{#a1e8c8}&l壤{#7cddb0}&l蕴{#66d6a4}&l育{#8be2b9}&l熔{#b2ecd0}&l炉"
+  slots:
+    1:
+      name: "&7&l(在左侧放置{#ffd166}&l哈{#f4a259}&l基{#e07a3f}&l仙&7&l) &4蕴生进度 "
+      material: "egg"
+      glow: true
+      progressbar: true
+    9-17:
+      name: "&1&l分割栏"
+      material: BLACK_STAINED_GLASS_PANE
+    53:
+      name: ""
+      material: LIGHT_GRAY_STAINED_GLASS_PANE
+Tr_bdmachine:
+  title: "{#8ddaa8}&l补{#6fcec9}&l丁{#2da215}&l机{#568b4b}&l器"
+  slots:
+    3:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    4:
+      name: ""
+      material_type: skull_hash
+      material: baf574f78dd9e2b53e9234d47ded217bae5b487e5c19f74b111b6b3f6b044e7b
+      progressbar: true
+    5:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    12-14:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    21-23:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    30-32:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    39-41:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    48-50:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+Tr_czzddrc:
+  title: "&c&l⚡&e&l自&a&l动&b&l电&d&l容&c&l厂"
+  slots:
+    0:
+      name: ""
+      material: GREEN_STAINED_GLASS_PANE
+    9:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    18:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    27:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    36:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    45:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+Tr_amzz:
+  title: "{#6a00f4}&l奥{#9d00ff}&l密{#e040fb}&l织{#00e5ff}&l者"
+  slots:
+    0:
+      name: ""
+      material: LIME_STAINED_GLASS_PANE
+    9:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    18:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    27:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    36:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    45:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+Tr_dlzjbl:
+  title: "{#00e5ff}&l等{#00b0ff}&l离{#2979ff}&l子{#00e5ff}&l聚{#80d8ff}&l变{#e0f7fa}&l炉"
+  slots:
+    0:
+      name: ""
+      material: GREEN_STAINED_GLASS_PANE
+    9:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    18:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    27:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    36:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    45:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+Tr_nmjqrzpz:
+  title: "{#7ff9ff}&l纳{#18d6ff}&l米{#0091ff}&l机{#0043ff}&l器{#00e5ff}&l人{#a5f3fc}&l装{#e0f7fa}&l配{#b3e5fc}&l站"
+  slots:
+    0:
+      name: ""
+      material_type: slimefun
+      material: PROGRAMMABLE_ANDROID
+    9:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    18:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    27:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    36:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    45:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+Tr_akxzj:
+  title: "{#b388ff}&l阿{#7c4dff}&l卡{#651fff}&l夏{#00e5ff}&l织{#18ffff}&l机"
+  slots:
+    3:
+      name: "{#b388ff}&l✦"
+      material: MAGENTA_STAINED_GLASS_PANE
+    4:
+      name: "{#b388ff}&l✦ 织机核心 ✦"
+      material: "book"
+      glow: true
+      progressbar: true
+    5:
+      name: "{#b388ff}&l✦"
+      material: MAGENTA_STAINED_GLASS_PANE
+    12-14:
+      name: "{#7c4dff}&l✦ 织机丝线 ✦"
+      material: PURPLE_STAINED_GLASS_PANE
+    21-23:
+      name: "{#7c4dff}&l✦ 织机丝线 ✦"
+      material: PURPLE_STAINED_GLASS_PANE
+    30-32:
+      name: "{#7c4dff}&l✦ 织机丝线 ✦"
+      material: PURPLE_STAINED_GLASS_PANE
+    39-41:
+      name: "{#7c4dff}&l✦ 织机丝线 ✦"
+      material: PURPLE_STAINED_GLASS_PANE
+    48-50:
+      name: "{#7c4dff}&l✦ 织机丝线 ✦"
+      material: PURPLE_STAINED_GLASS_PANE
+Tr_ysjq:
+  title: "{#b388ff}&l元{#7c4dff}&l素{#651fff}&l祭{#00e5ff}&l器"
+  slots:
+    0:
+      name: ""
+      material: MAGENTA_STAINED_GLASS_PANE
+    1:
+      name: "&5✦"
+      material: PURPLE_STAINED_GLASS_PANE
+    2:
+      name: "&b✦"
+      material: LIGHT_BLUE_STAINED_GLASS_PANE
+    3:
+      name: "&d✦"
+      material: MAGENTA_STAINED_GLASS_PANE
+    4:
+      name: "{#b388ff}&l元素流转"
+      material: LIGHT_BLUE_STAINED_GLASS_PANE
+      glow: true
+      progressbar: true
+    5:
+      name: "&5✦"
+      material: PURPLE_STAINED_GLASS_PANE
+    6:
+      name: "&b✦"
+      material: LIGHT_BLUE_STAINED_GLASS_PANE
+    7:
+      name: "&d✦"
+      material: MAGENTA_STAINED_GLASS_PANE
+    8:
+      name: "&5✦"
+      material: PURPLE_STAINED_GLASS_PANE
+    9:
+      name: "&b✦"
+      material: LIGHT_BLUE_STAINED_GLASS_PANE
+    10:
+      name: "&d✦"
+      material: MAGENTA_STAINED_GLASS_PANE
+    11:
+      name: "&5✦"
+      material: PURPLE_STAINED_GLASS_PANE
+    12:
+      name: "&b✦"
+      material: LIGHT_BLUE_STAINED_GLASS_PANE
+    13:
+      name: "&d✦"
+      material: MAGENTA_STAINED_GLASS_PANE
+    17:
+      name: "&5✦"
+      material: PURPLE_STAINED_GLASS_PANE
+    18:
+      name: "&d✦"
+      material: MAGENTA_STAINED_GLASS_PANE
+    19:
+      name: "&b✦"
+      material: LIGHT_BLUE_STAINED_GLASS_PANE
+    21:
+      name: "&5✦"
+      material: PURPLE_STAINED_GLASS_PANE
+    22:
+      name: "&b✦"
+      material: LIGHT_BLUE_STAINED_GLASS_PANE
+    26:
+      name: "&b✦"
+      material: LIGHT_BLUE_STAINED_GLASS_PANE
+    27:
+      name: "&d✦"
+      material: MAGENTA_STAINED_GLASS_PANE
+    28:
+      name: "&5✦"
+      material: PURPLE_STAINED_GLASS_PANE
+    29:
+      name: "&b✦"
+      material: LIGHT_BLUE_STAINED_GLASS_PANE
+    30:
+      name: "&d✦"
+      material: MAGENTA_STAINED_GLASS_PANE
+    31:
+      name: "&d✦"
+      material: MAGENTA_STAINED_GLASS_PANE
+    35:
+      name: "&b✦"
+      material: LIGHT_BLUE_STAINED_GLASS_PANE
+    36:
+      name: "&d✦"
+      material: MAGENTA_STAINED_GLASS_PANE
+    37:
+      name: "&5✦"
+      material: PURPLE_STAINED_GLASS_PANE
+    38:
+      name: "&b✦"
+      material: LIGHT_BLUE_STAINED_GLASS_PANE
+    39:
+      name: "&d✦"
+      material: MAGENTA_STAINED_GLASS_PANE
+    40:
+      name: "&5✦"
+      material: PURPLE_STAINED_GLASS_PANE
+    44:
+      name: "&b✦"
+      material: LIGHT_BLUE_STAINED_GLASS_PANE
+    45:
+      name: "&d✦"
+      material: MAGENTA_STAINED_GLASS_PANE
+    46:
+      name: "&5✦"
+      material: PURPLE_STAINED_GLASS_PANE
+    47:
+      name: "&b✦"
+      material: LIGHT_BLUE_STAINED_GLASS_PANE
+    48:
+      name: "&d✦"
+      material: MAGENTA_STAINED_GLASS_PANE
+    49:
+      name: "&5✦"
+      material: PURPLE_STAINED_GLASS_PANE
+    51:
+      name: "&b✦"
+      material: LIGHT_BLUE_STAINED_GLASS_PANE
+    52:
+      name: "&d✦"
+      material: MAGENTA_STAINED_GLASS_PANE
+    53:
+      name: "&5✦"
+      material: PURPLE_STAINED_GLASS_PANE
+
+Tr_bkmnq:
+  title: "{#fde68a}&l宝{#fcd34d}&l库{#fbbf24}&l模{#f59e0b}&l拟{#d97706}&l器"
+  slots:
+    0-8:
+      name: ""
+      material: YELLOW_STAINED_GLASS_PANE
+    9:
+      name: ""
+      material: ORANGE_STAINED_GLASS_PANE
+    10:
+      name: ""
+      material: ORANGE_STAINED_GLASS_PANE
+    12-14:
+      name: ""
+      material: ORANGE_STAINED_GLASS_PANE
+    16-17:
+      name: ""
+      material: ORANGE_STAINED_GLASS_PANE
+    18:
+      name: ""
+      material: ORANGE_STAINED_GLASS_PANE
+    19:
+      name: ""
+      material: ORANGE_STAINED_GLASS_PANE
+    21-23:
+      name: ""
+      material: ORANGE_STAINED_GLASS_PANE
+    25-26:
+      name: ""
+      material: ORANGE_STAINED_GLASS_PANE
+    27:
+      name: ""
+      material: ORANGE_STAINED_GLASS_PANE
+    28:
+      name: ""
+      material: ORANGE_STAINED_GLASS_PANE
+    30-32:
+      name: ""
+      material: ORANGE_STAINED_GLASS_PANE
+    34-35:
+      name: ""
+      material: ORANGE_STAINED_GLASS_PANE
+    36:
+      name: ""
+      material: ORANGE_STAINED_GLASS_PANE
+    37:
+      name: ""
+      material: ORANGE_STAINED_GLASS_PANE
+    39-41:
+      name: ""
+      material: ORANGE_STAINED_GLASS_PANE
+    43-44:
+      name: ""
+      material: ORANGE_STAINED_GLASS_PANE
+    45-53:
+      name: ""
+      material: YELLOW_STAINED_GLASS_PANE
+TR_HTY:
+  title: "{#f5d0fe}&l浑{#e879f9}&l天{#c026d3}&l仪"
+  slots:
+    0-4:
+      name: ""
+      material: GRAY_STAINED_GLASS_PANE
+    9:
+      name: ""
+      material: GRAY_STAINED_GLASS_PANE
+    13:
+      name: ""
+      material: GRAY_STAINED_GLASS_PANE
+    18:
+      name: ""
+      material: GRAY_STAINED_GLASS_PANE
+    22:
+      name: "&d&l→"
+      material: PURPLE_STAINED_GLASS_PANE
+    27:
+      name: ""
+      material: GRAY_STAINED_GLASS_PANE
+    31:
+      name: ""
+      material: GRAY_STAINED_GLASS_PANE
+    36-40:
+      name: ""
+      material: GRAY_STAINED_GLASS_PANE
+    45-48:
+      name: ""
+      material: GRAY_STAINED_GLASS_PANE
+    49:
+      name: "&b周天推演中..."
+      material: SEA_LANTERN
+      glow: true
+      progressbar: true
+Tr_zdglsk:
+  title: "&4&l自动{#a5f3fc}&l甘{#67e8f9}&l霖{#22d3ee}&l神{#0ea5e9}&l龛"
+  slots:
+    0:
+      name: ""
+      material_type: mc
+      material: saddle
+    9:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    18:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    27:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    36:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE
+    45:
+      name: ""
+      material: BLACK_STAINED_GLASS_PANE

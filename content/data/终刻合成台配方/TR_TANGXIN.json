@@ -1,0 +1,307 @@
+{
+  "v": 1,
+  "result": {
+    "kind": "sf",
+    "id": "TR_TANGXIN",
+    "amount": 1,
+    "name": "糖心"
+  },
+  "ingredients": [
+    {
+      "kind": "sf",
+      "id": "TR_JSLLZ",
+      "name": "九色琉璃珠",
+      "slot": 0,
+      "amount": 64
+    },
+    {
+      "kind": "sf",
+      "id": "TR_ZPSJ",
+      "name": "中品神晶",
+      "slot": 1,
+      "amount": 32
+    },
+    {
+      "kind": "sf",
+      "id": "TR_DUN",
+      "name": "沌",
+      "slot": 2,
+      "amount": 16
+    },
+    {
+      "kind": "sf",
+      "id": "TR_FDSZ20",
+      "name": "鸿蒙紫晶",
+      "slot": 3,
+      "amount": 2
+    },
+    {
+      "kind": "sf",
+      "id": "TR_DUN",
+      "name": "沌",
+      "slot": 4,
+      "amount": 16
+    },
+    {
+      "kind": "sf",
+      "id": "TR_XPSJ",
+      "name": "下品神晶",
+      "slot": 5,
+      "amount": 32
+    },
+    {
+      "kind": "sf",
+      "id": "TR_JSLLZ",
+      "name": "九色琉璃珠",
+      "slot": 6,
+      "amount": 64
+    },
+    {
+      "kind": "sf",
+      "id": "TR_SPSJ",
+      "name": "上品神晶",
+      "slot": 9,
+      "amount": 32
+    },
+    {
+      "kind": "sf",
+      "id": "TR_CAI",
+      "name": "材",
+      "slot": 10,
+      "amount": 16
+    },
+    {
+      "kind": "sf",
+      "id": "TR_HQY",
+      "name": "黄泉引",
+      "slot": 11,
+      "amount": 16
+    },
+    {
+      "kind": "sf",
+      "id": "TR_SUGAR",
+      "name": "糖然牌基础物质",
+      "slot": 12,
+      "amount": 64
+    },
+    {
+      "kind": "sf",
+      "id": "TR_HQY",
+      "name": "黄泉引",
+      "slot": 13,
+      "amount": 16
+    },
+    {
+      "kind": "sf",
+      "id": "TR_CAI",
+      "name": "材",
+      "slot": 14,
+      "amount": 16
+    },
+    {
+      "kind": "sf",
+      "id": "TR_TSSJ",
+      "name": "糖神神晶",
+      "slot": 15,
+      "amount": 32
+    },
+    {
+      "kind": "sf",
+      "id": "TR_CUI",
+      "name": "萃",
+      "slot": 18,
+      "amount": 16
+    },
+    {
+      "kind": "sf",
+      "id": "TR_LZ16_FRUIT",
+      "name": "星辰麦穗",
+      "slot": 19,
+      "amount": 2
+    },
+    {
+      "kind": "sf",
+      "id": "TR_BXS",
+      "name": "碧息石",
+      "slot": 20,
+      "amount": 16
+    },
+    {
+      "kind": "sf",
+      "id": "TR_TJ",
+      "name": "糖精",
+      "slot": 21,
+      "amount": 64
+    },
+    {
+      "kind": "sf",
+      "id": "TR_BXS",
+      "name": "碧息石",
+      "slot": 22,
+      "amount": 16
+    },
+    {
+      "kind": "sf",
+      "id": "TR_LZ16_FRUIT",
+      "name": "星辰麦穗",
+      "slot": 23,
+      "amount": 2
+    },
+    {
+      "kind": "sf",
+      "id": "TR_CUI",
+      "name": "萃",
+      "slot": 24,
+      "amount": 16
+    },
+    {
+      "kind": "sf",
+      "id": "TR_CUI",
+      "name": "萃",
+      "slot": 27,
+      "amount": 16
+    },
+    {
+      "kind": "sf",
+      "id": "TR_LZ16_FRUIT",
+      "name": "星辰麦穗",
+      "slot": 28,
+      "amount": 2
+    },
+    {
+      "kind": "sf",
+      "id": "TR_BXS",
+      "name": "碧息石",
+      "slot": 29,
+      "amount": 16
+    },
+    {
+      "kind": "sf",
+      "id": "TR_CJTZHX",
+      "name": "初级糖之核心",
+      "slot": 30,
+      "amount": 64
+    },
+    {
+      "kind": "sf",
+      "id": "TR_BXS",
+      "name": "碧息石",
+      "slot": 31,
+      "amount": 16
+    },
+    {
+      "kind": "sf",
+      "id": "TR_LZ16_FRUIT",
+      "name": "星辰麦穗",
+      "slot": 32,
+      "amount": 2
+    },
+    {
+      "kind": "sf",
+      "id": "TR_CUI",
+      "name": "萃",
+      "slot": 33,
+      "amount": 16
+    },
+    {
+      "kind": "sf",
+      "id": "TR_TSSJ",
+      "name": "糖神神晶",
+      "slot": 36,
+      "amount": 32
+    },
+    {
+      "kind": "sf",
+      "id": "TR_CAI",
+      "name": "材",
+      "slot": 37,
+      "amount": 16
+    },
+    {
+      "kind": "sf",
+      "id": "TR_HQY",
+      "name": "黄泉引",
+      "slot": 38,
+      "amount": 16
+    },
+    {
+      "kind": "sf",
+      "id": "TR_SUGAR",
+      "name": "糖然牌基础物质",
+      "slot": 39,
+      "amount": 64
+    },
+    {
+      "kind": "sf",
+      "id": "TR_HQY",
+      "name": "黄泉引",
+      "slot": 40,
+      "amount": 16
+    },
+    {
+      "kind": "sf",
+      "id": "TR_CAI",
+      "name": "材",
+      "slot": 41,
+      "amount": 16
+    },
+    {
+      "kind": "sf",
+      "id": "TR_SPSJ",
+      "name": "上品神晶",
+      "slot": 42,
+      "amount": 32
+    },
+    {
+      "kind": "sf",
+      "id": "TR_JSLLZ",
+      "name": "九色琉璃珠",
+      "slot": 45,
+      "amount": 64
+    },
+    {
+      "kind": "sf",
+      "id": "TR_XPSJ",
+      "name": "下品神晶",
+      "slot": 46,
+      "amount": 32
+    },
+    {
+      "kind": "sf",
+      "id": "TR_DUN",
+      "name": "沌",
+      "slot": 47,
+      "amount": 16
+    },
+    {
+      "kind": "sf",
+      "id": "TR_FDSZ20",
+      "name": "鸿蒙紫晶",
+      "slot": 48,
+      "amount": 2
+    },
+    {
+      "kind": "sf",
+      "id": "TR_DUN",
+      "name": "沌",
+      "slot": 49,
+      "amount": 16
+    },
+    {
+      "kind": "sf",
+      "id": "TR_ZPSJ",
+      "name": "中品神晶",
+      "slot": 50,
+      "amount": 32
+    },
+    {
+      "kind": "sf",
+      "id": "TR_JSLLZ",
+      "name": "九色琉璃珠",
+      "slot": 51,
+      "amount": 64
+    }
+  ],
+  "savedBy": "Tang_ran",
+  "savedAt": 1791204556570
+}

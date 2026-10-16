@@ -1,0 +1,20 @@
+id: TangranTech
+name: 糖然科技
+depends: []
+pluginDepends:
+- Slimefun
+- LiteXpansion
+- DynaTech
+- InfinityExpansion
+version: Beta1.0
+description: 糖然的懒狗科技
+authors:
+- Tang_ran
+loadStartTexts:
+- "==================="
+- "糖神开播啦！"
+- "==================="
+enabledTexts:
+- "==================="
+- "糖然科技成功暴力注入"
+- "==================="

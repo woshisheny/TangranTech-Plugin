@@ -1,0 +1,12 @@
+TR_DLJX:
+  item_group: Tr_czjjcl
+  item:
+    glow: true
+    material_type: mc
+    material: nether_wart
+    name: '{#f5d0fe}&l凋{#e879f9}&l零{#c026d3}&l祭{#86198f}&l心'
+    lore:
+    - '{#c026d3}&l凋零残念凝结而成的祭品'
+    - '&8⇨ &7用于合成{#a78bfa}&l造物底座'
+  entity: WITHER
+  chance: 60

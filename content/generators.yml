@@ -1,0 +1,80 @@
+Tr_cjhfyd:
+  item_group: Tr_czfdj
+  item:
+    material_type: skull_base64
+    material: eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvYTdlMTVkZTBkNGI1ZTIwZTZjNmQwMmMwNjQ2NWU4ZDg3ZTJiMGFiYjdmNGVkNThmYzZhNGJiNDllMDA4NmY1YyJ9fX0=
+    name: "{#8dddd8}&l初{#6fbeb9}&l级{#2da215}&l核{#21810e}&l反{#0e5700}&l应{#568b4b}&l堆"
+    lore: 
+      - "{#704100}&l好臭的{#2da215}&l核{#21810e}&l反{#0e5700}&l应{#568b4b}&l堆"
+      - '&8⇨ &e⚡&7 1919810 J 可存储'
+      - '&8⇨ &e⚡&7 1145 J/s 发电量'
+  recipe_type: ENHANCED_CRAFTING_TABLE
+  recipe:
+    1:
+      material_type: slimefun
+      material: nether_ice
+    2:
+      material_type: slimefun
+      material: Tr_qlzplqj
+    3:
+      material_type: slimefun
+      material: nether_ice
+    4:
+      material_type: slimefun
+      material: Tr_qlzplqj
+    5:
+      material_type: mc
+      material: nether_star
+    6:
+      material_type: slimefun
+      material: Tr_qlzplqj
+    7:
+      material_type: slimefun
+      material: REINFORCED_PLATE
+    8:
+      material_type: slimefun
+      material: ADVANCED_CIRCUIT_BOARD
+    9:
+      material_type: slimefun
+      material: REINFORCED_PLATE
+  capacity: 1919810
+  production: 1145
+  input: [0,1,2,9,10,11,18,19,20,27,28,29,36,37,38,45,46,47]
+  output: [6,7,8,15,16,17,24,25,26,33,34,35,42,43,44,51,52,53]
+  hideAllRecipes: false
+  fuels:
+    1:
+      item:
+        material: cobblestone
+        amount: 8
+      seconds: 1
+      output:
+        material_type: slimefun
+        material: URANIUM
+        chance: 50
+    2:
+      item:
+        material_type: slimefun
+        material: URANIUM
+      seconds: 10
+      output:
+        material_type: slimefun
+        material: NEPTUNIUM
+    3:
+      item:
+        material_type: slimefun
+        material: NEPTUNIUM
+      seconds: 10
+      output:
+        material_type: slimefun
+        material: PLUTONIUM
+    4:
+      item:
+        material_type: slimefun
+        material: PLUTONIUM
+      seconds: 10
+      output:
+        material_type: slimefun
+        material: BOOSTED_URANIUM
+
+    

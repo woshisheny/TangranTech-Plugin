@@ -1,0 +1,623 @@
+#糖然科技物品组
+TangranTech:
+  type: nested
+  item:
+    material_type: skull_hash
+    material: baf574f78dd9e2b53e9234d47ded217bae5b487e5c19f74b111b6b3f6b044e7b
+    name: '{#c030b4}&kT{#b20606}&l糖{#fd1c1c}&l然{#f74040}&l科{#bf5f5f}&l技{#8e064e}&kR'
+  tier: 0
+Tr_rz:  
+  type: sub
+  item:
+    material_type: mc
+    material: paper
+    name: '{#c030a4}&k&lT&f&l日志{#8f064e}&kR'
+  parent: TangranTech
+  tier: 1
+Tr_1:  
+  type: button
+  item:
+    material_type: mc
+    material: light_blue_stained_glass_pane
+    name: ''
+  parent: TangranTech
+  tier: 2
+Tr_czcl:
+  type: sub
+  item:
+    material_type: mc
+    material: dirt
+    name: '{#c030b4}&kT{#8dddd8}&l初{#6fbeb9}&l章{#3fc7d9}&l材{#00cfeb}&l料{#8e064e}&kR'
+  parent: TangranTech
+  tier: 3
+Tr_czhcjg:
+  type: sub
+  item:
+    material_type: mc
+    material: blast_furnace
+    name: '{#c030b4}&kT{#8ddff8}&l初{#6fbbb9}&l章{#3fccd9}&l合{#00cf1b}&l成{#62d5ce}&l结{#66f5ec}&l构{#8e064e}&kR'
+  parent: TangranTech
+  tier: 4
+Tr_czscjq:
+  type: sub
+  glow: true
+  item:
+    material_type: mc
+    material: wooden_pickaxe
+    name: '{#c030b4}&kT{#8ddff8}&l初{#6fbbb9}&l章{#3fc660}&l生{#00cf1b}&l产{#29f55c}&l机{#5dd597}&l器{#8e064e}&kR'
+  parent: TangranTech
+  tier: 5
+Tr_czxhjq:
+  type: sub
+  glow: true
+  item:
+    material_type: mc
+    material: hopper
+    name: '{#c030b4}&kT{#8ddff8}&l初{#6fbbb9}&l章{#919410}&l消耗{#29f55c}&l机{#5dd597}&l器{#8e064e}&kR'
+  parent: TangranTech
+  tier: 6
+Tr_cztsjq:  
+  type: sub
+  item:
+    material_type: skull_base64
+    material: eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNjVmZmM4M2UwNTZkNDhlNGIzYjBhMmMwNzQyYTc0MGUzOTcyMjM0MDhiNTJhZmY1MzIxZGZmN2Y3NTZjMDc4MCJ9fX0=
+    name: '{#c030b4}&kT{#8ddff8}&l初{#6fbbb9}&l章{#ee5e20}&l特殊机器{#8e064e}&kR'
+  parent: TangranTech
+  tier: 7
+Tr_czfdj:  
+  type: sub
+  item:
+    material_type: mc
+    material: lava_bucket
+    name: '{#c030b4}&kT{#8ddff8}&l初{#6fbbb9}&l章{#ffd04c}&l发电机{#8e064e}&kR'
+  parent: TangranTech
+  tier: 8
+Tr_czjt:  
+  type: sub
+  item:
+    material_type: mc
+    material: enchanting_table
+    name: '{#8dddd8}&l初{#6fbeb9}&l章{#c52b2b}&l祭{#cc0000}&l坛'
+  parent: TangranTech
+  tier: 9
+Tr_jcwzhq:
+  type: button
+  item:
+    material_type: mc
+    material: sugar
+    name: '{#c030b4}&kT&b&l糖然牌基础物质获取{#8e064e}&kR'
+  parent: TangranTech
+  tier: 10
+  actions:
+  - "script 糖然牌基础物质获取"
+Tr_6:  
+  type: button
+  item:
+    material_type: mc
+    material: light_blue_stained_glass_pane
+    name: ''
+  parent: TangranTech
+  tier: 11
+Tr_czjjcl:
+  type: sub
+  item:
+    material_type: mc
+    material: grass_block
+    name: '{#c030b4}&kT{#8dddd8}&l初{#6fbeb9}&l章{#5e2895}&l进{#691bb6}&l阶{#3fc7d9}&l材{#00cfeb}&l料{#8e064e}&kR'
+  parent: TangranTech
+  tier: 12
+Tr_8:  
+  type: button
+  item:
+    material_type: mc
+    material: light_gray_stained_glass_pane
+    name: ''
+  parent: TangranTech
+  tier: 13
+Tr_czjjscjq:
+  type: sub
+  glow: true
+  item:
+    material_type: mc
+    material: stone_pickaxe
+    name: '{#c030b4}&kT{#8ddff8}&l初{#6fbbb9}&l章{#5e2895}&l进{#691bb6}&l阶{#3fc660}&l生{#00cf1b}&l产{#29f55c}&l机{#5dd597}&l器{#8e064e}&kR'
+  parent: TangranTech
+  tier: 14
+Tr_czjjxhjq:
+  type: sub
+  glow: true
+  item:
+    material_type: mc
+    material: hopper_minecart
+    name: '{#c030b4}&kT{#8ddff8}&l初{#6fbbb9}&l章{#5e2895}&l进{#691bb6}&l阶{#919410}&l消耗{#29f55c}&l机{#5dd597}&l器{#8e064e}&kR'
+  parent: TangranTech
+  tier: 15
+Tr_czjjtsjq:  
+  type: sub
+  item:
+    material_type: skull_base64
+    material: eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNjVmZmM4M2UwNTZkNDhlNGIzYjBhMmMwNzQyYTc0MGUzOTcyMjM0MDhiNTJhZmY1MzIxZGZmN2Y3NTZjMDc4MCJ9fX0=
+    name: '{#c030b4}&kT{#8ddff8}&l初{#6fbbb9}&l章{#5e2895}&l进{#691bb6}&l阶{#ee5e20}&l特殊机器{#8e064e}&kR'
+  parent: TangranTech
+  tier: 16
+Tr_12:  
+  type: button
+  item:
+    material_type: mc
+    material: light_gray_stained_glass_pane
+    name: ''
+  parent: TangranTech
+  tier: 17
+Tr_13:  
+  type: button
+  item:
+    material_type: mc
+    material: light_gray_stained_glass_pane
+    name: ''
+  parent: TangranTech
+  tier: 18
+Tr_14:  
+  type: button
+  item:
+    material_type: mc
+    material: light_gray_stained_glass_pane
+    name: ''
+  parent: TangranTech
+  tier: 19
+Tr_15:  
+  type: button
+  item:
+    material_type: mc
+    material: light_blue_stained_glass_pane
+    name: ''
+  parent: TangranTech
+  tier: 20
+Tr_czdj:  
+  type: sub
+  item:
+    material_type: mc
+    material: firework_star
+    name: '{#c030b4}&kT{#8ddff8}&l初{#6fbbb9}&l章{#4d1188}&l道{#3d0774}&l具{#8e064e}&kR'
+  parent: TangranTech
+  tier: 21
+Tr_17:  
+  type: button
+  item:
+    material_type: mc
+    material: light_gray_stained_glass_pane
+    name: ''
+  parent: TangranTech
+  tier: 22
+Tr_18:  
+  type: button
+  item:
+    material_type: mc
+    material: light_gray_stained_glass_pane
+    name: ''
+  parent: TangranTech
+  tier: 23
+Tr_19:  
+  type: button
+  item:
+    material_type: mc
+    material: light_gray_stained_glass_pane
+    name: ''
+  parent: TangranTech
+  tier: 24
+Tr_20:  
+  type: button
+  item:
+    material_type: mc
+    material: light_gray_stained_glass_pane
+    name: ''
+  parent: TangranTech
+  tier: 25
+Tr_21:  
+  type: button
+  item:
+    material_type: mc
+    material: light_gray_stained_glass_pane
+    name: ''
+  parent: TangranTech
+  tier: 26
+Tr_22:  
+  type: button
+  item:
+    material_type: mc
+    material: light_gray_stained_glass_pane
+    name: ''
+  parent: TangranTech
+  tier: 27
+Tr_shuoming:
+  type: sub
+  item:
+    material_type: mc
+    material: cherry_hanging_sign
+    name: '{#c030b4}&kT&c&l说明{#8e064e}&kR'
+  parent: TangranTech
+  tier: 28
+Tr_24:  
+  type: button
+  item:
+    material_type: mc
+    material: light_blue_stained_glass_pane
+    name: ''
+  parent: TangranTech
+  tier: 29
+Tr_czzwx:  
+  type: sub
+  item:
+    material_type: skull_base64
+    material: eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNGU1NmZiNWIyOWE4ZDJlNjVlYWY5Y2NjNzM2MWIzYmU1MWUyM2JhOGYwNWJkN2RkYWI3MWM5NDYwYzhkMzQ2MCJ9fX0=
+    name: '{#c030b4}&kT{#8ddff8}&l初{#6fbbb9}&l章{#7b2ff7}&l造{#5533d6}&l物{#2563eb}&l匣{#8e064e}&kR'
+  parent: TangranTech
+  tier: 30
+Tr_26:  
+  type: button
+  item:
+    material_type: mc
+    material: light_gray_stained_glass_pane
+    name: ''
+  parent: TangranTech
+  tier: 31
+Tr_27:  
+  type: button
+  item:
+    material_type: mc
+    material: light_gray_stained_glass_pane
+    name: ''
+  parent: TangranTech
+  tier: 32
+Tr_28:  
+  type: button
+  item:
+    material_type: mc
+    material: light_gray_stained_glass_pane
+    name: ''
+  parent: TangranTech
+  tier: 33
+Tr_29:  
+  type: button
+  item:
+    material_type: mc
+    material: light_gray_stained_glass_pane
+    name: ''
+  parent: TangranTech
+  tier: 34
+Tr_30:  
+  type: button
+  item:
+    material_type: mc
+    material: red_stained_glass_pane
+    name: '&f&l↓'
+  parent: TangranTech
+  tier: 35
+Tr_bdjq:  
+  type: sub
+  item:
+    material_type: mc
+    material: sunflower
+    name: '{#8ddaa8}&l补{#6fcec9}&l丁{#2da215}&l机{#568b4b}&l器'
+  parent: TangranTech
+  tier: 36
+Tr_zzfzcl:  
+  type: sub
+  item:
+    material_type: mc
+    material: magma_cream
+    name: '{#c030b4}&kT{#5e0000}&l中{#9b0000}&l章{#f0f4ff}&l法{#dbe7ff}&l则{#b8c8ff}&l材{#9db8ff}&l料{#8e064e}&kR'
+  parent: TangranTech
+  tier: 37
+Tr_zzjq:  
+  type: sub
+  item:
+    material_type: mc
+    material: vault
+    name: '{#c030b4}&kT{#5e0000}&l中{#9b0000}&l章{#114514}&l机{#191981}&l器{#8e064e}&kR'
+  parent: TangranTech
+  tier: 38
+Tr_zzhcjg:  
+  type: sub
+  item:
+    material_type: mc
+    material: crafting_table
+    name: '{#c030b4}&kT{#5e0000}&l中{#9b0000}&l章{#d40000}&l合{#ff1744}&l成{#ff6d00}&l结{#ffab00}&l构{#8e064e}&kR'
+  parent: TangranTech
+  tier: 39
+Tr_35:  
+  type: button
+  item:
+    material_type: mc
+    material: light_gray_stained_glass_pane
+    name: ''
+  parent: TangranTech
+  tier: 40
+Tr_zzlzcl:  
+  type: sub
+  item:
+    material_type: mc
+    material: pink_petals
+    name: '{#c030b4}&kT{#5e0000}&l中{#9b0000}&l章{#d40000}&l灵{#ff1744}&l植{#ff6d00}&l材{#ffab00}&l料{#8e064e}&kR'
+    lore:
+    - '{#e8f6ff}&l灵植种子与果实，天地灵气凝结而成'
+    - '{#b8e3ff}&l可用于炼丹、培育灵植、兑换功德'
+  parent: TangranTech
+  tier: 41
+Tr_fdsz:  
+  type: sub
+  item:
+    material_type: skull_hash
+    material: eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNzczYjM1NWM5MWJjYzQyMjA4OWQwM2Y1NDY5ODdlMWE3MWVlNzc1OWY0YzdkNTdlZDU5ODgyY2U4YmM2MTM3NCJ9fX0=
+    name: '{#c030b4}&kT{#5e0000}&l中{#9b0000}&l章&d&l福地生珍{#ff6d00}&l材{#ffab00}&l料{#8e064e}&kR'
+  parent: TangranTech
+  tier: 42
+Tr_yhxz:  
+  type: button
+  item:
+    material_type: mc
+    material: campfire
+    name: '{#fca5a5}&l异{#f87171}&l火{#ef4444}&l选{#dc2626}&l择{#b91c1c}&l'
+    lore:
+    - '{#fed7aa}&l异火有灵，择主而燃'
+    - '&7&l点击选择并查看你已掌握的异火'
+  parent: TangranTech
+  tier: 43
+  actions:
+  - "script 道法/异火选择"
+Tr_39:  
+  type: button
+  item:
+    material_type: mc
+    material: light_gray_stained_glass_pane
+    name: ''
+  parent: TangranTech
+  tier: 44
+Tr_40:  
+  type: button
+  item:
+    material_type: mc
+    material: light_gray_stained_glass_pane
+    name: ''
+  parent: TangranTech
+  tier: 45
+Tr_41:  
+  type: button
+  item:
+    material_type: mc
+    material: light_gray_stained_glass_pane
+    name: ''
+  parent: TangranTech
+  tier: 46
+Tr_zzdj:  
+  type: sub
+  item:
+    material_type: mc
+    material: music_disc_5
+    name: '{#c030b4}&kT{#5e0000}&l中{#9b0000}&l章{#d40000}&l道{#ff1744}&l具{#8e064e}&kR'
+  parent: TangranTech
+  tier: 47
+Tr_43:  
+  type: button
+  item:
+    material_type: mc
+    material: light_gray_stained_glass_pane
+    name: ''
+  parent: TangranTech
+  tier: 48
+Tr_44:  
+  type: button
+  item:
+    material_type: mc
+    material: light_gray_stained_glass_pane
+    name: ''
+  parent: TangranTech
+  tier: 49
+Tr_jj:  
+  type: button
+  item:
+    material_type: mc
+    material: player_head
+    name: '&f&l境界查看'
+    lore:
+  parent: TangranTech
+  tier: 50
+  actions:
+  - "script 道法/境界"
+Tr_46:  
+  type: button
+  item:
+    material_type: mc
+    material: light_gray_stained_glass_pane
+    name: ''
+  parent: TangranTech
+  tier: 51
+Tr_zhuangbei:  
+  type: sub
+  item:
+    material_type: mc
+    material: smithing_table
+    name: '{#c030b4}&kT{#5e0000}&l中{#9b0000}&l章{#d40000}&l装{#ff1744}&l备{#8e064e}&kR'
+  parent: TangranTech
+  tier: 52
+Tr_48:  
+  type: button
+  item:
+    material_type: mc
+    material: light_gray_stained_glass_pane
+    name: ''
+  parent: TangranTech
+  tier: 53
+Tr_49:  
+  type: button
+  item:
+    material_type: mc
+    material: light_gray_stained_glass_pane
+    name: ''
+  parent: TangranTech
+  tier: 54
+Tr_50:  
+  type: button
+  item:
+    material_type: mc
+    material: light_gray_stained_glass_pane
+    name: ''
+  parent: TangranTech
+  tier: 55
+Tr_fsdp:  
+  type: button
+  item:
+    material_type: mc
+    material: emerald
+    name: '{#d4f1f9}&l浮{#a8e6f0}&l生{#7fd4e6}&l当{#5bb8d8}&l铺'
+    lore:
+    - '{#d4f1f9}&l浮生若梦，当铺一纸'
+    - '{#a8e6f0}&l典当尘缘，收取道源'
+  parent: TangranTech
+  tier: 56
+  actions:
+  - "script 道法/浮生当铺"
+Tr_52:  
+  type: button
+  item:
+    material_type: mc
+    material: light_gray_stained_glass_pane
+    name: ''
+  parent: TangranTech
+  tier: 57
+Tr_53:  
+  type: button
+  item:
+    material_type: mc
+    material: light_gray_stained_glass_pane
+    name: ''
+  parent: TangranTech
+  tier: 58
+Tr_glywp:  
+  type: sub
+  item:
+    material_type: mc
+    material: barrier
+    name: '{#c030b4}&kT{#5e0000}&l中{#9b0000}&l章{#ffd700}&l管{#ffc107}&l理{#ffb300}&l员{#ff9f00}&l物{#ff8f00}&l品{#8e064e}&kR'
+  parent: TangranTech
+  tier: 59
+Tr_zkhct:  
+  type: button
+  item:
+    material_type: mc
+    material: crafter
+    name: '{#e879f9}&l终{#c026d3}&l刻{#7c3aed}&l合{#6366f1}&l成{#0ea5e9}&l台'
+  parent: TangranTech
+  tier: 60
+  actions:
+  - "script 道法/终刻合成台"
+Tr_56:  
+  type: button
+  item:
+    material_type: mc
+    material: light_gray_stained_glass_pane
+    name: ''
+  parent: TangranTech
+  tier: 61
+Tr_57:  
+  type: button
+  item:
+    material_type: mc
+    material: light_gray_stained_glass_pane
+    name: ''
+  parent: TangranTech
+  tier: 62
+Tr_58:  
+  type: button
+  item:
+    material_type: mc
+    material: light_gray_stained_glass_pane
+    name: ''
+  parent: TangranTech
+  tier: 63
+Tr_59:  
+  type: button
+  item:
+    material_type: mc
+    material: light_gray_stained_glass_pane
+    name: ''
+  parent: TangranTech
+  tier: 64
+Tr_60:  
+  type: button
+  item:
+    material_type: mc
+    material: black_shulker_box
+    name: '{#e8f6ff}&l储{#b8e3ff}&l物{#7fc9e8}&l空{#4aa3c7}&l间{#d4f1f9}&l'
+  parent: TangranTech
+  tier: 65
+  actions:
+  - "script 道法/储物空间"
+Tr_61:  
+  type: button
+  item:
+    material_type: mc
+    material: light_gray_stained_glass_pane
+    name: ''
+  parent: TangranTech
+  tier: 66
+Tr_62:  
+  type: button
+  item:
+    material_type: mc
+    material: light_gray_stained_glass_pane
+    name: ''
+  parent: TangranTech
+  tier: 67
+Tr_63:  
+  type: button
+  item:
+    material_type: mc
+    material: book
+    name: '{#c030b4}&kT{#5e0000}&l中{#9b0000}&l章{#8b5cf6}&l阶{#6366f1}&l段{#3b82f6}&l任{#0ea5e9}&l务{#8e064e}&kR'
+  parent: TangranTech
+  tier: 68
+  actions:
+  - "script 道法/任务"
+Tr_64:  
+  type: button
+  item:
+    material_type: mc
+    material: light_gray_stained_glass_pane
+    name: ''
+  parent: TangranTech
+  tier: 69
+Tr_65:  
+  type: button
+  item:
+    material_type: mc
+    material: ladder
+    name: '{#1e3a8a}&l升{#0ea5e9}&l维{#67e8f9}&l之{#e0f7fa}&l路'
+  parent: TangranTech
+  tier: 70
+  actions:
+  - "script 道法/升维之路"
+Tr_66:  
+  type: button
+  item:
+    material_type: mc
+    material: light_gray_stained_glass_pane
+    name: ''
+  parent: TangranTech
+  tier: 71
+Tr_67:  
+  type: button
+  item:
+    material_type: mc
+    material: light_gray_stained_glass_pane
+    name: ''
+  parent: TangranTech
+  tier: 72
+Tr_cdtl:
+  type: seasonal
+  month: 7
+  item:
+    name: "&b菜单头颅"
+    material_type: skull_hash
+    material: eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNDUyOGVkNDU4MDI0MDBmNDY1YjVjNGUzYTZiN2E5ZjJiNmE1YjNkNDc4YjZmZDg0OTI1Y2M1ZDk4ODM5MWM3ZCJ9fX0=
+  parent: TangranTech
+

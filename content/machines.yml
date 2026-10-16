@@ -1,0 +1,266 @@
+Tr_hqsjq:
+  lateInit: false
+  item_group: Tr_czjjtsjq
+  placeable: true
+  item:
+    glow: false
+    material_type: mc
+    material: note_block
+    name: "{#b8f2e6}&l哈{#8ad4e0}&l气{#5fb2d8}&l收{#3f8ec4}&l集{#2a5fa8}&l器"
+    lore: 
+      - "&6&l乐子音符盒 &b&l观看老吴撼地掌后收集哈气"
+      - "&7&l工作范围6x6x6"
+      - "&f&l或许要配合&4&l老吴&7 召唤器&f&l使用?"
+      - '&8⇨ &e⚡ 10000 &7 J 可存储'
+      - '&8⇨ &e⚡ 500 &7 J/检测到&4&l进击的老吴&7&l受伤'
+  recipe_type: ENHANCED_CRAFTING_TABLE
+  energy:
+    capacity: 10000
+    type: CONSUMER
+  recipe:
+    2:
+      material_type: mc
+      material: chicken
+    4:
+      material_type: mc
+      material: cod
+    5:
+      material_type: slimefun
+      material: Tr_txsj
+    6:
+      material_type: mc
+      material: salmon
+    7:
+      material_type: mc
+      material: oak_log
+    8:
+      material_type: mc
+      material: redstone
+    9:
+      material_type: mc
+      material: oak_log
+  output: [21, 22, 23, 30, 31, 32]
+  script: 哈气收集
+Tr_znq:
+  lateInit: false
+  item_group: Tr_cztsjq
+  placeable: true
+  item:
+    glow: false
+    material_type: mc
+    material: daylight_detector
+    name: "{#f9a35d}&l注能器"
+    lore: 
+      - "&f&l为{#8dddd8}&l初{#6fbeb9}&l级{#5c3db3}&l能量核心&f&l·{#a30000}&l半成品&e&l注入能量"
+      - "&f&l仅需将{#8dddd8}&l初{#6fbeb9}&l级{#5c3db3}&l能量核心&f&l·{#a30000}&l半成品&f&l丢在上面?"
+      - "&f&l80%概率生成{#8dddd8}&l初{#6fbeb9}&l级{#5c3db3}&l能量核心"
+      - '&8⇨ &e⚡{#2d790c} 0 &7 J 可存储'
+      - '&8⇨ &e⚡{#006680} 0 &7 J/s'
+  recipe_type: ENHANCED_CRAFTING_TABLE
+  recipe:
+    1:
+      material_type: slimefun
+      material: solar_panel
+    2:
+      material_type: mc
+      material: redstone_block
+    3:
+      material_type: slimefun
+      material: solar_panel
+    4:
+      material_type: slimefun
+      material: COMPRESSED_CARBON
+    5:
+      material_type: slimefun
+      material: Tr_cjtzhx
+    6:
+      material_type: slimefun
+      material: COMPRESSED_CARBON
+    7:
+      material_type: slimefun
+      material: ELECTRIC_MOTOR
+    8:
+      material_type: slimefun
+      material: BASIC_CIRCUIT_BOARD
+    9:
+      material_type: slimefun
+      material: ELECTRIC_MOTOR
+  script: 注能
+Tr_txlll:
+  lateInit: false
+  item_group: Tr_zzjq
+  placeable: true
+  item:
+    glow: false
+    material_type: mc
+    material: cauldron
+    name: '{#c4b5fd}&l太{#a78bfa}&l虚{#8b5cf6}&l琉{#7c3aed}&l璃{#6d28d9}&l炉'
+    lore: 
+      - '&f&l琉璃为壁，太虚为炉'
+      - '&7&l将灵植灵材投入炉中，炼化天地灵气'
+      - '&7&l用于中章炼丹配方'
+  recipe_type: TR_YGYLS_TYPE
+  recipe:
+    1:
+      material_type: slimefun
+      material: TR_FDSZ15
+    3:
+      material_type: slimefun
+      material: TR_FDSZ15
+    4:
+      material_type: slimefun
+      material: TR_FDSZ15
+    5:
+      material_type: slimefun
+      material: TR_FDSZ10
+    6:
+      material_type: slimefun
+      material: TR_FDSZ15
+    7:
+      material_type: slimefun
+      material: TR_FDSZ15
+    8:
+      material_type: slimefun
+      material: TR_FDSZ20
+    9:
+      material_type: slimefun
+      material: TR_FDSZ15
+  script: 道法/丹药
+Tr_glsk:
+  lateInit: false
+  item_group: Tr_zzjq
+  placeable: true
+  energy:
+    capacity: 1
+    type: CONSUMER
+  item:
+    glow: false
+    material_type: mc
+    material: polished_diorite
+    name: '{#a5f3fc}&l甘{#67e8f9}&l霖{#22d3ee}&l神{#0ea5e9}&l龛'
+    lore: 
+      - '&f&l甘霖普降，神龛纳福'
+      - '&7&l用于获取神晶'
+      - '&7&l出现特性请挖掉重放('
+  recipe_type: TR_YGYLS_TYPE
+  recipe:
+    1:
+      material_type: slimefun
+      material: TR_HMZQ
+    2:
+      material_type: slimefun
+      material: TR_JSLLZ
+    3:
+      material_type: slimefun
+      material: TR_HMZQ
+    4:
+      material_type: slimefun
+      material: TR_DY01
+    5:
+      material_type: slimefun
+      material: TR_FDSZ16
+    6:
+      material_type: slimefun
+      material: TR_DY01
+    7:
+      material_type: mc
+      material: polished_diorite_slab
+    8:
+      material_type: slimefun
+      material: TR_JSLLZ
+    9:
+      material_type: mc
+      material: polished_diorite_slab
+  script: 道法/神晶获取
+  output: [9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43,44]
+Tr_mgzj:
+  lateInit: false
+  energy:
+    capacity: 1
+    type: CONSUMER
+  item_group: Tr_zzjq
+  placeable: true
+  item:
+    glow: false
+    material_type: mc
+    material: purple_glazed_terracotta
+    name: '{#c4b5fd}&l命{#a78bfa}&l轨{#8b5cf6}&l织{#7c3aed}&l机'
+    lore:
+      - '&f&l编织命轨，凝聚太虚'
+      - '&7&l自己动'
+  recipe_type: TR_FSDP
+  recipe:
+    5:
+      material_type: slimefun
+      material: Tr_mgxx
+  input: [4]
+  output: [9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43,44]
+  script: 道法/自动太虚枢机
+
+Tr_bkmnq:
+  lateInit: false
+  item_group: Tr_czjjscjq
+  placeable: true
+  energy:
+    capacity: 10000
+    type: CONSUMER
+  item:
+    glow: false
+    material_type: mc
+    material: vault
+    name: '{#fde68a}&l宝{#fcd34d}&l库{#fbbf24}&l模{#f59e0b}&l拟{#d97706}&l器'
+    lore:
+    - '&7&l模拟开启宝库的战利品'
+    - '&8⇨ &e⚡&7 10000 J 可存储'
+    - '&8⇨ &e⚡&7 0 J/次'
+  recipe_type: ENHANCED_CRAFTING_TABLE
+  recipe:
+    1:
+      material_type: slimefun
+      material: Tr_cjsmhhw
+    2:
+      material_type: mc
+      material: chest
+    3:
+      material_type: slimefun
+      material: Tr_cjsmhhw
+    4:
+      material_type: slimefun
+      material: Tr_cjscjq
+    5:
+      material_type: slimefun
+      material: Tr_txsj
+    6:
+      material_type: slimefun
+      material: Tr_cjscjq
+    7:
+      material_type: slimefun
+      material: Tr_cjsmhhw
+    8:
+      material_type: mc
+      material: golden_apple
+    9:
+      material_type: slimefun
+      material: Tr_cjsmhhw
+  output: [11,15,20,24,29,33,38,42]
+  script: 宝库模拟器
+Tr_trpddj:
+  lateInit: false
+  placeable: true
+  item_group: Tr_zzjq
+  item:
+    glow: true
+    material_type: mc
+    material: beehive
+    name: "&b&l糖然牌堆叠机"
+    lore:
+      - '&7初始堆叠效率: &b2.0'
+      - '&7产物优先自动进入&d网络&7中设置有产物的最大存储'
+      - '&7适配&d网络量子存储&7与&d网络抽屉'
+      - '&7也支持逻辑的堆叠特性'
+  recipe_type: TR_FSDP
+  recipe:
+    5:
+      material_type: slimefun
+      material: Tr_tssj
+  script: 道法/堆叠机

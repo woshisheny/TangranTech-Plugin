@@ -1,0 +1,977 @@
+TR_YTC:
+  item_group: Tr_czhcjg
+  item:
+    material: BLAST_FURNACE
+    name: "&d&l冶糖厂"
+    lore:
+      - "&e&l简陋的机器&f&l，&e&l但足够制造普通的糖&f&l?"
+      - '&8⇨ &e⚡&7 500 J 可存储'
+      - '&8⇨ &e⚡&7 10 J/s'
+  recipe_type: ENHANCED_CRAFTING_TABLE
+  recipe:
+    1:
+      material_type: slimefun
+      material: STEEL_PLATE
+    2:
+      material_type: mc
+      material: FLINT_AND_STEEL
+    3:
+      material_type: slimefun
+      material: STEEL_PLATE
+    4:
+      material_type: mc
+      material: IRON_BLOCK
+    5:
+      material_type: mc
+      material: FURNACE
+    6:
+      material_type: mc
+      material: IRON_BLOCK
+    7:
+      material_type: mc
+      material: SMOOTH_STONE
+    8:
+      material_type: mc
+      material: SMOOTH_STONE
+    9:
+      material_type: mc
+      material: SMOOTH_STONE
+
+  capacity: 500
+  energyPerCraft: 10
+  speed: 1
+
+  hideAllRecipes: false
+
+
+  input: [19, 20]
+  output: [24, 25]
+
+  displayProjectiles: true
+  checkFormed: true
+  openMenuWhenClickedParts: true
+  noMenuWhenNotFormed: true
+  allowSwitchDisplayLayer: true
+  defaultNotice: true
+  structure:
+  - - a1 a1 a1 a1 a1
+    - a1 a5 a5 a5 a1
+    - a1 a5 a5 a5 a1
+    - a1 a5 a5 a5 a1
+    - a1 a1 a1 a1 a1
+  - - a1 a6 a6 a6 a1
+    - a6 __ __ __ a6
+    - a6 __ __ __ a6
+    - a6 __ __ __ a6
+    - a1 a6 a6 a6 a1
+  - - a1 a6 a6 a6 a1
+    - a6 __ __ __ a6
+    - a6 __ __ __ a6
+    - a6 __ __ __ a6
+    - a1 a6 a6 a6 a1 
+  - - a1 a6 a6 a6 a1
+    - a6 __ __ __ a6
+    - a7 __ __ __ a6
+    - a6 __ __ __ a6
+    - a1 a6 a6 a6 a1
+  - - a1 a2 a2 a2 a1
+    - a2 a3 a3 a3 a2
+    - a2 a3 a4 a3 a2
+    - a2 a3 a3 a3 a2
+    - a1 a2 a2 a2 a1
+  mapping:
+    a1:
+      material_type: mc
+      material: stone_bricks
+    a2:
+      material_type: mc
+      material: glass
+    a3:
+      material_type: mc
+      material: iron_block
+    a4:
+      material_type: mc
+      material: magma_block
+    a5:
+      material_type: mc
+      material: glowstone
+    a6:
+      material_type: mc
+      material: glass_pane
+    a7:
+      material_type: slimefun
+      material: TR_YTC
+      core: true
+  recipes:
+    TR_YTC_RECIPE:
+      seconds: 5
+      input:
+        1:
+          material_type: slimefun
+          material: Tr_Tj
+        2:
+          material_type: slimefun
+          material: SYNTHETIC_SAPPHIRE
+          amount: 2
+      output:
+        1:
+          material_type: slimefun
+          material: Tr_cjtzhx
+          amount: 1
+          chance: 70
+        2:
+          material_type: slimefun
+          material: Tr_tz
+          amount: 2
+          chance: 80
+TR_CJHNSCYQ:
+  item_group: Tr_czhcjg
+  item:
+    material_type: skull_base64
+    material: eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvMWFkNTQyNGQ5OTAzOTUzODQzNTI2YTdjNDE2ODY2ZTdkNzk1MDFjODhjZTdjZGFiZWVlNTI4NGVhMzlmIn19fQ==
+    name: "{#8dddd8}&l初{#6fbeb9}&l级{#685a5a}&l黑奴{#8d1c1c}&l生产园区"
+    lore:
+      - "{#705800}&lGO WORK!"
+      - "&f&l灯笼上面是锁链，图层5的锁链会被台阶的投影覆盖导致不显示,只有单独开图层5才能看到锁链投影"
+      - '&8⇨ &e⚡&7 5000 J 可存储'
+      - '&8⇨ &e⚡&7 100 J/s'
+  recipe_type: ENHANCED_CRAFTING_TABLE
+  recipe:
+    1:
+      material_type: slimefun
+      material: cobalt_pickaxe
+    2:
+      material_type: mc
+      material: diamond_sword
+    3:
+      material_type: slimefun
+      material: lumber_axe
+    4:
+      material_type: mc
+      material: IRON_BARS
+    5:
+      material_type: slimefun
+      material: Tr_cjtzhx
+    6:
+      material_type: mc
+      material: IRON_BARS
+    7:
+      material_type: mc
+      material: STONE_BRICKS
+    8:
+      material_type: mc
+      material: STONE_BRICKS
+    9:
+      material_type: mc
+      material: STONE_BRICKS
+
+  capacity: 5000
+  energyPerCraft: 100
+  speed: 1
+
+  hideAllRecipes: false
+
+
+  input: [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26]
+  output: [46,47,48,49,50,51,52,53]
+
+  displayProjectiles: true
+  checkFormed: true
+  openMenuWhenClickedParts: true
+  noMenuWhenNotFormed: true
+  allowSwitchDisplayLayer: true
+  defaultNotice: true
+  structure:
+  - - __ __ __ __ __ __ __
+    - __ __ __ __ __ __ __
+    - __ __ __ __ __ __ __
+    - __ __ __ __ __ __ __
+    - __ __ __ __ __ __ __
+    - a14 a14 a14 a14 a14 a14 a14
+    - a14 a14 a14 a14 a14 a14 a14
+  - - a1 a1 a1 a2 a1 a1 a1
+    - a1 __ __ __ __ __ a1
+    - a1 __ __ __ __ __ a1
+    - a2 __ __ __ __ __ a2
+    - a1 __ __ __ __ __ a1
+    - a1 a13 __ __ __ a13 a1
+    - a1 a1 a1 a2 a1 a1 a1
+  - - a2 a7 a8 __ a8 a7 a2
+    - a7 __ __ __ __ __ a7
+    - a1 __ __ __ __ __ a1
+    - a8 __ __ __ __ __ a8
+    - a1 __ __ __ __ __ a1
+    - a7 a12 __ __ __ a12 a7
+    - a2 a7 a1 a8 a1 a7 a2
+  - - a1 a7 a8 __ a8 a7 a1
+    - a7 __ __ __ __ __ a7
+    - a1 __ __ __ __ __ a1
+    - a8 __ __ __ __ __ a8
+    - a1 __ __ __ __ __ a1
+    - a7 __ __ __ __ __ a7
+    - a1 a7 a1 a8 a1 a7 a1
+  - - a2 a7 a8 __ a8 a7 a2
+    - a7 __ __ __ __ __ a7
+    - a1 __ __ __ __ __ a1
+    - a8 __ __ a10 __ __ a8
+    - a1 a15 __ a11 __ a15 a1
+    - a7 a9 a15 a16 a15 a4 a7
+    - a2 a7 a1 a8 a1 a7 a2
+  - - a1 a1 a1 a2 a1 a1 a1
+    - a1 a1 a1 a1 a1 a1 a1
+    - a1 a5 a5 a6 a5 a5 a1
+    - a2 a3 a3 a3 a3 a3 a2
+    - a1 a3 a3 a3 a3 a3 a1
+    - a1 a3 a3 a3 a3 a3 a1
+    - a1 a1 a1 a2 a1 a1 a1
+
+
+
+
+  mapping:
+    a1:
+      material_type: mc
+      material: stone_bricks
+    a2:
+      material_type: mc
+      material: cracked_stone_bricks
+    a3:
+      material_type: mc
+      material: dirt
+    a4:
+      material_type: mc
+      material: crafting_table
+    a5:
+      material_type: mc
+      material: farmland
+    a6:
+      material_type: mc
+      material: water
+    a7:
+      material_type: mc
+      material: iron_bars
+    a8:
+      material_type: mc
+      material: cobblestone_wall
+    a9:
+      material_type: mc
+      material: anvil
+    a10:
+      material_type: mc
+      material: white_carpet
+    a11:
+      material_type: mc
+      material: red_carpet
+    a12:
+      material_type: mc
+      material: lantern
+    a13:
+      material_type: mc
+      material: iron_chain | chain
+    a14:
+      material_type: mc
+      material: stone_brick_slab
+    a15:
+      material_type: mc
+      material: chest
+    a16:
+      material_type: slimefun
+      material: TR_CJHNSCYQ
+      core: true
+  recipes:
+    TR_CJHN_RECIPE:
+      seconds: 10
+      input:
+        1:
+          material_type: mc
+          material: cooked_chicken
+        2:
+          material_type: mc
+          material: wooden_pickaxe
+        3:
+          material_type: mc
+          material: armor_stand
+        4:
+          material_type: mc
+          material: wooden_axe
+        5:
+          material_type: slimefun
+          material: Tr_cjtzhx
+        6:
+          material_type: mc
+          material: wooden_shovel
+        7:
+          material_type: slimefun
+          material: Tr_cts
+        8:
+          material_type: mc
+          material: wooden_hoe
+        9:
+          material_type: slimefun
+          material: grappling_hook
+      output:
+        1:
+          material_type: slimefun
+          material: Tr_cjhn
+          amount: 6
+TR_CZJT:
+  item_group: Tr_czjt
+  item:
+    material: enchanting_table
+    name: "{#8dddd8}&l初{#6fbeb9}&l章{#c52b2b}&l祭{#cc0000}&l坛"
+    lore:
+      - "&e&l前进4！"
+      - '&8⇨ &e⚡&7 120000 J 可存储'
+      - '&8⇨ &e⚡&7 3000 J/s'
+  recipe_type: ENHANCED_CRAFTING_TABLE
+  recipe:
+    1:
+      material_type: slimefun
+      material: CRAFTER_SMART_PORT
+    2:
+      material_type: slimefun
+      material: Tr_qlzplqj
+    3:
+      material_type: slimefun
+      material: CRAFTER_SMART_PORT
+    4:
+      material_type: mc
+      material: candle
+    5:
+      material_type: slimefun
+      material: ANCIENT_ALTAR
+    6:
+      material_type: mc
+      material: candle
+    7:
+      material_type: slimefun
+      material: Tr_cjnlhx
+    8:
+      material_type: slimefun
+      material: Tr_cjhn
+    9:
+      material_type: slimefun
+      material: Tr_cjnlhx
+
+  capacity: 120000
+  energyPerCraft: 3000
+  speed: 1
+
+  hideAllRecipes: false
+  #script: 初章祭坛
+  #大型多方快结构机器装载脚本会占用大量的粘液刻，所以停用了(
+
+
+  input: [2,6,9,17,36,44,47,51]
+  output: [13,22,31,40]
+
+  displayProjectiles: true
+  checkFormed: true
+  openMenuWhenClickedParts: true
+  noMenuWhenNotFormed: true
+  allowSwitchDisplayLayer: true
+  defaultNotice: true
+  structure:
+  - - a11 __ __ __ __ __ __ __ a11
+    - __ __ __ __ __ __ __ __ __
+    - __ __ __ __ __ __ __ __ __
+    - __ __ __ __ __ __ __ __ __
+    - __ __ __ __ __ __ __ __ __
+    - __ __ __ __ __ __ __ __ __
+    - __ __ __ __ __ __ __ __ __
+    - __ __ __ __ __ __ __ __ __
+    - a11 __ __ __ __ __ __ __ a11
+  - - a12 __ __ __ __ __ __ __ a12
+    - __ __ __ __ __ __ __ __ __
+    - __ __ __ __ __ __ __ __ __
+    - __ __ __ __ __ __ __ __ __
+    - __ __ __ __ __ __ __ __ __
+    - __ __ __ __ __ __ __ __ __
+    - __ __ __ __ __ __ __ __ __
+    - __ __ __ __ __ __ __ __ __
+    - a12 __ __ __ __ __ __ __ a12
+  - - a12 __ __ __ a13 __ __ __ a12
+    - __ a13 __ __ __ __ __ a13 __
+    - __ __ __ __ __ __ __ __ __
+    - __ __ __ __ __ __ __ __ __
+    - a13 __ __ __ a14 __ __ __ a13
+    - __ __ __ __ __ __ __ __ __
+    - __ __ __ __ __ __ __ __ __
+    - __ a13 __ __ __ __ __ a13 __
+    - a12 __ __ __ a13 __ __ __ a12
+  - - a1 a1 a2 a2 a3 a2 a2 a1 a1
+    - a1 a3 a4 a4 a4 a4 a4 a3 a1
+    - a2 a4 a5 a6 a7 a6 a5 a4 a2
+    - a2 a4 a6 a8 a9 a8 a6 a4 a2
+    - a3 a4 a7 a9 a10 a9 a7 a4 a3
+    - a2 a4 a6 a8 a9 a8 a6 a4 a2
+    - a2 a4 a5 a6 a7 a6 a5 a4 a2
+    - a1 a3 a4 a4 a4 a4 a4 a3 a1
+    - a1 a1 a2 a2 a3 a2 a2 a1 a1
+
+
+
+  mapping:
+    a1:
+      material_type: mc
+      material: end_stone
+    a2:
+      material_type: mc
+      material: mycelium
+    a3:
+      material_type: mc
+      material: ancient_debris
+    a4:
+      material_type: mc
+      material: crying_obsidian
+    a5:
+      material_type: mc
+      material: grass_block
+    a6:
+      material_type: mc
+      material: magma_block
+    a7:
+      material_type: mc
+      material: packed_ice
+    a8:
+      material_type: mc
+      material: podzol
+    a9:
+      material_type: mc
+      material: blue_ice
+    a10:
+      material_type: mc
+      material: soul_soil
+    a11:
+      material_type: mc
+      material: bookshelf
+    a12:
+      material_type: mc
+      material: chorus_plant
+    a13:
+      material_type: mc
+      material: dispenser
+    a14:
+      material_type: slimefun
+      material: TR_CZJT
+      core: true
+  recipes:
+    TR_CZJT_RECIPE:
+      seconds: 16
+      input:
+        1:
+          material_type: slimefun
+          material: MAGIC_LUMP_3
+          amount: 2
+        2:
+          material_type: slimefun
+          material: URANIUM
+          amount: 2
+        3:
+          material_type: mc
+          material: snow
+          amount: 2
+        4:
+          material_type: mc
+          material: pufferfish
+          amount: 2
+        5:
+          material_type: mc
+          material: honey_bottle
+          amount: 2
+        6:
+          material_type: mc
+          material: prismarine_shard
+          amount: 2
+        7:
+          material_type: slimefun
+          material: CARBONADO
+          amount: 2
+        8:
+          material_type: slimefun
+          material: ENDER_LUMP_3
+          amount: 2
+      output:
+        1:
+          material_type: slimefun
+          material: Tr_cjsmhhw
+          amount: 4
+
+TR_HTY:
+  item_group: Tr_zzhcjg
+  item:
+    material_type: mc
+    material: lodestone
+    name: '{#f5d0fe}&l浑{#e879f9}&l天{#c026d3}&l仪'
+    lore:
+    - '&7仰观日月星辰，俯察天地经纬。'
+    - '&7以浑天为仪，解构万物玄妙。'
+    - '&8⇨ &e⚡&7 1919810 J 可存储'
+    - '&8⇨ &e⚡&7 9178 J/次'
+  recipe_type: ENHANCED_CRAFTING_TABLE
+  recipe:
+    1:
+      material_type: slimefun
+      material: Tr_txsj
+    2:
+      material_type: slimefun
+      material: TR_TSSJ
+    3:
+      material_type: slimefun
+      material: Tr_txsj
+    4:
+      material_type: slimefun
+      material: Tr_mgzj
+    5:
+      material_type: slimefun
+      material: TR_HMZQ
+    6:
+      material_type: slimefun
+      material: Tr_ysjq
+    7:
+      material_type: slimefun
+      material: Tr_txsj
+    8:
+      material_type: slimefun
+      material: TR_JSLLZ
+    9:
+      material_type: slimefun
+      material: Tr_txsj
+  capacity: 1919810
+  energyPerCraft: 9178
+  speed: 1
+  hideAllRecipes: false
+  input: [10, 11, 12, 19, 20, 21, 28, 29, 30]
+  output: [5, 6, 7, 8, 14, 15, 16, 17, 23, 24, 25, 26, 32, 33, 34, 35, 41, 42, 43, 44, 50, 51, 52, 53]
+  displayProjectiles: true
+  checkFormed: true
+  openMenuWhenClickedParts: true
+  noMenuWhenNotFormed: true
+  allowSwitchDisplayLayer: true
+  defaultNotice: true
+  structure:
+  - - __ __ __ __ __ __ __ __ __ __ __
+    - __ __ __ __ __ __ __ __ __ __ __
+    - __ __ __ __ __ __ __ __ __ __ __
+    - __ __ __ __ __ __ __ __ __ __ __
+    - __ __ __ __ a1 a2 a1 __ __ __ __
+    - __ __ __ __ a2 a3 a2 __ __ __ __
+    - __ __ __ __ a1 a2 a1 __ __ __ __
+    - __ __ __ __ __ __ __ __ __ __ __
+    - __ __ __ __ __ __ __ __ __ __ __
+    - __ __ __ __ __ __ __ __ __ __ __
+    - __ __ __ __ __ __ __ __ __ __ __
+  - - __ __ __ __ __ __ __ __ __ __ __
+    - __ __ __ __ __ __ __ __ __ __ __
+    - __ __ __ __ a5 a2 a5 __ __ __ __
+    - __ __ __ a5 a5 a2 a5 a5 __ __ __
+    - __ __ a5 a5 a5 a2 a5 a5 a5 __ __
+    - __ __ a2 a2 a2 __ a2 a2 a2 __ __
+    - __ __ a5 a5 a5 a2 a5 a5 a5 __ __
+    - __ __ __ a5 a5 a2 a5 a5 __ __ __
+    - __ __ __ __ a5 a2 a5 __ __ __ __
+    - __ __ __ __ __ __ __ __ __ __ __
+    - __ __ __ __ __ __ __ __ __ __ __
+  - - __ __ __ __ __ __ __ __ __ __ __
+    - __ __ __ __ a5 a2 a5 __ __ __ __
+    - __ __ a4 a5 a5 a2 a5 a5 a4 __ __
+    - __ __ a5 a5 __ __ __ a5 a5 __ __
+    - __ a5 a5 __ __ __ __ __ a5 a5 __
+    - __ a2 a2 __ __ __ __ __ a2 a2 __
+    - __ a5 a5 __ __ __ __ __ a5 a5 __
+    - __ __ a5 a5 __ __ __ a5 a5 __ __
+    - __ __ a4 a5 a5 a2 a5 a5 a4 __ __
+    - __ __ __ __ a5 a2 a5 __ __ __ __
+    - __ __ __ __ __ __ __ __ __ __ __
+  - - __ __ __ __ __ __ __ __ __ __ __
+    - __ __ __ a5 a5 a2 a5 a5 __ __ __
+    - __ __ a5 a5 __ __ __ a5 a5 __ __
+    - __ a5 a5 __ __ __ __ __ a5 a5 __
+    - __ a5 __ __ __ __ __ __ __ a5 __
+    - __ a2 __ __ __ __ __ __ __ a2 __
+    - __ a5 __ __ __ __ __ __ __ a5 __
+    - __ a5 a5 __ __ __ __ __ a5 a5 __
+    - __ __ a5 a5 __ __ __ a5 a5 __ __
+    - __ __ __ a5 a5 a2 a5 a5 __ __ __
+    - __ __ __ __ __ __ __ __ __ __ __
+  - - __ __ __ __ a1 a2 a1 __ __ __ __
+    - __ __ a5 a5 a5 a2 a5 a5 a5 __ __
+    - __ a5 a5 __ __ __ __ __ a5 a5 __
+    - __ a5 __ __ __ __ __ __ __ a5 __
+    - a1 a5 __ __ __ __ __ __ __ a5 a1
+    - a2 a2 __ __ __ __ __ __ __ a2 a2
+    - a1 a5 __ __ __ __ __ __ __ a5 a1
+    - __ a5 __ __ __ __ __ __ __ a5 __
+    - __ a5 a5 __ __ __ __ __ a5 a5 __
+    - __ __ a5 a5 a5 a2 a5 a5 a5 __ __
+    - __ __ __ __ a1 a2 a1 __ __ __ __
+  - - __ __ __ __ a2 a3 a2 __ __ __ __
+    - __ a2 a2 a2 a2 a2 a2 a2 a2 a2 __
+    - __ a2 a2 __ __ __ __ __ a2 a2 __
+    - __ a2 __ __ __ __ __ __ __ a2 __
+    - a2 a2 __ __ __ __ __ __ __ a2 a2
+    - a3 a2 __ __ __ a7 __ __ __ a2 a3
+    - a2 a2 __ __ __ __ __ __ __ a2 a2
+    - __ a2 __ __ __ __ __ __ __ a2 __
+    - __ a2 a2 __ __ __ __ __ a2 a2 __
+    - __ a2 a2 a2 a2 a2 a2 a2 a2 a2 __
+    - __ __ __ __ a2 a3 a2 __ __ __ __
+  - - __ __ __ __ a1 a2 a1 __ __ __ __
+    - __ __ a5 a5 a5 a2 a5 a5 a5 __ __
+    - __ a5 a5 __ __ __ __ __ a5 a5 __
+    - __ a5 __ __ __ __ __ __ __ a5 __
+    - a1 a5 __ __ __ __ __ __ __ a5 a1
+    - a2 a2 __ __ __ __ __ __ __ a2 a2
+    - a1 a5 __ __ __ __ __ __ __ a5 a1
+    - __ a5 __ __ __ __ __ __ __ a5 __
+    - __ a5 a5 __ __ __ __ __ a5 a5 __
+    - __ __ a5 a5 a5 a2 a5 a5 a5 __ __
+    - __ __ __ __ a1 a2 a1 __ __ __ __
+  - - __ __ __ __ __ __ __ __ __ __ __
+    - __ __ __ a5 a5 a2 a5 a5 __ __ __
+    - __ __ a5 a5 __ __ __ a5 a5 __ __
+    - __ a5 a5 __ __ __ __ __ a5 a5 __
+    - __ a5 __ __ __ __ __ __ __ a5 __
+    - __ a2 __ __ __ __ __ __ __ a2 __
+    - __ a5 __ __ __ __ __ __ __ a5 __
+    - __ a5 a5 __ __ __ __ __ a5 a5 __
+    - __ __ a5 a5 __ __ __ a5 a5 __ __
+    - __ __ __ a5 a5 a2 a5 a5 __ __ __
+    - __ __ __ __ __ __ __ __ __ __ __
+  - - __ __ __ __ __ __ __ __ __ __ __
+    - __ __ __ __ a5 a2 a5 __ __ __ __
+    - __ __ a4 a5 a5 a2 a5 a5 a4 __ __
+    - __ __ a5 a5 __ __ __ a5 a5 __ __
+    - __ a5 a5 __ __ __ __ __ a5 a5 __
+    - __ a2 a2 __ __ __ __ __ a2 a2 __
+    - __ a5 a5 __ __ __ __ __ a5 a5 __
+    - __ __ a5 a5 __ __ __ a5 a5 __ __
+    - __ __ a4 a5 a5 a2 a5 a5 a4 __ __
+    - __ __ __ __ a5 a2 a5 __ __ __ __
+    - __ __ __ __ __ __ __ __ __ __ __
+  - - a1 a1 a1 a1 a1 a1 a1 a1 a1 a1 a1
+    - a1 __ __ __ __ __ __ __ __ __ a1
+    - a1 __ a2 a2 a2 a2 a2 a2 a2 __ a1
+    - a1 __ a2 a2 a2 a2 a2 a2 a2 __ a1
+    - a1 __ a2 a2 a2 a2 a2 a2 a2 __ a1
+    - a1 __ a2 a2 a2 a2 a2 a2 a2 __ a1
+    - a1 __ a2 a2 a2 a2 a2 a2 a2 __ a1
+    - a1 __ a2 a2 a2 a2 a2 a2 a2 __ a1
+    - a1 __ a2 a2 a2 a2 a2 a2 a2 __ a1
+    - a1 __ __ __ __ __ __ __ __ __ a1
+    - a1 a1 a1 a1 a1 a1 a1 a1 a1 a1 a1
+  - - a1 a1 a1 a1 a1 a1 a1 a1 a1 a1 a1
+    - a1 a1 a1 a1 a1 a1 a1 a1 a1 a1 a1
+    - a1 a1 a1 a1 a1 a1 a1 a1 a1 a1 a1
+    - a1 a1 a1 a1 a1 a1 a1 a1 a1 a1 a1
+    - a1 a1 a1 a1 a6 a6 a6 a1 a1 a1 a1
+    - a1 a1 a1 a1 a6 a6 a6 a1 a1 a1 a1
+    - a1 a1 a1 a1 a6 a6 a6 a1 a1 a1 a1
+    - a1 a1 a1 a1 a1 a1 a1 a1 a1 a1 a1
+    - a1 a1 a1 a1 a1 a1 a1 a1 a1 a1 a1
+    - a1 a1 a1 a1 a1 a1 a1 a1 a1 a1 a1
+    - a1 a1 a1 a1 a1 a1 a1 a1 a1 a1 a1
+  mapping:
+    a1:
+      material_type: mc
+      material: polished_deepslate
+    a2:
+      material_type: mc
+      material: smooth_quartz
+    a3:
+      material_type: mc
+      material: amethyst_block
+    a4:
+      material_type: mc
+      material: sea_lantern
+    a5:
+      material_type: mc
+      material: glass
+    a6:
+      material_type: mc
+      material: lodestone
+    a7:
+      material_type: slimefun
+      material: TR_HTY
+      core: true
+  recipes:
+    element_gather:
+      seconds: 8
+      input:
+        1:
+          material_type: slimefun
+          material: Tr_jsllz
+          amount: 8
+      output:
+        1:
+          material_type: slimefun
+          material: Tr_jsllz
+          amount: 24
+        2:
+          material_type: slimefun
+          material: TR_FJ
+          amount: 64
+        3:
+          material_type: slimefun
+          material: TR_SL
+          amount: 64
+        4:
+          material_type: slimefun
+          material: TR_YL
+          amount: 64
+        5:
+          material_type: slimefun
+          material: TR_JM
+          amount: 64
+        6:
+          material_type: slimefun
+          material: TR_CH
+          amount: 64
+        7:
+          material_type: slimefun
+          material: TR_YC
+          amount: 64
+        8:
+          material_type: slimefun
+          material: TR_YY
+          amount: 64
+        9:
+          material_type: slimefun
+          material: TR_TE
+          amount: 64
+        10:
+          material_type: slimefun
+          material: TR_XS
+          amount: 64
+        11:
+          material_type: slimefun
+          material: Tr_dun
+          amount: 1
+          chance: 5
+    lingzhi_gather:
+      seconds: 8
+      input:
+        1:
+          material_type: slimefun
+          material: Tr_hmsg
+          amount: 64
+          noConsume: true
+      output:
+        1:
+          material_type: slimefun
+          material: Tr_lz01_fruit
+          amount: 64
+          chance: 100
+        2:
+          material_type: slimefun
+          material: Tr_lz02_fruit
+          amount: 64
+          chance: 100
+        3:
+          material_type: slimefun
+          material: Tr_lz03_fruit
+          amount: 64
+          chance: 100
+        4:
+          material_type: slimefun
+          material: Tr_lz04_fruit
+          amount: 64
+          chance: 100
+        5:
+          material_type: slimefun
+          material: Tr_lz05_fruit
+          amount: 64
+          chance: 100
+        6:
+          material_type: slimefun
+          material: Tr_lz06_fruit
+          amount: 64
+          chance: 100
+        7:
+          material_type: slimefun
+          material: Tr_lz07_fruit
+          amount: 32
+          chance: 80
+        8:
+          material_type: slimefun
+          material: Tr_lz08_fruit
+          amount: 32
+          chance: 80
+        9:
+          material_type: slimefun
+          material: Tr_lz09_fruit
+          amount: 32
+          chance: 80
+        10:
+          material_type: slimefun
+          material: Tr_lz10_fruit
+          amount: 32
+          chance: 80
+        11:
+          material_type: slimefun
+          material: Tr_lz11_fruit
+          amount: 32
+          chance: 80
+        12:
+          material_type: slimefun
+          material: Tr_lz12_fruit
+          amount: 16
+          chance: 64
+        13:
+          material_type: slimefun
+          material: Tr_lz13_fruit
+          amount: 16
+          chance: 64
+        14:
+          material_type: slimefun
+          material: Tr_lz14_fruit
+          amount: 16
+          chance: 64
+        15:
+          material_type: slimefun
+          material: Tr_lz15_fruit
+          amount: 8
+          chance: 51
+        16:
+          material_type: slimefun
+          material: Tr_lz16_fruit
+          amount: 8
+          chance: 51
+        17:
+          material_type: slimefun
+          material: Tr_cui
+          amount: 1
+          chance: 5
+        18:
+          material_type: slimefun
+          material: Tr_qmlp
+          amount: 1
+          chance: 20
+        19:
+          material_type: slimefun
+          material: Tr_xhlp
+          amount: 1
+          chance: 10
+        20:
+          material_type: slimefun
+          material: Tr_hmsg
+          amount: 1
+          chance: 2
+    fudi_gather:
+      seconds: 8
+      input:
+        1:
+          material_type: slimefun
+          material: Tr_fdszsxq
+          amount: 64
+          noConsume: true
+      output:
+        1:
+          material_type: slimefun
+          material: Tr_fdsz01
+          amount: 64
+          chance: 100
+        2:
+          material_type: slimefun
+          material: Tr_fdsz02
+          amount: 64
+          chance: 100
+        3:
+          material_type: slimefun
+          material: Tr_fdsz03
+          amount: 64
+          chance: 100
+        4:
+          material_type: slimefun
+          material: Tr_fdsz04
+          amount: 64
+          chance: 100
+        5:
+          material_type: slimefun
+          material: Tr_fdsz05
+          amount: 64
+          chance: 100
+        6:
+          material_type: slimefun
+          material: Tr_fdsz06
+          amount: 64
+          chance: 100
+        7:
+          material_type: slimefun
+          material: Tr_fdsz07
+          amount: 64
+          chance: 100
+        8:
+          material_type: slimefun
+          material: Tr_fdsz08
+          amount: 64
+          chance: 100
+        9:
+          material_type: slimefun
+          material: Tr_fdsz09
+          amount: 32
+          chance: 80
+        10:
+          material_type: slimefun
+          material: Tr_fdsz10
+          amount: 1
+          chance: 80
+        11:
+          material_type: slimefun
+          material: Tr_fdsz11
+          amount: 32
+          chance: 80
+        12:
+          material_type: slimefun
+          material: Tr_fdsz12
+          amount: 32
+          chance: 80
+        13:
+          material_type: slimefun
+          material: Tr_fdsz13
+          amount: 32
+          chance: 80
+        14:
+          material_type: slimefun
+          material: Tr_fdsz14
+          amount: 32
+          chance: 80
+        15:
+          material_type: slimefun
+          material: Tr_fdsz15
+          amount: 32
+          chance: 80
+        16:
+          material_type: slimefun
+          material: Tr_fdsz16
+          amount: 16
+          chance: 64
+        17:
+          material_type: slimefun
+          material: Tr_fdsz17
+          amount: 16
+          chance: 64
+        18:
+          material_type: slimefun
+          material: Tr_fdsz18
+          amount: 16
+          chance: 64
+        19:
+          material_type: slimefun
+          material: Tr_fdsz19
+          amount: 16
+          chance: 64
+        20:
+          material_type: slimefun
+          material: Tr_fdsz20
+          amount: 16
+          chance: 64
+        21:
+          material_type: slimefun
+          material: Tr_cai
+          amount: 1
+          chance: 5
+        22:
+          material_type: slimefun
+          material: Tr_fdszsxq
+          amount: 4

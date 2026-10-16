@@ -1,0 +1,5300 @@
+Tr_zwxmg:
+  lateInit: true
+  item_group: Tr_czzwx
+  item:
+    name: '&f&l&kTg{#7b2ff7}&l造{#5533d6}&l物{#2563eb}&l匣&f&l·&7木镐&f&l&kRn'
+    lore:
+    - '&8⇨ &e⚡&7 10000 J 可存储'
+    - '&8⇨ &e⚡&7 500 J/s'
+    material_type: skull_base64
+    material: eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNGU1NmZiNWIyOWE4ZDJlNjVlYWY5Y2NjNzM2MWIzYmU1MWUyM2JhOGYwNWJkN2RkYWI3MWM5NDYwYzhkMzQ2MCJ9fX0=
+  capacity: 10000
+  per: 500
+  recipe_type: ENHANCED_CRAFTING_TABLE
+  recipe:
+    2:
+      material_type: slimefun
+      material: Tr_zwxyp
+    5:
+      material_type: mc
+      material: wooden_pickaxe
+    7:
+      material_type: slimefun
+      material: Tr_zwdz
+    8:
+      material_type: slimefun
+      material: Tr_zwdz
+    9:
+      material_type: slimefun
+      material: Tr_zwdz
+  status: 0
+  tickRate: 1
+  output: [1,2,3,4,5,6,7,8,10,11,12,13,14,15,16,17,19,20,21,22,23,24,25,26,28,29,30,31,32,33,34,35,37,38,39,40,41,42,43,44,46,47,48,49,50,51,52,53]
+  outputItem:
+      material_type: mc
+      material: wooden_pickaxe
+      amount: 16
+Tr_zwxsg:
+  lateInit: true
+  item_group: Tr_czzwx
+  item:
+    name: '&f&l&kTg{#7b2ff7}&l造{#5533d6}&l物{#2563eb}&l匣&f&l·&7石镐&f&l&kRn'
+    lore:
+    - '&8⇨ &e⚡&7 10000 J 可存储'
+    - '&8⇨ &e⚡&7 500 J/s'
+    material_type: skull_base64
+    material: eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNGU1NmZiNWIyOWE4ZDJlNjVlYWY5Y2NjNzM2MWIzYmU1MWUyM2JhOGYwNWJkN2RkYWI3MWM5NDYwYzhkMzQ2MCJ9fX0=
+  capacity: 10000
+  per: 500
+  recipe_type: ENHANCED_CRAFTING_TABLE
+  recipe:
+    2:
+      material_type: slimefun
+      material: Tr_zwxyp
+    5:
+      material_type: mc
+      material: stone_pickaxe
+    7:
+      material_type: slimefun
+      material: Tr_zwdz
+    8:
+      material_type: slimefun
+      material: Tr_zwdz
+    9:
+      material_type: slimefun
+      material: Tr_zwdz
+  status: 0
+  tickRate: 1
+  output: [1,2,3,4,5,6,7,8,10,11,12,13,14,15,16,17,19,20,21,22,23,24,25,26,28,29,30,31,32,33,34,35,37,38,39,40,41,42,43,44,46,47,48,49,50,51,52,53]
+  outputItem:
+      material_type: mc
+      material: stone_pickaxe
+      amount: 16
+Tr_zwxtg:
+  lateInit: true
+  item_group: Tr_czzwx
+  item:
+    name: '&f&l&kTg{#7b2ff7}&l造{#5533d6}&l物{#2563eb}&l匣&f&l·&7铁镐&f&l&kRn'
+    lore:
+    - '&8⇨ &e⚡&7 10000 J 可存储'
+    - '&8⇨ &e⚡&7 500 J/s'
+    material_type: skull_base64
+    material: eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNGU1NmZiNWIyOWE4ZDJlNjVlYWY5Y2NjNzM2MWIzYmU1MWUyM2JhOGYwNWJkN2RkYWI3MWM5NDYwYzhkMzQ2MCJ9fX0=
+  capacity: 10000
+  per: 500
+  recipe_type: ENHANCED_CRAFTING_TABLE
+  recipe:
+    2:
+      material_type: slimefun
+      material: Tr_zwxyp
+    5:
+      material_type: mc
+      material: iron_pickaxe
+    7:
+      material_type: slimefun
+      material: Tr_zwdz
+    8:
+      material_type: slimefun
+      material: Tr_zwdz
+    9:
+      material_type: slimefun
+      material: Tr_zwdz
+  status: 0
+  tickRate: 1
+  output: [1,2,3,4,5,6,7,8,10,11,12,13,14,15,16,17,19,20,21,22,23,24,25,26,28,29,30,31,32,33,34,35,37,38,39,40,41,42,43,44,46,47,48,49,50,51,52,53]
+  outputItem:
+      material_type: mc
+      material: iron_pickaxe
+      amount: 16
+Tr_zwxjg:
+  lateInit: true
+  item_group: Tr_czzwx
+  item:
+    name: '&f&l&kTg{#7b2ff7}&l造{#5533d6}&l物{#2563eb}&l匣&f&l·&7金镐&f&l&kRn'
+    lore:
+    - '&8⇨ &e⚡&7 10000 J 可存储'
+    - '&8⇨ &e⚡&7 500 J/s'
+    material_type: skull_base64
+    material: eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNGU1NmZiNWIyOWE4ZDJlNjVlYWY5Y2NjNzM2MWIzYmU1MWUyM2JhOGYwNWJkN2RkYWI3MWM5NDYwYzhkMzQ2MCJ9fX0=
+  capacity: 10000
+  per: 500
+  recipe_type: ENHANCED_CRAFTING_TABLE
+  recipe:
+    2:
+      material_type: slimefun
+      material: Tr_zwxyp
+    5:
+      material_type: mc
+      material: golden_pickaxe
+    7:
+      material_type: slimefun
+      material: Tr_zwdz
+    8:
+      material_type: slimefun
+      material: Tr_zwdz
+    9:
+      material_type: slimefun
+      material: Tr_zwdz
+  status: 0
+  tickRate: 1
+  output: [1,2,3,4,5,6,7,8,10,11,12,13,14,15,16,17,19,20,21,22,23,24,25,26,28,29,30,31,32,33,34,35,37,38,39,40,41,42,43,44,46,47,48,49,50,51,52,53]
+  outputItem:
+      material_type: mc
+      material: golden_pickaxe
+      amount: 16
+Tr_zwxzsg:
+  lateInit: true
+  item_group: Tr_czzwx
+  item:
+    name: '&f&l&kTg{#7b2ff7}&l造{#5533d6}&l物{#2563eb}&l匣&f&l·&7钻石镐&f&l&kRn'
+    lore:
+    - '&8⇨ &e⚡&7 10000 J 可存储'
+    - '&8⇨ &e⚡&7 500 J/s'
+    material_type: skull_base64
+    material: eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNGU1NmZiNWIyOWE4ZDJlNjVlYWY5Y2NjNzM2MWIzYmU1MWUyM2JhOGYwNWJkN2RkYWI3MWM5NDYwYzhkMzQ2MCJ9fX0=
+  capacity: 10000
+  per: 500
+  recipe_type: ENHANCED_CRAFTING_TABLE
+  recipe:
+    2:
+      material_type: slimefun
+      material: Tr_zwxyp
+    5:
+      material_type: mc
+      material: diamond_pickaxe
+    7:
+      material_type: slimefun
+      material: Tr_zwdz
+    8:
+      material_type: slimefun
+      material: Tr_zwdz
+    9:
+      material_type: slimefun
+      material: Tr_zwdz
+  status: 0
+  tickRate: 1
+  output: [1,2,3,4,5,6,7,8,10,11,12,13,14,15,16,17,19,20,21,22,23,24,25,26,28,29,30,31,32,33,34,35,37,38,39,40,41,42,43,44,46,47,48,49,50,51,52,53]
+  outputItem:
+      material_type: mc
+      material: diamond_pickaxe
+      amount: 16
+Tr_zwxxjhjg:
+  lateInit: true
+  item_group: Tr_czzwx
+  item:
+    name: '&f&l&kTg{#7b2ff7}&l造{#5533d6}&l物{#2563eb}&l匣&f&l·&7下界合金镐&f&l&kRn'
+    lore:
+    - '&8⇨ &e⚡&7 10000 J 可存储'
+    - '&8⇨ &e⚡&7 500 J/s'
+    material_type: skull_base64
+    material: eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNGU1NmZiNWIyOWE4ZDJlNjVlYWY5Y2NjNzM2MWIzYmU1MWUyM2JhOGYwNWJkN2RkYWI3MWM5NDYwYzhkMzQ2MCJ9fX0=
+  capacity: 10000
+  per: 500
+  recipe_type: ENHANCED_CRAFTING_TABLE
+  recipe:
+    2:
+      material_type: slimefun
+      material: Tr_zwxyp
+    5:
+      material_type: mc
+      material: netherite_pickaxe
+    7:
+      material_type: slimefun
+      material: Tr_zwdz
+    8:
+      material_type: slimefun
+      material: Tr_zwdz
+    9:
+      material_type: slimefun
+      material: Tr_zwdz
+  status: 0
+  tickRate: 1
+  output: [1,2,3,4,5,6,7,8,10,11,12,13,14,15,16,17,19,20,21,22,23,24,25,26,28,29,30,31,32,33,34,35,37,38,39,40,41,42,43,44,46,47,48,49,50,51,52,53]
+  outputItem:
+      material_type: mc
+      material: netherite_pickaxe
+      amount: 16
+Tr_zwxmf:
+  lateInit: true
+  item_group: Tr_czzwx
+  item:
+    name: '&f&l&kTg{#7b2ff7}&l造{#5533d6}&l物{#2563eb}&l匣&f&l·&7木斧&f&l&kRn'
+    lore:
+    - '&8⇨ &e⚡&7 10000 J 可存储'
+    - '&8⇨ &e⚡&7 500 J/s'
+    material_type: skull_base64
+    material: eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNGU1NmZiNWIyOWE4ZDJlNjVlYWY5Y2NjNzM2MWIzYmU1MWUyM2JhOGYwNWJkN2RkYWI3MWM5NDYwYzhkMzQ2MCJ9fX0=
+  capacity: 10000
+  per: 500
+  recipe_type: ENHANCED_CRAFTING_TABLE
+  recipe:
+    2:
+      material_type: slimefun
+      material: Tr_zwxyp
+    5:
+      material_type: mc
+      material: wooden_axe
+    7:
+      material_type: slimefun
+      material: Tr_zwdz
+    8:
+      material_type: slimefun
+      material: Tr_zwdz
+    9:
+      material_type: slimefun
+      material: Tr_zwdz
+  status: 0
+  tickRate: 1
+  output: [1,2,3,4,5,6,7,8,10,11,12,13,14,15,16,17,19,20,21,22,23,24,25,26,28,29,30,31,32,33,34,35,37,38,39,40,41,42,43,44,46,47,48,49,50,51,52,53]
+  outputItem:
+      material_type: mc
+      material: wooden_axe
+      amount: 16
+Tr_zwxsf:
+  lateInit: true
+  item_group: Tr_czzwx
+  item:
+    name: '&f&l&kTg{#7b2ff7}&l造{#5533d6}&l物{#2563eb}&l匣&f&l·&7石斧&f&l&kRn'
+    lore:
+    - '&8⇨ &e⚡&7 10000 J 可存储'
+    - '&8⇨ &e⚡&7 500 J/s'
+    material_type: skull_base64
+    material: eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNGU1NmZiNWIyOWE4ZDJlNjVlYWY5Y2NjNzM2MWIzYmU1MWUyM2JhOGYwNWJkN2RkYWI3MWM5NDYwYzhkMzQ2MCJ9fX0=
+  capacity: 10000
+  per: 500
+  recipe_type: ENHANCED_CRAFTING_TABLE
+  recipe:
+    2:
+      material_type: slimefun
+      material: Tr_zwxyp
+    5:
+      material_type: mc
+      material: stone_axe
+    7:
+      material_type: slimefun
+      material: Tr_zwdz
+    8:
+      material_type: slimefun
+      material: Tr_zwdz
+    9:
+      material_type: slimefun
+      material: Tr_zwdz
+  status: 0
+  tickRate: 1
+  output: [1,2,3,4,5,6,7,8,10,11,12,13,14,15,16,17,19,20,21,22,23,24,25,26,28,29,30,31,32,33,34,35,37,38,39,40,41,42,43,44,46,47,48,49,50,51,52,53]
+  outputItem:
+      material_type: mc
+      material: stone_axe
+      amount: 16
+Tr_zwxtf:
+  lateInit: true
+  item_group: Tr_czzwx
+  item:
+    name: '&f&l&kTg{#7b2ff7}&l造{#5533d6}&l物{#2563eb}&l匣&f&l·&7铁斧&f&l&kRn'
+    lore:
+    - '&8⇨ &e⚡&7 10000 J 可存储'
+    - '&8⇨ &e⚡&7 500 J/s'
+    material_type: skull_base64
+    material: eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNGU1NmZiNWIyOWE4ZDJlNjVlYWY5Y2NjNzM2MWIzYmU1MWUyM2JhOGYwNWJkN2RkYWI3MWM5NDYwYzhkMzQ2MCJ9fX0=
+  capacity: 10000
+  per: 500
+  recipe_type: ENHANCED_CRAFTING_TABLE
+  recipe:
+    2:
+      material_type: slimefun
+      material: Tr_zwxyp
+    5:
+      material_type: mc
+      material: iron_axe
+    7:
+      material_type: slimefun
+      material: Tr_zwdz
+    8:
+      material_type: slimefun
+      material: Tr_zwdz
+    9:
+      material_type: slimefun
+      material: Tr_zwdz
+  status: 0
+  tickRate: 1
+  output: [1,2,3,4,5,6,7,8,10,11,12,13,14,15,16,17,19,20,21,22,23,24,25,26,28,29,30,31,32,33,34,35,37,38,39,40,41,42,43,44,46,47,48,49,50,51,52,53]
+  outputItem:
+      material_type: mc
+      material: iron_axe
+      amount: 16
+Tr_zwxjf:
+  lateInit: true
+  item_group: Tr_czzwx
+  item:
+    name: '&f&l&kTg{#7b2ff7}&l造{#5533d6}&l物{#2563eb}&l匣&f&l·&7金斧&f&l&kRn'
+    lore:
+    - '&8⇨ &e⚡&7 10000 J 可存储'
+    - '&8⇨ &e⚡&7 500 J/s'
+    material_type: skull_base64
+    material: eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNGU1NmZiNWIyOWE4ZDJlNjVlYWY5Y2NjNzM2MWIzYmU1MWUyM2JhOGYwNWJkN2RkYWI3MWM5NDYwYzhkMzQ2MCJ9fX0=
+  capacity: 10000
+  per: 500
+  recipe_type: ENHANCED_CRAFTING_TABLE
+  recipe:
+    2:
+      material_type: slimefun
+      material: Tr_zwxyp
+    5:
+      material_type: mc
+      material: golden_axe
+    7:
+      material_type: slimefun
+      material: Tr_zwdz
+    8:
+      material_type: slimefun
+      material: Tr_zwdz
+    9:
+      material_type: slimefun
+      material: Tr_zwdz
+  status: 0
+  tickRate: 1
+  output: [1,2,3,4,5,6,7,8,10,11,12,13,14,15,16,17,19,20,21,22,23,24,25,26,28,29,30,31,32,33,34,35,37,38,39,40,41,42,43,44,46,47,48,49,50,51,52,53]
+  outputItem:
+      material_type: mc
+      material: golden_axe
+      amount: 16
+Tr_zwxzsf:
+  lateInit: true
+  item_group: Tr_czzwx
+  item:
+    name: '&f&l&kTg{#7b2ff7}&l造{#5533d6}&l物{#2563eb}&l匣&f&l·&7钻石斧&f&l&kRn'
+    lore:
+    - '&8⇨ &e⚡&7 10000 J 可存储'
+    - '&8⇨ &e⚡&7 500 J/s'
+    material_type: skull_base64
+    material: eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNGU1NmZiNWIyOWE4ZDJlNjVlYWY5Y2NjNzM2MWIzYmU1MWUyM2JhOGYwNWJkN2RkYWI3MWM5NDYwYzhkMzQ2MCJ9fX0=
+  capacity: 10000
+  per: 500
+  recipe_type: ENHANCED_CRAFTING_TABLE
+  recipe:
+    2:
+      material_type: slimefun
+      material: Tr_zwxyp
+    5:
+      material_type: mc
+      material: diamond_axe
+    7:
+      material_type: slimefun
+      material: Tr_zwdz
+    8:
+      material_type: slimefun
+      material: Tr_zwdz
+    9:
+      material_type: slimefun
+      material: Tr_zwdz
+  status: 0
+  tickRate: 1
+  output: [1,2,3,4,5,6,7,8,10,11,12,13,14,15,16,17,19,20,21,22,23,24,25,26,28,29,30,31,32,33,34,35,37,38,39,40,41,42,43,44,46,47,48,49,50,51,52,53]
+  outputItem:
+      material_type: mc
+      material: diamond_axe
+      amount: 16
+Tr_zwxxjhjf:
+  lateInit: true
+  item_group: Tr_czzwx
+  item:
+    name: '&f&l&kTg{#7b2ff7}&l造{#5533d6}&l物{#2563eb}&l匣&f&l·&7下界合金斧&f&l&kRn'
+    lore:
+    - '&8⇨ &e⚡&7 10000 J 可存储'
+    - '&8⇨ &e⚡&7 500 J/s'
+    material_type: skull_base64
+    material: eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNGU1NmZiNWIyOWE4ZDJlNjVlYWY5Y2NjNzM2MWIzYmU1MWUyM2JhOGYwNWJkN2RkYWI3MWM5NDYwYzhkMzQ2MCJ9fX0=
+  capacity: 10000
+  per: 500
+  recipe_type: ENHANCED_CRAFTING_TABLE
+  recipe:
+    2:
+      material_type: slimefun
+      material: Tr_zwxyp
+    5:
+      material_type: mc
+      material: netherite_axe
+    7:
+      material_type: slimefun
+      material: Tr_zwdz
+    8:
+      material_type: slimefun
+      material: Tr_zwdz
+    9:
+      material_type: slimefun
+      material: Tr_zwdz
+  status: 0
+  tickRate: 1
+  output: [1,2,3,4,5,6,7,8,10,11,12,13,14,15,16,17,19,20,21,22,23,24,25,26,28,29,30,31,32,33,34,35,37,38,39,40,41,42,43,44,46,47,48,49,50,51,52,53]
+  outputItem:
+      material_type: mc
+      material: netherite_axe
+      amount: 16
+Tr_zwxmq:
+  lateInit: true
+  item_group: Tr_czzwx
+  item:
+    name: '&f&l&kTg{#7b2ff7}&l造{#5533d6}&l物{#2563eb}&l匣&f&l·&7木锹&f&l&kRn'
+    lore:
+    - '&8⇨ &e⚡&7 10000 J 可存储'
+    - '&8⇨ &e⚡&7 500 J/s'
+    material_type: skull_base64
+    material: eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNGU1NmZiNWIyOWE4ZDJlNjVlYWY5Y2NjNzM2MWIzYmU1MWUyM2JhOGYwNWJkN2RkYWI3MWM5NDYwYzhkMzQ2MCJ9fX0=
+  capacity: 10000
+  per: 500
+  recipe_type: ENHANCED_CRAFTING_TABLE
+  recipe:
+    2:
+      material_type: slimefun
+      material: Tr_zwxyp
+    5:
+      material_type: mc
+      material: wooden_shovel
+    7:
+      material_type: slimefun
+      material: Tr_zwdz
+    8:
+      material_type: slimefun
+      material: Tr_zwdz
+    9:
+      material_type: slimefun
+      material: Tr_zwdz
+  status: 0
+  tickRate: 1
+  output: [1,2,3,4,5,6,7,8,10,11,12,13,14,15,16,17,19,20,21,22,23,24,25,26,28,29,30,31,32,33,34,35,37,38,39,40,41,42,43,44,46,47,48,49,50,51,52,53]
+  outputItem:
+      material_type: mc
+      material: wooden_shovel
+      amount: 16
+Tr_zwxsq:
+  lateInit: true
+  item_group: Tr_czzwx
+  item:
+    name: '&f&l&kTg{#7b2ff7}&l造{#5533d6}&l物{#2563eb}&l匣&f&l·&7石锹&f&l&kRn'
+    lore:
+    - '&8⇨ &e⚡&7 10000 J 可存储'
+    - '&8⇨ &e⚡&7 500 J/s'
+    material_type: skull_base64
+    material: eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNGU1NmZiNWIyOWE4ZDJlNjVlYWY5Y2NjNzM2MWIzYmU1MWUyM2JhOGYwNWJkN2RkYWI3MWM5NDYwYzhkMzQ2MCJ9fX0=
+  capacity: 10000
+  per: 500
+  recipe_type: ENHANCED_CRAFTING_TABLE
+  recipe:
+    2:
+      material_type: slimefun
+      material: Tr_zwxyp
+    5:
+      material_type: mc
+      material: stone_shovel
+    7:
+      material_type: slimefun
+      material: Tr_zwdz
+    8:
+      material_type: slimefun
+      material: Tr_zwdz
+    9:
+      material_type: slimefun
+      material: Tr_zwdz
+  status: 0
+  tickRate: 1
+  output: [1,2,3,4,5,6,7,8,10,11,12,13,14,15,16,17,19,20,21,22,23,24,25,26,28,29,30,31,32,33,34,35,37,38,39,40,41,42,43,44,46,47,48,49,50,51,52,53]
+  outputItem:
+      material_type: mc
+      material: stone_shovel
+      amount: 16
+Tr_zwxtq:
+  lateInit: true
+  item_group: Tr_czzwx
+  item:
+    name: '&f&l&kTg{#7b2ff7}&l造{#5533d6}&l物{#2563eb}&l匣&f&l·&7铁锹&f&l&kRn'
+    lore:
+    - '&8⇨ &e⚡&7 10000 J 可存储'
+    - '&8⇨ &e⚡&7 500 J/s'
+    material_type: skull_base64
+    material: eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNGU1NmZiNWIyOWE4ZDJlNjVlYWY5Y2NjNzM2MWIzYmU1MWUyM2JhOGYwNWJkN2RkYWI3MWM5NDYwYzhkMzQ2MCJ9fX0=
+  capacity: 10000
+  per: 500
+  recipe_type: ENHANCED_CRAFTING_TABLE
+  recipe:
+    2:
+      material_type: slimefun
+      material: Tr_zwxyp
+    5:
+      material_type: mc
+      material: iron_shovel
+    7:
+      material_type: slimefun
+      material: Tr_zwdz
+    8:
+      material_type: slimefun
+      material: Tr_zwdz
+    9:
+      material_type: slimefun
+      material: Tr_zwdz
+  status: 0
+  tickRate: 1
+  output: [1,2,3,4,5,6,7,8,10,11,12,13,14,15,16,17,19,20,21,22,23,24,25,26,28,29,30,31,32,33,34,35,37,38,39,40,41,42,43,44,46,47,48,49,50,51,52,53]
+  outputItem:
+      material_type: mc
+      material: iron_shovel
+      amount: 16
+Tr_zwxjq:
+  lateInit: true
+  item_group: Tr_czzwx
+  item:
+    name: '&f&l&kTg{#7b2ff7}&l造{#5533d6}&l物{#2563eb}&l匣&f&l·&7金锹&f&l&kRn'
+    lore:
+    - '&8⇨ &e⚡&7 10000 J 可存储'
+    - '&8⇨ &e⚡&7 500 J/s'
+    material_type: skull_base64
+    material: eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNGU1NmZiNWIyOWE4ZDJlNjVlYWY5Y2NjNzM2MWIzYmU1MWUyM2JhOGYwNWJkN2RkYWI3MWM5NDYwYzhkMzQ2MCJ9fX0=
+  capacity: 10000
+  per: 500
+  recipe_type: ENHANCED_CRAFTING_TABLE
+  recipe:
+    2:
+      material_type: slimefun
+      material: Tr_zwxyp
+    5:
+      material_type: mc
+      material: golden_shovel
+    7:
+      material_type: slimefun
+      material: Tr_zwdz
+    8:
+      material_type: slimefun
+      material: Tr_zwdz
+    9:
+      material_type: slimefun
+      material: Tr_zwdz
+  status: 0
+  tickRate: 1
+  output: [1,2,3,4,5,6,7,8,10,11,12,13,14,15,16,17,19,20,21,22,23,24,25,26,28,29,30,31,32,33,34,35,37,38,39,40,41,42,43,44,46,47,48,49,50,51,52,53]
+  outputItem:
+      material_type: mc
+      material: golden_shovel
+      amount: 16
+Tr_zwxzsq:
+  lateInit: true
+  item_group: Tr_czzwx
+  item:
+    name: '&f&l&kTg{#7b2ff7}&l造{#5533d6}&l物{#2563eb}&l匣&f&l·&7钻石锹&f&l&kRn'
+    lore:
+    - '&8⇨ &e⚡&7 10000 J 可存储'
+    - '&8⇨ &e⚡&7 500 J/s'
+    material_type: skull_base64
+    material: eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNGU1NmZiNWIyOWE4ZDJlNjVlYWY5Y2NjNzM2MWIzYmU1MWUyM2JhOGYwNWJkN2RkYWI3MWM5NDYwYzhkMzQ2MCJ9fX0=
+  capacity: 10000
+  per: 500
+  recipe_type: ENHANCED_CRAFTING_TABLE
+  recipe:
+    2:
+      material_type: slimefun
+      material: Tr_zwxyp
+    5:
+      material_type: mc
+      material: diamond_shovel
+    7:
+      material_type: slimefun
+      material: Tr_zwdz
+    8:
+      material_type: slimefun
+      material: Tr_zwdz
+    9:
+      material_type: slimefun
+      material: Tr_zwdz
+  status: 0
+  tickRate: 1
+  output: [1,2,3,4,5,6,7,8,10,11,12,13,14,15,16,17,19,20,21,22,23,24,25,26,28,29,30,31,32,33,34,35,37,38,39,40,41,42,43,44,46,47,48,49,50,51,52,53]
+  outputItem:
+      material_type: mc
+      material: diamond_shovel
+      amount: 16
+Tr_zwxxjhjq:
+  lateInit: true
+  item_group: Tr_czzwx
+  item:
+    name: '&f&l&kTg{#7b2ff7}&l造{#5533d6}&l物{#2563eb}&l匣&f&l·&7下界合金锹&f&l&kRn'
+    lore:
+    - '&8⇨ &e⚡&7 10000 J 可存储'
+    - '&8⇨ &e⚡&7 500 J/s'
+    material_type: skull_base64
+    material: eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNGU1NmZiNWIyOWE4ZDJlNjVlYWY5Y2NjNzM2MWIzYmU1MWUyM2JhOGYwNWJkN2RkYWI3MWM5NDYwYzhkMzQ2MCJ9fX0=
+  capacity: 10000
+  per: 500
+  recipe_type: ENHANCED_CRAFTING_TABLE
+  recipe:
+    2:
+      material_type: slimefun
+      material: Tr_zwxyp
+    5:
+      material_type: mc
+      material: netherite_shovel
+    7:
+      material_type: slimefun
+      material: Tr_zwdz
+    8:
+      material_type: slimefun
+      material: Tr_zwdz
+    9:
+      material_type: slimefun
+      material: Tr_zwdz
+  status: 0
+  tickRate: 1
+  output: [1,2,3,4,5,6,7,8,10,11,12,13,14,15,16,17,19,20,21,22,23,24,25,26,28,29,30,31,32,33,34,35,37,38,39,40,41,42,43,44,46,47,48,49,50,51,52,53]
+  outputItem:
+      material_type: mc
+      material: netherite_shovel
+      amount: 16
+Tr_zwxmc:
+  lateInit: true
+  item_group: Tr_czzwx
+  item:
+    name: '&f&l&kTg{#7b2ff7}&l造{#5533d6}&l物{#2563eb}&l匣&f&l·&7木锄&f&l&kRn'
+    lore:
+    - '&8⇨ &e⚡&7 10000 J 可存储'
+    - '&8⇨ &e⚡&7 500 J/s'
+    material_type: skull_base64
+    material: eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNGU1NmZiNWIyOWE4ZDJlNjVlYWY5Y2NjNzM2MWIzYmU1MWUyM2JhOGYwNWJkN2RkYWI3MWM5NDYwYzhkMzQ2MCJ9fX0=
+  capacity: 10000
+  per: 500
+  recipe_type: ENHANCED_CRAFTING_TABLE
+  recipe:
+    2:
+      material_type: slimefun
+      material: Tr_zwxyp
+    5:
+      material_type: mc
+      material: wooden_hoe
+    7:
+      material_type: slimefun
+      material: Tr_zwdz
+    8:
+      material_type: slimefun
+      material: Tr_zwdz
+    9:
+      material_type: slimefun
+      material: Tr_zwdz
+  status: 0
+  tickRate: 1
+  output: [1,2,3,4,5,6,7,8,10,11,12,13,14,15,16,17,19,20,21,22,23,24,25,26,28,29,30,31,32,33,34,35,37,38,39,40,41,42,43,44,46,47,48,49,50,51,52,53]
+  outputItem:
+      material_type: mc
+      material: wooden_hoe
+      amount: 16
+Tr_zwxsc:
+  lateInit: true
+  item_group: Tr_czzwx
+  item:
+    name: '&f&l&kTg{#7b2ff7}&l造{#5533d6}&l物{#2563eb}&l匣&f&l·&7石锄&f&l&kRn'
+    lore:
+    - '&8⇨ &e⚡&7 10000 J 可存储'
+    - '&8⇨ &e⚡&7 500 J/s'
+    material_type: skull_base64
+    material: eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNGU1NmZiNWIyOWE4ZDJlNjVlYWY5Y2NjNzM2MWIzYmU1MWUyM2JhOGYwNWJkN2RkYWI3MWM5NDYwYzhkMzQ2MCJ9fX0=
+  capacity: 10000
+  per: 500
+  recipe_type: ENHANCED_CRAFTING_TABLE
+  recipe:
+    2:
+      material_type: slimefun
+      material: Tr_zwxyp
+    5:
+      material_type: mc
+      material: stone_hoe
+    7:
+      material_type: slimefun
+      material: Tr_zwdz
+    8:
+      material_type: slimefun
+      material: Tr_zwdz
+    9:
+      material_type: slimefun
+      material: Tr_zwdz
+  status: 0
+  tickRate: 1
+  output: [1,2,3,4,5,6,7,8,10,11,12,13,14,15,16,17,19,20,21,22,23,24,25,26,28,29,30,31,32,33,34,35,37,38,39,40,41,42,43,44,46,47,48,49,50,51,52,53]
+  outputItem:
+      material_type: mc
+      material: stone_hoe
+      amount: 16
+Tr_zwxtc:
+  lateInit: true
+  item_group: Tr_czzwx
+  item:
+    name: '&f&l&kTg{#7b2ff7}&l造{#5533d6}&l物{#2563eb}&l匣&f&l·&7铁锄&f&l&kRn'
+    lore:
+    - '&8⇨ &e⚡&7 10000 J 可存储'
+    - '&8⇨ &e⚡&7 500 J/s'
+    material_type: skull_base64
+    material: eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNGU1NmZiNWIyOWE4ZDJlNjVlYWY5Y2NjNzM2MWIzYmU1MWUyM2JhOGYwNWJkN2RkYWI3MWM5NDYwYzhkMzQ2MCJ9fX0=
+  capacity: 10000
+  per: 500
+  recipe_type: ENHANCED_CRAFTING_TABLE
+  recipe:
+    2:
+      material_type: slimefun
+      material: Tr_zwxyp
+    5:
+      material_type: mc
+      material: iron_hoe
+    7:
+      material_type: slimefun
+      material: Tr_zwdz
+    8:
+      material_type: slimefun
+      material: Tr_zwdz
+    9:
+      material_type: slimefun
+      material: Tr_zwdz
+  status: 0
+  tickRate: 1
+  output: [1,2,3,4,5,6,7,8,10,11,12,13,14,15,16,17,19,20,21,22,23,24,25,26,28,29,30,31,32,33,34,35,37,38,39,40,41,42,43,44,46,47,48,49,50,51,52,53]
+  outputItem:
+      material_type: mc
+      material: iron_hoe
+      amount: 16
+Tr_zwxjc:
+  lateInit: true
+  item_group: Tr_czzwx
+  item:
+    name: '&f&l&kTg{#7b2ff7}&l造{#5533d6}&l物{#2563eb}&l匣&f&l·&7金锄&f&l&kRn'
+    lore:
+    - '&8⇨ &e⚡&7 10000 J 可存储'
+    - '&8⇨ &e⚡&7 500 J/s'
+    material_type: skull_base64
+    material: eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNGU1NmZiNWIyOWE4ZDJlNjVlYWY5Y2NjNzM2MWIzYmU1MWUyM2JhOGYwNWJkN2RkYWI3MWM5NDYwYzhkMzQ2MCJ9fX0=
+  capacity: 10000
+  per: 500
+  recipe_type: ENHANCED_CRAFTING_TABLE
+  recipe:
+    2:
+      material_type: slimefun
+      material: Tr_zwxyp
+    5:
+      material_type: mc
+      material: golden_hoe
+    7:
+      material_type: slimefun
+      material: Tr_zwdz
+    8:
+      material_type: slimefun
+      material: Tr_zwdz
+    9:
+      material_type: slimefun
+      material: Tr_zwdz
+  status: 0
+  tickRate: 1
+  output: [1,2,3,4,5,6,7,8,10,11,12,13,14,15,16,17,19,20,21,22,23,24,25,26,28,29,30,31,32,33,34,35,37,38,39,40,41,42,43,44,46,47,48,49,50,51,52,53]
+  outputItem:
+      material_type: mc
+      material: golden_hoe
+      amount: 16
+Tr_zwxzsc:
+  lateInit: true
+  item_group: Tr_czzwx
+  item:
+    name: '&f&l&kTg{#7b2ff7}&l造{#5533d6}&l物{#2563eb}&l匣&f&l·&7钻石锄&f&l&kRn'
+    lore:
+    - '&8⇨ &e⚡&7 10000 J 可存储'
+    - '&8⇨ &e⚡&7 500 J/s'
+    material_type: skull_base64
+    material: eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNGU1NmZiNWIyOWE4ZDJlNjVlYWY5Y2NjNzM2MWIzYmU1MWUyM2JhOGYwNWJkN2RkYWI3MWM5NDYwYzhkMzQ2MCJ9fX0=
+  capacity: 10000
+  per: 500
+  recipe_type: ENHANCED_CRAFTING_TABLE
+  recipe:
+    2:
+      material_type: slimefun
+      material: Tr_zwxyp
+    5:
+      material_type: mc
+      material: diamond_hoe
+    7:
+      material_type: slimefun
+      material: Tr_zwdz
+    8:
+      material_type: slimefun
+      material: Tr_zwdz
+    9:
+      material_type: slimefun
+      material: Tr_zwdz
+  status: 0
+  tickRate: 1
+  output: [1,2,3,4,5,6,7,8,10,11,12,13,14,15,16,17,19,20,21,22,23,24,25,26,28,29,30,31,32,33,34,35,37,38,39,40,41,42,43,44,46,47,48,49,50,51,52,53]
+  outputItem:
+      material_type: mc
+      material: diamond_hoe
+      amount: 16
+Tr_zwxxjhjc:
+  lateInit: true
+  item_group: Tr_czzwx
+  item:
+    name: '&f&l&kTg{#7b2ff7}&l造{#5533d6}&l物{#2563eb}&l匣&f&l·&7下界合金锄&f&l&kRn'
+    lore:
+    - '&8⇨ &e⚡&7 10000 J 可存储'
+    - '&8⇨ &e⚡&7 500 J/s'
+    material_type: skull_base64
+    material: eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNGU1NmZiNWIyOWE4ZDJlNjVlYWY5Y2NjNzM2MWIzYmU1MWUyM2JhOGYwNWJkN2RkYWI3MWM5NDYwYzhkMzQ2MCJ9fX0=
+  capacity: 10000
+  per: 500
+  recipe_type: ENHANCED_CRAFTING_TABLE
+  recipe:
+    2:
+      material_type: slimefun
+      material: Tr_zwxyp
+    5:
+      material_type: mc
+      material: netherite_hoe
+    7:
+      material_type: slimefun
+      material: Tr_zwdz
+    8:
+      material_type: slimefun
+      material: Tr_zwdz
+    9:
+      material_type: slimefun
+      material: Tr_zwdz
+  status: 0
+  tickRate: 1
+  output: [1,2,3,4,5,6,7,8,10,11,12,13,14,15,16,17,19,20,21,22,23,24,25,26,28,29,30,31,32,33,34,35,37,38,39,40,41,42,43,44,46,47,48,49,50,51,52,53]
+  outputItem:
+      material_type: mc
+      material: netherite_hoe
+      amount: 16
+Tr_zwxt:
+  lateInit: true
+  item_group: Tr_czzwx
+  item:
+    name: '&f&l&kTg{#7b2ff7}&l造{#5533d6}&l物{#2563eb}&l匣&f&l·&7桶&f&l&kRn'
+    lore:
+    - '&8⇨ &e⚡&7 10000 J 可存储'
+    - '&8⇨ &e⚡&7 500 J/s'
+    material_type: skull_base64
+    material: eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNGU1NmZiNWIyOWE4ZDJlNjVlYWY5Y2NjNzM2MWIzYmU1MWUyM2JhOGYwNWJkN2RkYWI3MWM5NDYwYzhkMzQ2MCJ9fX0=
+  capacity: 10000
+  per: 500
+  recipe_type: ENHANCED_CRAFTING_TABLE
+  recipe:
+    2:
+      material_type: slimefun
+      material: Tr_zwxyp
+    5:
+      material_type: mc
+      material: bucket
+    7:
+      material_type: slimefun
+      material: Tr_zwdz
+    8:
+      material_type: slimefun
+      material: Tr_zwdz
+    9:
+      material_type: slimefun
+      material: Tr_zwdz
+  status: 0
+  tickRate: 1
+  output: [1,2,3,4,5,6,7,8,10,11,12,13,14,15,16,17,19,20,21,22,23,24,25,26,28,29,30,31,32,33,34,35,37,38,39,40,41,42,43,44,46,47,48,49,50,51,52,53]
+  outputItem:
+      material_type: mc
+      material: bucket
+      amount: 16
+Tr_zwxst:
+  lateInit: true
+  item_group: Tr_czzwx
+  item:
+    name: '&f&l&kTg{#7b2ff7}&l造{#5533d6}&l物{#2563eb}&l匣&f&l·&7水桶&f&l&kRn'
+    lore:
+    - '&8⇨ &e⚡&7 10000 J 可存储'
+    - '&8⇨ &e⚡&7 500 J/s'
+    material_type: skull_base64
+    material: eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNGU1NmZiNWIyOWE4ZDJlNjVlYWY5Y2NjNzM2MWIzYmU1MWUyM2JhOGYwNWJkN2RkYWI3MWM5NDYwYzhkMzQ2MCJ9fX0=
+  capacity: 10000
+  per: 500
+  recipe_type: ENHANCED_CRAFTING_TABLE
+  recipe:
+    2:
+      material_type: slimefun
+      material: Tr_zwxyp
+    5:
+      material_type: mc
+      material: water_bucket
+    7:
+      material_type: slimefun
+      material: Tr_zwdz
+    8:
+      material_type: slimefun
+      material: Tr_zwdz
+    9:
+      material_type: slimefun
+      material: Tr_zwdz
+  status: 0
+  tickRate: 1
+  output: [1,2,3,4,5,6,7,8,10,11,12,13,14,15,16,17,19,20,21,22,23,24,25,26,28,29,30,31,32,33,34,35,37,38,39,40,41,42,43,44,46,47,48,49,50,51,52,53]
+  outputItem:
+      material_type: mc
+      material: water_bucket
+      amount: 16
+Tr_zwxyjt:
+  lateInit: true
+  item_group: Tr_czzwx
+  item:
+    name: '&f&l&kTg{#7b2ff7}&l造{#5533d6}&l物{#2563eb}&l匣&f&l·&7岩浆桶&f&l&kRn'
+    lore:
+    - '&8⇨ &e⚡&7 10000 J 可存储'
+    - '&8⇨ &e⚡&7 500 J/s'
+    material_type: skull_base64
+    material: eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNGU1NmZiNWIyOWE4ZDJlNjVlYWY5Y2NjNzM2MWIzYmU1MWUyM2JhOGYwNWJkN2RkYWI3MWM5NDYwYzhkMzQ2MCJ9fX0=
+  capacity: 10000
+  per: 500
+  recipe_type: ENHANCED_CRAFTING_TABLE
+  recipe:
+    2:
+      material_type: slimefun
+      material: Tr_zwxyp
+    5:
+      material_type: mc
+      material: lava_bucket
+    7:
+      material_type: slimefun
+      material: Tr_zwdz
+    8:
+      material_type: slimefun
+      material: Tr_zwdz
+    9:
+      material_type: slimefun
+      material: Tr_zwdz
+  status: 0
+  tickRate: 1
+  output: [1,2,3,4,5,6,7,8,10,11,12,13,14,15,16,17,19,20,21,22,23,24,25,26,28,29,30,31,32,33,34,35,37,38,39,40,41,42,43,44,46,47,48,49,50,51,52,53]
+  outputItem:
+      material_type: mc
+      material: lava_bucket
+      amount: 16
+Tr_zwxnt:
+  lateInit: true
+  item_group: Tr_czzwx
+  item:
+    name: '&f&l&kTg{#7b2ff7}&l造{#5533d6}&l物{#2563eb}&l匣&f&l·&7奶桶&f&l&kRn'
+    lore:
+    - '&8⇨ &e⚡&7 10000 J 可存储'
+    - '&8⇨ &e⚡&7 500 J/s'
+    material_type: skull_base64
+    material: eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNGU1NmZiNWIyOWE4ZDJlNjVlYWY5Y2NjNzM2MWIzYmU1MWUyM2JhOGYwNWJkN2RkYWI3MWM5NDYwYzhkMzQ2MCJ9fX0=
+  capacity: 10000
+  per: 500
+  recipe_type: ENHANCED_CRAFTING_TABLE
+  recipe:
+    2:
+      material_type: slimefun
+      material: Tr_zwxyp
+    5:
+      material_type: mc
+      material: milk_bucket
+    7:
+      material_type: slimefun
+      material: Tr_zwdz
+    8:
+      material_type: slimefun
+      material: Tr_zwdz
+    9:
+      material_type: slimefun
+      material: Tr_zwdz
+  status: 0
+  tickRate: 1
+  output: [1,2,3,4,5,6,7,8,10,11,12,13,14,15,16,17,19,20,21,22,23,24,25,26,28,29,30,31,32,33,34,35,37,38,39,40,41,42,43,44,46,47,48,49,50,51,52,53]
+  outputItem:
+      material_type: mc
+      material: milk_bucket
+      amount: 16
+Tr_zwxxyt:
+  lateInit: true
+  item_group: Tr_czzwx
+  item:
+    name: '&f&l&kTg{#7b2ff7}&l造{#5533d6}&l物{#2563eb}&l匣&f&l·&7鳕鱼桶&f&l&kRn'
+    lore:
+    - '&8⇨ &e⚡&7 10000 J 可存储'
+    - '&8⇨ &e⚡&7 500 J/s'
+    material_type: skull_base64
+    material: eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNGU1NmZiNWIyOWE4ZDJlNjVlYWY5Y2NjNzM2MWIzYmU1MWUyM2JhOGYwNWJkN2RkYWI3MWM5NDYwYzhkMzQ2MCJ9fX0=
+  capacity: 10000
+  per: 500
+  recipe_type: ENHANCED_CRAFTING_TABLE
+  recipe:
+    2:
+      material_type: slimefun
+      material: Tr_zwxyp
+    5:
+      material_type: mc
+      material: cod_bucket
+    7:
+      material_type: slimefun
+      material: Tr_zwdz
+    8:
+      material_type: slimefun
+      material: Tr_zwdz
+    9:
+      material_type: slimefun
+      material: Tr_zwdz
+  status: 0
+  tickRate: 1
+  output: [1,2,3,4,5,6,7,8,10,11,12,13,14,15,16,17,19,20,21,22,23,24,25,26,28,29,30,31,32,33,34,35,37,38,39,40,41,42,43,44,46,47,48,49,50,51,52,53]
+  outputItem:
+      material_type: mc
+      material: cod_bucket
+      amount: 16
+Tr_zwxgyt:
+  lateInit: true
+  item_group: Tr_czzwx
+  item:
+    name: '&f&l&kTg{#7b2ff7}&l造{#5533d6}&l物{#2563eb}&l匣&f&l·&7鲑鱼桶&f&l&kRn'
+    lore:
+    - '&8⇨ &e⚡&7 10000 J 可存储'
+    - '&8⇨ &e⚡&7 500 J/s'
+    material_type: skull_base64
+    material: eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNGU1NmZiNWIyOWE4ZDJlNjVlYWY5Y2NjNzM2MWIzYmU1MWUyM2JhOGYwNWJkN2RkYWI3MWM5NDYwYzhkMzQ2MCJ9fX0=
+  capacity: 10000
+  per: 500
+  recipe_type: ENHANCED_CRAFTING_TABLE
+  recipe:
+    2:
+      material_type: slimefun
+      material: Tr_zwxyp
+    5:
+      material_type: mc
+      material: salmon_bucket
+    7:
+      material_type: slimefun
+      material: Tr_zwdz
+    8:
+      material_type: slimefun
+      material: Tr_zwdz
+    9:
+      material_type: slimefun
+      material: Tr_zwdz
+  status: 0
+  tickRate: 1
+  output: [1,2,3,4,5,6,7,8,10,11,12,13,14,15,16,17,19,20,21,22,23,24,25,26,28,29,30,31,32,33,34,35,37,38,39,40,41,42,43,44,46,47,48,49,50,51,52,53]
+  outputItem:
+      material_type: mc
+      material: salmon_bucket
+      amount: 16
+Tr_zwxhtt:
+  lateInit: true
+  item_group: Tr_czzwx
+  item:
+    name: '&f&l&kTg{#7b2ff7}&l造{#5533d6}&l物{#2563eb}&l匣&f&l·&7河豚桶&f&l&kRn'
+    lore:
+    - '&8⇨ &e⚡&7 10000 J 可存储'
+    - '&8⇨ &e⚡&7 500 J/s'
+    material_type: skull_base64
+    material: eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNGU1NmZiNWIyOWE4ZDJlNjVlYWY5Y2NjNzM2MWIzYmU1MWUyM2JhOGYwNWJkN2RkYWI3MWM5NDYwYzhkMzQ2MCJ9fX0=
+  capacity: 10000
+  per: 500
+  recipe_type: ENHANCED_CRAFTING_TABLE
+  recipe:
+    2:
+      material_type: slimefun
+      material: Tr_zwxyp
+    5:
+      material_type: mc
+      material: pufferfish_bucket
+    7:
+      material_type: slimefun
+      material: Tr_zwdz
+    8:
+      material_type: slimefun
+      material: Tr_zwdz
+    9:
+      material_type: slimefun
+      material: Tr_zwdz
+  status: 0
+  tickRate: 1
+  output: [1,2,3,4,5,6,7,8,10,11,12,13,14,15,16,17,19,20,21,22,23,24,25,26,28,29,30,31,32,33,34,35,37,38,39,40,41,42,43,44,46,47,48,49,50,51,52,53]
+  outputItem:
+      material_type: mc
+      material: pufferfish_bucket
+      amount: 16
+Tr_zwxrdyt:
+  lateInit: true
+  item_group: Tr_czzwx
+  item:
+    name: '&f&l&kTg{#7b2ff7}&l造{#5533d6}&l物{#2563eb}&l匣&f&l·&7热带鱼桶&f&l&kRn'
+    lore:
+    - '&8⇨ &e⚡&7 10000 J 可存储'
+    - '&8⇨ &e⚡&7 500 J/s'
+    material_type: skull_base64
+    material: eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNGU1NmZiNWIyOWE4ZDJlNjVlYWY5Y2NjNzM2MWIzYmU1MWUyM2JhOGYwNWJkN2RkYWI3MWM5NDYwYzhkMzQ2MCJ9fX0=
+  capacity: 10000
+  per: 500
+  recipe_type: ENHANCED_CRAFTING_TABLE
+  recipe:
+    2:
+      material_type: slimefun
+      material: Tr_zwxyp
+    5:
+      material_type: mc
+      material: tropical_fish_bucket
+    7:
+      material_type: slimefun
+      material: Tr_zwdz
+    8:
+      material_type: slimefun
+      material: Tr_zwdz
+    9:
+      material_type: slimefun
+      material: Tr_zwdz
+  status: 0
+  tickRate: 1
+  output: [1,2,3,4,5,6,7,8,10,11,12,13,14,15,16,17,19,20,21,22,23,24,25,26,28,29,30,31,32,33,34,35,37,38,39,40,41,42,43,44,46,47,48,49,50,51,52,53]
+  outputItem:
+      material_type: mc
+      material: tropical_fish_bucket
+      amount: 16
+Tr_zwxkdt:
+  lateInit: true
+  item_group: Tr_czzwx
+  item:
+    name: '&f&l&kTg{#7b2ff7}&l造{#5533d6}&l物{#2563eb}&l匣&f&l·&7蝌蚪桶&f&l&kRn'
+    lore:
+    - '&8⇨ &e⚡&7 10000 J 可存储'
+    - '&8⇨ &e⚡&7 500 J/s'
+    material_type: skull_base64
+    material: eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNGU1NmZiNWIyOWE4ZDJlNjVlYWY5Y2NjNzM2MWIzYmU1MWUyM2JhOGYwNWJkN2RkYWI3MWM5NDYwYzhkMzQ2MCJ9fX0=
+  capacity: 10000
+  per: 500
+  recipe_type: ENHANCED_CRAFTING_TABLE
+  recipe:
+    2:
+      material_type: slimefun
+      material: Tr_zwxyp
+    5:
+      material_type: mc
+      material: tadpole_bucket
+    7:
+      material_type: slimefun
+      material: Tr_zwdz
+    8:
+      material_type: slimefun
+      material: Tr_zwdz
+    9:
+      material_type: slimefun
+      material: Tr_zwdz
+  status: 0
+  tickRate: 1
+  output: [1,2,3,4,5,6,7,8,10,11,12,13,14,15,16,17,19,20,21,22,23,24,25,26,28,29,30,31,32,33,34,35,37,38,39,40,41,42,43,44,46,47,48,49,50,51,52,53]
+  outputItem:
+      material_type: mc
+      material: tadpole_bucket
+      amount: 16
+Tr_zwxmxyt:
+  lateInit: true
+  item_group: Tr_czzwx
+  item:
+    name: '&f&l&kTg{#7b2ff7}&l造{#5533d6}&l物{#2563eb}&l匣&f&l·&7美西螈桶&f&l&kRn'
+    lore:
+    - '&8⇨ &e⚡&7 10000 J 可存储'
+    - '&8⇨ &e⚡&7 500 J/s'
+    material_type: skull_base64
+    material: eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNGU1NmZiNWIyOWE4ZDJlNjVlYWY5Y2NjNzM2MWIzYmU1MWUyM2JhOGYwNWJkN2RkYWI3MWM5NDYwYzhkMzQ2MCJ9fX0=
+  capacity: 10000
+  per: 500
+  recipe_type: ENHANCED_CRAFTING_TABLE
+  recipe:
+    2:
+      material_type: slimefun
+      material: Tr_zwxyp
+    5:
+      material_type: mc
+      material: axolotl_bucket
+    7:
+      material_type: slimefun
+      material: Tr_zwdz
+    8:
+      material_type: slimefun
+      material: Tr_zwdz
+    9:
+      material_type: slimefun
+      material: Tr_zwdz
+  status: 0
+  tickRate: 1
+  output: [1,2,3,4,5,6,7,8,10,11,12,13,14,15,16,17,19,20,21,22,23,24,25,26,28,29,30,31,32,33,34,35,37,38,39,40,41,42,43,44,46,47,48,49,50,51,52,53]
+  outputItem:
+      material_type: mc
+      material: axolotl_bucket
+      amount: 16
+Tr_zwxxxt:
+  lateInit: true
+  item_group: Tr_czzwx
+  item:
+    name: '&f&l&kTg{#7b2ff7}&l造{#5533d6}&l物{#2563eb}&l匣&f&l·&7细雪桶&f&l&kRn'
+    lore:
+    - '&8⇨ &e⚡&7 10000 J 可存储'
+    - '&8⇨ &e⚡&7 500 J/s'
+    material_type: skull_base64
+    material: eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNGU1NmZiNWIyOWE4ZDJlNjVlYWY5Y2NjNzM2MWIzYmU1MWUyM2JhOGYwNWJkN2RkYWI3MWM5NDYwYzhkMzQ2MCJ9fX0=
+  capacity: 10000
+  per: 500
+  recipe_type: ENHANCED_CRAFTING_TABLE
+  recipe:
+    2:
+      material_type: slimefun
+      material: Tr_zwxyp
+    5:
+      material_type: mc
+      material: powder_snow_bucket
+    7:
+      material_type: slimefun
+      material: Tr_zwdz
+    8:
+      material_type: slimefun
+      material: Tr_zwdz
+    9:
+      material_type: slimefun
+      material: Tr_zwdz
+  status: 0
+  tickRate: 1
+  output: [1,2,3,4,5,6,7,8,10,11,12,13,14,15,16,17,19,20,21,22,23,24,25,26,28,29,30,31,32,33,34,35,37,38,39,40,41,42,43,44,46,47,48,49,50,51,52,53]
+  outputItem:
+      material_type: mc
+      material: powder_snow_bucket
+      amount: 16
+Tr_zwxdyg:
+  lateInit: true
+  item_group: Tr_czzwx
+  item:
+    name: '&f&l&kTg{#7b2ff7}&l造{#5533d6}&l物{#2563eb}&l匣&f&l·&7钓鱼竿&f&l&kRn'
+    lore:
+    - '&8⇨ &e⚡&7 10000 J 可存储'
+    - '&8⇨ &e⚡&7 500 J/s'
+    material_type: skull_base64
+    material: eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNGU1NmZiNWIyOWE4ZDJlNjVlYWY5Y2NjNzM2MWIzYmU1MWUyM2JhOGYwNWJkN2RkYWI3MWM5NDYwYzhkMzQ2MCJ9fX0=
+  capacity: 10000
+  per: 500
+  recipe_type: ENHANCED_CRAFTING_TABLE
+  recipe:
+    2:
+      material_type: slimefun
+      material: Tr_zwxyp
+    5:
+      material_type: mc
+      material: fishing_rod
+    7:
+      material_type: slimefun
+      material: Tr_zwdz
+    8:
+      material_type: slimefun
+      material: Tr_zwdz
+    9:
+      material_type: slimefun
+      material: Tr_zwdz
+  status: 0
+  tickRate: 1
+  output: [1,2,3,4,5,6,7,8,10,11,12,13,14,15,16,17,19,20,21,22,23,24,25,26,28,29,30,31,32,33,34,35,37,38,39,40,41,42,43,44,46,47,48,49,50,51,52,53]
+  outputItem:
+      material_type: mc
+      material: fishing_rod
+      amount: 16
+Tr_zwxdhs:
+  lateInit: true
+  item_group: Tr_czzwx
+  item:
+    name: '&f&l&kTg{#7b2ff7}&l造{#5533d6}&l物{#2563eb}&l匣&f&l·&7打火石&f&l&kRn'
+    lore:
+    - '&8⇨ &e⚡&7 10000 J 可存储'
+    - '&8⇨ &e⚡&7 500 J/s'
+    material_type: skull_base64
+    material: eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNGU1NmZiNWIyOWE4ZDJlNjVlYWY5Y2NjNzM2MWIzYmU1MWUyM2JhOGYwNWJkN2RkYWI3MWM5NDYwYzhkMzQ2MCJ9fX0=
+  capacity: 10000
+  per: 500
+  recipe_type: ENHANCED_CRAFTING_TABLE
+  recipe:
+    2:
+      material_type: slimefun
+      material: Tr_zwxyp
+    5:
+      material_type: mc
+      material: flint_and_steel
+    7:
+      material_type: slimefun
+      material: Tr_zwdz
+    8:
+      material_type: slimefun
+      material: Tr_zwdz
+    9:
+      material_type: slimefun
+      material: Tr_zwdz
+  status: 0
+  tickRate: 1
+  output: [1,2,3,4,5,6,7,8,10,11,12,13,14,15,16,17,19,20,21,22,23,24,25,26,28,29,30,31,32,33,34,35,37,38,39,40,41,42,43,44,46,47,48,49,50,51,52,53]
+  outputItem:
+      material_type: mc
+      material: flint_and_steel
+      amount: 16
+Tr_zwxjd:
+  lateInit: true
+  item_group: Tr_czzwx
+  item:
+    name: '&f&l&kTg{#7b2ff7}&l造{#5533d6}&l物{#2563eb}&l匣&f&l·&7剪刀&f&l&kRn'
+    lore:
+    - '&8⇨ &e⚡&7 10000 J 可存储'
+    - '&8⇨ &e⚡&7 500 J/s'
+    material_type: skull_base64
+    material: eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNGU1NmZiNWIyOWE4ZDJlNjVlYWY5Y2NjNzM2MWIzYmU1MWUyM2JhOGYwNWJkN2RkYWI3MWM5NDYwYzhkMzQ2MCJ9fX0=
+  capacity: 10000
+  per: 500
+  recipe_type: ENHANCED_CRAFTING_TABLE
+  recipe:
+    2:
+      material_type: slimefun
+      material: Tr_zwxyp
+    5:
+      material_type: mc
+      material: shears
+    7:
+      material_type: slimefun
+      material: Tr_zwdz
+    8:
+      material_type: slimefun
+      material: Tr_zwdz
+    9:
+      material_type: slimefun
+      material: Tr_zwdz
+  status: 0
+  tickRate: 1
+  output: [1,2,3,4,5,6,7,8,10,11,12,13,14,15,16,17,19,20,21,22,23,24,25,26,28,29,30,31,32,33,34,35,37,38,39,40,41,42,43,44,46,47,48,49,50,51,52,53]
+  outputItem:
+      material_type: mc
+      material: shears
+      amount: 16
+Tr_zwxsz:
+  lateInit: true
+  item_group: Tr_czzwx
+  item:
+    name: '&f&l&kTg{#7b2ff7}&l造{#5533d6}&l物{#2563eb}&l匣&f&l·&7刷子&f&l&kRn'
+    lore:
+    - '&8⇨ &e⚡&7 10000 J 可存储'
+    - '&8⇨ &e⚡&7 500 J/s'
+    material_type: skull_base64
+    material: eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNGU1NmZiNWIyOWE4ZDJlNjVlYWY5Y2NjNzM2MWIzYmU1MWUyM2JhOGYwNWJkN2RkYWI3MWM5NDYwYzhkMzQ2MCJ9fX0=
+  capacity: 10000
+  per: 500
+  recipe_type: ENHANCED_CRAFTING_TABLE
+  recipe:
+    2:
+      material_type: slimefun
+      material: Tr_zwxyp
+    5:
+      material_type: mc
+      material: brush
+    7:
+      material_type: slimefun
+      material: Tr_zwdz
+    8:
+      material_type: slimefun
+      material: Tr_zwdz
+    9:
+      material_type: slimefun
+      material: Tr_zwdz
+  status: 0
+  tickRate: 1
+  output: [1,2,3,4,5,6,7,8,10,11,12,13,14,15,16,17,19,20,21,22,23,24,25,26,28,29,30,31,32,33,34,35,37,38,39,40,41,42,43,44,46,47,48,49,50,51,52,53]
+  outputItem:
+      material_type: mc
+      material: brush
+      amount: 16
+Tr_zwxmmp:
+  lateInit: true
+  item_group: Tr_czzwx
+  item:
+    name: '&f&l&kTg{#7b2ff7}&l造{#5533d6}&l物{#2563eb}&l匣&f&l·&7命名牌&f&l&kRn'
+    lore:
+    - '&8⇨ &e⚡&7 10000 J 可存储'
+    - '&8⇨ &e⚡&7 500 J/s'
+    material_type: skull_base64
+    material: eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNGU1NmZiNWIyOWE4ZDJlNjVlYWY5Y2NjNzM2MWIzYmU1MWUyM2JhOGYwNWJkN2RkYWI3MWM5NDYwYzhkMzQ2MCJ9fX0=
+  capacity: 10000
+  per: 500
+  recipe_type: ENHANCED_CRAFTING_TABLE
+  recipe:
+    2:
+      material_type: slimefun
+      material: Tr_zwxyp
+    5:
+      material_type: mc
+      material: name_tag
+    7:
+      material_type: slimefun
+      material: Tr_zwdz
+    8:
+      material_type: slimefun
+      material: Tr_zwdz
+    9:
+      material_type: slimefun
+      material: Tr_zwdz
+  status: 0
+  tickRate: 1
+  output: [1,2,3,4,5,6,7,8,10,11,12,13,14,15,16,17,19,20,21,22,23,24,25,26,28,29,30,31,32,33,34,35,37,38,39,40,41,42,43,44,46,47,48,49,50,51,52,53]
+  outputItem:
+      material_type: mc
+      material: name_tag
+      amount: 16
+Tr_zwxss:
+  lateInit: true
+  item_group: Tr_czzwx
+  item:
+    name: '&f&l&kTg{#7b2ff7}&l造{#5533d6}&l物{#2563eb}&l匣&f&l·&7拴绳&f&l&kRn'
+    lore:
+    - '&8⇨ &e⚡&7 10000 J 可存储'
+    - '&8⇨ &e⚡&7 500 J/s'
+    material_type: skull_base64
+    material: eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNGU1NmZiNWIyOWE4ZDJlNjVlYWY5Y2NjNzM2MWIzYmU1MWUyM2JhOGYwNWJkN2RkYWI3MWM5NDYwYzhkMzQ2MCJ9fX0=
+  capacity: 10000
+  per: 500
+  recipe_type: ENHANCED_CRAFTING_TABLE
+  recipe:
+    2:
+      material_type: slimefun
+      material: Tr_zwxyp
+    5:
+      material_type: mc
+      material: lead
+    7:
+      material_type: slimefun
+      material: Tr_zwdz
+    8:
+      material_type: slimefun
+      material: Tr_zwdz
+    9:
+      material_type: slimefun
+      material: Tr_zwdz
+  status: 0
+  tickRate: 1
+  output: [1,2,3,4,5,6,7,8,10,11,12,13,14,15,16,17,19,20,21,22,23,24,25,26,28,29,30,31,32,33,34,35,37,38,39,40,41,42,43,44,46,47,48,49,50,51,52,53]
+  outputItem:
+      material_type: mc
+      material: lead
+      amount: 16
+Tr_zwxznz:
+  lateInit: true
+  item_group: Tr_czzwx
+  item:
+    name: '&f&l&kTg{#7b2ff7}&l造{#5533d6}&l物{#2563eb}&l匣&f&l·&7指南针&f&l&kRn'
+    lore:
+    - '&8⇨ &e⚡&7 10000 J 可存储'
+    - '&8⇨ &e⚡&7 500 J/s'
+    material_type: skull_base64
+    material: eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNGU1NmZiNWIyOWE4ZDJlNjVlYWY5Y2NjNzM2MWIzYmU1MWUyM2JhOGYwNWJkN2RkYWI3MWM5NDYwYzhkMzQ2MCJ9fX0=
+  capacity: 10000
+  per: 500
+  recipe_type: ENHANCED_CRAFTING_TABLE
+  recipe:
+    2:
+      material_type: slimefun
+      material: Tr_zwxyp
+    5:
+      material_type: mc
+      material: compass
+    7:
+      material_type: slimefun
+      material: Tr_zwdz
+    8:
+      material_type: slimefun
+      material: Tr_zwdz
+    9:
+      material_type: slimefun
+      material: Tr_zwdz
+  status: 0
+  tickRate: 1
+  output: [1,2,3,4,5,6,7,8,10,11,12,13,14,15,16,17,19,20,21,22,23,24,25,26,28,29,30,31,32,33,34,35,37,38,39,40,41,42,43,44,46,47,48,49,50,51,52,53]
+  outputItem:
+      material_type: mc
+      material: compass
+      amount: 16
+Tr_zwxszh:
+  lateInit: true
+  item_group: Tr_czzwx
+  item:
+    name: '&f&l&kTg{#7b2ff7}&l造{#5533d6}&l物{#2563eb}&l匣&f&l·&7时钟&f&l&kRn'
+    lore:
+    - '&8⇨ &e⚡&7 10000 J 可存储'
+    - '&8⇨ &e⚡&7 500 J/s'
+    material_type: skull_base64
+    material: eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNGU1NmZiNWIyOWE4ZDJlNjVlYWY5Y2NjNzM2MWIzYmU1MWUyM2JhOGYwNWJkN2RkYWI3MWM5NDYwYzhkMzQ2MCJ9fX0=
+  capacity: 10000
+  per: 500
+  recipe_type: ENHANCED_CRAFTING_TABLE
+  recipe:
+    2:
+      material_type: slimefun
+      material: Tr_zwxyp
+    5:
+      material_type: mc
+      material: clock
+    7:
+      material_type: slimefun
+      material: Tr_zwdz
+    8:
+      material_type: slimefun
+      material: Tr_zwdz
+    9:
+      material_type: slimefun
+      material: Tr_zwdz
+  status: 0
+  tickRate: 1
+  output: [1,2,3,4,5,6,7,8,10,11,12,13,14,15,16,17,19,20,21,22,23,24,25,26,28,29,30,31,32,33,34,35,37,38,39,40,41,42,43,44,46,47,48,49,50,51,52,53]
+  outputItem:
+      material_type: mc
+      material: clock
+      amount: 16
+Tr_zwx13:
+  lateInit: true
+  item_group: Tr_czzwx
+  item:
+    name: '&f&l&kTg{#7b2ff7}&l造{#5533d6}&l物{#2563eb}&l匣&f&l·&713&f&l&kRn'
+    lore:
+    - '&8⇨ &e⚡&7 10000 J 可存储'
+    - '&8⇨ &e⚡&7 500 J/s'
+    material_type: skull_base64
+    material: eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNGU1NmZiNWIyOWE4ZDJlNjVlYWY5Y2NjNzM2MWIzYmU1MWUyM2JhOGYwNWJkN2RkYWI3MWM5NDYwYzhkMzQ2MCJ9fX0=
+  capacity: 10000
+  per: 500
+  recipe_type: ENHANCED_CRAFTING_TABLE
+  recipe:
+    2:
+      material_type: slimefun
+      material: Tr_zwxyp
+    5:
+      material_type: mc
+      material: music_disc_13
+    7:
+      material_type: slimefun
+      material: Tr_zwdz
+    8:
+      material_type: slimefun
+      material: Tr_zwdz
+    9:
+      material_type: slimefun
+      material: Tr_zwdz
+  status: 0
+  tickRate: 1
+  output: [1,2,3,4,5,6,7,8,10,11,12,13,14,15,16,17,19,20,21,22,23,24,25,26,28,29,30,31,32,33,34,35,37,38,39,40,41,42,43,44,46,47,48,49,50,51,52,53]
+  outputItem:
+      material_type: mc
+      material: music_disc_13
+      amount: 16
+Tr_zwxcat:
+  lateInit: true
+  item_group: Tr_czzwx
+  item:
+    name: '&f&l&kTg{#7b2ff7}&l造{#5533d6}&l物{#2563eb}&l匣&f&l·&7Cat&f&l&kRn'
+    lore:
+    - '&8⇨ &e⚡&7 10000 J 可存储'
+    - '&8⇨ &e⚡&7 500 J/s'
+    material_type: skull_base64
+    material: eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNGU1NmZiNWIyOWE4ZDJlNjVlYWY5Y2NjNzM2MWIzYmU1MWUyM2JhOGYwNWJkN2RkYWI3MWM5NDYwYzhkMzQ2MCJ9fX0=
+  capacity: 10000
+  per: 500
+  recipe_type: ENHANCED_CRAFTING_TABLE
+  recipe:
+    2:
+      material_type: slimefun
+      material: Tr_zwxyp
+    5:
+      material_type: mc
+      material: music_disc_cat
+    7:
+      material_type: slimefun
+      material: Tr_zwdz
+    8:
+      material_type: slimefun
+      material: Tr_zwdz
+    9:
+      material_type: slimefun
+      material: Tr_zwdz
+  status: 0
+  tickRate: 1
+  output: [1,2,3,4,5,6,7,8,10,11,12,13,14,15,16,17,19,20,21,22,23,24,25,26,28,29,30,31,32,33,34,35,37,38,39,40,41,42,43,44,46,47,48,49,50,51,52,53]
+  outputItem:
+      material_type: mc
+      material: music_disc_cat
+      amount: 16
+Tr_zwxblocks:
+  lateInit: true
+  item_group: Tr_czzwx
+  item:
+    name: '&f&l&kTg{#7b2ff7}&l造{#5533d6}&l物{#2563eb}&l匣&f&l·&7Blocks&f&l&kRn'
+    lore:
+    - '&8⇨ &e⚡&7 10000 J 可存储'
+    - '&8⇨ &e⚡&7 500 J/s'
+    material_type: skull_base64
+    material: eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNGU1NmZiNWIyOWE4ZDJlNjVlYWY5Y2NjNzM2MWIzYmU1MWUyM2JhOGYwNWJkN2RkYWI3MWM5NDYwYzhkMzQ2MCJ9fX0=
+  capacity: 10000
+  per: 500
+  recipe_type: ENHANCED_CRAFTING_TABLE
+  recipe:
+    2:
+      material_type: slimefun
+      material: Tr_zwxyp
+    5:
+      material_type: mc
+      material: music_disc_blocks
+    7:
+      material_type: slimefun
+      material: Tr_zwdz
+    8:
+      material_type: slimefun
+      material: Tr_zwdz
+    9:
+      material_type: slimefun
+      material: Tr_zwdz
+  status: 0
+  tickRate: 1
+  output: [1,2,3,4,5,6,7,8,10,11,12,13,14,15,16,17,19,20,21,22,23,24,25,26,28,29,30,31,32,33,34,35,37,38,39,40,41,42,43,44,46,47,48,49,50,51,52,53]
+  outputItem:
+      material_type: mc
+      material: music_disc_blocks
+      amount: 16
+Tr_zwxchirp:
+  lateInit: true
+  item_group: Tr_czzwx
+  item:
+    name: '&f&l&kTg{#7b2ff7}&l造{#5533d6}&l物{#2563eb}&l匣&f&l·&7Chirp&f&l&kRn'
+    lore:
+    - '&8⇨ &e⚡&7 10000 J 可存储'
+    - '&8⇨ &e⚡&7 500 J/s'
+    material_type: skull_base64
+    material: eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNGU1NmZiNWIyOWE4ZDJlNjVlYWY5Y2NjNzM2MWIzYmU1MWUyM2JhOGYwNWJkN2RkYWI3MWM5NDYwYzhkMzQ2MCJ9fX0=
+  capacity: 10000
+  per: 500
+  recipe_type: ENHANCED_CRAFTING_TABLE
+  recipe:
+    2:
+      material_type: slimefun
+      material: Tr_zwxyp
+    5:
+      material_type: mc
+      material: music_disc_chirp
+    7:
+      material_type: slimefun
+      material: Tr_zwdz
+    8:
+      material_type: slimefun
+      material: Tr_zwdz
+    9:
+      material_type: slimefun
+      material: Tr_zwdz
+  status: 0
+  tickRate: 1
+  output: [1,2,3,4,5,6,7,8,10,11,12,13,14,15,16,17,19,20,21,22,23,24,25,26,28,29,30,31,32,33,34,35,37,38,39,40,41,42,43,44,46,47,48,49,50,51,52,53]
+  outputItem:
+      material_type: mc
+      material: music_disc_chirp
+      amount: 16
+Tr_zwxcreator:
+  lateInit: true
+  item_group: Tr_czzwx
+  item:
+    name: '&f&l&kTg{#7b2ff7}&l造{#5533d6}&l物{#2563eb}&l匣&f&l·&7Creator&f&l&kRn'
+    lore:
+    - '&8⇨ &e⚡&7 10000 J 可存储'
+    - '&8⇨ &e⚡&7 500 J/s'
+    material_type: skull_base64
+    material: eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNGU1NmZiNWIyOWE4ZDJlNjVlYWY5Y2NjNzM2MWIzYmU1MWUyM2JhOGYwNWJkN2RkYWI3MWM5NDYwYzhkMzQ2MCJ9fX0=
+  capacity: 10000
+  per: 500
+  recipe_type: ENHANCED_CRAFTING_TABLE
+  recipe:
+    2:
+      material_type: slimefun
+      material: Tr_zwxyp
+    5:
+      material_type: mc
+      material: music_disc_creator
+    7:
+      material_type: slimefun
+      material: Tr_zwdz
+    8:
+      material_type: slimefun
+      material: Tr_zwdz
+    9:
+      material_type: slimefun
+      material: Tr_zwdz
+  status: 0
+  tickRate: 1
+  output: [1,2,3,4,5,6,7,8,10,11,12,13,14,15,16,17,19,20,21,22,23,24,25,26,28,29,30,31,32,33,34,35,37,38,39,40,41,42,43,44,46,47,48,49,50,51,52,53]
+  outputItem:
+      material_type: mc
+      material: music_disc_creator
+      amount: 16
+Tr_zwxcmb:
+  lateInit: true
+  item_group: Tr_czzwx
+  item:
+    name: '&f&l&kTg{#7b2ff7}&l造{#5533d6}&l物{#2563eb}&l匣&f&l·&7Creator Music Box&f&l&kRn'
+    lore:
+    - '&8⇨ &e⚡&7 10000 J 可存储'
+    - '&8⇨ &e⚡&7 500 J/s'
+    material_type: skull_base64
+    material: eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNGU1NmZiNWIyOWE4ZDJlNjVlYWY5Y2NjNzM2MWIzYmU1MWUyM2JhOGYwNWJkN2RkYWI3MWM5NDYwYzhkMzQ2MCJ9fX0=
+  capacity: 10000
+  per: 500
+  recipe_type: ENHANCED_CRAFTING_TABLE
+  recipe:
+    2:
+      material_type: slimefun
+      material: Tr_zwxyp
+    5:
+      material_type: mc
+      material: music_disc_creator_music_box
+    7:
+      material_type: slimefun
+      material: Tr_zwdz
+    8:
+      material_type: slimefun
+      material: Tr_zwdz
+    9:
+      material_type: slimefun
+      material: Tr_zwdz
+  status: 0
+  tickRate: 1
+  output: [1,2,3,4,5,6,7,8,10,11,12,13,14,15,16,17,19,20,21,22,23,24,25,26,28,29,30,31,32,33,34,35,37,38,39,40,41,42,43,44,46,47,48,49,50,51,52,53]
+  outputItem:
+      material_type: mc
+      material: music_disc_creator_music_box
+      amount: 16
+Tr_zwxfar:
+  lateInit: true
+  item_group: Tr_czzwx
+  item:
+    name: '&f&l&kTg{#7b2ff7}&l造{#5533d6}&l物{#2563eb}&l匣&f&l·&7Far&f&l&kRn'
+    lore:
+    - '&8⇨ &e⚡&7 10000 J 可存储'
+    - '&8⇨ &e⚡&7 500 J/s'
+    material_type: skull_base64
+    material: eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNGU1NmZiNWIyOWE4ZDJlNjVlYWY5Y2NjNzM2MWIzYmU1MWUyM2JhOGYwNWJkN2RkYWI3MWM5NDYwYzhkMzQ2MCJ9fX0=
+  capacity: 10000
+  per: 500
+  recipe_type: ENHANCED_CRAFTING_TABLE
+  recipe:
+    2:
+      material_type: slimefun
+      material: Tr_zwxyp
+    5:
+      material_type: mc
+      material: music_disc_far
+    7:
+      material_type: slimefun
+      material: Tr_zwdz
+    8:
+      material_type: slimefun
+      material: Tr_zwdz
+    9:
+      material_type: slimefun
+      material: Tr_zwdz
+  status: 0
+  tickRate: 1
+  output: [1,2,3,4,5,6,7,8,10,11,12,13,14,15,16,17,19,20,21,22,23,24,25,26,28,29,30,31,32,33,34,35,37,38,39,40,41,42,43,44,46,47,48,49,50,51,52,53]
+  outputItem:
+      material_type: mc
+      material: music_disc_far
+      amount: 16
+Tr_zwxmall:
+  lateInit: true
+  item_group: Tr_czzwx
+  item:
+    name: '&f&l&kTg{#7b2ff7}&l造{#5533d6}&l物{#2563eb}&l匣&f&l·&7Mall&f&l&kRn'
+    lore:
+    - '&8⇨ &e⚡&7 10000 J 可存储'
+    - '&8⇨ &e⚡&7 500 J/s'
+    material_type: skull_base64
+    material: eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNGU1NmZiNWIyOWE4ZDJlNjVlYWY5Y2NjNzM2MWIzYmU1MWUyM2JhOGYwNWJkN2RkYWI3MWM5NDYwYzhkMzQ2MCJ9fX0=
+  capacity: 10000
+  per: 500
+  recipe_type: ENHANCED_CRAFTING_TABLE
+  recipe:
+    2:
+      material_type: slimefun
+      material: Tr_zwxyp
+    5:
+      material_type: mc
+      material: music_disc_mall
+    7:
+      material_type: slimefun
+      material: Tr_zwdz
+    8:
+      material_type: slimefun
+      material: Tr_zwdz
+    9:
+      material_type: slimefun
+      material: Tr_zwdz
+  status: 0
+  tickRate: 1
+  output: [1,2,3,4,5,6,7,8,10,11,12,13,14,15,16,17,19,20,21,22,23,24,25,26,28,29,30,31,32,33,34,35,37,38,39,40,41,42,43,44,46,47,48,49,50,51,52,53]
+  outputItem:
+      material_type: mc
+      material: music_disc_mall
+      amount: 16
+Tr_zwxmellohi:
+  lateInit: true
+  item_group: Tr_czzwx
+  item:
+    name: '&f&l&kTg{#7b2ff7}&l造{#5533d6}&l物{#2563eb}&l匣&f&l·&7Mellohi&f&l&kRn'
+    lore:
+    - '&8⇨ &e⚡&7 10000 J 可存储'
+    - '&8⇨ &e⚡&7 500 J/s'
+    material_type: skull_base64
+    material: eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNGU1NmZiNWIyOWE4ZDJlNjVlYWY5Y2NjNzM2MWIzYmU1MWUyM2JhOGYwNWJkN2RkYWI3MWM5NDYwYzhkMzQ2MCJ9fX0=
+  capacity: 10000
+  per: 500
+  recipe_type: ENHANCED_CRAFTING_TABLE
+  recipe:
+    2:
+      material_type: slimefun
+      material: Tr_zwxyp
+    5:
+      material_type: mc
+      material: music_disc_mellohi
+    7:
+      material_type: slimefun
+      material: Tr_zwdz
+    8:
+      material_type: slimefun
+      material: Tr_zwdz
+    9:
+      material_type: slimefun
+      material: Tr_zwdz
+  status: 0
+  tickRate: 1
+  output: [1,2,3,4,5,6,7,8,10,11,12,13,14,15,16,17,19,20,21,22,23,24,25,26,28,29,30,31,32,33,34,35,37,38,39,40,41,42,43,44,46,47,48,49,50,51,52,53]
+  outputItem:
+      material_type: mc
+      material: music_disc_mellohi
+      amount: 16
+Tr_zwxotherside:
+  lateInit: true
+  item_group: Tr_czzwx
+  item:
+    name: '&f&l&kTg{#7b2ff7}&l造{#5533d6}&l物{#2563eb}&l匣&f&l·&7Otherside&f&l&kRn'
+    lore:
+    - '&8⇨ &e⚡&7 10000 J 可存储'
+    - '&8⇨ &e⚡&7 500 J/s'
+    material_type: skull_base64
+    material: eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNGU1NmZiNWIyOWE4ZDJlNjVlYWY5Y2NjNzM2MWIzYmU1MWUyM2JhOGYwNWJkN2RkYWI3MWM5NDYwYzhkMzQ2MCJ9fX0=
+  capacity: 10000
+  per: 500
+  recipe_type: ENHANCED_CRAFTING_TABLE
+  recipe:
+    2:
+      material_type: slimefun
+      material: Tr_zwxyp
+    5:
+      material_type: mc
+      material: music_disc_otherside
+    7:
+      material_type: slimefun
+      material: Tr_zwdz
+    8:
+      material_type: slimefun
+      material: Tr_zwdz
+    9:
+      material_type: slimefun
+      material: Tr_zwdz
+  status: 0
+  tickRate: 1
+  output: [1,2,3,4,5,6,7,8,10,11,12,13,14,15,16,17,19,20,21,22,23,24,25,26,28,29,30,31,32,33,34,35,37,38,39,40,41,42,43,44,46,47,48,49,50,51,52,53]
+  outputItem:
+      material_type: mc
+      material: music_disc_otherside
+      amount: 16
+Tr_zwxpigstep:
+  lateInit: true
+  item_group: Tr_czzwx
+  item:
+    name: '&f&l&kTg{#7b2ff7}&l造{#5533d6}&l物{#2563eb}&l匣&f&l·&7Pigstep&f&l&kRn'
+    lore:
+    - '&8⇨ &e⚡&7 10000 J 可存储'
+    - '&8⇨ &e⚡&7 500 J/s'
+    material_type: skull_base64
+    material: eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNGU1NmZiNWIyOWE4ZDJlNjVlYWY5Y2NjNzM2MWIzYmU1MWUyM2JhOGYwNWJkN2RkYWI3MWM5NDYwYzhkMzQ2MCJ9fX0=
+  capacity: 10000
+  per: 500
+  recipe_type: ENHANCED_CRAFTING_TABLE
+  recipe:
+    2:
+      material_type: slimefun
+      material: Tr_zwxyp
+    5:
+      material_type: mc
+      material: music_disc_pigstep
+    7:
+      material_type: slimefun
+      material: Tr_zwdz
+    8:
+      material_type: slimefun
+      material: Tr_zwdz
+    9:
+      material_type: slimefun
+      material: Tr_zwdz
+  status: 0
+  tickRate: 1
+  output: [1,2,3,4,5,6,7,8,10,11,12,13,14,15,16,17,19,20,21,22,23,24,25,26,28,29,30,31,32,33,34,35,37,38,39,40,41,42,43,44,46,47,48,49,50,51,52,53]
+  outputItem:
+      material_type: mc
+      material: music_disc_pigstep
+      amount: 16
+Tr_zwxprecipice:
+  lateInit: true
+  item_group: Tr_czzwx
+  item:
+    name: '&f&l&kTg{#7b2ff7}&l造{#5533d6}&l物{#2563eb}&l匣&f&l·&7Precipice&f&l&kRn'
+    lore:
+    - '&8⇨ &e⚡&7 10000 J 可存储'
+    - '&8⇨ &e⚡&7 500 J/s'
+    material_type: skull_base64
+    material: eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNGU1NmZiNWIyOWE4ZDJlNjVlYWY5Y2NjNzM2MWIzYmU1MWUyM2JhOGYwNWJkN2RkYWI3MWM5NDYwYzhkMzQ2MCJ9fX0=
+  capacity: 10000
+  per: 500
+  recipe_type: ENHANCED_CRAFTING_TABLE
+  recipe:
+    2:
+      material_type: slimefun
+      material: Tr_zwxyp
+    5:
+      material_type: mc
+      material: music_disc_precipice
+    7:
+      material_type: slimefun
+      material: Tr_zwdz
+    8:
+      material_type: slimefun
+      material: Tr_zwdz
+    9:
+      material_type: slimefun
+      material: Tr_zwdz
+  status: 0
+  tickRate: 1
+  output: [1,2,3,4,5,6,7,8,10,11,12,13,14,15,16,17,19,20,21,22,23,24,25,26,28,29,30,31,32,33,34,35,37,38,39,40,41,42,43,44,46,47,48,49,50,51,52,53]
+  outputItem:
+      material_type: mc
+      material: music_disc_precipice
+      amount: 16
+Tr_zwxrelic:
+  lateInit: true
+  item_group: Tr_czzwx
+  item:
+    name: '&f&l&kTg{#7b2ff7}&l造{#5533d6}&l物{#2563eb}&l匣&f&l·&7Relic&f&l&kRn'
+    lore:
+    - '&8⇨ &e⚡&7 10000 J 可存储'
+    - '&8⇨ &e⚡&7 500 J/s'
+    material_type: skull_base64
+    material: eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNGU1NmZiNWIyOWE4ZDJlNjVlYWY5Y2NjNzM2MWIzYmU1MWUyM2JhOGYwNWJkN2RkYWI3MWM5NDYwYzhkMzQ2MCJ9fX0=
+  capacity: 10000
+  per: 500
+  recipe_type: ENHANCED_CRAFTING_TABLE
+  recipe:
+    2:
+      material_type: slimefun
+      material: Tr_zwxyp
+    5:
+      material_type: mc
+      material: music_disc_relic
+    7:
+      material_type: slimefun
+      material: Tr_zwdz
+    8:
+      material_type: slimefun
+      material: Tr_zwdz
+    9:
+      material_type: slimefun
+      material: Tr_zwdz
+  status: 0
+  tickRate: 1
+  output: [1,2,3,4,5,6,7,8,10,11,12,13,14,15,16,17,19,20,21,22,23,24,25,26,28,29,30,31,32,33,34,35,37,38,39,40,41,42,43,44,46,47,48,49,50,51,52,53]
+  outputItem:
+      material_type: mc
+      material: music_disc_relic
+      amount: 16
+Tr_zwxstal:
+  lateInit: true
+  item_group: Tr_czzwx
+  item:
+    name: '&f&l&kTg{#7b2ff7}&l造{#5533d6}&l物{#2563eb}&l匣&f&l·&7Stal&f&l&kRn'
+    lore:
+    - '&8⇨ &e⚡&7 10000 J 可存储'
+    - '&8⇨ &e⚡&7 500 J/s'
+    material_type: skull_base64
+    material: eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNGU1NmZiNWIyOWE4ZDJlNjVlYWY5Y2NjNzM2MWIzYmU1MWUyM2JhOGYwNWJkN2RkYWI3MWM5NDYwYzhkMzQ2MCJ9fX0=
+  capacity: 10000
+  per: 500
+  recipe_type: ENHANCED_CRAFTING_TABLE
+  recipe:
+    2:
+      material_type: slimefun
+      material: Tr_zwxyp
+    5:
+      material_type: mc
+      material: music_disc_stal
+    7:
+      material_type: slimefun
+      material: Tr_zwdz
+    8:
+      material_type: slimefun
+      material: Tr_zwdz
+    9:
+      material_type: slimefun
+      material: Tr_zwdz
+  status: 0
+  tickRate: 1
+  output: [1,2,3,4,5,6,7,8,10,11,12,13,14,15,16,17,19,20,21,22,23,24,25,26,28,29,30,31,32,33,34,35,37,38,39,40,41,42,43,44,46,47,48,49,50,51,52,53]
+  outputItem:
+      material_type: mc
+      material: music_disc_stal
+      amount: 16
+Tr_zwxstrad:
+  lateInit: true
+  item_group: Tr_czzwx
+  item:
+    name: '&f&l&kTg{#7b2ff7}&l造{#5533d6}&l物{#2563eb}&l匣&f&l·&7Strad&f&l&kRn'
+    lore:
+    - '&8⇨ &e⚡&7 10000 J 可存储'
+    - '&8⇨ &e⚡&7 500 J/s'
+    material_type: skull_base64
+    material: eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNGU1NmZiNWIyOWE4ZDJlNjVlYWY5Y2NjNzM2MWIzYmU1MWUyM2JhOGYwNWJkN2RkYWI3MWM5NDYwYzhkMzQ2MCJ9fX0=
+  capacity: 10000
+  per: 500
+  recipe_type: ENHANCED_CRAFTING_TABLE
+  recipe:
+    2:
+      material_type: slimefun
+      material: Tr_zwxyp
+    5:
+      material_type: mc
+      material: music_disc_strad
+    7:
+      material_type: slimefun
+      material: Tr_zwdz
+    8:
+      material_type: slimefun
+      material: Tr_zwdz
+    9:
+      material_type: slimefun
+      material: Tr_zwdz
+  status: 0
+  tickRate: 1
+  output: [1,2,3,4,5,6,7,8,10,11,12,13,14,15,16,17,19,20,21,22,23,24,25,26,28,29,30,31,32,33,34,35,37,38,39,40,41,42,43,44,46,47,48,49,50,51,52,53]
+  outputItem:
+      material_type: mc
+      material: music_disc_strad
+      amount: 16
+Tr_zwxwait:
+  lateInit: true
+  item_group: Tr_czzwx
+  item:
+    name: '&f&l&kTg{#7b2ff7}&l造{#5533d6}&l物{#2563eb}&l匣&f&l·&7Wait&f&l&kRn'
+    lore:
+    - '&8⇨ &e⚡&7 10000 J 可存储'
+    - '&8⇨ &e⚡&7 500 J/s'
+    material_type: skull_base64
+    material: eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNGU1NmZiNWIyOWE4ZDJlNjVlYWY5Y2NjNzM2MWIzYmU1MWUyM2JhOGYwNWJkN2RkYWI3MWM5NDYwYzhkMzQ2MCJ9fX0=
+  capacity: 10000
+  per: 500
+  recipe_type: ENHANCED_CRAFTING_TABLE
+  recipe:
+    2:
+      material_type: slimefun
+      material: Tr_zwxyp
+    5:
+      material_type: mc
+      material: music_disc_wait
+    7:
+      material_type: slimefun
+      material: Tr_zwdz
+    8:
+      material_type: slimefun
+      material: Tr_zwdz
+    9:
+      material_type: slimefun
+      material: Tr_zwdz
+  status: 0
+  tickRate: 1
+  output: [1,2,3,4,5,6,7,8,10,11,12,13,14,15,16,17,19,20,21,22,23,24,25,26,28,29,30,31,32,33,34,35,37,38,39,40,41,42,43,44,46,47,48,49,50,51,52,53]
+  outputItem:
+      material_type: mc
+      material: music_disc_wait
+      amount: 16
+Tr_zwxward:
+  lateInit: true
+  item_group: Tr_czzwx
+  item:
+    name: '&f&l&kTg{#7b2ff7}&l造{#5533d6}&l物{#2563eb}&l匣&f&l·&7Ward&f&l&kRn'
+    lore:
+    - '&8⇨ &e⚡&7 10000 J 可存储'
+    - '&8⇨ &e⚡&7 500 J/s'
+    material_type: skull_base64
+    material: eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNGU1NmZiNWIyOWE4ZDJlNjVlYWY5Y2NjNzM2MWIzYmU1MWUyM2JhOGYwNWJkN2RkYWI3MWM5NDYwYzhkMzQ2MCJ9fX0=
+  capacity: 10000
+  per: 500
+  recipe_type: ENHANCED_CRAFTING_TABLE
+  recipe:
+    2:
+      material_type: slimefun
+      material: Tr_zwxyp
+    5:
+      material_type: mc
+      material: music_disc_ward
+    7:
+      material_type: slimefun
+      material: Tr_zwdz
+    8:
+      material_type: slimefun
+      material: Tr_zwdz
+    9:
+      material_type: slimefun
+      material: Tr_zwdz
+  status: 0
+  tickRate: 1
+  output: [1,2,3,4,5,6,7,8,10,11,12,13,14,15,16,17,19,20,21,22,23,24,25,26,28,29,30,31,32,33,34,35,37,38,39,40,41,42,43,44,46,47,48,49,50,51,52,53]
+  outputItem:
+      material_type: mc
+      material: music_disc_ward
+      amount: 16
+Tr_zwx5:
+  lateInit: true
+  item_group: Tr_czzwx
+  item:
+    name: '&f&l&kTg{#7b2ff7}&l造{#5533d6}&l物{#2563eb}&l匣&f&l·&75&f&l&kRn'
+    lore:
+    - '&8⇨ &e⚡&7 10000 J 可存储'
+    - '&8⇨ &e⚡&7 500 J/s'
+    material_type: skull_base64
+    material: eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNGU1NmZiNWIyOWE4ZDJlNjVlYWY5Y2NjNzM2MWIzYmU1MWUyM2JhOGYwNWJkN2RkYWI3MWM5NDYwYzhkMzQ2MCJ9fX0=
+  capacity: 10000
+  per: 500
+  recipe_type: ENHANCED_CRAFTING_TABLE
+  recipe:
+    2:
+      material_type: slimefun
+      material: Tr_zwxyp
+    5:
+      material_type: mc
+      material: music_disc_5
+    7:
+      material_type: slimefun
+      material: Tr_zwdz
+    8:
+      material_type: slimefun
+      material: Tr_zwdz
+    9:
+      material_type: slimefun
+      material: Tr_zwdz
+  status: 0
+  tickRate: 1
+  output: [1,2,3,4,5,6,7,8,10,11,12,13,14,15,16,17,19,20,21,22,23,24,25,26,28,29,30,31,32,33,34,35,37,38,39,40,41,42,43,44,46,47,48,49,50,51,52,53]
+  outputItem:
+      material_type: mc
+      material: music_disc_5
+      amount: 16
+Tr_zwx11:
+  lateInit: true
+  item_group: Tr_czzwx
+  item:
+    name: '&f&l&kTg{#7b2ff7}&l造{#5533d6}&l物{#2563eb}&l匣&f&l·&711&f&l&kRn'
+    lore:
+    - '&8⇨ &e⚡&7 10000 J 可存储'
+    - '&8⇨ &e⚡&7 500 J/s'
+    material_type: skull_base64
+    material: eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNGU1NmZiNWIyOWE4ZDJlNjVlYWY5Y2NjNzM2MWIzYmU1MWUyM2JhOGYwNWJkN2RkYWI3MWM5NDYwYzhkMzQ2MCJ9fX0=
+  capacity: 10000
+  per: 500
+  recipe_type: ENHANCED_CRAFTING_TABLE
+  recipe:
+    2:
+      material_type: slimefun
+      material: Tr_zwxyp
+    5:
+      material_type: mc
+      material: music_disc_11
+    7:
+      material_type: slimefun
+      material: Tr_zwdz
+    8:
+      material_type: slimefun
+      material: Tr_zwdz
+    9:
+      material_type: slimefun
+      material: Tr_zwdz
+  status: 0
+  tickRate: 1
+  output: [1,2,3,4,5,6,7,8,10,11,12,13,14,15,16,17,19,20,21,22,23,24,25,26,28,29,30,31,32,33,34,35,37,38,39,40,41,42,43,44,46,47,48,49,50,51,52,53]
+  outputItem:
+      material_type: mc
+      material: music_disc_11
+      amount: 16
+Tr_zwxkc:
+  lateInit: true
+  item_group: Tr_czzwx
+  item:
+    name: '&f&l&kTg{#7b2ff7}&l造{#5533d6}&l物{#2563eb}&l匣&f&l·&7矿车&f&l&kRn'
+    lore:
+    - '&8⇨ &e⚡&7 10000 J 可存储'
+    - '&8⇨ &e⚡&7 500 J/s'
+    material_type: skull_base64
+    material: eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNGU1NmZiNWIyOWE4ZDJlNjVlYWY5Y2NjNzM2MWIzYmU1MWUyM2JhOGYwNWJkN2RkYWI3MWM5NDYwYzhkMzQ2MCJ9fX0=
+  capacity: 10000
+  per: 500
+  recipe_type: ENHANCED_CRAFTING_TABLE
+  recipe:
+    2:
+      material_type: slimefun
+      material: Tr_zwxyp
+    5:
+      material_type: mc
+      material: minecart
+    7:
+      material_type: slimefun
+      material: Tr_zwdz
+    8:
+      material_type: slimefun
+      material: Tr_zwdz
+    9:
+      material_type: slimefun
+      material: Tr_zwdz
+  status: 0
+  tickRate: 1
+  output: [1,2,3,4,5,6,7,8,10,11,12,13,14,15,16,17,19,20,21,22,23,24,25,26,28,29,30,31,32,33,34,35,37,38,39,40,41,42,43,44,46,47,48,49,50,51,52,53]
+  outputItem:
+      material_type: mc
+      material: minecart
+      amount: 16
+Tr_zwxxzkc:
+  lateInit: true
+  item_group: Tr_czzwx
+  item:
+    name: '&f&l&kTg{#7b2ff7}&l造{#5533d6}&l物{#2563eb}&l匣&f&l·&7箱子矿车&f&l&kRn'
+    lore:
+    - '&8⇨ &e⚡&7 10000 J 可存储'
+    - '&8⇨ &e⚡&7 500 J/s'
+    material_type: skull_base64
+    material: eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNGU1NmZiNWIyOWE4ZDJlNjVlYWY5Y2NjNzM2MWIzYmU1MWUyM2JhOGYwNWJkN2RkYWI3MWM5NDYwYzhkMzQ2MCJ9fX0=
+  capacity: 10000
+  per: 500
+  recipe_type: ENHANCED_CRAFTING_TABLE
+  recipe:
+    2:
+      material_type: slimefun
+      material: Tr_zwxyp
+    5:
+      material_type: mc
+      material: chest_minecart
+    7:
+      material_type: slimefun
+      material: Tr_zwdz
+    8:
+      material_type: slimefun
+      material: Tr_zwdz
+    9:
+      material_type: slimefun
+      material: Tr_zwdz
+  status: 0
+  tickRate: 1
+  output: [1,2,3,4,5,6,7,8,10,11,12,13,14,15,16,17,19,20,21,22,23,24,25,26,28,29,30,31,32,33,34,35,37,38,39,40,41,42,43,44,46,47,48,49,50,51,52,53]
+  outputItem:
+      material_type: mc
+      material: chest_minecart
+      amount: 16
+Tr_zwxldkc:
+  lateInit: true
+  item_group: Tr_czzwx
+  item:
+    name: '&f&l&kTg{#7b2ff7}&l造{#5533d6}&l物{#2563eb}&l匣&f&l·&7漏斗矿车&f&l&kRn'
+    lore:
+    - '&8⇨ &e⚡&7 10000 J 可存储'
+    - '&8⇨ &e⚡&7 500 J/s'
+    material_type: skull_base64
+    material: eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNGU1NmZiNWIyOWE4ZDJlNjVlYWY5Y2NjNzM2MWIzYmU1MWUyM2JhOGYwNWJkN2RkYWI3MWM5NDYwYzhkMzQ2MCJ9fX0=
+  capacity: 10000
+  per: 500
+  recipe_type: ENHANCED_CRAFTING_TABLE
+  recipe:
+    2:
+      material_type: slimefun
+      material: Tr_zwxyp
+    5:
+      material_type: mc
+      material: hopper_minecart
+    7:
+      material_type: slimefun
+      material: Tr_zwdz
+    8:
+      material_type: slimefun
+      material: Tr_zwdz
+    9:
+      material_type: slimefun
+      material: Tr_zwdz
+  status: 0
+  tickRate: 1
+  output: [1,2,3,4,5,6,7,8,10,11,12,13,14,15,16,17,19,20,21,22,23,24,25,26,28,29,30,31,32,33,34,35,37,38,39,40,41,42,43,44,46,47,48,49,50,51,52,53]
+  outputItem:
+      material_type: mc
+      material: hopper_minecart
+      amount: 16
+Tr_zwxtntkc:
+  lateInit: true
+  item_group: Tr_czzwx
+  item:
+    name: '&f&l&kTg{#7b2ff7}&l造{#5533d6}&l物{#2563eb}&l匣&f&l·&7TNT矿车&f&l&kRn'
+    lore:
+    - '&8⇨ &e⚡&7 10000 J 可存储'
+    - '&8⇨ &e⚡&7 500 J/s'
+    material_type: skull_base64
+    material: eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNGU1NmZiNWIyOWE4ZDJlNjVlYWY5Y2NjNzM2MWIzYmU1MWUyM2JhOGYwNWJkN2RkYWI3MWM5NDYwYzhkMzQ2MCJ9fX0=
+  capacity: 10000
+  per: 500
+  recipe_type: ENHANCED_CRAFTING_TABLE
+  recipe:
+    2:
+      material_type: slimefun
+      material: Tr_zwxyp
+    5:
+      material_type: mc
+      material: tnt_minecart
+    7:
+      material_type: slimefun
+      material: Tr_zwdz
+    8:
+      material_type: slimefun
+      material: Tr_zwdz
+    9:
+      material_type: slimefun
+      material: Tr_zwdz
+  status: 0
+  tickRate: 1
+  output: [1,2,3,4,5,6,7,8,10,11,12,13,14,15,16,17,19,20,21,22,23,24,25,26,28,29,30,31,32,33,34,35,37,38,39,40,41,42,43,44,46,47,48,49,50,51,52,53]
+  outputItem:
+      material_type: mc
+      material: tnt_minecart
+      amount: 16
+Tr_zwxdlkc:
+  lateInit: true
+  item_group: Tr_czzwx
+  item:
+    name: '&f&l&kTg{#7b2ff7}&l造{#5533d6}&l物{#2563eb}&l匣&f&l·&7动力矿车&f&l&kRn'
+    lore:
+    - '&8⇨ &e⚡&7 10000 J 可存储'
+    - '&8⇨ &e⚡&7 500 J/s'
+    material_type: skull_base64
+    material: eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNGU1NmZiNWIyOWE4ZDJlNjVlYWY5Y2NjNzM2MWIzYmU1MWUyM2JhOGYwNWJkN2RkYWI3MWM5NDYwYzhkMzQ2MCJ9fX0=
+  capacity: 10000
+  per: 500
+  recipe_type: ENHANCED_CRAFTING_TABLE
+  recipe:
+    2:
+      material_type: slimefun
+      material: Tr_zwxyp
+    5:
+      material_type: mc
+      material: furnace_minecart
+    7:
+      material_type: slimefun
+      material: Tr_zwdz
+    8:
+      material_type: slimefun
+      material: Tr_zwdz
+    9:
+      material_type: slimefun
+      material: Tr_zwdz
+  status: 0
+  tickRate: 1
+  output: [1,2,3,4,5,6,7,8,10,11,12,13,14,15,16,17,19,20,21,22,23,24,25,26,28,29,30,31,32,33,34,35,37,38,39,40,41,42,43,44,46,47,48,49,50,51,52,53]
+  outputItem:
+      material_type: mc
+      material: furnace_minecart
+      amount: 16
+Tr_zwxmj:
+  lateInit: true
+  item_group: Tr_czzwx
+  item:
+    name: '&f&l&kTg{#7b2ff7}&l造{#5533d6}&l物{#2563eb}&l匣&f&l·&7木剑&f&l&kRn'
+    lore:
+    - '&8⇨ &e⚡&7 10000 J 可存储'
+    - '&8⇨ &e⚡&7 500 J/s'
+    material_type: skull_base64
+    material: eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNGU1NmZiNWIyOWE4ZDJlNjVlYWY5Y2NjNzM2MWIzYmU1MWUyM2JhOGYwNWJkN2RkYWI3MWM5NDYwYzhkMzQ2MCJ9fX0=
+  capacity: 10000
+  per: 500
+  recipe_type: ENHANCED_CRAFTING_TABLE
+  recipe:
+    2:
+      material_type: slimefun
+      material: Tr_zwxyp
+    5:
+      material_type: mc
+      material: wooden_sword
+    7:
+      material_type: slimefun
+      material: Tr_zwdz
+    8:
+      material_type: slimefun
+      material: Tr_zwdz
+    9:
+      material_type: slimefun
+      material: Tr_zwdz
+  status: 0
+  tickRate: 1
+  output: [1,2,3,4,5,6,7,8,10,11,12,13,14,15,16,17,19,20,21,22,23,24,25,26,28,29,30,31,32,33,34,35,37,38,39,40,41,42,43,44,46,47,48,49,50,51,52,53]
+  outputItem:
+      material_type: mc
+      material: wooden_sword
+      amount: 16
+Tr_zwxsj:
+  lateInit: true
+  item_group: Tr_czzwx
+  item:
+    name: '&f&l&kTg{#7b2ff7}&l造{#5533d6}&l物{#2563eb}&l匣&f&l·&7石剑&f&l&kRn'
+    lore:
+    - '&8⇨ &e⚡&7 10000 J 可存储'
+    - '&8⇨ &e⚡&7 500 J/s'
+    material_type: skull_base64
+    material: eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNGU1NmZiNWIyOWE4ZDJlNjVlYWY5Y2NjNzM2MWIzYmU1MWUyM2JhOGYwNWJkN2RkYWI3MWM5NDYwYzhkMzQ2MCJ9fX0=
+  capacity: 10000
+  per: 500
+  recipe_type: ENHANCED_CRAFTING_TABLE
+  recipe:
+    2:
+      material_type: slimefun
+      material: Tr_zwxyp
+    5:
+      material_type: mc
+      material: stone_sword
+    7:
+      material_type: slimefun
+      material: Tr_zwdz
+    8:
+      material_type: slimefun
+      material: Tr_zwdz
+    9:
+      material_type: slimefun
+      material: Tr_zwdz
+  status: 0
+  tickRate: 1
+  output: [1,2,3,4,5,6,7,8,10,11,12,13,14,15,16,17,19,20,21,22,23,24,25,26,28,29,30,31,32,33,34,35,37,38,39,40,41,42,43,44,46,47,48,49,50,51,52,53]
+  outputItem:
+      material_type: mc
+      material: stone_sword
+      amount: 16
+Tr_zwxtj:
+  lateInit: true
+  item_group: Tr_czzwx
+  item:
+    name: '&f&l&kTg{#7b2ff7}&l造{#5533d6}&l物{#2563eb}&l匣&f&l·&7铁剑&f&l&kRn'
+    lore:
+    - '&8⇨ &e⚡&7 10000 J 可存储'
+    - '&8⇨ &e⚡&7 500 J/s'
+    material_type: skull_base64
+    material: eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNGU1NmZiNWIyOWE4ZDJlNjVlYWY5Y2NjNzM2MWIzYmU1MWUyM2JhOGYwNWJkN2RkYWI3MWM5NDYwYzhkMzQ2MCJ9fX0=
+  capacity: 10000
+  per: 500
+  recipe_type: ENHANCED_CRAFTING_TABLE
+  recipe:
+    2:
+      material_type: slimefun
+      material: Tr_zwxyp
+    5:
+      material_type: mc
+      material: iron_sword
+    7:
+      material_type: slimefun
+      material: Tr_zwdz
+    8:
+      material_type: slimefun
+      material: Tr_zwdz
+    9:
+      material_type: slimefun
+      material: Tr_zwdz
+  status: 0
+  tickRate: 1
+  output: [1,2,3,4,5,6,7,8,10,11,12,13,14,15,16,17,19,20,21,22,23,24,25,26,28,29,30,31,32,33,34,35,37,38,39,40,41,42,43,44,46,47,48,49,50,51,52,53]
+  outputItem:
+      material_type: mc
+      material: iron_sword
+      amount: 16
+Tr_zwxjj:
+  lateInit: true
+  item_group: Tr_czzwx
+  item:
+    name: '&f&l&kTg{#7b2ff7}&l造{#5533d6}&l物{#2563eb}&l匣&f&l·&7金剑&f&l&kRn'
+    lore:
+    - '&8⇨ &e⚡&7 10000 J 可存储'
+    - '&8⇨ &e⚡&7 500 J/s'
+    material_type: skull_base64
+    material: eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNGU1NmZiNWIyOWE4ZDJlNjVlYWY5Y2NjNzM2MWIzYmU1MWUyM2JhOGYwNWJkN2RkYWI3MWM5NDYwYzhkMzQ2MCJ9fX0=
+  capacity: 10000
+  per: 500
+  recipe_type: ENHANCED_CRAFTING_TABLE
+  recipe:
+    2:
+      material_type: slimefun
+      material: Tr_zwxyp
+    5:
+      material_type: mc
+      material: golden_sword
+    7:
+      material_type: slimefun
+      material: Tr_zwdz
+    8:
+      material_type: slimefun
+      material: Tr_zwdz
+    9:
+      material_type: slimefun
+      material: Tr_zwdz
+  status: 0
+  tickRate: 1
+  output: [1,2,3,4,5,6,7,8,10,11,12,13,14,15,16,17,19,20,21,22,23,24,25,26,28,29,30,31,32,33,34,35,37,38,39,40,41,42,43,44,46,47,48,49,50,51,52,53]
+  outputItem:
+      material_type: mc
+      material: golden_sword
+      amount: 16
+Tr_zwxzsj:
+  lateInit: true
+  item_group: Tr_czzwx
+  item:
+    name: '&f&l&kTg{#7b2ff7}&l造{#5533d6}&l物{#2563eb}&l匣&f&l·&7钻石剑&f&l&kRn'
+    lore:
+    - '&8⇨ &e⚡&7 10000 J 可存储'
+    - '&8⇨ &e⚡&7 500 J/s'
+    material_type: skull_base64
+    material: eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNGU1NmZiNWIyOWE4ZDJlNjVlYWY5Y2NjNzM2MWIzYmU1MWUyM2JhOGYwNWJkN2RkYWI3MWM5NDYwYzhkMzQ2MCJ9fX0=
+  capacity: 10000
+  per: 500
+  recipe_type: ENHANCED_CRAFTING_TABLE
+  recipe:
+    2:
+      material_type: slimefun
+      material: Tr_zwxyp
+    5:
+      material_type: mc
+      material: diamond_sword
+    7:
+      material_type: slimefun
+      material: Tr_zwdz
+    8:
+      material_type: slimefun
+      material: Tr_zwdz
+    9:
+      material_type: slimefun
+      material: Tr_zwdz
+  status: 0
+  tickRate: 1
+  output: [1,2,3,4,5,6,7,8,10,11,12,13,14,15,16,17,19,20,21,22,23,24,25,26,28,29,30,31,32,33,34,35,37,38,39,40,41,42,43,44,46,47,48,49,50,51,52,53]
+  outputItem:
+      material_type: mc
+      material: diamond_sword
+      amount: 16
+Tr_zwxxjhjj:
+  lateInit: true
+  item_group: Tr_czzwx
+  item:
+    name: '&f&l&kTg{#7b2ff7}&l造{#5533d6}&l物{#2563eb}&l匣&f&l·&7下界合金剑&f&l&kRn'
+    lore:
+    - '&8⇨ &e⚡&7 10000 J 可存储'
+    - '&8⇨ &e⚡&7 500 J/s'
+    material_type: skull_base64
+    material: eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNGU1NmZiNWIyOWE4ZDJlNjVlYWY5Y2NjNzM2MWIzYmU1MWUyM2JhOGYwNWJkN2RkYWI3MWM5NDYwYzhkMzQ2MCJ9fX0=
+  capacity: 10000
+  per: 500
+  recipe_type: ENHANCED_CRAFTING_TABLE
+  recipe:
+    2:
+      material_type: slimefun
+      material: Tr_zwxyp
+    5:
+      material_type: mc
+      material: netherite_sword
+    7:
+      material_type: slimefun
+      material: Tr_zwdz
+    8:
+      material_type: slimefun
+      material: Tr_zwdz
+    9:
+      material_type: slimefun
+      material: Tr_zwdz
+  status: 0
+  tickRate: 1
+  output: [1,2,3,4,5,6,7,8,10,11,12,13,14,15,16,17,19,20,21,22,23,24,25,26,28,29,30,31,32,33,34,35,37,38,39,40,41,42,43,44,46,47,48,49,50,51,52,53]
+  outputItem:
+      material_type: mc
+      material: netherite_sword
+      amount: 16
+Tr_zwxg:
+  lateInit: true
+  item_group: Tr_czzwx
+  item:
+    name: '&f&l&kTg{#7b2ff7}&l造{#5533d6}&l物{#2563eb}&l匣&f&l·&7弓&f&l&kRn'
+    lore:
+    - '&8⇨ &e⚡&7 10000 J 可存储'
+    - '&8⇨ &e⚡&7 500 J/s'
+    material_type: skull_base64
+    material: eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNGU1NmZiNWIyOWE4ZDJlNjVlYWY5Y2NjNzM2MWIzYmU1MWUyM2JhOGYwNWJkN2RkYWI3MWM5NDYwYzhkMzQ2MCJ9fX0=
+  capacity: 10000
+  per: 500
+  recipe_type: ENHANCED_CRAFTING_TABLE
+  recipe:
+    2:
+      material_type: slimefun
+      material: Tr_zwxyp
+    5:
+      material_type: mc
+      material: bow
+    7:
+      material_type: slimefun
+      material: Tr_zwdz
+    8:
+      material_type: slimefun
+      material: Tr_zwdz
+    9:
+      material_type: slimefun
+      material: Tr_zwdz
+  status: 0
+  tickRate: 1
+  output: [1,2,3,4,5,6,7,8,10,11,12,13,14,15,16,17,19,20,21,22,23,24,25,26,28,29,30,31,32,33,34,35,37,38,39,40,41,42,43,44,46,47,48,49,50,51,52,53]
+  outputItem:
+      material_type: mc
+      material: bow
+      amount: 16
+Tr_zwxn:
+  lateInit: true
+  item_group: Tr_czzwx
+  item:
+    name: '&f&l&kTg{#7b2ff7}&l造{#5533d6}&l物{#2563eb}&l匣&f&l·&7弩&f&l&kRn'
+    lore:
+    - '&8⇨ &e⚡&7 10000 J 可存储'
+    - '&8⇨ &e⚡&7 500 J/s'
+    material_type: skull_base64
+    material: eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNGU1NmZiNWIyOWE4ZDJlNjVlYWY5Y2NjNzM2MWIzYmU1MWUyM2JhOGYwNWJkN2RkYWI3MWM5NDYwYzhkMzQ2MCJ9fX0=
+  capacity: 10000
+  per: 500
+  recipe_type: ENHANCED_CRAFTING_TABLE
+  recipe:
+    2:
+      material_type: slimefun
+      material: Tr_zwxyp
+    5:
+      material_type: mc
+      material: crossbow
+    7:
+      material_type: slimefun
+      material: Tr_zwdz
+    8:
+      material_type: slimefun
+      material: Tr_zwdz
+    9:
+      material_type: slimefun
+      material: Tr_zwdz
+  status: 0
+  tickRate: 1
+  output: [1,2,3,4,5,6,7,8,10,11,12,13,14,15,16,17,19,20,21,22,23,24,25,26,28,29,30,31,32,33,34,35,37,38,39,40,41,42,43,44,46,47,48,49,50,51,52,53]
+  outputItem:
+      material_type: mc
+      material: crossbow
+      amount: 16
+Tr_zwxdp:
+  lateInit: true
+  item_group: Tr_czzwx
+  item:
+    name: '&f&l&kTg{#7b2ff7}&l造{#5533d6}&l物{#2563eb}&l匣&f&l·&7盾牌&f&l&kRn'
+    lore:
+    - '&8⇨ &e⚡&7 10000 J 可存储'
+    - '&8⇨ &e⚡&7 500 J/s'
+    material_type: skull_base64
+    material: eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNGU1NmZiNWIyOWE4ZDJlNjVlYWY5Y2NjNzM2MWIzYmU1MWUyM2JhOGYwNWJkN2RkYWI3MWM5NDYwYzhkMzQ2MCJ9fX0=
+  capacity: 10000
+  per: 500
+  recipe_type: ENHANCED_CRAFTING_TABLE
+  recipe:
+    2:
+      material_type: slimefun
+      material: Tr_zwxyp
+    5:
+      material_type: mc
+      material: shield
+    7:
+      material_type: slimefun
+      material: Tr_zwdz
+    8:
+      material_type: slimefun
+      material: Tr_zwdz
+    9:
+      material_type: slimefun
+      material: Tr_zwdz
+  status: 0
+  tickRate: 1
+  output: [1,2,3,4,5,6,7,8,10,11,12,13,14,15,16,17,19,20,21,22,23,24,25,26,28,29,30,31,32,33,34,35,37,38,39,40,41,42,43,44,46,47,48,49,50,51,52,53]
+  outputItem:
+      material_type: mc
+      material: shield
+      amount: 16
+Tr_zwxscj:
+  lateInit: true
+  item_group: Tr_czzwx
+  item:
+    name: '&f&l&kTg{#7b2ff7}&l造{#5533d6}&l物{#2563eb}&l匣&f&l·&7三叉戟&f&l&kRn'
+    lore:
+    - '&8⇨ &e⚡&7 10000 J 可存储'
+    - '&8⇨ &e⚡&7 500 J/s'
+    material_type: skull_base64
+    material: eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNGU1NmZiNWIyOWE4ZDJlNjVlYWY5Y2NjNzM2MWIzYmU1MWUyM2JhOGYwNWJkN2RkYWI3MWM5NDYwYzhkMzQ2MCJ9fX0=
+  capacity: 10000
+  per: 500
+  recipe_type: ENHANCED_CRAFTING_TABLE
+  recipe:
+    2:
+      material_type: slimefun
+      material: Tr_zwxyp
+    5:
+      material_type: mc
+      material: trident
+    7:
+      material_type: slimefun
+      material: Tr_zwdz
+    8:
+      material_type: slimefun
+      material: Tr_zwdz
+    9:
+      material_type: slimefun
+      material: Tr_zwdz
+  status: 0
+  tickRate: 1
+  output: [1,2,3,4,5,6,7,8,10,11,12,13,14,15,16,17,19,20,21,22,23,24,25,26,28,29,30,31,32,33,34,35,37,38,39,40,41,42,43,44,46,47,48,49,50,51,52,53]
+  outputItem:
+      material_type: mc
+      material: trident
+      amount: 16
+Tr_zwxlyb:
+  lateInit: true
+  item_group: Tr_czzwx
+  item:
+    name: '&f&l&kTg{#7b2ff7}&l造{#5533d6}&l物{#2563eb}&l匣&f&l·&7重锤&f&l&kRn'
+    lore:
+    - '&8⇨ &e⚡&7 10000 J 可存储'
+    - '&8⇨ &e⚡&7 500 J/s'
+    material_type: skull_base64
+    material: eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNGU1NmZiNWIyOWE4ZDJlNjVlYWY5Y2NjNzM2MWIzYmU1MWUyM2JhOGYwNWJkN2RkYWI3MWM5NDYwYzhkMzQ2MCJ9fX0=
+  capacity: 10000
+  per: 500
+  recipe_type: ENHANCED_CRAFTING_TABLE
+  recipe:
+    2:
+      material_type: slimefun
+      material: Tr_zwxyp
+    5:
+      material_type: mc
+      material: mace
+    7:
+      material_type: slimefun
+      material: Tr_zwdz
+    8:
+      material_type: slimefun
+      material: Tr_zwdz
+    9:
+      material_type: slimefun
+      material: Tr_zwdz
+  status: 0
+  tickRate: 1
+  output: [1,2,3,4,5,6,7,8,10,11,12,13,14,15,16,17,19,20,21,22,23,24,25,26,28,29,30,31,32,33,34,35,37,38,39,40,41,42,43,44,46,47,48,49,50,51,52,53]
+  outputItem:
+      material_type: mc
+      material: mace
+      amount: 16
+Tr_zwxj:
+  lateInit: true
+  item_group: Tr_czzwx
+  item:
+    name: '&f&l&kTg{#7b2ff7}&l造{#5533d6}&l物{#2563eb}&l匣&f&l·&7箭&f&l&kRn'
+    lore:
+    - '&8⇨ &e⚡&7 10000 J 可存储'
+    - '&8⇨ &e⚡&7 500 J/s'
+    material_type: skull_base64
+    material: eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNGU1NmZiNWIyOWE4ZDJlNjVlYWY5Y2NjNzM2MWIzYmU1MWUyM2JhOGYwNWJkN2RkYWI3MWM5NDYwYzhkMzQ2MCJ9fX0=
+  capacity: 10000
+  per: 500
+  recipe_type: ENHANCED_CRAFTING_TABLE
+  recipe:
+    2:
+      material_type: slimefun
+      material: Tr_zwxyp
+    5:
+      material_type: mc
+      material: arrow
+    7:
+      material_type: slimefun
+      material: Tr_zwdz
+    8:
+      material_type: slimefun
+      material: Tr_zwdz
+    9:
+      material_type: slimefun
+      material: Tr_zwdz
+  status: 0
+  tickRate: 1
+  output: [1,2,3,4,5,6,7,8,10,11,12,13,14,15,16,17,19,20,21,22,23,24,25,26,28,29,30,31,32,33,34,35,37,38,39,40,41,42,43,44,46,47,48,49,50,51,52,53]
+  outputItem:
+      material_type: mc
+      material: arrow
+      amount: 16
+Tr_zwxhsf:
+  lateInit: true
+  item_group: Tr_czzwx
+  item:
+    name: '&f&l&kTg{#7b2ff7}&l造{#5533d6}&l物{#2563eb}&l匣&f&l·&7红石粉&f&l&kRn'
+    lore:
+    - '&8⇨ &e⚡&7 10000 J 可存储'
+    - '&8⇨ &e⚡&7 500 J/s'
+    material_type: skull_base64
+    material: eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNGU1NmZiNWIyOWE4ZDJlNjVlYWY5Y2NjNzM2MWIzYmU1MWUyM2JhOGYwNWJkN2RkYWI3MWM5NDYwYzhkMzQ2MCJ9fX0=
+  capacity: 10000
+  per: 500
+  recipe_type: ENHANCED_CRAFTING_TABLE
+  recipe:
+    2:
+      material_type: slimefun
+      material: Tr_zwxyp
+    5:
+      material_type: mc
+      material: redstone
+    7:
+      material_type: slimefun
+      material: Tr_zwdz
+    8:
+      material_type: slimefun
+      material: Tr_zwdz
+    9:
+      material_type: slimefun
+      material: Tr_zwdz
+  status: 0
+  tickRate: 1
+  output: [1,2,3,4,5,6,7,8,10,11,12,13,14,15,16,17,19,20,21,22,23,24,25,26,28,29,30,31,32,33,34,35,37,38,39,40,41,42,43,44,46,47,48,49,50,51,52,53]
+  outputItem:
+      material_type: mc
+      material: redstone
+      amount: 16
+Tr_zwxhsk:
+  lateInit: true
+  item_group: Tr_czzwx
+  item:
+    name: '&f&l&kTg{#7b2ff7}&l造{#5533d6}&l物{#2563eb}&l匣&f&l·&7红石块&f&l&kRn'
+    lore:
+    - '&8⇨ &e⚡&7 10000 J 可存储'
+    - '&8⇨ &e⚡&7 500 J/s'
+    material_type: skull_base64
+    material: eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNGU1NmZiNWIyOWE4ZDJlNjVlYWY5Y2NjNzM2MWIzYmU1MWUyM2JhOGYwNWJkN2RkYWI3MWM5NDYwYzhkMzQ2MCJ9fX0=
+  capacity: 10000
+  per: 500
+  recipe_type: ENHANCED_CRAFTING_TABLE
+  recipe:
+    2:
+      material_type: slimefun
+      material: Tr_zwxyp
+    5:
+      material_type: mc
+      material: redstone_block
+    7:
+      material_type: slimefun
+      material: Tr_zwdz
+    8:
+      material_type: slimefun
+      material: Tr_zwdz
+    9:
+      material_type: slimefun
+      material: Tr_zwdz
+  status: 0
+  tickRate: 1
+  output: [1,2,3,4,5,6,7,8,10,11,12,13,14,15,16,17,19,20,21,22,23,24,25,26,28,29,30,31,32,33,34,35,37,38,39,40,41,42,43,44,46,47,48,49,50,51,52,53]
+  outputItem:
+      material_type: mc
+      material: redstone_block
+      amount: 16
+Tr_zwxhshb:
+  lateInit: true
+  item_group: Tr_czzwx
+  item:
+    name: '&f&l&kTg{#7b2ff7}&l造{#5533d6}&l物{#2563eb}&l匣&f&l·&7红石火把&f&l&kRn'
+    lore:
+    - '&8⇨ &e⚡&7 10000 J 可存储'
+    - '&8⇨ &e⚡&7 500 J/s'
+    material_type: skull_base64
+    material: eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNGU1NmZiNWIyOWE4ZDJlNjVlYWY5Y2NjNzM2MWIzYmU1MWUyM2JhOGYwNWJkN2RkYWI3MWM5NDYwYzhkMzQ2MCJ9fX0=
+  capacity: 10000
+  per: 500
+  recipe_type: ENHANCED_CRAFTING_TABLE
+  recipe:
+    2:
+      material_type: slimefun
+      material: Tr_zwxyp
+    5:
+      material_type: mc
+      material: redstone_torch
+    7:
+      material_type: slimefun
+      material: Tr_zwdz
+    8:
+      material_type: slimefun
+      material: Tr_zwdz
+    9:
+      material_type: slimefun
+      material: Tr_zwdz
+  status: 0
+  tickRate: 1
+  output: [1,2,3,4,5,6,7,8,10,11,12,13,14,15,16,17,19,20,21,22,23,24,25,26,28,29,30,31,32,33,34,35,37,38,39,40,41,42,43,44,46,47,48,49,50,51,52,53]
+  outputItem:
+      material_type: mc
+      material: redstone_torch
+      amount: 16
+Tr_zwxhszjq:
+  lateInit: true
+  item_group: Tr_czzwx
+  item:
+    name: '&f&l&kTg{#7b2ff7}&l造{#5533d6}&l物{#2563eb}&l匣&f&l·&7红石中继器&f&l&kRn'
+    lore:
+    - '&8⇨ &e⚡&7 10000 J 可存储'
+    - '&8⇨ &e⚡&7 500 J/s'
+    material_type: skull_base64
+    material: eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNGU1NmZiNWIyOWE4ZDJlNjVlYWY5Y2NjNzM2MWIzYmU1MWUyM2JhOGYwNWJkN2RkYWI3MWM5NDYwYzhkMzQ2MCJ9fX0=
+  capacity: 10000
+  per: 500
+  recipe_type: ENHANCED_CRAFTING_TABLE
+  recipe:
+    2:
+      material_type: slimefun
+      material: Tr_zwxyp
+    5:
+      material_type: mc
+      material: repeater
+    7:
+      material_type: slimefun
+      material: Tr_zwdz
+    8:
+      material_type: slimefun
+      material: Tr_zwdz
+    9:
+      material_type: slimefun
+      material: Tr_zwdz
+  status: 0
+  tickRate: 1
+  output: [1,2,3,4,5,6,7,8,10,11,12,13,14,15,16,17,19,20,21,22,23,24,25,26,28,29,30,31,32,33,34,35,37,38,39,40,41,42,43,44,46,47,48,49,50,51,52,53]
+  outputItem:
+      material_type: mc
+      material: repeater
+      amount: 16
+Tr_zwxhsbjq:
+  lateInit: true
+  item_group: Tr_czzwx
+  item:
+    name: '&f&l&kTg{#7b2ff7}&l造{#5533d6}&l物{#2563eb}&l匣&f&l·&7红石比较器&f&l&kRn'
+    lore:
+    - '&8⇨ &e⚡&7 10000 J 可存储'
+    - '&8⇨ &e⚡&7 500 J/s'
+    material_type: skull_base64
+    material: eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNGU1NmZiNWIyOWE4ZDJlNjVlYWY5Y2NjNzM2MWIzYmU1MWUyM2JhOGYwNWJkN2RkYWI3MWM5NDYwYzhkMzQ2MCJ9fX0=
+  capacity: 10000
+  per: 500
+  recipe_type: ENHANCED_CRAFTING_TABLE
+  recipe:
+    2:
+      material_type: slimefun
+      material: Tr_zwxyp
+    5:
+      material_type: mc
+      material: comparator
+    7:
+      material_type: slimefun
+      material: Tr_zwdz
+    8:
+      material_type: slimefun
+      material: Tr_zwdz
+    9:
+      material_type: slimefun
+      material: Tr_zwdz
+  status: 0
+  tickRate: 1
+  output: [1,2,3,4,5,6,7,8,10,11,12,13,14,15,16,17,19,20,21,22,23,24,25,26,28,29,30,31,32,33,34,35,37,38,39,40,41,42,43,44,46,47,48,49,50,51,52,53]
+  outputItem:
+      material_type: mc
+      material: comparator
+      amount: 16
+Tr_zwxlg:
+  lateInit: true
+  item_group: Tr_czzwx
+  item:
+    name: '&f&l&kTg{#7b2ff7}&l造{#5533d6}&l物{#2563eb}&l匣&f&l·&7拉杆&f&l&kRn'
+    lore:
+    - '&8⇨ &e⚡&7 10000 J 可存储'
+    - '&8⇨ &e⚡&7 500 J/s'
+    material_type: skull_base64
+    material: eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNGU1NmZiNWIyOWE4ZDJlNjVlYWY5Y2NjNzM2MWIzYmU1MWUyM2JhOGYwNWJkN2RkYWI3MWM5NDYwYzhkMzQ2MCJ9fX0=
+  capacity: 10000
+  per: 500
+  recipe_type: ENHANCED_CRAFTING_TABLE
+  recipe:
+    2:
+      material_type: slimefun
+      material: Tr_zwxyp
+    5:
+      material_type: mc
+      material: lever
+    7:
+      material_type: slimefun
+      material: Tr_zwdz
+    8:
+      material_type: slimefun
+      material: Tr_zwdz
+    9:
+      material_type: slimefun
+      material: Tr_zwdz
+  status: 0
+  tickRate: 1
+  output: [1,2,3,4,5,6,7,8,10,11,12,13,14,15,16,17,19,20,21,22,23,24,25,26,28,29,30,31,32,33,34,35,37,38,39,40,41,42,43,44,46,47,48,49,50,51,52,53]
+  outputItem:
+      material_type: mc
+      material: lever
+      amount: 16
+Tr_zwxzcq:
+  lateInit: true
+  item_group: Tr_czzwx
+  item:
+    name: '&f&l&kTg{#7b2ff7}&l造{#5533d6}&l物{#2563eb}&l匣&f&l·&7侦测器&f&l&kRn'
+    lore:
+    - '&8⇨ &e⚡&7 10000 J 可存储'
+    - '&8⇨ &e⚡&7 500 J/s'
+    material_type: skull_base64
+    material: eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNGU1NmZiNWIyOWE4ZDJlNjVlYWY5Y2NjNzM2MWIzYmU1MWUyM2JhOGYwNWJkN2RkYWI3MWM5NDYwYzhkMzQ2MCJ9fX0=
+  capacity: 10000
+  per: 500
+  recipe_type: ENHANCED_CRAFTING_TABLE
+  recipe:
+    2:
+      material_type: slimefun
+      material: Tr_zwxyp
+    5:
+      material_type: mc
+      material: observer
+    7:
+      material_type: slimefun
+      material: Tr_zwdz
+    8:
+      material_type: slimefun
+      material: Tr_zwdz
+    9:
+      material_type: slimefun
+      material: Tr_zwdz
+  status: 0
+  tickRate: 1
+  output: [1,2,3,4,5,6,7,8,10,11,12,13,14,15,16,17,19,20,21,22,23,24,25,26,28,29,30,31,32,33,34,35,37,38,39,40,41,42,43,44,46,47,48,49,50,51,52,53]
+  outputItem:
+      material_type: mc
+      material: observer
+      amount: 16
+Tr_zwxfsq:
+  lateInit: true
+  item_group: Tr_czzwx
+  item:
+    name: '&f&l&kTg{#7b2ff7}&l造{#5533d6}&l物{#2563eb}&l匣&f&l·&7发射器&f&l&kRn'
+    lore:
+    - '&8⇨ &e⚡&7 10000 J 可存储'
+    - '&8⇨ &e⚡&7 500 J/s'
+    material_type: skull_base64
+    material: eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNGU1NmZiNWIyOWE4ZDJlNjVlYWY5Y2NjNzM2MWIzYmU1MWUyM2JhOGYwNWJkN2RkYWI3MWM5NDYwYzhkMzQ2MCJ9fX0=
+  capacity: 10000
+  per: 500
+  recipe_type: ENHANCED_CRAFTING_TABLE
+  recipe:
+    2:
+      material_type: slimefun
+      material: Tr_zwxyp
+    5:
+      material_type: mc
+      material: dispenser
+    7:
+      material_type: slimefun
+      material: Tr_zwdz
+    8:
+      material_type: slimefun
+      material: Tr_zwdz
+    9:
+      material_type: slimefun
+      material: Tr_zwdz
+  status: 0
+  tickRate: 1
+  output: [1,2,3,4,5,6,7,8,10,11,12,13,14,15,16,17,19,20,21,22,23,24,25,26,28,29,30,31,32,33,34,35,37,38,39,40,41,42,43,44,46,47,48,49,50,51,52,53]
+  outputItem:
+      material_type: mc
+      material: dispenser
+      amount: 16
+Tr_zwxtzq:
+  lateInit: true
+  item_group: Tr_czzwx
+  item:
+    name: '&f&l&kTg{#7b2ff7}&l造{#5533d6}&l物{#2563eb}&l匣&f&l·&7投掷器&f&l&kRn'
+    lore:
+    - '&8⇨ &e⚡&7 10000 J 可存储'
+    - '&8⇨ &e⚡&7 500 J/s'
+    material_type: skull_base64
+    material: eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNGU1NmZiNWIyOWE4ZDJlNjVlYWY5Y2NjNzM2MWIzYmU1MWUyM2JhOGYwNWJkN2RkYWI3MWM5NDYwYzhkMzQ2MCJ9fX0=
+  capacity: 10000
+  per: 500
+  recipe_type: ENHANCED_CRAFTING_TABLE
+  recipe:
+    2:
+      material_type: slimefun
+      material: Tr_zwxyp
+    5:
+      material_type: mc
+      material: dropper
+    7:
+      material_type: slimefun
+      material: Tr_zwdz
+    8:
+      material_type: slimefun
+      material: Tr_zwdz
+    9:
+      material_type: slimefun
+      material: Tr_zwdz
+  status: 0
+  tickRate: 1
+  output: [1,2,3,4,5,6,7,8,10,11,12,13,14,15,16,17,19,20,21,22,23,24,25,26,28,29,30,31,32,33,34,35,37,38,39,40,41,42,43,44,46,47,48,49,50,51,52,53]
+  outputItem:
+      material_type: mc
+      material: dropper
+      amount: 16
+Tr_zwxhs:
+  lateInit: true
+  item_group: Tr_czzwx
+  item:
+    name: '&f&l&kTg{#7b2ff7}&l造{#5533d6}&l物{#2563eb}&l匣&f&l·&7活塞&f&l&kRn'
+    lore:
+    - '&8⇨ &e⚡&7 10000 J 可存储'
+    - '&8⇨ &e⚡&7 500 J/s'
+    material_type: skull_base64
+    material: eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNGU1NmZiNWIyOWE4ZDJlNjVlYWY5Y2NjNzM2MWIzYmU1MWUyM2JhOGYwNWJkN2RkYWI3MWM5NDYwYzhkMzQ2MCJ9fX0=
+  capacity: 10000
+  per: 500
+  recipe_type: ENHANCED_CRAFTING_TABLE
+  recipe:
+    2:
+      material_type: slimefun
+      material: Tr_zwxyp
+    5:
+      material_type: mc
+      material: piston
+    7:
+      material_type: slimefun
+      material: Tr_zwdz
+    8:
+      material_type: slimefun
+      material: Tr_zwdz
+    9:
+      material_type: slimefun
+      material: Tr_zwdz
+  status: 0
+  tickRate: 1
+  output: [1,2,3,4,5,6,7,8,10,11,12,13,14,15,16,17,19,20,21,22,23,24,25,26,28,29,30,31,32,33,34,35,37,38,39,40,41,42,43,44,46,47,48,49,50,51,52,53]
+  outputItem:
+      material_type: mc
+      material: piston
+      amount: 16
+Tr_zwxnxhs:
+  lateInit: true
+  item_group: Tr_czzwx
+  item:
+    name: '&f&l&kTg{#7b2ff7}&l造{#5533d6}&l物{#2563eb}&l匣&f&l·&7粘性活塞&f&l&kRn'
+    lore:
+    - '&8⇨ &e⚡&7 10000 J 可存储'
+    - '&8⇨ &e⚡&7 500 J/s'
+    material_type: skull_base64
+    material: eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNGU1NmZiNWIyOWE4ZDJlNjVlYWY5Y2NjNzM2MWIzYmU1MWUyM2JhOGYwNWJkN2RkYWI3MWM5NDYwYzhkMzQ2MCJ9fX0=
+  capacity: 10000
+  per: 500
+  recipe_type: ENHANCED_CRAFTING_TABLE
+  recipe:
+    2:
+      material_type: slimefun
+      material: Tr_zwxyp
+    5:
+      material_type: mc
+      material: sticky_piston
+    7:
+      material_type: slimefun
+      material: Tr_zwdz
+    8:
+      material_type: slimefun
+      material: Tr_zwdz
+    9:
+      material_type: slimefun
+      material: Tr_zwdz
+  status: 0
+  tickRate: 1
+  output: [1,2,3,4,5,6,7,8,10,11,12,13,14,15,16,17,19,20,21,22,23,24,25,26,28,29,30,31,32,33,34,35,37,38,39,40,41,42,43,44,46,47,48,49,50,51,52,53]
+  outputItem:
+      material_type: mc
+      material: sticky_piston
+      amount: 16
+Tr_zwxyfh:
+  lateInit: true
+  item_group: Tr_czzwx
+  item:
+    name: '&f&l&kTg{#7b2ff7}&l造{#5533d6}&l物{#2563eb}&l匣&f&l·&7音符盒&f&l&kRn'
+    lore:
+    - '&8⇨ &e⚡&7 10000 J 可存储'
+    - '&8⇨ &e⚡&7 500 J/s'
+    material_type: skull_base64
+    material: eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNGU1NmZiNWIyOWE4ZDJlNjVlYWY5Y2NjNzM2MWIzYmU1MWUyM2JhOGYwNWJkN2RkYWI3MWM5NDYwYzhkMzQ2MCJ9fX0=
+  capacity: 10000
+  per: 500
+  recipe_type: ENHANCED_CRAFTING_TABLE
+  recipe:
+    2:
+      material_type: slimefun
+      material: Tr_zwxyp
+    5:
+      material_type: mc
+      material: note_block
+    7:
+      material_type: slimefun
+      material: Tr_zwdz
+    8:
+      material_type: slimefun
+      material: Tr_zwdz
+    9:
+      material_type: slimefun
+      material: Tr_zwdz
+  status: 0
+  tickRate: 1
+  output: [1,2,3,4,5,6,7,8,10,11,12,13,14,15,16,17,19,20,21,22,23,24,25,26,28,29,30,31,32,33,34,35,37,38,39,40,41,42,43,44,46,47,48,49,50,51,52,53]
+  outputItem:
+      material_type: mc
+      material: note_block
+      amount: 16
+Tr_zwxhsd:
+  lateInit: true
+  item_group: Tr_czzwx
+  item:
+    name: '&f&l&kTg{#7b2ff7}&l造{#5533d6}&l物{#2563eb}&l匣&f&l·&7红石灯&f&l&kRn'
+    lore:
+    - '&8⇨ &e⚡&7 10000 J 可存储'
+    - '&8⇨ &e⚡&7 500 J/s'
+    material_type: skull_base64
+    material: eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNGU1NmZiNWIyOWE4ZDJlNjVlYWY5Y2NjNzM2MWIzYmU1MWUyM2JhOGYwNWJkN2RkYWI3MWM5NDYwYzhkMzQ2MCJ9fX0=
+  capacity: 10000
+  per: 500
+  recipe_type: ENHANCED_CRAFTING_TABLE
+  recipe:
+    2:
+      material_type: slimefun
+      material: Tr_zwxyp
+    5:
+      material_type: mc
+      material: redstone_lamp
+    7:
+      material_type: slimefun
+      material: Tr_zwdz
+    8:
+      material_type: slimefun
+      material: Tr_zwdz
+    9:
+      material_type: slimefun
+      material: Tr_zwdz
+  status: 0
+  tickRate: 1
+  output: [1,2,3,4,5,6,7,8,10,11,12,13,14,15,16,17,19,20,21,22,23,24,25,26,28,29,30,31,32,33,34,35,37,38,39,40,41,42,43,44,46,47,48,49,50,51,52,53]
+  outputItem:
+      material_type: mc
+      material: redstone_lamp
+      amount: 16
+Tr_zwxbxg:
+  lateInit: true
+  item_group: Tr_czzwx
+  item:
+    name: '&f&l&kTg{#7b2ff7}&l造{#5533d6}&l物{#2563eb}&l匣&f&l·&7绊线钩&f&l&kRn'
+    lore:
+    - '&8⇨ &e⚡&7 10000 J 可存储'
+    - '&8⇨ &e⚡&7 500 J/s'
+    material_type: skull_base64
+    material: eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNGU1NmZiNWIyOWE4ZDJlNjVlYWY5Y2NjNzM2MWIzYmU1MWUyM2JhOGYwNWJkN2RkYWI3MWM5NDYwYzhkMzQ2MCJ9fX0=
+  capacity: 10000
+  per: 500
+  recipe_type: ENHANCED_CRAFTING_TABLE
+  recipe:
+    2:
+      material_type: slimefun
+      material: Tr_zwxyp
+    5:
+      material_type: mc
+      material: tripwire_hook
+    7:
+      material_type: slimefun
+      material: Tr_zwdz
+    8:
+      material_type: slimefun
+      material: Tr_zwdz
+    9:
+      material_type: slimefun
+      material: Tr_zwdz
+  status: 0
+  tickRate: 1
+  output: [1,2,3,4,5,6,7,8,10,11,12,13,14,15,16,17,19,20,21,22,23,24,25,26,28,29,30,31,32,33,34,35,37,38,39,40,41,42,43,44,46,47,48,49,50,51,52,53]
+  outputItem:
+      material_type: mc
+      material: tripwire_hook
+      amount: 16
+Tr_zwxbb:
+  lateInit: true
+  item_group: Tr_czzwx
+  item:
+    name: '&f&l&kTg{#7b2ff7}&l造{#5533d6}&l物{#2563eb}&l匣&f&l·&7标靶&f&l&kRn'
+    lore:
+    - '&8⇨ &e⚡&7 10000 J 可存储'
+    - '&8⇨ &e⚡&7 500 J/s'
+    material_type: skull_base64
+    material: eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNGU1NmZiNWIyOWE4ZDJlNjVlYWY5Y2NjNzM2MWIzYmU1MWUyM2JhOGYwNWJkN2RkYWI3MWM5NDYwYzhkMzQ2MCJ9fX0=
+  capacity: 10000
+  per: 500
+  recipe_type: ENHANCED_CRAFTING_TABLE
+  recipe:
+    2:
+      material_type: slimefun
+      material: Tr_zwxyp
+    5:
+      material_type: mc
+      material: target
+    7:
+      material_type: slimefun
+      material: Tr_zwdz
+    8:
+      material_type: slimefun
+      material: Tr_zwdz
+    9:
+      material_type: slimefun
+      material: Tr_zwdz
+  status: 0
+  tickRate: 1
+  output: [1,2,3,4,5,6,7,8,10,11,12,13,14,15,16,17,19,20,21,22,23,24,25,26,28,29,30,31,32,33,34,35,37,38,39,40,41,42,43,44,46,47,48,49,50,51,52,53]
+  outputItem:
+      material_type: mc
+      material: target
+      amount: 16
+Tr_zwxblz:
+  lateInit: true
+  item_group: Tr_czzwx
+  item:
+    name: '&f&l&kTg{#7b2ff7}&l造{#5533d6}&l物{#2563eb}&l匣&f&l·&7避雷针&f&l&kRn'
+    lore:
+    - '&8⇨ &e⚡&7 10000 J 可存储'
+    - '&8⇨ &e⚡&7 500 J/s'
+    material_type: skull_base64
+    material: eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNGU1NmZiNWIyOWE4ZDJlNjVlYWY5Y2NjNzM2MWIzYmU1MWUyM2JhOGYwNWJkN2RkYWI3MWM5NDYwYzhkMzQ2MCJ9fX0=
+  capacity: 10000
+  per: 500
+  recipe_type: ENHANCED_CRAFTING_TABLE
+  recipe:
+    2:
+      material_type: slimefun
+      material: Tr_zwxyp
+    5:
+      material_type: mc
+      material: lightning_rod
+    7:
+      material_type: slimefun
+      material: Tr_zwdz
+    8:
+      material_type: slimefun
+      material: Tr_zwdz
+    9:
+      material_type: slimefun
+      material: Tr_zwdz
+  status: 0
+  tickRate: 1
+  output: [1,2,3,4,5,6,7,8,10,11,12,13,14,15,16,17,19,20,21,22,23,24,25,26,28,29,30,31,32,33,34,35,37,38,39,40,41,42,43,44,46,47,48,49,50,51,52,53]
+  outputItem:
+      material_type: mc
+      material: lightning_rod
+      amount: 16
+Tr_zwxygcgq:
+  lateInit: true
+  item_group: Tr_czzwx
+  item:
+    name: '&f&l&kTg{#7b2ff7}&l造{#5533d6}&l物{#2563eb}&l匣&f&l·&7阳光传感器&f&l&kRn'
+    lore:
+    - '&8⇨ &e⚡&7 10000 J 可存储'
+    - '&8⇨ &e⚡&7 500 J/s'
+    material_type: skull_base64
+    material: eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNGU1NmZiNWIyOWE4ZDJlNjVlYWY5Y2NjNzM2MWIzYmU1MWUyM2JhOGYwNWJkN2RkYWI3MWM5NDYwYzhkMzQ2MCJ9fX0=
+  capacity: 10000
+  per: 500
+  recipe_type: ENHANCED_CRAFTING_TABLE
+  recipe:
+    2:
+      material_type: slimefun
+      material: Tr_zwxyp
+    5:
+      material_type: mc
+      material: daylight_detector
+    7:
+      material_type: slimefun
+      material: Tr_zwdz
+    8:
+      material_type: slimefun
+      material: Tr_zwdz
+    9:
+      material_type: slimefun
+      material: Tr_zwdz
+  status: 0
+  tickRate: 1
+  output: [1,2,3,4,5,6,7,8,10,11,12,13,14,15,16,17,19,20,21,22,23,24,25,26,28,29,30,31,32,33,34,35,37,38,39,40,41,42,43,44,46,47,48,49,50,51,52,53]
+  outputItem:
+      material_type: mc
+      material: daylight_detector
+      amount: 16
+Tr_zwxtnt:
+  lateInit: true
+  item_group: Tr_czzwx
+  item:
+    name: '&f&l&kTg{#7b2ff7}&l造{#5533d6}&l物{#2563eb}&l匣&f&l·&7TNT&f&l&kRn'
+    lore:
+    - '&8⇨ &e⚡&7 10000 J 可存储'
+    - '&8⇨ &e⚡&7 500 J/s'
+    material_type: skull_base64
+    material: eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNGU1NmZiNWIyOWE4ZDJlNjVlYWY5Y2NjNzM2MWIzYmU1MWUyM2JhOGYwNWJkN2RkYWI3MWM5NDYwYzhkMzQ2MCJ9fX0=
+  capacity: 10000
+  per: 500
+  recipe_type: ENHANCED_CRAFTING_TABLE
+  recipe:
+    2:
+      material_type: slimefun
+      material: Tr_zwxyp
+    5:
+      material_type: mc
+      material: tnt
+    7:
+      material_type: slimefun
+      material: Tr_zwdz
+    8:
+      material_type: slimefun
+      material: Tr_zwdz
+    9:
+      material_type: slimefun
+      material: Tr_zwdz
+  status: 0
+  tickRate: 1
+  output: [1,2,3,4,5,6,7,8,10,11,12,13,14,15,16,17,19,20,21,22,23,24,25,26,28,29,30,31,32,33,34,35,37,38,39,40,41,42,43,44,46,47,48,49,50,51,52,53]
+  outputItem:
+      material_type: mc
+      material: tnt
+      amount: 16
+Tr_zwxld:
+  lateInit: true
+  item_group: Tr_czzwx
+  item:
+    name: '&f&l&kTg{#7b2ff7}&l造{#5533d6}&l物{#2563eb}&l匣&f&l·&7漏斗&f&l&kRn'
+    lore:
+    - '&8⇨ &e⚡&7 10000 J 可存储'
+    - '&8⇨ &e⚡&7 500 J/s'
+    material_type: skull_base64
+    material: eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNGU1NmZiNWIyOWE4ZDJlNjVlYWY5Y2NjNzM2MWIzYmU1MWUyM2JhOGYwNWJkN2RkYWI3MWM5NDYwYzhkMzQ2MCJ9fX0=
+  capacity: 10000
+  per: 500
+  recipe_type: ENHANCED_CRAFTING_TABLE
+  recipe:
+    2:
+      material_type: slimefun
+      material: Tr_zwxyp
+    5:
+      material_type: mc
+      material: hopper
+    7:
+      material_type: slimefun
+      material: Tr_zwdz
+    8:
+      material_type: slimefun
+      material: Tr_zwdz
+    9:
+      material_type: slimefun
+      material: Tr_zwdz
+  status: 0
+  tickRate: 1
+  output: [1,2,3,4,5,6,7,8,10,11,12,13,14,15,16,17,19,20,21,22,23,24,25,26,28,29,30,31,32,33,34,35,37,38,39,40,41,42,43,44,46,47,48,49,50,51,52,53]
+  outputItem:
+      material_type: mc
+      material: hopper
+      amount: 16
+Tr_zwxdltg:
+  lateInit: true
+  item_group: Tr_czzwx
+  item:
+    name: '&f&l&kTg{#7b2ff7}&l造{#5533d6}&l物{#2563eb}&l匣&f&l·&7动力铁轨&f&l&kRn'
+    lore:
+    - '&8⇨ &e⚡&7 10000 J 可存储'
+    - '&8⇨ &e⚡&7 500 J/s'
+    material_type: skull_base64
+    material: eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNGU1NmZiNWIyOWE4ZDJlNjVlYWY5Y2NjNzM2MWIzYmU1MWUyM2JhOGYwNWJkN2RkYWI3MWM5NDYwYzhkMzQ2MCJ9fX0=
+  capacity: 10000
+  per: 500
+  recipe_type: ENHANCED_CRAFTING_TABLE
+  recipe:
+    2:
+      material_type: slimefun
+      material: Tr_zwxyp
+    5:
+      material_type: mc
+      material: powered_rail
+    7:
+      material_type: slimefun
+      material: Tr_zwdz
+    8:
+      material_type: slimefun
+      material: Tr_zwdz
+    9:
+      material_type: slimefun
+      material: Tr_zwdz
+  status: 0
+  tickRate: 1
+  output: [1,2,3,4,5,6,7,8,10,11,12,13,14,15,16,17,19,20,21,22,23,24,25,26,28,29,30,31,32,33,34,35,37,38,39,40,41,42,43,44,46,47,48,49,50,51,52,53]
+  outputItem:
+      material_type: mc
+      material: powered_rail
+      amount: 16
+Tr_zwxtctg:
+  lateInit: true
+  item_group: Tr_czzwx
+  item:
+    name: '&f&l&kTg{#7b2ff7}&l造{#5533d6}&l物{#2563eb}&l匣&f&l·&7探测铁轨&f&l&kRn'
+    lore:
+    - '&8⇨ &e⚡&7 10000 J 可存储'
+    - '&8⇨ &e⚡&7 500 J/s'
+    material_type: skull_base64
+    material: eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNGU1NmZiNWIyOWE4ZDJlNjVlYWY5Y2NjNzM2MWIzYmU1MWUyM2JhOGYwNWJkN2RkYWI3MWM5NDYwYzhkMzQ2MCJ9fX0=
+  capacity: 10000
+  per: 500
+  recipe_type: ENHANCED_CRAFTING_TABLE
+  recipe:
+    2:
+      material_type: slimefun
+      material: Tr_zwxyp
+    5:
+      material_type: mc
+      material: detector_rail
+    7:
+      material_type: slimefun
+      material: Tr_zwdz
+    8:
+      material_type: slimefun
+      material: Tr_zwdz
+    9:
+      material_type: slimefun
+      material: Tr_zwdz
+  status: 0
+  tickRate: 1
+  output: [1,2,3,4,5,6,7,8,10,11,12,13,14,15,16,17,19,20,21,22,23,24,25,26,28,29,30,31,32,33,34,35,37,38,39,40,41,42,43,44,46,47,48,49,50,51,52,53]
+  outputItem:
+      material_type: mc
+      material: detector_rail
+      amount: 16
+Tr_zwxjhtg:
+  lateInit: true
+  item_group: Tr_czzwx
+  item:
+    name: '&f&l&kTg{#7b2ff7}&l造{#5533d6}&l物{#2563eb}&l匣&f&l·&7激活铁轨&f&l&kRn'
+    lore:
+    - '&8⇨ &e⚡&7 10000 J 可存储'
+    - '&8⇨ &e⚡&7 500 J/s'
+    material_type: skull_base64
+    material: eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNGU1NmZiNWIyOWE4ZDJlNjVlYWY5Y2NjNzM2MWIzYmU1MWUyM2JhOGYwNWJkN2RkYWI3MWM5NDYwYzhkMzQ2MCJ9fX0=
+  capacity: 10000
+  per: 500
+  recipe_type: ENHANCED_CRAFTING_TABLE
+  recipe:
+    2:
+      material_type: slimefun
+      material: Tr_zwxyp
+    5:
+      material_type: mc
+      material: activator_rail
+    7:
+      material_type: slimefun
+      material: Tr_zwdz
+    8:
+      material_type: slimefun
+      material: Tr_zwdz
+    9:
+      material_type: slimefun
+      material: Tr_zwdz
+  status: 0
+  tickRate: 1
+  output: [1,2,3,4,5,6,7,8,10,11,12,13,14,15,16,17,19,20,21,22,23,24,25,26,28,29,30,31,32,33,34,35,37,38,39,40,41,42,43,44,46,47,48,49,50,51,52,53]
+  outputItem:
+      material_type: mc
+      material: activator_rail
+      amount: 16
+Tr_zwxsylb:
+  lateInit: true
+  item_group: Tr_czzwx
+  item:
+    name: '&f&l&kTg{#7b2ff7}&l造{#5533d6}&l物{#2563eb}&l匣&f&l·&7石压力板&f&l&kRn'
+    lore:
+    - '&8⇨ &e⚡&7 10000 J 可存储'
+    - '&8⇨ &e⚡&7 500 J/s'
+    material_type: skull_base64
+    material: eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNGU1NmZiNWIyOWE4ZDJlNjVlYWY5Y2NjNzM2MWIzYmU1MWUyM2JhOGYwNWJkN2RkYWI3MWM5NDYwYzhkMzQ2MCJ9fX0=
+  capacity: 10000
+  per: 500
+  recipe_type: ENHANCED_CRAFTING_TABLE
+  recipe:
+    2:
+      material_type: slimefun
+      material: Tr_zwxyp
+    5:
+      material_type: mc
+      material: stone_pressure_plate
+    7:
+      material_type: slimefun
+      material: Tr_zwdz
+    8:
+      material_type: slimefun
+      material: Tr_zwdz
+    9:
+      material_type: slimefun
+      material: Tr_zwdz
+  status: 0
+  tickRate: 1
+  output: [1,2,3,4,5,6,7,8,10,11,12,13,14,15,16,17,19,20,21,22,23,24,25,26,28,29,30,31,32,33,34,35,37,38,39,40,41,42,43,44,46,47,48,49,50,51,52,53]
+  outputItem:
+      material_type: mc
+      material: stone_pressure_plate
+      amount: 16
+Tr_zwxxmylb:
+  lateInit: true
+  item_group: Tr_czzwx
+  item:
+    name: '&f&l&kTg{#7b2ff7}&l造{#5533d6}&l物{#2563eb}&l匣&f&l·&7橡木压力板&f&l&kRn'
+    lore:
+    - '&8⇨ &e⚡&7 10000 J 可存储'
+    - '&8⇨ &e⚡&7 500 J/s'
+    material_type: skull_base64
+    material: eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNGU1NmZiNWIyOWE4ZDJlNjVlYWY5Y2NjNzM2MWIzYmU1MWUyM2JhOGYwNWJkN2RkYWI3MWM5NDYwYzhkMzQ2MCJ9fX0=
+  capacity: 10000
+  per: 500
+  recipe_type: ENHANCED_CRAFTING_TABLE
+  recipe:
+    2:
+      material_type: slimefun
+      material: Tr_zwxyp
+    5:
+      material_type: mc
+      material: oak_pressure_plate
+    7:
+      material_type: slimefun
+      material: Tr_zwdz
+    8:
+      material_type: slimefun
+      material: Tr_zwdz
+    9:
+      material_type: slimefun
+      material: Tr_zwdz
+  status: 0
+  tickRate: 1
+  output: [1,2,3,4,5,6,7,8,10,11,12,13,14,15,16,17,19,20,21,22,23,24,25,26,28,29,30,31,32,33,34,35,37,38,39,40,41,42,43,44,46,47,48,49,50,51,52,53]
+  outputItem:
+      material_type: mc
+      material: oak_pressure_plate
+      amount: 16
+Tr_zwxysmylb:
+  lateInit: true
+  item_group: Tr_czzwx
+  item:
+    name: '&f&l&kTg{#7b2ff7}&l造{#5533d6}&l物{#2563eb}&l匣&f&l·&7云杉木压力板&f&l&kRn'
+    lore:
+    - '&8⇨ &e⚡&7 10000 J 可存储'
+    - '&8⇨ &e⚡&7 500 J/s'
+    material_type: skull_base64
+    material: eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNGU1NmZiNWIyOWE4ZDJlNjVlYWY5Y2NjNzM2MWIzYmU1MWUyM2JhOGYwNWJkN2RkYWI3MWM5NDYwYzhkMzQ2MCJ9fX0=
+  capacity: 10000
+  per: 500
+  recipe_type: ENHANCED_CRAFTING_TABLE
+  recipe:
+    2:
+      material_type: slimefun
+      material: Tr_zwxyp
+    5:
+      material_type: mc
+      material: spruce_pressure_plate
+    7:
+      material_type: slimefun
+      material: Tr_zwdz
+    8:
+      material_type: slimefun
+      material: Tr_zwdz
+    9:
+      material_type: slimefun
+      material: Tr_zwdz
+  status: 0
+  tickRate: 1
+  output: [1,2,3,4,5,6,7,8,10,11,12,13,14,15,16,17,19,20,21,22,23,24,25,26,28,29,30,31,32,33,34,35,37,38,39,40,41,42,43,44,46,47,48,49,50,51,52,53]
+  outputItem:
+      material_type: mc
+      material: spruce_pressure_plate
+      amount: 16
+Tr_zwxbhmylb:
+  lateInit: true
+  item_group: Tr_czzwx
+  item:
+    name: '&f&l&kTg{#7b2ff7}&l造{#5533d6}&l物{#2563eb}&l匣&f&l·&7白桦木压力板&f&l&kRn'
+    lore:
+    - '&8⇨ &e⚡&7 10000 J 可存储'
+    - '&8⇨ &e⚡&7 500 J/s'
+    material_type: skull_base64
+    material: eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNGU1NmZiNWIyOWE4ZDJlNjVlYWY5Y2NjNzM2MWIzYmU1MWUyM2JhOGYwNWJkN2RkYWI3MWM5NDYwYzhkMzQ2MCJ9fX0=
+  capacity: 10000
+  per: 500
+  recipe_type: ENHANCED_CRAFTING_TABLE
+  recipe:
+    2:
+      material_type: slimefun
+      material: Tr_zwxyp
+    5:
+      material_type: mc
+      material: birch_pressure_plate
+    7:
+      material_type: slimefun
+      material: Tr_zwdz
+    8:
+      material_type: slimefun
+      material: Tr_zwdz
+    9:
+      material_type: slimefun
+      material: Tr_zwdz
+  status: 0
+  tickRate: 1
+  output: [1,2,3,4,5,6,7,8,10,11,12,13,14,15,16,17,19,20,21,22,23,24,25,26,28,29,30,31,32,33,34,35,37,38,39,40,41,42,43,44,46,47,48,49,50,51,52,53]
+  outputItem:
+      material_type: mc
+      material: birch_pressure_plate
+      amount: 16
+Tr_zwxclmylb:
+  lateInit: true
+  item_group: Tr_czzwx
+  item:
+    name: '&f&l&kTg{#7b2ff7}&l造{#5533d6}&l物{#2563eb}&l匣&f&l·&7丛林木压力板&f&l&kRn'
+    lore:
+    - '&8⇨ &e⚡&7 10000 J 可存储'
+    - '&8⇨ &e⚡&7 500 J/s'
+    material_type: skull_base64
+    material: eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNGU1NmZiNWIyOWE4ZDJlNjVlYWY5Y2NjNzM2MWIzYmU1MWUyM2JhOGYwNWJkN2RkYWI3MWM5NDYwYzhkMzQ2MCJ9fX0=
+  capacity: 10000
+  per: 500
+  recipe_type: ENHANCED_CRAFTING_TABLE
+  recipe:
+    2:
+      material_type: slimefun
+      material: Tr_zwxyp
+    5:
+      material_type: mc
+      material: jungle_pressure_plate
+    7:
+      material_type: slimefun
+      material: Tr_zwdz
+    8:
+      material_type: slimefun
+      material: Tr_zwdz
+    9:
+      material_type: slimefun
+      material: Tr_zwdz
+  status: 0
+  tickRate: 1
+  output: [1,2,3,4,5,6,7,8,10,11,12,13,14,15,16,17,19,20,21,22,23,24,25,26,28,29,30,31,32,33,34,35,37,38,39,40,41,42,43,44,46,47,48,49,50,51,52,53]
+  outputItem:
+      material_type: mc
+      material: jungle_pressure_plate
+      amount: 16
+Tr_zwxjhhmylb:
+  lateInit: true
+  item_group: Tr_czzwx
+  item:
+    name: '&f&l&kTg{#7b2ff7}&l造{#5533d6}&l物{#2563eb}&l匣&f&l·&7金合欢木压力板&f&l&kRn'
+    lore:
+    - '&8⇨ &e⚡&7 10000 J 可存储'
+    - '&8⇨ &e⚡&7 500 J/s'
+    material_type: skull_base64
+    material: eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNGU1NmZiNWIyOWE4ZDJlNjVlYWY5Y2NjNzM2MWIzYmU1MWUyM2JhOGYwNWJkN2RkYWI3MWM5NDYwYzhkMzQ2MCJ9fX0=
+  capacity: 10000
+  per: 500
+  recipe_type: ENHANCED_CRAFTING_TABLE
+  recipe:
+    2:
+      material_type: slimefun
+      material: Tr_zwxyp
+    5:
+      material_type: mc
+      material: acacia_pressure_plate
+    7:
+      material_type: slimefun
+      material: Tr_zwdz
+    8:
+      material_type: slimefun
+      material: Tr_zwdz
+    9:
+      material_type: slimefun
+      material: Tr_zwdz
+  status: 0
+  tickRate: 1
+  output: [1,2,3,4,5,6,7,8,10,11,12,13,14,15,16,17,19,20,21,22,23,24,25,26,28,29,30,31,32,33,34,35,37,38,39,40,41,42,43,44,46,47,48,49,50,51,52,53]
+  outputItem:
+      material_type: mc
+      material: acacia_pressure_plate
+      amount: 16
+Tr_zwxssxmylb:
+  lateInit: true
+  item_group: Tr_czzwx
+  item:
+    name: '&f&l&kTg{#7b2ff7}&l造{#5533d6}&l物{#2563eb}&l匣&f&l·&7深色橡木压力板&f&l&kRn'
+    lore:
+    - '&8⇨ &e⚡&7 10000 J 可存储'
+    - '&8⇨ &e⚡&7 500 J/s'
+    material_type: skull_base64
+    material: eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNGU1NmZiNWIyOWE4ZDJlNjVlYWY5Y2NjNzM2MWIzYmU1MWUyM2JhOGYwNWJkN2RkYWI3MWM5NDYwYzhkMzQ2MCJ9fX0=
+  capacity: 10000
+  per: 500
+  recipe_type: ENHANCED_CRAFTING_TABLE
+  recipe:
+    2:
+      material_type: slimefun
+      material: Tr_zwxyp
+    5:
+      material_type: mc
+      material: dark_oak_pressure_plate
+    7:
+      material_type: slimefun
+      material: Tr_zwdz
+    8:
+      material_type: slimefun
+      material: Tr_zwdz
+    9:
+      material_type: slimefun
+      material: Tr_zwdz
+  status: 0
+  tickRate: 1
+  output: [1,2,3,4,5,6,7,8,10,11,12,13,14,15,16,17,19,20,21,22,23,24,25,26,28,29,30,31,32,33,34,35,37,38,39,40,41,42,43,44,46,47,48,49,50,51,52,53]
+  outputItem:
+      material_type: mc
+      material: dark_oak_pressure_plate
+      amount: 16
+Tr_zwxhsmylb:
+  lateInit: true
+  item_group: Tr_czzwx
+  item:
+    name: '&f&l&kTg{#7b2ff7}&l造{#5533d6}&l物{#2563eb}&l匣&f&l·&7红树木压力板&f&l&kRn'
+    lore:
+    - '&8⇨ &e⚡&7 10000 J 可存储'
+    - '&8⇨ &e⚡&7 500 J/s'
+    material_type: skull_base64
+    material: eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNGU1NmZiNWIyOWE4ZDJlNjVlYWY5Y2NjNzM2MWIzYmU1MWUyM2JhOGYwNWJkN2RkYWI3MWM5NDYwYzhkMzQ2MCJ9fX0=
+  capacity: 10000
+  per: 500
+  recipe_type: ENHANCED_CRAFTING_TABLE
+  recipe:
+    2:
+      material_type: slimefun
+      material: Tr_zwxyp
+    5:
+      material_type: mc
+      material: mangrove_pressure_plate
+    7:
+      material_type: slimefun
+      material: Tr_zwdz
+    8:
+      material_type: slimefun
+      material: Tr_zwdz
+    9:
+      material_type: slimefun
+      material: Tr_zwdz
+  status: 0
+  tickRate: 1
+  output: [1,2,3,4,5,6,7,8,10,11,12,13,14,15,16,17,19,20,21,22,23,24,25,26,28,29,30,31,32,33,34,35,37,38,39,40,41,42,43,44,46,47,48,49,50,51,52,53]
+  outputItem:
+      material_type: mc
+      material: mangrove_pressure_plate
+      amount: 16
+Tr_zwxyhmylb:
+  lateInit: true
+  item_group: Tr_czzwx
+  item:
+    name: '&f&l&kTg{#7b2ff7}&l造{#5533d6}&l物{#2563eb}&l匣&f&l·&7樱花木压力板&f&l&kRn'
+    lore:
+    - '&8⇨ &e⚡&7 10000 J 可存储'
+    - '&8⇨ &e⚡&7 500 J/s'
+    material_type: skull_base64
+    material: eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNGU1NmZiNWIyOWE4ZDJlNjVlYWY5Y2NjNzM2MWIzYmU1MWUyM2JhOGYwNWJkN2RkYWI3MWM5NDYwYzhkMzQ2MCJ9fX0=
+  capacity: 10000
+  per: 500
+  recipe_type: ENHANCED_CRAFTING_TABLE
+  recipe:
+    2:
+      material_type: slimefun
+      material: Tr_zwxyp
+    5:
+      material_type: mc
+      material: cherry_pressure_plate
+    7:
+      material_type: slimefun
+      material: Tr_zwdz
+    8:
+      material_type: slimefun
+      material: Tr_zwdz
+    9:
+      material_type: slimefun
+      material: Tr_zwdz
+  status: 0
+  tickRate: 1
+  output: [1,2,3,4,5,6,7,8,10,11,12,13,14,15,16,17,19,20,21,22,23,24,25,26,28,29,30,31,32,33,34,35,37,38,39,40,41,42,43,44,46,47,48,49,50,51,52,53]
+  outputItem:
+      material_type: mc
+      material: cherry_pressure_plate
+      amount: 16
+Tr_zwxcsxmylb:
+  lateInit: true
+  item_group: Tr_czzwx
+  item:
+    name: '&f&l&kTg{#7b2ff7}&l造{#5533d6}&l物{#2563eb}&l匣&f&l·&7苍色橡木压力板&f&l&kRn'
+    lore:
+    - '&8⇨ &e⚡&7 10000 J 可存储'
+    - '&8⇨ &e⚡&7 500 J/s'
+    material_type: skull_base64
+    material: eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNGU1NmZiNWIyOWE4ZDJlNjVlYWY5Y2NjNzM2MWIzYmU1MWUyM2JhOGYwNWJkN2RkYWI3MWM5NDYwYzhkMzQ2MCJ9fX0=
+  capacity: 10000
+  per: 500
+  recipe_type: ENHANCED_CRAFTING_TABLE
+  recipe:
+    2:
+      material_type: slimefun
+      material: Tr_zwxyp
+    5:
+      material_type: mc
+      material: pale_oak_pressure_plate
+    7:
+      material_type: slimefun
+      material: Tr_zwdz
+    8:
+      material_type: slimefun
+      material: Tr_zwdz
+    9:
+      material_type: slimefun
+      material: Tr_zwdz
+  status: 0
+  tickRate: 1
+  output: [1,2,3,4,5,6,7,8,10,11,12,13,14,15,16,17,19,20,21,22,23,24,25,26,28,29,30,31,32,33,34,35,37,38,39,40,41,42,43,44,46,47,48,49,50,51,52,53]
+  outputItem:
+      material_type: mc
+      material: pale_oak_pressure_plate
+      amount: 16
+Tr_zwxzylb:
+  lateInit: true
+  item_group: Tr_czzwx
+  item:
+    name: '&f&l&kTg{#7b2ff7}&l造{#5533d6}&l物{#2563eb}&l匣&f&l·&7竹压力板&f&l&kRn'
+    lore:
+    - '&8⇨ &e⚡&7 10000 J 可存储'
+    - '&8⇨ &e⚡&7 500 J/s'
+    material_type: skull_base64
+    material: eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNGU1NmZiNWIyOWE4ZDJlNjVlYWY5Y2NjNzM2MWIzYmU1MWUyM2JhOGYwNWJkN2RkYWI3MWM5NDYwYzhkMzQ2MCJ9fX0=
+  capacity: 10000
+  per: 500
+  recipe_type: ENHANCED_CRAFTING_TABLE
+  recipe:
+    2:
+      material_type: slimefun
+      material: Tr_zwxyp
+    5:
+      material_type: mc
+      material: bamboo_pressure_plate
+    7:
+      material_type: slimefun
+      material: Tr_zwdz
+    8:
+      material_type: slimefun
+      material: Tr_zwdz
+    9:
+      material_type: slimefun
+      material: Tr_zwdz
+  status: 0
+  tickRate: 1
+  output: [1,2,3,4,5,6,7,8,10,11,12,13,14,15,16,17,19,20,21,22,23,24,25,26,28,29,30,31,32,33,34,35,37,38,39,40,41,42,43,44,46,47,48,49,50,51,52,53]
+  outputItem:
+      material_type: mc
+      material: bamboo_pressure_plate
+      amount: 16
+Tr_zwxfhmylb:
+  lateInit: true
+  item_group: Tr_czzwx
+  item:
+    name: '&f&l&kTg{#7b2ff7}&l造{#5533d6}&l物{#2563eb}&l匣&f&l·&7绯红木压力板&f&l&kRn'
+    lore:
+    - '&8⇨ &e⚡&7 10000 J 可存储'
+    - '&8⇨ &e⚡&7 500 J/s'
+    material_type: skull_base64
+    material: eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNGU1NmZiNWIyOWE4ZDJlNjVlYWY5Y2NjNzM2MWIzYmU1MWUyM2JhOGYwNWJkN2RkYWI3MWM5NDYwYzhkMzQ2MCJ9fX0=
+  capacity: 10000
+  per: 500
+  recipe_type: ENHANCED_CRAFTING_TABLE
+  recipe:
+    2:
+      material_type: slimefun
+      material: Tr_zwxyp
+    5:
+      material_type: mc
+      material: crimson_pressure_plate
+    7:
+      material_type: slimefun
+      material: Tr_zwdz
+    8:
+      material_type: slimefun
+      material: Tr_zwdz
+    9:
+      material_type: slimefun
+      material: Tr_zwdz
+  status: 0
+  tickRate: 1
+  output: [1,2,3,4,5,6,7,8,10,11,12,13,14,15,16,17,19,20,21,22,23,24,25,26,28,29,30,31,32,33,34,35,37,38,39,40,41,42,43,44,46,47,48,49,50,51,52,53]
+  outputItem:
+      material_type: mc
+      material: crimson_pressure_plate
+      amount: 16
+Tr_zwxgymylb:
+  lateInit: true
+  item_group: Tr_czzwx
+  item:
+    name: '&f&l&kTg{#7b2ff7}&l造{#5533d6}&l物{#2563eb}&l匣&f&l·&7诡异木压力板&f&l&kRn'
+    lore:
+    - '&8⇨ &e⚡&7 10000 J 可存储'
+    - '&8⇨ &e⚡&7 500 J/s'
+    material_type: skull_base64
+    material: eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNGU1NmZiNWIyOWE4ZDJlNjVlYWY5Y2NjNzM2MWIzYmU1MWUyM2JhOGYwNWJkN2RkYWI3MWM5NDYwYzhkMzQ2MCJ9fX0=
+  capacity: 10000
+  per: 500
+  recipe_type: ENHANCED_CRAFTING_TABLE
+  recipe:
+    2:
+      material_type: slimefun
+      material: Tr_zwxyp
+    5:
+      material_type: mc
+      material: warped_pressure_plate
+    7:
+      material_type: slimefun
+      material: Tr_zwdz
+    8:
+      material_type: slimefun
+      material: Tr_zwdz
+    9:
+      material_type: slimefun
+      material: Tr_zwdz
+  status: 0
+  tickRate: 1
+  output: [1,2,3,4,5,6,7,8,10,11,12,13,14,15,16,17,19,20,21,22,23,24,25,26,28,29,30,31,32,33,34,35,37,38,39,40,41,42,43,44,46,47,48,49,50,51,52,53]
+  outputItem:
+      material_type: mc
+      material: warped_pressure_plate
+      amount: 16
+Tr_zwxmzhsylb:
+  lateInit: true
+  item_group: Tr_czzwx
+  item:
+    name: '&f&l&kTg{#7b2ff7}&l造{#5533d6}&l物{#2563eb}&l匣&f&l·&7磨制黑石压力板&f&l&kRn'
+    lore:
+    - '&8⇨ &e⚡&7 10000 J 可存储'
+    - '&8⇨ &e⚡&7 500 J/s'
+    material_type: skull_base64
+    material: eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNGU1NmZiNWIyOWE4ZDJlNjVlYWY5Y2NjNzM2MWIzYmU1MWUyM2JhOGYwNWJkN2RkYWI3MWM5NDYwYzhkMzQ2MCJ9fX0=
+  capacity: 10000
+  per: 500
+  recipe_type: ENHANCED_CRAFTING_TABLE
+  recipe:
+    2:
+      material_type: slimefun
+      material: Tr_zwxyp
+    5:
+      material_type: mc
+      material: polished_blackstone_pressure_plate
+    7:
+      material_type: slimefun
+      material: Tr_zwdz
+    8:
+      material_type: slimefun
+      material: Tr_zwdz
+    9:
+      material_type: slimefun
+      material: Tr_zwdz
+  status: 0
+  tickRate: 1
+  output: [1,2,3,4,5,6,7,8,10,11,12,13,14,15,16,17,19,20,21,22,23,24,25,26,28,29,30,31,32,33,34,35,37,38,39,40,41,42,43,44,46,47,48,49,50,51,52,53]
+  outputItem:
+      material_type: mc
+      material: polished_blackstone_pressure_plate
+      amount: 16
+Tr_zwxqzczylb:
+  lateInit: true
+  item_group: Tr_czzwx
+  item:
+    name: '&f&l&kTg{#7b2ff7}&l造{#5533d6}&l物{#2563eb}&l匣&f&l·&7轻质测重压力板&f&l&kRn'
+    lore:
+    - '&8⇨ &e⚡&7 10000 J 可存储'
+    - '&8⇨ &e⚡&7 500 J/s'
+    material_type: skull_base64
+    material: eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNGU1NmZiNWIyOWE4ZDJlNjVlYWY5Y2NjNzM2MWIzYmU1MWUyM2JhOGYwNWJkN2RkYWI3MWM5NDYwYzhkMzQ2MCJ9fX0=
+  capacity: 10000
+  per: 500
+  recipe_type: ENHANCED_CRAFTING_TABLE
+  recipe:
+    2:
+      material_type: slimefun
+      material: Tr_zwxyp
+    5:
+      material_type: mc
+      material: light_weighted_pressure_plate
+    7:
+      material_type: slimefun
+      material: Tr_zwdz
+    8:
+      material_type: slimefun
+      material: Tr_zwdz
+    9:
+      material_type: slimefun
+      material: Tr_zwdz
+  status: 0
+  tickRate: 1
+  output: [1,2,3,4,5,6,7,8,10,11,12,13,14,15,16,17,19,20,21,22,23,24,25,26,28,29,30,31,32,33,34,35,37,38,39,40,41,42,43,44,46,47,48,49,50,51,52,53]
+  outputItem:
+      material_type: mc
+      material: light_weighted_pressure_plate
+      amount: 16
+Tr_zwxzzczylb:
+  lateInit: true
+  item_group: Tr_czzwx
+  item:
+    name: '&f&l&kTg{#7b2ff7}&l造{#5533d6}&l物{#2563eb}&l匣&f&l·&7重质测重压力板&f&l&kRn'
+    lore:
+    - '&8⇨ &e⚡&7 10000 J 可存储'
+    - '&8⇨ &e⚡&7 500 J/s'
+    material_type: skull_base64
+    material: eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNGU1NmZiNWIyOWE4ZDJlNjVlYWY5Y2NjNzM2MWIzYmU1MWUyM2JhOGYwNWJkN2RkYWI3MWM5NDYwYzhkMzQ2MCJ9fX0=
+  capacity: 10000
+  per: 500
+  recipe_type: ENHANCED_CRAFTING_TABLE
+  recipe:
+    2:
+      material_type: slimefun
+      material: Tr_zwxyp
+    5:
+      material_type: mc
+      material: heavy_weighted_pressure_plate
+    7:
+      material_type: slimefun
+      material: Tr_zwdz
+    8:
+      material_type: slimefun
+      material: Tr_zwdz
+    9:
+      material_type: slimefun
+      material: Tr_zwdz
+  status: 0
+  tickRate: 1
+  output: [1,2,3,4,5,6,7,8,10,11,12,13,14,15,16,17,19,20,21,22,23,24,25,26,28,29,30,31,32,33,34,35,37,38,39,40,41,42,43,44,46,47,48,49,50,51,52,53]
+  outputItem:
+      material_type: mc
+      material: heavy_weighted_pressure_plate
+      amount: 16
+Tr_zzznq:
+  item_group: Tr_czjjtsjq
+  item:
+    name: "{#5e2895}&l自{#691bb6}&l动{#f9a35d}&l注能器"
+    lore: 
+      - '&e&l神明&b&l也得给我&4&lgo work！'
+      - '&8⇨ &e⚡&7 15000 J 可存储'
+      - '&8⇨ &e⚡&7 1000 J/s '
+    material: daylight_detector
+  capacity: 15000
+  recipe_type: ENHANCED_CRAFTING_TABLE
+  recipe:
+    2:
+      material_type: slimefun
+      material: Tr_cjsmhhw
+    4:
+      material_type: mc
+      material: armor_stand
+    5:
+      material_type: slimefun
+      material: Tr_znq
+    6:
+      material_type: slimefun
+      material: Tr_cjnlhx_bcp
+    8:
+      material_type: slimefun
+      material: Tr_cjdgc
+  output: [1,2,3,4,5,6,7,8,10,11,12,13,14,15,16,17,19,20,21,22,23,24,25,26,28,29,30,31,32,33,34,35,37,38,39,40,41,42,43,44,46,47,48,49,50,51,52,53]
+  outputItem:
+    material_type: slimefun
+    material: Tr_cjnlhx
+  tickRate: 20
+  status: 0
+  per: 1000
+Tr_zdspj:
+  item_group: Tr_czjjscjq
+  item:
+    name: "{#5e2895}&l自{#691bb6}&l动&f&l赛跑机"
+    lore: 
+      - '&f&l超越风之后，它选择与&e&l神明&f&l赛跑'
+      - '{#d8f0f3}&l我们必须相信&7&l,&f&l彰学风{#d8f0f3}&l是快乐的'
+      - '&8⇨ &e⚡&7 15000 J 可存储'
+      - '&8⇨ &e⚡&7 1000 J/s '
+    material: snow_block
+  capacity: 15000
+  recipe_type: ENHANCED_CRAFTING_TABLE
+  recipe:
+    2:
+      material_type: slimefun
+      material: Tr_cjsmhhw
+    4:
+      material_type: mc
+      material: armor_stand
+    5:
+      material_type: slimefun
+      material: Tr_zxf
+    6:
+      material_type: mc
+      material: golden_boots
+    8:
+      material_type: slimefun
+      material: Tr_cjbk
+  output: [1,2,3,4,5,6,7,8,10,11,12,13,14,15,16,17,19,20,21,22,23,24,25,26,28,29,30,31,32,33,34,35,37,38,39,40,41,42,43,44,46,47,48,49,50,51,52,53]
+  outputItem:
+    material_type: slimefun
+    material: Tr_qlzplqj
+  tickRate: 10
+  status: 0
+  per: 1000
+Tr_zdrlc:
+  lateInit: false
+  item_group: Tr_czjjscjq
+  item:
+    name: '{#5e2895}&l自{#691bb6}&l动{#25b9bb}&l染{#df0c0c}&l料{#fffa66}&l厂'
+    lore:
+    - '&8⇨ &e⚡&7 1000 J 可存储'
+    - '&8⇨ &e⚡&7 200 J/s'
+    material_type: skull_base64
+    material: eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvODMzZGZhNjE3Y2E3NDQ2ZGEwOTlkMGRjZmM1NjgzNmQwZTUzOGM0OTJmNjA0Y2RkYjhiODgzNzU4YjY2MTFlOCJ9fX0=
+  capacity: 1000
+  per: 200
+  recipe_type: ENHANCED_CRAFTING_TABLE
+  recipe:
+    2:
+      material_type: slimefun
+      material: Tr_cjsmhhw
+    4:
+      material_type: mc
+      material: armor_stand
+    5:
+      material_type: slimefun
+      material: PRODUCE_COLLECTOR
+    6:
+      material_type: mc
+      material: shears
+    8:
+      material_type: slimefun
+      material: Tr_cjws
+  status: 0
+  tickRate: 2
+  output: [1,2,3,4,5,6,7,8,10,11,12,13,14,15,16,17,19,20,21,22,23,24,25,26,28,29,30,31,32,33,34,35,37,38,39,40,41,42,43,44,46,47,48,49,50,51,52,53]
+  outputs:
+    1:
+      material_type: mc
+      material: WHITE_DYE
+      amount: 4
+    2:
+      material_type: mc
+      material: LIGHT_GRAY_DYE
+      amount: 4
+    3:
+      material_type: mc
+      material: GRAY_DYE
+      amount: 4
+    4:
+      material_type: mc
+      material: BLACK_DYE
+      amount: 4
+    5:
+      material_type: mc
+      material: BROWN_DYE
+      amount: 4
+    6:
+      material_type: mc
+      material: RED_DYE
+      amount: 4
+    7:
+      material_type: mc
+      material: ORANGE_DYE
+      amount: 4
+    8:
+      material_type: mc
+      material: YELLOW_DYE
+      amount: 4
+    9:
+      material_type: mc
+      material: PINK_DYE
+      amount: 4
+    10:
+      material_type: mc
+      material: LIME_DYE
+      amount: 4
+    11:
+      material_type: mc
+      material: GREEN_DYE
+      amount: 4
+    12:
+      material_type: mc
+      material: CYAN_DYE
+      amount: 4
+    13:
+      material_type: mc
+      material: LIGHT_BLUE_DYE
+      amount: 4
+    14:
+      material_type: mc
+      material: BLUE_DYE
+      amount: 4
+    15:
+      material_type: mc
+      material: PURPLE_DYE
+      amount: 4
+    16:
+      material_type: mc
+      material: MAGENTA_DYE
+      amount: 4
+Tr_zdkj:
+  lateInit: false
+  item_group: Tr_czjjscjq
+  item:
+    name: '{#5e2895}&l自{#691bb6}&l动&7&l矿机'
+    lore:
+    - '&8⇨ &e⚡&7 10000 J 可存储'
+    - '&8⇨ &e⚡&7 500 J/s'
+    material_type: skull_base64
+    material: eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvOTI5ZmE4Y2Q4NGFjMTI1MDIxZDYyMDFhMTQ4YTllODYyYzBiNzcyYzQ4NDc3YjA2YzE5MTQ1YzRhNjczYWEyNCJ9fX0=
+  capacity: 10000
+  per: 500
+  recipe_type: ENHANCED_CRAFTING_TABLE
+  recipe:
+    2:
+      material_type: slimefun
+      material: Tr_cjsmhhw
+    4:
+      material_type: slimefun
+      material: PICKAXE_OF_THE_SEEKER
+    5:
+      material_type: mc
+      material: bee_spawn_egg
+    6:
+      material_type: slimefun
+      material: PICKAXE_OF_VEIN_MINING
+    8:
+      material_type: slimefun
+      material: Tr_cjnlhx
+  status: 0
+  tickRate: 2
+  output: [1,2,3,4,5,6,7,8,10,11,12,13,14,15,16,17,19,20,21,22,23,24,25,26,28,29,30,31,32,33,34,35,37,38,39,40,41,42,43,44,46,47,48,49,50,51,52,53]
+  outputs:
+    1:
+      material_type: mc
+      material: COAL
+      amount: 16
+    2:
+      material_type: mc
+      material: IRON_INGOT
+      amount: 16
+    3:
+      material_type: mc
+      material: COPPER_INGOT
+      amount: 16
+    4:
+      material_type: mc
+      material: GOLD_INGOT
+      amount: 16
+    5:
+      material_type: mc
+      material: REDSTONE
+      amount: 16
+    6:
+      material_type: mc
+      material: EMERALD
+      amount: 16
+    7:
+      material_type: mc
+      material: DIAMOND
+      amount: 16
+    8:
+      material_type: mc
+      material: LAPIS_LAZULI
+      amount: 16
+    9:
+      material_type: mc
+      material: QUARTZ
+      amount: 16
+    10:
+      material_type: mc
+      material: NETHERITE_INGOT
+      amount: 16
+    11:
+      material_type: slimefun
+      material: thorium
+      amount: 2
+      chance: 10
+Tr_zdxfq:
+  lateInit: false
+  item_group: Tr_czjjscjq
+  item:
+    name: '{#5e2895}&l自{#691bb6}&l动&7&l析粉器'
+    lore:
+    - '&8⇨ &e⚡&7 10000 J 可存储'
+    - '&8⇨ &e⚡&7 500 J/s'
+    material_type: skull_base64
+    material: eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvYmU5NzNjNGFlOTEyZTQ3ZjcxNGZkZjg3NmU1NmIwOGNkNzI3MjdjODM0ZTg4M2I5MjYzNTJiMTBkMGMyMGEwOSJ9fX0=
+  capacity: 10000
+  per: 500
+  recipe_type: ENHANCED_CRAFTING_TABLE
+  recipe:
+    1:
+      material_type: mc
+      material: gravel
+    2:
+      material_type: slimefun
+      material: Tr_cjsmhhw
+    3:
+      material_type: mc
+      material: gravel
+    4:
+      material_type: slimefun
+      material: ELECTRIC_GOLD_PAN
+    5:
+      material_type: slimefun
+      material: Tr_cjscjq
+    6:
+      material_type: slimefun
+      material: ELECTRIC_DUST_WASHER
+    7:
+      material_type: mc
+      material: gravel
+    8:
+      material_type: slimefun
+      material: Tr_cjnlhx
+    9:
+      material_type: mc
+      material: gravel
+  status: 0
+  tickRate: 2
+  output: [1,2,3,4,5,6,7,8,10,11,12,13,14,15,16,17,19,20,21,22,23,24,25,26,28,29,30,31,32,33,34,35,37,38,39,40,41,42,43,44,46,47,48,49,50,51,52,53]
+  outputs:
+    1:
+      material_type: slimefun
+      material: IRON_DUST
+      amount: 16
+    2:
+      material_type: slimefun
+      material: GOLD_DUST
+      amount: 16
+    3:
+      material_type: slimefun
+      material: COPPER_DUST
+      amount: 16
+    4:
+      material_type: slimefun
+      material: TIN_DUST
+      amount: 16
+    5:
+      material_type: slimefun
+      material: LEAD_DUST
+      amount: 16
+    6:
+      material_type: slimefun
+      material: SILVER_DUST
+      amount: 16
+    7:
+      material_type: slimefun
+      material: ALUMINUM_DUST
+      amount: 16
+    8:
+      material_type: slimefun
+      material: ZINC_DUST
+      amount: 16
+    9:
+      material_type: slimefun
+      material: MAGNESIUM_DUST
+      amount: 16
+Tr_zddzc:
+  lateInit: false
+  item_group: Tr_czjjscjq
+  item:
+    name: '{#5e2895}&l自{#691bb6}&l动&4&l锻造厂'
+    lore:
+    - '&8⇨ &e⚡&7 10000 J 可存储'
+    - '&8⇨ &e⚡&7 500 J/s'
+    material_type: skull_base64
+    material: eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvYWNlZTgzNjJlMDBkOTNiZjcwN2EwY2VhNDY5OTdhNjlkZWQ4MmY5MjQ5Zjk4OTIyNGM0MjYzMjJhNTM3NDU3ZiJ9fX0=
+  capacity: 10000
+  per: 500
+  recipe_type: ENHANCED_CRAFTING_TABLE
+  recipe:
+    1:
+      material_type: slimefun
+      material: ELECTRIC_INGOT_FACTORY
+    2:
+      material_type: slimefun
+      material: Tr_cjsmhhw
+    3:
+      material_type: slimefun
+      material: ELECTRIC_INGOT_FACTORY
+    4:
+      material_type: slimefun
+      material: ELECTRIC_INGOT_FACTORY
+    5:
+      material_type: slimefun
+      material: Tr_cjscjq
+    6:
+      material_type: slimefun
+      material: ELECTRIC_INGOT_FACTORY
+    7:
+      material_type: slimefun
+      material: ELECTRIC_INGOT_FACTORY
+    8:
+      material_type: slimefun
+      material: Tr_cjnlhx
+    9:
+      material_type: slimefun
+      material: ELECTRIC_INGOT_FACTORY
+  status: 0
+  tickRate: 1
+  output: [1,2,3,4,5,6,7,8,10,11,12,13,14,15,16,17,19,20,21,22,23,24,25,26,28,29,30,31,32,33,34,35,37,38,39,40,41,42,43,44,46,47,48,49,50,51,52,53]
+  outputs:
+    1:
+      material_type: mc
+      material: IRON_INGOT
+      amount: 8
+    2:
+      material_type: slimefun
+      material: GOLD_4K
+      amount: 8
+    3:
+      material_type: slimefun
+      material: COPPER_INGOT
+      amount: 8
+    4:
+      material_type: slimefun
+      material: TIN_INGOT
+      amount: 8
+    5:
+      material_type: slimefun
+      material: LEAD_INGOT
+      amount: 8
+    6:
+      material_type: slimefun
+      material: SILVER_INGOT
+      amount: 8
+    7:
+      material_type: slimefun
+      material: ALUMINUM_INGOT
+      amount: 8
+    8:
+      material_type: slimefun
+      material: ZINC_INGOT
+      amount: 8
+    9:
+      material_type: slimefun
+      material: MAGNESIUM_INGOT
+      amount: 8
+Tr_zdylc:
+  lateInit: false
+  item_group: Tr_czjjscjq
+  item:
+    name: '{#5e2895}&l自{#691bb6}&l动{#8a2828}&l冶炼厂'
+    lore:
+    - '&8⇨ &e⚡&7 50000 J 可存储'
+    - '&8⇨ &e⚡&7 5000 J/s'
+    material_type: skull_base64
+    material: eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvZDE0MGZkNDY4ZmNiYzk3MjZjNDllNzQwOTJlN2ViZDM0MzIzNDIxY2Q3MTVhODhiNDdlZGJhNmZmZGJhMTFiNCJ9fX0=
+  capacity: 50000
+  per: 5000
+  recipe_type: ENHANCED_CRAFTING_TABLE
+  recipe:
+    1:
+      material_type: slimefun
+      material: ANCIENT_RUNE_FIRE
+    2:
+      material_type: slimefun
+      material: Tr_cjsmhhw
+    3:
+      material_type: slimefun
+      material: ANCIENT_RUNE_FIRE
+    4:
+      material_type: slimefun
+      material: Tr_zdxfq
+    5:
+      material_type: slimefun
+      material: Tr_cjscjq
+    6:
+      material_type: slimefun
+      material: Tr_zddzc
+    7:
+      material_type: slimefun
+      material: Tr_zdkj
+    8:
+      material_type: slimefun
+      material: Tr_cjnlhx
+    9:
+      material_type: slimefun
+      material: Tr_cjzryhj
+  status: 0
+  tickRate: 1
+  output: [1,2,3,4,5,6,7,8,10,11,12,13,14,15,16,17,19,20,21,22,23,24,25,26,28,29,30,31,32,33,34,35,37,38,39,40,41,42,43,44,46,47,48,49,50,51,52,53]
+  outputs:
+    1:
+      material_type: slimefun
+      material: SYNTHETIC_SAPPHIRE
+      amount: 4
+    2:
+      material_type: slimefun
+      material: SYNTHETIC_DIAMOND
+      amount: 4
+    3:
+      material_type: slimefun
+      material: SYNTHETIC_EMERALD
+      amount: 4
+    4:
+      material_type: slimefun
+      material: STEEL_INGOT
+      amount: 4
+    5:
+      material_type: slimefun
+      material: DAMASCUS_STEEL_INGOT
+      amount: 4
+    6:
+      material_type: slimefun
+      material: DURALUMIN_INGOT
+      amount: 4
+    7:
+      material_type: slimefun
+      material: SOLDER_INGOT
+      amount: 4
+    8:
+      material_type: slimefun
+      material: NICKEL_INGOT
+      amount: 4
+    9:
+      material_type: slimefun
+      material: COBALT_INGOT
+      amount: 4
+    10:
+      material_type: slimefun
+      material: BILLON_INGOT
+      amount: 4
+    11:
+      material_type: slimefun
+      material: HARDENED_METAL_INGOT
+      amount: 4
+    12:
+      material_type: slimefun
+      material: REINFORCED_ALLOY_INGOT
+      amount: 4
+    13:
+      material_type: slimefun
+      material: BRASS_INGOT
+      amount: 4
+    14:
+      material_type: slimefun
+      material: CORINTHIAN_BRONZE_INGOT
+      amount: 4
+    15:
+      material_type: slimefun
+      material: GOLD_24K
+      amount: 4
+    16:
+      material_type: slimefun
+      material: GOLD_22K
+      amount: 4
+    17:
+      material_type: slimefun
+      material: GOLD_18K
+      amount: 4
+    18:
+      material_type: slimefun
+      material: GOLD_8K
+      amount: 4
+    19:
+      material_type: slimefun
+      material: ALUMINUM_BRASS_INGOT
+      amount: 4
+    20:
+      material_type: slimefun
+      material: ALUMINUM_BRONZE_INGOT
+      amount: 4
+    21:
+      material_type: slimefun
+      material: BRONZE_INGOT
+      amount: 4
+    22:
+      material_type: slimefun
+      material: REDSTONE_ALLOY
+      amount: 4
+    23:
+      material_type: slimefun
+      material: CARBONADO
+      amount: 4
+Tr_mgzjt:
+  lateInit: false
+  item_group: Tr_czjjscjq
+  item:
+    name: '{#D9BFF0}&l命{#B78FE4}&l轨{#FFE9A8}&l铸{#FFC64D}&l金{#D98F00}&l台'
+    lore:
+    - '{#cfcfcf}&l不{#b5b5b5}&l定{#9b9b9b}&l的{#D9BFF0}&l命{#B78FE4}&l轨'
+    - '&8⇨ &e⚡&7 10000 J 可存储'
+    - '&8⇨ &e⚡&7 500 J/s'
+    material_type: skull_base64
+    material: eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvZWEwN2RlNDQ0NGYyOTViZTA5ZWQxNTE4OGU5NmNlYTU2MjgwMTlkOTQ0ZjY3OGExMmQ4OGNmZTdjZDAwMTk2NyJ9fX0=
+  capacity: 10000
+  per: 500
+  recipe_type: ENHANCED_CRAFTING_TABLE
+  recipe:
+    1:
+      material_type: slimefun
+      material: GOLD_24K_BLOCK
+    2:
+      material_type: slimefun
+      material: Tr_txsj
+    3:
+      material_type: slimefun
+      material: GOLD_24K_BLOCK
+    5:
+      material_type: slimefun
+      material: Tr_cjscjq
+    8:
+      material_type: slimefun
+      material: Tr_zdylc
+  status: 0
+  tickRate: 24
+  output: [1,2,3,4,5,6,7,8,10,11,12,13,14,15,16,17,19,20,21,22,23,24,25,26,28,29,30,31,32,33,34,35,37,38,39,40,41,42,43,44,46,47,48,49,50,51,52,53]
+  chooseOne: false
+  outputs:
+    1:
+      material_type: slimefun
+      material: GOLD_4K
+      amount: 16
+    2:
+      material_type: slimefun
+      material: GOLD_6K
+      amount: 16
+    3:
+      material_type: slimefun
+      material: GOLD_8K
+      amount: 16
+    4:
+      material_type: slimefun
+      material: GOLD_10K
+      amount: 16
+    5:
+      material_type: slimefun
+      material: GOLD_12K
+      amount: 16
+    6:
+      material_type: slimefun
+      material: GOLD_14K
+      amount: 16
+    7:
+      material_type: slimefun
+      material: GOLD_16K
+      amount: 16
+    8:
+      material_type: slimefun
+      material: GOLD_18K
+      amount: 16
+    9:
+      material_type: slimefun
+      material: GOLD_20K
+      amount: 16
+    10:
+      material_type: slimefun
+      material: GOLD_22K
+      amount: 16
+    11:
+      material_type: slimefun
+      material: GOLD_24K
+      amount: 16
+Tr_czzddrc:
+  lateInit: false
+  item_group: Tr_czjjscjq
+  item:
+    name: '&c&l⚡&e&l自&a&l动&b&l电&d&l容&c&l厂'
+    lore:
+    - '&b&l电解万物，存储雷霆'
+    - '&7&l可以随机产出粘液科技原版电容'
+    - '&8⇨ &e⚡&7 10000 J 可存储'
+    - '&8⇨ &e⚡&7 500 J/s'
+    material_type: mc
+    material: lime_stained_glass
+  capacity: 10000
+  per: 500
+  recipe_type: ENHANCED_CRAFTING_TABLE
+  recipe:
+    2:
+      material_type: slimefun
+      material: Tr_cjsmhhw
+    4:
+      material_type: mc
+      material: armor_stand
+    5:
+      material_type: slimefun
+      material: ENERGY_REGULATOR
+    6:
+      material_type: slimefun
+      material: Tr_cjdgc
+    8:
+      material_type: slimefun
+      material: Tr_txsj
+  status: 0
+  tickRate: 2
+  output: [1,2,3,4,5,6,7,8,10,11,12,13,14,15,16,17,19,20,21,22,23,24,25,26,28,29,30,31,32,33,34,35,37,38,39,40,41,42,43,44,46,47,48,49,50,51,52,53]
+  chooseOne: true
+  outputs:
+    1:
+      material_type: slimefun
+      material: SMALL_CAPACITOR
+      amount: 1
+    2:
+      material_type: slimefun
+      material: MEDIUM_CAPACITOR
+      amount: 1
+    3:
+      material_type: slimefun
+      material: BIG_CAPACITOR
+      amount: 1
+    4:
+      material_type: slimefun
+      material: LARGE_CAPACITOR
+      amount: 1
+    5:
+      material_type: slimefun
+      material: CARBONADO_EDGED_CAPACITOR
+      amount: 1
+    6:
+      material_type: slimefun
+      material: ENERGIZED_CAPACITOR
+      amount: 1
+Tr_amzz:
+  lateInit: false
+  item_group: Tr_czjjscjq
+  item:
+    name: '{#6a00f4}&l奥{#9d00ff}&l密{#e040fb}&l织{#00e5ff}&l者'
+    lore:
+    - '{#2b00ff}&l星{#6a00f4}&l辰{#9d00ff}&l与{#d000ff}&l天{#ff2d55}&l穹{#ff6b35}&l为{#ffb627}&l你{#ffd166}&l敞{#ff9e00}&l开'
+    - '&8⇨ &e⚡&7 10000 J 可存储'
+    - '&8⇨ &e⚡&7 500 J/s'
+    material_type: skull_base64
+    material: eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvYjI3NjkyZTM3OWFiMTI5OTgyYzZhNmQ3ZjU0MzRjNDAwYmM1OGVjYjhlMjUwNDczNWM2MTU3NDE5MDA5YmE2MCJ9fX0=
+  capacity: 10000
+  per: 500
+  recipe_type: ENHANCED_CRAFTING_TABLE
+  recipe:
+    1:
+      material_type: mc
+      material: glass
+    2:
+      material_type: slimefun
+      material: Tr_yhs
+    3:
+      material_type: mc
+      material: glass
+    4:
+      material_type: slimefun
+      material: Tr_txsj
+    5:
+      material_type: mc
+      material: spyglass
+    6:
+      material_type: slimefun
+      material: Tr_txsj
+    7:
+      material_type: mc
+      material: obsidian
+    8:
+      material_type: slimefun
+      material: ESSENCE_OF_AFTERLIFE
+    9:
+      material_type: mc
+      material: obsidian
+  status: 0
+  tickRate: 12
+  output: [1,2,3,4,5,6,7,8,10,11,12,13,14,15,16,17,19,20,21,22,23,24,25,26,28,29,30,31,32,33,34,35,37,38,39,40,41,42,43,44,46,47,48,49,50,51,52,53]
+  outputs:
+    1:
+      material_type: slimefun
+      material: MAGIC_LUMP_1
+      amount: 4
+    2:
+      material_type: slimefun
+      material: MAGIC_LUMP_2
+      amount: 4
+    3:
+      material_type: slimefun
+      material: MAGIC_LUMP_3
+      amount: 4
+    4:
+      material_type: slimefun
+      material: ENDER_LUMP_1
+      amount: 4
+    5:
+      material_type: slimefun
+      material: ENDER_LUMP_2
+      amount: 4
+    6:
+      material_type: slimefun
+      material: ENDER_LUMP_3
+      amount: 4
+    7:
+      material_type: slimefun
+      material: MAGICAL_BOOK_COVER
+      amount: 4
+    8:
+      material_type: slimefun
+      material: MAGICAL_GLASS
+      amount: 4
+    9:
+      material_type: slimefun
+      material: LAVA_CRYSTAL
+      amount: 4
+    10:
+      material_type: slimefun
+      material: COMMON_TALISMAN
+      amount: 4
+    11:
+      material_type: slimefun
+      material: NECROTIC_SKULL
+      amount: 4
+    12:
+      material_type: slimefun
+      material: ESSENCE_OF_AFTERLIFE
+      amount: 4
+    13:
+      material_type: slimefun
+      material: SYNTHETIC_SHULKER_SHELL
+      amount: 4
+    14:
+      material_type: slimefun
+      material: ANCIENT_RUNE_AIR
+      amount: 4
+    15:
+      material_type: slimefun
+      material: ANCIENT_RUNE_EARTH
+      amount: 4
+    16:
+      material_type: slimefun
+      material: ANCIENT_RUNE_FIRE
+      amount: 4
+    17:
+      material_type: slimefun
+      material: ANCIENT_RUNE_WATER
+      amount: 4
+    18:
+      material_type: slimefun
+      material: ANCIENT_RUNE_ENDER
+      amount: 4
+    19:
+      material_type: slimefun
+      material: ANCIENT_RUNE_LIGHTNING
+      amount: 4
+    20:
+      material_type: slimefun
+      material: ANCIENT_RUNE_ENCHANTMENT
+      amount: 4
+    21:
+      material_type: slimefun
+      material: ANCIENT_RUNE_RAINBOW
+      amount: 4
+    22:
+      material_type: slimefun
+      material: ANCIENT_RUNE_SOULBOUND
+      amount: 4
+    23:
+      material_type: slimefun
+      material: ANCIENT_RUNE_VILLAGERS
+      amount: 4
+    24:
+      material_type: slimefun
+      material: BLANK_RUNE
+      amount: 4
+    25:
+      material_type: slimefun
+      material: FILLED_FLASK_OF_KNOWLEDGE
+      amount: 4
+Tr_dlzjbl:
+  lateInit: false
+  item_group: Tr_czjjscjq
+  item:
+    name: '{#00e5ff}&l等{#00b0ff}&l离{#2979ff}&l子{#00e5ff}&l聚{#80d8ff}&l变{#e0f7fa}&l炉'
+    lore:
+    - '{#00e5ff}&l磁约束环已启动'
+    - '{#2979ff}&l亿度等离子在你手中燃烧'
+    - '{#e0f7fa}&l将凡铁锻成星辰，将不可能聚变为可能'
+    - '&8⇨ &e⚡&7 10000 J 可存储'
+    - '&8⇨ &e⚡&7 1000 J/s'
+    material_type: skull_base64
+    material: eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvZmQ5ODMwMjMxNjY2YTk5NGVhODEyN2ExOWI5M2Y0NzNhZTc0MTI3YWUxMTM4OTI0ODQ5Yjk2NzI1MmE5N2EzOSJ9fX0=
+  capacity: 10000
+  per: 1000
+  recipe_type: ENHANCED_CRAFTING_TABLE
+  recipe:
+    1:
+      material_type: mc
+      material: iron_chain
+    2:
+      material_type: slimefun
+      material: Tr_yhs
+    3:
+      material_type: mc
+      material: tnt
+    4:
+      material_type: slimefun
+      material: Tr_txsj
+    5:
+      material_type: mc
+      material: smithing_table
+    6:
+      material_type: slimefun
+      material: Tr_txsj
+    7:
+      material_type: mc
+      material: iron_block
+    8:
+      material_type: slimefun
+      material: ADVANCED_CIRCUIT_BOARD
+    9:
+      material_type: mc
+      material: iron_block
+  status: 0
+  tickRate: 8
+  output: [1,2,3,4,5,6,7,8,10,11,12,13,14,15,16,17,19,20,21,22,23,24,25,26,28,29,30,31,32,33,34,35,37,38,39,40,41,42,43,44,46,47,48,49,50,51,52,53]
+  outputs:
+    1:
+      material_type: slimefun
+      material: BASIC_CIRCUIT_BOARD
+      amount: 8
+    2:
+      material_type: slimefun
+      material: ADVANCED_CIRCUIT_BOARD
+      amount: 8
+    3:
+      material_type: slimefun
+      material: BATTERY
+      amount: 8
+    4:
+      material_type: slimefun
+      material: STEEL_THRUSTER
+      amount: 8
+    5:
+      material_type: slimefun
+      material: POWER_CRYSTAL
+      amount: 8
+    6:
+      material_type: slimefun
+      material: SOLAR_PANEL
+      amount: 8
+    7:
+      material_type: slimefun
+      material: MAGNET
+      amount: 8
+    8:
+      material_type: slimefun
+      material: ELECTRO_MAGNET
+      amount: 8
+    9:
+      material_type: slimefun
+      material: ELECTRIC_MOTOR
+      amount: 8
+    10:
+      material_type: slimefun
+      material: HEATING_COIL
+      amount: 8
+    11:
+      material_type: slimefun
+      material: HARDENED_GLASS
+      amount: 8
+    12:
+      material_type: slimefun
+      material: COOLING_UNIT
+      amount: 8
+    13:
+      material_type: slimefun
+      material: WITHER_PROOF_OBSIDIAN
+      amount: 8
+    14:
+      material_type: slimefun
+      material: ANDROID_MEMORY_CORE
+      amount: 8
+    15:
+      material_type: slimefun
+      material: WITHER_PROOF_GLASS
+      amount: 8
+    16:
+      material_type: slimefun
+      material: NETHER_ICE_COOLANT_CELL
+      amount: 8
+    17:
+      material_type: slimefun
+      material: REACTOR_COLLANT_CELL
+      amount: 8
+Tr_nmjqrzpz:
+  lateInit: false
+  item_group: Tr_czjjscjq
+  item:
+    name: '{#7ff9ff}&l纳{#18d6ff}&l米{#0091ff}&l机{#0043ff}&l器{#00e5ff}&l人{#a5f3fc}&l装{#e0f7fa}&l配{#b3e5fc}&l站'
+    lore:
+    - '{#0091ff}&l分子级组装,震撼美味'
+    - '&8⇨ &e⚡&7 10000 J 可存储'
+    - '&8⇨ &e⚡&7 1500 J/s'
+    material_type: skull_base64
+    material: eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNjA5MDc5ODUxNmJhMGNkODc0ZDgwZDczZjJiY2Y5MmQ3MmIwZjMxMTJmZjk1NzY5MzdlODZmMzgyNzk5NWNhNSJ9fX0=
+  per: 1500
+  recipe_type: ENHANCED_CRAFTING_TABLE
+  recipe:
+    1:
+      material_type: slimefun
+      material: NETHERSTAR_REACTOR
+    2:
+      material_type: slimefun
+      material: Tr_yhs
+    3:
+      material_type: mc
+      material: crafter
+    4:
+      material_type: slimefun
+      material: Tr_txsj
+    5:
+      material_type: mc
+      material: piston
+    6:
+      material_type: slimefun
+      material: Tr_txsj
+    7:
+      material_type: mc
+      material: quartz_block
+    8:
+      material_type: slimefun
+      material: ADVANCED_CIRCUIT_BOARD
+    9:
+      material_type: mc
+      material: oak_button
+  status: 0
+  tickRate: 16
+  output: [1,2,3,4,5,6,7,8,10,11,12,13,14,15,16,17,19,20,21,22,23,24,25,26,28,29,30,31,32,33,34,35,37,38,39,40,41,42,43,44,46,47,48,49,50,51,52,53]
+  outputs:
+    1:
+      material_type: slimefun
+      material: ANDROID_INTERFACE_ITEMS
+      amount: 1
+    2:
+      material_type: slimefun
+      material: ANDROID_INTERFACE_FUEL
+      amount: 1
+    3:
+      material_type: slimefun
+      material: PROGRAMMABLE_ANDROID
+      amount: 1
+    4:
+      material_type: slimefun
+      material: PROGRAMMABLE_ANDROID_2
+      amount: 1
+    5:
+      material_type: slimefun
+      material: PROGRAMMABLE_ANDROID_3
+      amount: 1
+      chance: 80
+    6:
+      material_type: slimefun
+      material: PROGRAMMABLE_ANDROID_BUTCHER
+      amount: 1
+    7:
+      material_type: slimefun
+      material: PROGRAMMABLE_ANDROID_2_BUTCHER
+      amount: 1
+    8:
+      material_type: slimefun
+      material: PROGRAMMABLE_ANDROID_3_BUTCHER
+      amount: 1
+      chance: 60
+    9:
+      material_type: slimefun
+      material: PROGRAMMABLE_ANDROID_FARMER
+      amount: 1
+    10:
+      material_type: slimefun
+      material: PROGRAMMABLE_ANDROID_2_FARMER
+      amount: 1
+    11:
+      material_type: slimefun
+      material: PROGRAMMABLE_ANDROID_FISHERMAN
+      amount: 1
+    12:
+      material_type: slimefun
+      material: PROGRAMMABLE_ANDROID_2_FISHERMAN
+      amount: 1
+    13:
+      material_type: slimefun
+      material: PROGRAMMABLE_ANDROID_3_FISHERMAN
+      amount: 1
+      chance: 60
+    14:
+      material_type: slimefun
+      material: PROGRAMMABLE_ANDROID_MINER
+      amount: 1
+    15:
+      material_type: slimefun
+      material: PROGRAMMABLE_ANDROID_WOODCUTTER
+      amount: 1
+Tr_zdglsk:
+  lateInit: false
+  item_group: Tr_zzjq
+  item:
+    name: '&4&l自动{#a5f3fc}&l甘{#67e8f9}&l霖{#22d3ee}&l神{#0ea5e9}&l龛'
+    lore:
+    - '{#0091ff}&l全自动生产神晶喵'
+    - '&8⇨ &e⚡&7 1000 J 可存储'
+    - '&8⇨ &e⚡&7 100 J/s'
+    material_type: mc
+    material: yellow_glazed_terracotta
+  per: 100
+  recipe_type: TR_ZKHCT_TYPE
+  status: 0
+  tickRate: 1
+  output: [1,2,3,4,5,6,7,8,10,11,12,13,14,15,16,17,19,20,21,22,23,24,25,26,28,29,30,31,32,33,34,35,37,38,39,40,41,42,43,44,46,47,48,49,50,51,52,53]
+  outputs:
+    1:
+      material_type: slimefun
+      material: Tr_xpsj
+      amount: 8
+    2:
+      material_type: slimefun
+      material: Tr_zpsj
+      amount: 4
+    3:
+      material_type: slimefun
+      material: Tr_spsj
+      amount: 2
+      chance: 80
+    4:
+      material_type: slimefun
+      material: Tr_tssj
+      amount: 1
+      chance: 60
+

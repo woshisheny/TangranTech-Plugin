@@ -1,0 +1,14 @@
+name: TangranTech
+version: 1.0.0-standalone
+main: com.tangran.tangrantech.TangranTechPlugin
+api-version: '1.21'
+author: Tang_ran
+description: 糖然科技 —— 独立 Slimefun 附属（由 RSC 脚本版重构为原生 Java 加载）
+depend: [Slimefun]
+# softdepend 里这几个必须列上 —— 堆叠机的识别层用【反射】读它们：
+#   LogiTech            StorageType / RecipeSupporter.STACKMACHINE_LIST（存储物品与机器识别）
+#   NetworksExpansion   NetworkUtil / Keys.QUANTUM_STORAGE_INSTANCE（产物入网、量子存储）
+#   MagicExpansion      FishKeys / Fish$WeightRarity（生物发电机的鱼）
+# 反射探测是「失败一次就记住不可用」，若它们在本插件之后加载就会永久判为不可用；
+# 列进 softdepend 保证它们先启动。三者都不是硬依赖（没装时功能静默退化，不影响加载）。
+softdepend: [LiteXpansion, DynaTech, InfinityExpansion, LogiTech, NetworksExpansion, MagicExpansion]

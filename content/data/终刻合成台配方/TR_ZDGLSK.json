@@ -1,0 +1,195 @@
+{
+  "v": 1,
+  "result": {
+    "kind": "sf",
+    "id": "TR_ZDGLSK",
+    "amount": 1,
+    "name": "自动甘霖神龛"
+  },
+  "ingredients": [
+    {
+      "kind": "sf",
+      "id": "TR_GLSK",
+      "name": "甘霖神龛",
+      "slot": 0,
+      "amount": 1
+    },
+    {
+      "kind": "sf",
+      "id": "TR_CJNLHX",
+      "name": "初级能量核心",
+      "slot": 1,
+      "amount": 1
+    },
+    {
+      "kind": "sf",
+      "id": "TR_ZWXYP",
+      "name": "造物匣原片",
+      "slot": 2,
+      "amount": 1
+    },
+    {
+      "kind": "sf",
+      "id": "TR_ZWXYP",
+      "name": "造物匣原片",
+      "slot": 3,
+      "amount": 1
+    },
+    {
+      "kind": "sf",
+      "id": "TR_ZWXYP",
+      "name": "造物匣原片",
+      "slot": 4,
+      "amount": 1
+    },
+    {
+      "kind": "sf",
+      "id": "TR_CJNLHX",
+      "name": "初级能量核心",
+      "slot": 5,
+      "amount": 1
+    },
+    {
+      "kind": "sf",
+      "id": "TR_GLSK",
+      "name": "甘霖神龛",
+      "slot": 6,
+      "amount": 1
+    },
+    {
+      "kind": "sf",
+      "id": "TR_CJNLHX",
+      "name": "初级能量核心",
+      "slot": 11,
+      "amount": 1
+    },
+    {
+      "kind": "sf",
+      "id": "TR_ZWXYP",
+      "name": "造物匣原片",
+      "slot": 12,
+      "amount": 1
+    },
+    {
+      "kind": "sf",
+      "id": "TR_CJNLHX",
+      "name": "初级能量核心",
+      "slot": 13,
+      "amount": 1
+    },
+    {
+      "kind": "sf",
+      "id": "TR_TXSJ",
+      "name": "太虚枢机",
+      "slot": 20,
+      "amount": 1
+    },
+    {
+      "kind": "sf",
+      "id": "TR_CJNLHX",
+      "name": "初级能量核心",
+      "slot": 21,
+      "amount": 1
+    },
+    {
+      "kind": "sf",
+      "id": "TR_TXSJ",
+      "name": "太虚枢机",
+      "slot": 22,
+      "amount": 1
+    },
+    {
+      "kind": "sf",
+      "id": "TR_TXSJ",
+      "name": "太虚枢机",
+      "slot": 29,
+      "amount": 1
+    },
+    {
+      "kind": "sf",
+      "id": "TR_CJNLHX",
+      "name": "初级能量核心",
+      "slot": 30,
+      "amount": 1
+    },
+    {
+      "kind": "sf",
+      "id": "TR_TXSJ",
+      "name": "太虚枢机",
+      "slot": 31,
+      "amount": 1
+    },
+    {
+      "kind": "sf",
+      "id": "TR_CJNLHX",
+      "name": "初级能量核心",
+      "slot": 38,
+      "amount": 1
+    },
+    {
+      "kind": "sf",
+      "id": "TR_ZWDZ",
+      "name": "造物底座",
+      "slot": 39,
+      "amount": 1
+    },
+    {
+      "kind": "sf",
+      "id": "TR_CJNLHX",
+      "name": "初级能量核心",
+      "slot": 40,
+      "amount": 1
+    },
+    {
+      "kind": "sf",
+      "id": "TR_GLSK",
+      "name": "甘霖神龛",
+      "slot": 45,
+      "amount": 1
+    },
+    {
+      "kind": "sf",
+      "id": "TR_CJNLHX",
+      "name": "初级能量核心",
+      "slot": 46,
+      "amount": 1
+    },
+    {
+      "kind": "sf",
+      "id": "TR_ZWDZ",
+      "name": "造物底座",
+      "slot": 47,
+      "amount": 1
+    },
+    {
+      "kind": "sf",
+      "id": "TR_ZWDZ",
+      "name": "造物底座",
+      "slot": 48,
+      "amount": 1
+    },
+    {
+      "kind": "sf",
+      "id": "TR_ZWDZ",
+      "name": "造物底座",
+      "slot": 49,
+      "amount": 1
+    },
+    {
+      "kind": "sf",
+      "id": "TR_CJNLHX",
+      "name": "初级能量核心",
+      "slot": 50,
+      "amount": 1
+    },
+    {
+      "kind": "sf",
+      "id": "TR_GLSK",
+      "name": "甘霖神龛",
+      "slot": 51,
+      "amount": 1
+    }
+  ],
+  "savedBy": "Tang_ran",
+  "savedAt": 1791687229800
+}

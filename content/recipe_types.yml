@@ -1,0 +1,95 @@
+TR_JCWZ_RECIPE_TYPE:
+  name: "&f&l在哪获取这诱人的糖?"
+  material: BOOK
+TR_TJ_RECIPE_TYPE:
+  name: "&f&l右键消耗&b&l糖然牌基础物质&f&l概率获取"
+  material: SUGAR
+TR_YTC_RECIPE_TYPE:
+  name: "&d&l冶糖厂"
+  material: BLAST_FURNACE
+TR_CTS_RECIPE_TYPE:
+  name: "&f&l向水中丢入4n+1/4n个{#4dc9ff}&l糖渣&f&l与n/n+1个{#c1fafb}&l万用瓶&f&l获取n瓶{#78a1f2}&l粗糖水"
+  material: WATER_BUCKET
+TR_CJHNSCYQ_RECIPE_TYPE:
+  name: "{#8dddd8}&l初{#6fbeb9}&l级{#685a5a}&l黑奴{#8d1c1c}&l生产园区"
+  material_type: skull_base64
+  material: eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvMWFkNTQyNGQ5OTAzOTUzODQzNTI2YTdjNDE2ODY2ZTdkNzk1MDFjODhjZTdjZGFiZWVlNTI4NGVhMzlmIn19fQ==
+TR_ZNQ_RECIPE_TYPE:
+  name: "{#f9a35d}&l注能器"
+  material: daylight_detector
+TR_QLZPLQJ_RECIPE_TYPE:
+  name: "&f&l与彰学风赛跑，跑赢了就给你了"
+  material: leather_boots
+TR_CZJT_RECIPE_TYPE:
+  name: "&f&l通过{#8dddd8}&l初{#6fbeb9}&l章{#c52b2b}&l祭{#cc0000}&l坛&f&l向&e&l神明&4&l祭献&f&l获取"
+  material_type: skull_base64
+  material: eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvOWQ2YmRkMDdhYmUzZjM5ODcyMGU1ZjAxMDY0OGMyYzE5NGEyYmEwZjVlZjNlMjcwMTNiMDY3MDMzNmViNGYzYyJ9fX0=
+TR_MGXX_RECIPE_TYPE:
+  name: "&f&l通过{#D9BFF0}&l命{#B78FE4}&l轨{#9661D6}&l星{#7A42C0}&l屑&f&l获取"
+  material_type: mc
+  material: knowledge_book
+TR_HQ_RECIPE_TYPE:
+  name: "&f&l通过{#b8f2e6}&l哈{#8ad4e0}&l气{#5fb2d8}&l收{#3f8ec4}&l集{#2a5fa8}&l器&f&l获取"
+  material_type: mc
+  material: glass_bottle
+TR_MW_RECIPE_TYPE:
+  name: "&f&l通过{#4f4559}&l猫王 &d&l捕捉器&f&l捕捉"
+  material_type: mc
+  material: iron_bars
+TR_TTHJ_RECIPE_TYPE:
+  name: "&f&l通过 {#4A0E1F}&l糖{#8C1C3A}&l天{#C86B85}&l画{#E8F1F2}&l戟 &c&l击杀&8&l生物&f&l掉落"
+  material_type: mc
+  material: redstone
+TR_AKXZJ_RECIPE_TYPE:
+  name: "&f&l通过 {#b388ff}&l阿{#7c4dff}&l卡{#651fff}&l夏{#00e5ff}&l织{#18ffff}&l机 &f&l制作"
+  material_type: mc
+  material: fletching_table
+TR_YCKY_RECIPE_TYPE:
+  name: "&f&l通过完成 {#b22e82}&l原{#49006b}&l初{#6856f0}&l刻{#304673}&l印 &f&l发布的任务获取"
+  material_type: mc
+  material: writable_book
+TR_YGYLS_TYPE:
+  name: "{#3d0c6e}&l因{#7b2ff7}&l果{#c026d3}&l衍{#00e5ff}&l灵{#e0f7fa}&l梭"
+  material_type: skull_base64
+  material: eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvODAzM2ZlMmY4ZGYwMWE2YjE1NzFkODU1YWQ1MjhiYzk3YzdjYTEyMDFmNzIxMzE0NjBlZTI1YmI2NjhhMjhjMSJ9fX0=
+  bind-to-multiblock: TR_YGYLS
+TR_FSDP:
+  name: "&f&l于 {#d4f1f9}&l浮{#a8e6f0}&l生{#7fd4e6}&l当{#5bb8d8}&l铺 &f&l购买"
+  material_type: mc
+  material: emerald
+TR_LP:
+  name: "&f&l于 {#e8f6ff}&l储{#b8e3ff}&l物{#7fc9e8}&l空{#4aa3c7}&l间{#87dea5}&l灵{#8dde87}&l圃 &f&l种植收获"
+  material_type: skull_hash
+  material: eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvMTg0NzEyZWNiZjFjNmNlOWRlMTIzMGJmYTA1ODMxYWEzYzVkMGVlOWQxYmE1OWRlZWY3YTMxY2FmZDdkOGVmMyJ9fX0=
+TR_FDSZ:
+  name: "&f&l于 {#e8f6ff}&l储{#b8e3ff}&l物{#7fc9e8}&l空{#4aa3c7}&l间&d&l福地生珍 &f&l概率生成"
+  material_type: skull_hash
+  material: eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNzczYjM1NWM5MWJjYzQyMjA4OWQwM2Y1NDY5ODdlMWE3MWVlNzc1OWY0YzdkNTdlZDU5ODgyY2U4YmM2MTM3NCJ9fX0=
+TR_DY:
+  name: "&f&l于 {#c4b5fd}&l太{#a78bfa}&l虚{#8b5cf6}&l琉{#7c3aed}&l璃{#6d28d9}&l炉 &f&l炼制"
+  material_type: mc
+  material: cauldron
+
+TR_GL:
+  name: "&f&l于 {#a5f3fc}&l甘{#67e8f9}&l霖{#22d3ee}&l神{#0ea5e9}&l龛 &f&l凝聚"
+  material_type: mc
+  material: polished_diorite
+
+TR_HTY:
+  name: "&f&l于 {#f5d0fe}&l浑{#e879f9}&l天{#c026d3}&l仪 &f&l推演"
+  material_type: mc
+  material: spyglass
+
+TR_JBTR_RECIPE_TYPE:
+  name: "&f&l完成任务九获取"
+  material_type: mc
+  material: redstone
+TR_WFZZ_TYPE:
+  name: "&f&l无法制作"
+  material_type: skull_base64
+  material: eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvZjE4NGU0MjE1NjUyY2E4ZmE4MGRkMjJlZGE0NjRhZDVhMmE3ZGMyZGI0ODZkNmI4NjhjOGQ0ZjExNjVjNDIwMiJ9fX0=
+
+TR_ZKHCT_TYPE:
+  name: "&f&l通过{#e879f9}&l终{#c026d3}&l刻{#7c3aed}&l合{#6366f1}&l成{#0ea5e9}&l台&f&l合成"
+  material_type: mc
+  material: crafter

@@ -1,0 +1,199 @@
+package com.tangran.tangrantech.util;
+
+import com.tangran.tangrantech.TT;
+import java.io.File;
+import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.util.Collections;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
+
+/**
+ * 附属数据路径的统一入口。
+ *
+ * <p>原 RSC 版把数据放在两个地方，本插件完全沿用同样的相对路径，保证老档不失效：</p>
+ * <ul>
+ *   <li>{@code addon_configs/糖然科技/**} —— <b>玩家数据</b>（丹方权限、异火权限、境界、任务、
+ *       储物空间、浮生当铺缓存、终刻合成台草稿…），按玩家名分文件；</li>
+ *   <li>{@code addons/糖然科技 TangranTech/**} —— <b>附属资源</b>（终刻合成台配方、语言文件），
+ *       管理员手工维护。</li>
+ * </ul>
+ *
+ * <p>两者都挂在插件数据目录（{@code plugins/TangranTech/}）之下。</p>
+ *
+ * <p>另外注意：jar 里 {@code data/**} 是<b>随插件发布</b>的初始资源
+ * （{@code data/终刻合成台配方/*.json}、{@code data/lang/zh_cn.json}），
+ * 与运行期磁盘目录是两回事 —— 需要「发布默认值 + 运行时覆盖」的场合，
+ * 请用 {@link #readBundledText(String)}。</p>
+ */
+public final class AddonPaths {
+
+    private AddonPaths() {}
+
+    /** 玩家数据根目录（相对插件数据目录）。 */
+    public static final String CONFIG_ROOT = "addon_configs/糖然科技";
+    /** 附属资源目录（相对插件数据目录）。 */
+    public static final String ADDON_ROOT = "addons/糖然科技 TangranTech";
+
+    /** 玩家数据子目录名。 */
+    public static final String DIR_DANFANG = "丹方权限";
+    public static final String DIR_YANHUO = "异火权限";
+    public static final String DIR_REALM = "境界";
+    public static final String DIR_TASKS = "任务";
+    public static final String DIR_STORAGE = "储物空间";
+    /** 天道证明目录（击败糖然后写入，终刻合成台的准入凭证）。 */
+    public static final String DIR_HEAVEN_PROOF = "天道证明";
+    /** 终刻合成台玩家存档目录（玩家数据侧）。 */
+    public static final String DIR_FINAL_CRAFT_SAVE = "终刻合成台";
+    /** 终刻合成台草稿目录（玩家数据侧，与编译器共用同一目录、不同文件名后缀）。 */
+    public static final String DIR_FINAL_CRAFT_DRAFT = "终刻合成台";
+    /** 终刻合成台配方目录（附属资源侧，主目录）。 */
+    public static final String DIR_FINAL_CRAFT_RECIPE = "终刻合成台配方";
+    /** 终刻合成台配方备用目录（附属资源侧，老档可能把配方落在这里）。 */
+    public static final String DIR_FINAL_CRAFT_RECIPE_ALT = "终刻合成台";
+
+    /** 插件数据目录；插件未初始化时返回 null。 */
+    public static File dataFolder() {
+        return TT.plugin == null ? null : TT.plugin.getDataFolder();
+    }
+
+    /** 取（并创建）玩家数据侧的子目录。 */
+    public static File configDir(String sub) {
+        return ensure(new File(dataFolder(), CONFIG_ROOT + "/" + sub));
+    }
+
+    /** 附属资源根目录（{@code addons/糖然科技 TangranTech}）。 */
+    public static File addonRoot() {
+        return ensure(new File(dataFolder(), ADDON_ROOT));
+    }
+
+    /** 取（并创建）附属资源侧的子目录。 */
+    public static File addonDir(String sub) {
+        return ensure(new File(dataFolder(), ADDON_ROOT + "/" + sub));
+    }
+
+    /** 终刻合成台配方目录（附属资源侧）。 */
+    public static File finalCraftRecipeDir() {
+        return addonDir(DIR_FINAL_CRAFT_RECIPE);
+    }
+
+    /** 终刻合成台配方备用目录（附属资源侧）。 */
+    public static File finalCraftRecipeAltDir() {
+        return addonDir(DIR_FINAL_CRAFT_RECIPE_ALT);
+    }
+
+    /** 终刻合成台草稿目录（玩家数据侧）。 */
+    public static File finalCraftDraftDir() {
+        return configDir(DIR_FINAL_CRAFT_DRAFT);
+    }
+
+    /** 终刻合成台玩家存档目录（玩家数据侧）。 */
+    public static File finalCraftSaveDir() {
+        return configDir(DIR_FINAL_CRAFT_SAVE);
+    }
+
+    /** 天道证明目录（玩家数据侧）。 */
+    public static File heavenProofDir() {
+        return configDir(DIR_HEAVEN_PROOF);
+    }
+
+    private static File ensure(File dir) {
+        if (dir != null && !dir.exists() && !dir.mkdirs()) {
+            TT.log("目录创建失败: " + dir.getAbsolutePath());
+        }
+        return dir;
+    }
+
+    // ------------------------------------------------------------------
+    // JSON 文件读写
+    // ------------------------------------------------------------------
+
+    /** 读一个 JSON 对象文件；不存在或损坏时返回 null。 */
+    public static Map<String, Object> readJson(File file) {
+        try {
+            if (file == null || !file.exists()) return null;
+            String text = new String(Files.readAllBytes(file.toPath()), StandardCharsets.UTF_8);
+            Map<String, Object> map = Json.parseObject(text);
+            return map.isEmpty() && !text.trim().startsWith("{") ? null : map;
+        } catch (Throwable t) {
+            TT.log("读 JSON 失败 " + (file == null ? "?" : file.getAbsolutePath()) + ": " + t);
+            return null;
+        }
+    }
+
+    /** 写一个 JSON 对象文件（2 空格缩进，与原脚本 {@code JSON.stringify(x, null, 2)} 一致）。 */
+    public static boolean writeJson(File file, Object data) {
+        try {
+            if (file == null) return false;
+            File parent = file.getParentFile();
+            if (parent != null && !parent.exists() && !parent.mkdirs()) {
+                TT.log("目录创建失败: " + parent.getAbsolutePath());
+                return false;
+            }
+            Files.write(file.toPath(),
+                    Collections.singletonList(Json.writePretty(data)),
+                    StandardCharsets.UTF_8);
+            return true;
+        } catch (IOException | RuntimeException e) {
+            TT.log("写 JSON 失败 " + (file == null ? "?" : file.getAbsolutePath()) + ": " + e);
+            return false;
+        }
+    }
+
+    // ------------------------------------------------------------------
+    // 随插件发布的资源
+    // ------------------------------------------------------------------
+
+    /**
+     * 读 jar 内 {@code data/<name>} 的文本内容（UTF-8）；不存在返回 null。
+     *
+     * <p>用于「随插件发布的默认配置」：运行时优先读磁盘目录，取不到再回落到这里。</p>
+     */
+    public static String readBundledText(String name) {
+        if (TT.plugin == null || name == null) return null;
+        try (java.io.InputStream in = TT.plugin.getResource("data/" + name)) {
+            if (in == null) return null;
+            return new String(in.readAllBytes(), StandardCharsets.UTF_8);
+        } catch (Throwable t) {
+            TT.log("读内置资源失败 data/" + name + ": " + t);
+            return null;
+        }
+    }
+
+    /** 列出 jar 内 {@code data/<dir>/} 下的资源文件名（不含目录前缀）。 */
+    public static List<String> listBundledFiles(String dir) {
+        List<String> out = new java.util.ArrayList<>();
+        if (TT.plugin == null || dir == null) return out;
+        try (java.io.InputStream root = TT.plugin.getResource("data/" + dir)) {
+            // JarURLConnection 不允许直接 list，改用 jar 条目枚举
+        } catch (Throwable ignored) {
+            // 下面走 jar 条目
+        }
+        try {
+            java.net.URL url = TT.plugin.getClass().getProtectionDomain().getCodeSource().getLocation();
+            File jar = new File(url.toURI());
+            if (!jar.isFile()) return out;
+            String prefix = "data/" + dir + "/";
+            try (java.util.jar.JarFile jf = new java.util.jar.JarFile(jar)) {
+                java.util.Enumeration<java.util.jar.JarEntry> en = jf.entries();
+                while (en.hasMoreElements()) {
+                    String entry = en.nextElement().getName();
+                    if (!entry.startsWith(prefix) || entry.equals(prefix)) continue;
+                    String rest = entry.substring(prefix.length());
+                    if (rest.isEmpty() || rest.contains("/")) continue;
+                    out.add(rest);
+                }
+            }
+        } catch (Throwable t) {
+            TT.log("枚举内置资源失败 data/" + dir + ": " + t);
+        }
+        return out;
+    }
+
+    /** 空的只读 JSON 对象，避免调用方到处判 null。 */
+    public static Map<String, Object> emptyJson() {
+        return new LinkedHashMap<>();
+    }
+}

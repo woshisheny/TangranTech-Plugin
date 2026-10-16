@@ -1,0 +1,2748 @@
+Tr_zzdh:
+  lateInit: false
+  item_group: Tr_shuoming
+  item:
+    name: "{#51d0ad}&l作者的话&f&l"
+    lore: 
+      - "&f&l本附属由&d&lTang_ran&f&l开发"
+      - "&4&l♥&e&l⭐&f&l怒zqx125,Zhuuuu_,katarina,mc888,Woodenzeroone,Nice_qt，ThisJester00提供宝贵意见&4&l♥"
+      - "&4&l♥&7&l大蛇&f&lbalugaq&e&l🍌&f&l提供技术支持&4&l♥"
+      - "&4&l♥&7&l感谢新世界服务器的大力支持!&4&l♥"
+    material_type: skull_hash
+    material: baf574f78dd9e2b53e9234d47ded217bae5b487e5c19f74b111b6b3f6b044e7b
+  recipe_type: NULL
+Tr_fssm:
+  lateInit: false
+  item_group: Tr_shuoming
+  item:
+    name: "{#51d0ad}&l附属说明&f&l"
+    lore: 
+      - "{#87b3ee}&l附属所需材料附属三步内必有解药"
+    material_type: mc
+    material: jigsaw
+  recipe_type: NULL
+Tr_洞天福地:
+  lateInit: false
+  item_group: Tr_cdtl
+  item:
+    material_type: skull_hash
+    material: eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNDUyOGVkNDU4MDI0MDBmNDY1YjVjNGUzYTZiN2E5ZjJiNmE1YjNkNDc4YjZmZDg0OTI1Y2M1ZDk4ODM5MWM3ZCJ9fX0=
+  recipe_type: NULL
+Tr_福地生珍:
+  lateInit: false
+  item_group: Tr_cdtl
+  item:
+    material_type: skull_hash
+    material: eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNzczYjM1NWM5MWJjYzQyMjA4OWQwM2Y1NDY5ODdlMWE3MWVlNzc1OWY0YzdkNTdlZDU5ODgyY2U4YmM2MTM3NCJ9fX0=
+Tr_灵圃:
+  lateInit: false
+  item_group: Tr_cdtl
+  item:
+    material_type: skull_hash
+    material: eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvMTg0NzEyZWNiZjFjNmNlOWRlMTIzMGJmYTA1ODMxYWEzYzVkMGVlOWQxYmE1OWRlZWY3YTMxY2FmZDdkOGVmMyJ9fX0=
+Tr_rz1:  
+  item_group: Tr_rz
+  item:
+    name: "{#b1f03d}&l日志&f&l1"
+    lore: 
+      - "&f&l2026.8.6更新"
+      - "&a&l加入糖然牌基础物质,糖精,初级糖之核心，糖渣"
+    material: paper
+  recipe_type: NULL
+Tr_rz2:
+  lateInit: false
+  item_group: Tr_rz
+  item:
+    name: "{#b1f03d}&l日志&f&l2"
+    lore: 
+      - "&f&l2026.8.7更新"
+      - "&a&l加入冶糖厂，万用瓶，粗糖水获取"
+    material: paper
+  recipe_type: NULL
+Tr_rz3:
+  lateInit: false
+  item_group: Tr_rz
+  item:
+    name: "{#b1f03d}&l日志&f&l3"
+    lore: 
+      - "&f&l2026.8.8更新"
+      - "&a&l加入初级黑奴生产园区，初级黑奴，初级生产机器"
+    material: paper
+  recipe_type: NULL
+Tr_rz4:
+  lateInit: false
+  item_group: Tr_rz
+  item:
+    name: "{#b1f03d}&l日志&f&l4"
+    lore: 
+      - "&f&l2026.8.9更新"
+      - "&a&l加入初级温室，初级自然演化机"
+    material: paper
+  recipe_type: NULL
+Tr_rz5:
+  lateInit: false
+  item_group: Tr_rz
+  item:
+    name: "{#b1f03d}&l日志&f&l5"
+    lore: 
+      - "&f&l2026.8.10更新"
+      - "&a&l加入初级树厂，初级花圃，初级珊瑚厂，初级灯光厂,初级能量核心·半成品，注能器,初级能量核心"
+    material: paper
+  recipe_type: NULL
+Tr_rz6:
+  lateInit: false
+  item_group: Tr_rz
+  item:
+    name: "{#b1f03d}&l日志&f&l6"
+    lore: 
+      - "&f&l2026.8.11更新"
+      - "&a&l加入彰学风召唤器，俏了滋牌冷却剂,初级冰库"
+      - "&7&l初级生产机器加入肉类"
+      - "&b&l对彰学风召唤器的脚本增加玩家退出清除禁锢的效果"
+      - "&b&l从而防止玩家召唤彰学风的瞬间退出，再次上号被永久禁锢"
+      - "&b&l若您通过别的方式被永久禁锢，请使用乱码科技的量子清除器打赢复活赛"
+    material: paper
+  recipe_type: NULL
+Tr_rz7:
+  lateInit: false
+  item_group: Tr_rz
+  item:
+    name: "{#b1f03d}&l日志&f&l7"
+    lore: 
+      - "&f&l2026.8.13更新"
+      - "&a&l加入初级核反应堆，初章祭坛，初级神明化合物，初级核转换器"
+    material: paper
+  recipe_type: NULL
+Tr_rz8:
+  lateInit: false
+  item_group: Tr_rz
+  item:
+    name: "{#b1f03d}&l日志&f&l8"
+    lore: 
+      - "&f&l2026.8.14更新"
+      - "&a&l加入说明，自动注能器，自动赛跑机，自动染料厂,&f&l本质轮椅的&a&l自动矿机"
+    material: paper
+  recipe_type: NULL
+Tr_rz9:
+  lateInit: false
+  item_group: Tr_rz
+  item:
+    name: "{#b1f03d}&l日志&f&l9"
+    lore: 
+      - "&f&l2026.8.15更新"
+      - "&f&l更多轮椅来袭:&a&l自动析粉器，自动锻造厂，自动冶炼厂&f&l 加入&a&l命轨星屑，太虚枢机，命轨铸金台"
+      - "&f&l为&7&l'{#8dddd8}&l初{#6fbeb9}&l级&f&l生产机器&7&l'&f&l增添配方"
+    material: paper
+  recipe_type: NULL
+Tr_rz10:
+  lateInit: false
+  item_group: Tr_rz
+  item:
+    name: "{#b1f03d}&l日志&f&l10"
+    lore: 
+      - "&f&l2026.8.16更新"
+      - "&d&l加入老吴召唤器，哈气收集器，哈气,猫王捕捉器，猫王，自动哈气机"
+    material: bamboo_hanging_sign
+  recipe_type: NULL
+Tr_rz11:
+  lateInit: false
+  item_group: Tr_rz
+  item:
+    name: "{#b1f03d}&l日志&f&l11"
+    lore: 
+      - "&f&l2026.8.17更新"
+      - "&d&l加入致密哈气，哈基仙，造物匣原片，深渊血肉熔炉，息壤蕴育熔炉，造物匣系列"
+    material: bamboo_hanging_sign
+  recipe_type: NULL
+Tr_rz12:
+  lateInit: false
+  item_group: Tr_rz
+  item:
+    name: "{#b1f03d}&l日志&f&l12"
+    lore: 
+      - "&f&l2026.8.18更新"
+      - "&d&l加入致死量全糖水，糖天画戟，余恨砂，补丁机器"
+    material: bamboo_hanging_sign
+  recipe_type: NULL
+Tr_rz13:
+  lateInit: false
+  item_group: Tr_rz
+  item:
+    name: "{#b1f03d}&l日志&f&l13"
+    lore: 
+      - "&f&l2026.8.20更新"
+      - "&d&l加入自动电容厂，奥秘织者,等离子聚变炉,纳米机器人装配站"
+    material: bamboo_hanging_sign
+  recipe_type: NULL
+Tr_rz14:
+  lateInit: false
+  item_group: Tr_rz
+  item:
+    name: "{#b1f03d}&l日志&f&l14"
+    lore: 
+      - "&f&l2026.8.21更新"
+      - "&d&l加入原初刻印，阿卡夏织机，九种元素，九色琉璃石,元素祭器，因果衍灵梭，问天玉碟，浮生当铺,道源货币"
+    material: bamboo_hanging_sign
+  recipe_type: NULL
+Tr_rz15:
+  lateInit: false
+  item_group: Tr_rz
+  item:
+    name: "{#b1f03d}&l日志&f&l15"
+    lore: 
+      - "&f&l2026.8.22更新"
+      - "&d&l加入储物空间开辟石，储物空间，洞天福地，福地生珍,16种灵植和果实，功德货币，鸿蒙紫气，灵圃，聚灵散"
+    material: bamboo_hanging_sign
+  recipe_type: NULL
+Tr_rz16:
+  lateInit: false
+  item_group: Tr_rz
+  item:
+    name: "{#b1f03d}&l日志&f&l16"
+    lore: 
+      - "&f&l2026.8.23更新"
+      - "&d&l修改福地生珍，加入20种新材料，福地生珍刷新券，更新问天玉碟兑换道源清单与浮生当铺商品，增添九种异火,控火道具"
+    material: bamboo_hanging_sign
+  recipe_type: NULL
+Tr_rz17:
+  lateInit: false
+  item_group: Tr_rz
+  item:
+    name: "{#b1f03d}&l日志&f&l17"
+    lore: 
+      - "&f&l2026.8.26更新"
+      - "&d&l加入9种丹药与9种丹方，太虚琉璃炉,自动炼丹券,镇炉珠"
+    material: bamboo_hanging_sign
+  recipe_type: NULL
+Tr_rz18:
+  lateInit: false
+  item_group: Tr_rz
+  item:
+    name: "{#b1f03d}&l日志&f&l18"
+    lore: 
+      - "&f&l2026.8.27更新"
+      - "&d&l加入境界，修复注能器"
+    material: bamboo_hanging_sign
+  recipe_type: NULL
+Tr_rz19:
+  lateInit: false
+  item_group: Tr_rz
+  item:
+    name: "{#b1f03d}&l日志&f&l19"
+    lore: 
+      - "&f&l2026.8.29更新"
+      - "&d&l加入4种神晶,甘霖神龛，命轨织机"
+    material: name_tag
+  recipe_type: NULL
+Tr_rz20:
+  lateInit: false
+  item_group: Tr_rz
+  item:
+    name: "{#b1f03d}&l日志&f&l20"
+    lore: 
+      - "&f&l2026.8.30更新"
+      - "&d&l加入宝库模拟器，息壤蕴育熔炉增添新输出配方，浮生当铺原版类大更新"
+    material: name_tag
+  recipe_type: NULL
+Tr_rz21:
+  lateInit: false
+  item_group: Tr_rz
+  item:
+    name: "{#b1f03d}&l日志&f&l21"
+    lore: 
+      - "&f&l2026.9.27更新"
+      - "&f&l我糖汉三又回来更史啦！"      
+      - "&d&l修复问天玉碟兑换道源出现的神秘特性，修改造物匣配方，调整部分数值"
+      - "&d&l加入浮生石&7&l(快捷打开浮生当铺)"
+      - "&d&l加入纳界袋&7&l(快捷打开储物空间)"
+      - "&d&l修改灵圃的操作机制，比德芙丝滑~" 
+      - "&d&l加入任务与升维" 
+      - "&d&l加入大型结构填充棒" 
+      - "&d&l加入浑天仪，加入沌、萃、材" 
+    material: name_tag
+  recipe_type: NULL
+Tr_rz22:
+  lateInit: false
+  item_group: Tr_rz
+  item:
+    name: "{#b1f03d}&l日志&f&l22"
+    lore: 
+      - "&f&l2026.9.30~2026.10.5更新"
+      - "&d&l加入中章装备与中章管理员物品，加入BOSS战,加入终刻合成台，加入糖心"
+      - "&b&l双子护法就是纯阴，硬是打了15遍"
+    material: name_tag
+  recipe_type: NULL
+Tr_rz23:
+  lateInit: false
+  item_group: Tr_rz
+  item:
+    name: "{#b1f03d}&l日志&f&l23"
+    lore: 
+      - "&f&l2026.10.10~10.11更新"
+      - "&d&l中章--境界查看--属性开关加入糖之力关闭"
+      - "&d&l下调双子挑战的难度，破法弓购买难度大幅度降低，并修复了事件监听叠加问题"
+      - "&d&l增强戮仙剑的机动性"
+      - "&d&l修复原初刻印等显示名兜底产生的bug"
+      - "&d&lBOSS战道具位置更明显，修复生命甘露失效的问题"
+      - "&d&lBOSS战场地中央最上方屏障替换为基岩，使用新道具挑战区域清除器右键基岩可以清除该场地"
+      - "&d&l堆叠机尚未完工喵"
+    material: name_tag
+  recipe_type: NULL
+Tr_sugar:
+  lateInit: false
+  item_group: Tr_czcl
+  item:
+    name: "&b&l糖然牌基础物质"
+    lore: 
+      - "&6香气扑鼻?右键赤一口看看！&f(获取饱和效果)"
+      - "&4吃10个必然获取糖精"
+    material: SUGAR
+  recipe_type: TR_JCWZ_RECIPE_TYPE
+  script: 糖精获取
+Tr_zwf:
+  item_group: Tr_jcwzhq
+  item:
+    name: ' '
+    lore:
+    material_type: mc
+    material: glass_pane
+    amount: 1
+  placeable: false
+  recipe_type: NULL
+Tr_Tj:
+  placeable: false
+  lateInit: false
+  item_group: Tr_czcl
+  item:
+    glow: true
+    material_type: skull_hash
+    material: baf574f78dd9e2b53e9234d47ded217bae5b487e5c19f74b111b6b3f6b044e7b
+    name: "{#f000bc}&l糖精"
+    lore: 
+      - "&f出来了，这下舒坦了"
+  recipe_type: TR_TJ_RECIPE_TYPE
+Tr_cjtzhx:
+  lateInit: false
+  item_group: Tr_czcl
+  item:
+    glow: true
+    material_type: mc
+    material: amethyst_shard
+    name: "{#f000bc}&l初级糖之核心"
+    lore: 
+      - "{#c741ec}散发着些许光泽"
+  recipe_type: TR_YTC_RECIPE_TYPE
+Tr_tz:
+  lateInit: false
+  item_group: Tr_czcl
+  item:
+    glow: true
+    material_type: mc
+    material: gunpowder
+    name: "{#4dc9ff}&l糖渣"
+    lore: 
+      - "{#741706}燃尽了"
+  recipe_type: TR_YTC_RECIPE_TYPE
+  script: 粗糖水获取
+Tr_bottle:
+  lateInit: false
+  item_group: Tr_czcl
+  item:
+    glow: true
+    material_type: mc
+    material: glass_bottle
+    name: "{#c1fafb}&l万用瓶"
+    lore: 
+      - "{#4e6e6e}有点神秘"
+  recipe_type: ENHANCED_CRAFTING_TABLE
+  recipe:
+    2:
+      material_type: mc
+      material: glass_pane
+    4:
+      material_type: slimefun
+      material: iron_dust
+    5:
+      material_type: slimefun
+      material: carbon
+    6:
+      material_type: slimefun
+      material: iron_dust
+    7:
+      material_type: mc
+      material: glass
+    8:
+      material_type: mc
+      material: glass
+    9:
+      material_type: mc
+      material: glass
+  script: 粗糖水获取
+Tr_cts:
+  lateInit: false
+  item_group: Tr_czcl
+  item:
+    glow: true
+    material_type: mc
+    material: potion
+    name: "{#78a1f2}&l粗糖水"
+    lore: 
+      - "{#4dc9ff}&l糖渣&f&l的新生"
+  recipe_type: TR_CTS_RECIPE_TYPE
+Tr_cjhn:
+  lateInit: false
+  item_group: Tr_czscjq
+  placeable: false
+  item:
+    glow: false
+    material_type: skull_hash
+    material: 75a9e8ee9361c99255df509db11d1a464a1c6f2f6e5c51d8cad86e3892d38e9a
+    name: "{#8dddd8}&l初{#6fbeb9}&l级{#685a5a}&l黑奴"
+    lore: 
+      - "{#a152a3}&l开始严肃手搓"
+  recipe_type: TR_CJHNSCYQ_RECIPE_TYPE
+  recipe:
+    1:
+      material_type: mc
+      material: cooked_chicken
+    2:
+      material_type: mc
+      material: wooden_pickaxe
+    3:
+      material_type: mc
+      material: armor_stand
+    4:
+      material_type: mc
+      material: wooden_axe
+    5:
+      material_type: slimefun
+      material: Tr_cjtzhx
+    6:
+      material_type: mc
+      material: wooden_shovel
+    7:
+      material_type: slimefun
+      material: Tr_cts
+    8:
+      material_type: mc
+      material: wooden_hoe
+    9:
+      material_type: slimefun
+      material: grappling_hook
+Tr_cjnlhx_bcp:
+  lateInit: false
+  item_group: Tr_czcl
+  placeable: false
+  item:
+    glow: false
+    material_type: skull_base64
+    material: eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvZDdlM2I5OTg5ODIxMmZiOGVjZGVhYWNlZjk2YzA1MTE1Mzg1NWUyOGZkZjA3ODdkYTY0OTU1NTNiMjNiYzljIn19fQ==
+    name: "{#8dddd8}&l初{#6fbeb9}&l级{#5c3db3}&l能量核心&f&l·{#a30000}&l半成品"
+    lore: 
+      - "{#ff7b00}&l缺少能量的屑核心"
+  recipe_type: ENHANCED_CRAFTING_TABLE
+  recipe:
+    1:
+      material_type: mc
+      material: jack_o_lantern
+    2:
+      material_type: mc
+      material: lantern
+    3:
+      material_type: mc
+      material: sea_lantern
+    4:
+      material_type: mc
+      material: glowstone
+    5:
+      material_type: slimefun
+      material: Tr_cjtzhx
+    6:
+      material_type: mc
+      material: shroomlight
+    7:
+      material_type: mc
+      material: ochre_froglight
+    8:
+      material_type: mc
+      material: verdant_froglight
+    9:
+      material_type: mc
+      material: pearlescent_froglight
+Tr_cjnlhx:
+  lateInit: false
+  item_group: Tr_czcl
+  placeable: false
+  item:
+    glow: false
+    material_type: skull_base64
+    material: eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvYjUzZTBiOTNlMmNmZDdjZWM4NDg2NzQyMTQ0OGJmMzNiMDJiNWY2ZTIyYzdjNGQzOWI3ODA1NWMwZTgzZTE4MCJ9fX0=
+    name: "{#8dddd8}&l初{#6fbeb9}&l级{#5c3db3}&l能量核心"
+    lore: 
+      - "{#ff7b00}&l要溢出了!"
+  recipe_type: TR_ZNQ_RECIPE_TYPE
+  recipe:
+    5:
+      material_type: slimefun
+      material: Tr_cjnlhx_bcp
+Tr_zxf:
+  lateInit: false
+  item_group: Tr_czcl
+  item:
+    glow: true
+    material_type: mc
+    material: snow_golem_spawn_egg
+    name: "&f&l彰学风&7 召唤器"
+    lore: 
+      - "&b&l励志的雪傀儡，不断追赶风速"
+      - "{#800990}他说紫色很有韵味"
+      - "{#f080ff}&l俏了滋牌冷却剂&f&l就在这里，想要就赛跑吧！"
+      - "&e&l“或许我无法战胜服用&f&l魔法糖&e&l的你？”"
+      - "&7&l(该物品存在2秒冷却)"
+  recipe_type: ENHANCED_CRAFTING_TABLE
+  recipe:
+    2:
+      material_type: mc
+      material: purple_dye
+    5:
+      material_type: mc
+      material: snowball
+    8:
+      material_type: mc
+      material: stick
+  script: 俏了滋牌冷却剂获取
+Tr_qlzplqj:
+  lateInit: false
+  placeable: false
+  item_group: Tr_czcl
+  item:
+    glow: true
+    material_type: skull_base64
+    material: eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNThmYWMxMzlmNDkzZmM2MTNjZjQwZWRkMTUzMjRlMWZhYTJkOTZmZjI2YzFkNDZlNmJlYWNmOTZmNDI1Y2FhNiJ9fX0=
+    name: "{#f080ff}&l俏了滋牌冷却剂"
+    lore: 
+      - "{#277fa5}&l有被糖到吗?"
+  recipe_type: TR_QLZPLQJ_RECIPE_TYPE
+  recipe:
+    5:
+      material_type: slimefun
+      material: Tr_zxf
+Tr_cjsmhhw:
+  lateInit: false
+  placeable: false
+  item_group: Tr_czjjcl
+  item:
+    glow: true
+    material_type: skull_base64
+    material: eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNGU0MjM1NzM5OGQ0ODkzZTJhYWM2NjFiNzAxMzI2ZmU0YTBjMGE4MzE2NGJmNDYwNTkyZTNhMDI2OTZjYTUyZCJ9fX0=
+    name: "{#8dddd8}&l初{#6fbeb9}&l级{#ff5555}&l神{#ffaa00}&l明{#00e676}&l化{#00bcd4}&l合{#e040fb}&l物"
+    lore: 
+      - "&7&l祭献所得神明的垂青"
+      - "&f&l即使是{#8dddd8}&l初{#6fbeb9}&l级&f&l的{#ff5555}&l神{#ffaa00}&l明{#00e676}&l化{#00bcd4}&l合{#e040fb}&l物&f&l也具有不可思议的力量"
+  recipe_type: TR_CZJT_RECIPE_TYPE
+  recipe:
+    5:
+      material_type: slimefun
+      material: TR_CZJT
+Tr_mgxx:
+  lateInit: false
+  placeable: false
+  item_group: Tr_czjjcl
+  item:
+    glow: true
+    material_type: skull_base64
+    material: eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvMjVkMTc4N2MxNjRmYjg3NzljODAxOWQ2YWRiNDYwYTAzMDUyNGFhZmEwNGZiZjBjYmNiYzUzZTYzYTQ1YWU4ZCJ9fX0=
+    name: "{#D9BFF0}&l命{#B78FE4}&l轨{#9661D6}&l星{#7A42C0}&l屑"
+    lore: 
+      - "&b&l60%概率获得任意一个原版物品，15%概率获得{#7c7c85}&l太{#3a3a42}&l虚{#cfeeff}&l枢{#9ed4f0}&l机&b&l,25%轮空"
+      - "&7&l(该物品存在5秒冷却,优先消耗背包内部该物品)"
+      - "&8&l15抽保底！"
+  recipe_type: ENHANCED_CRAFTING_TABLE
+  recipe:
+    1:
+      material_type: mc
+      material: purpur_block
+    2:
+      material_type: mc
+      material: red_nether_bricks
+    3:
+      material_type: mc
+      material: suspicious_sand
+    4:
+      material_type: mc
+      material: polished_andesite
+    5:
+      material_type: slimefun
+      material: Tr_cjsmhhw
+    6:
+      material_type: mc
+      material: amethyst_block
+    7:
+      material_type: mc
+      material: waxed_weathered_cut_copper
+    8:
+      material_type: mc
+      material: ancient_debris
+    9:
+      material_type: mc
+      material: nether_gold_ore
+  script: 太虚枢机获取
+Tr_txsj:
+  lateInit: false
+  placeable: false
+  item_group: Tr_czjjcl
+  item:
+    glow: true
+    material_type: skull_base64
+    material: eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvZDk1Nzg0ZDUxOGY2MDFkNjJkYjI4OWRmZGY5ZjgwNTk1ZDJmYWZjYTc2MDcxMmViOTI3OGFmZTM3ODQwODJkNyJ9fX0=
+    name: "{#7c7c85}&l太{#3a3a42}&l虚{#cfeeff}&l枢{#9ed4f0}&l机"
+    lore: 
+      - "{#cfcfcf}&l充{#b5b5b5}&l满{#9b9b9b}&l不{#828282}&l确{#6b6b6b}&l定{#555555}&l性"
+  recipe_type: TR_MGXX_RECIPE_TYPE
+  recipe:
+    5:
+      material_type: slimefun
+      material: Tr_mgxx
+Tr_lw:
+  lateInit: false
+  item_group: Tr_czjjcl
+  item:
+    glow: true
+    material_type: mc
+    material: ocelot_spawn_egg
+    name: "&4&l老吴&7 召唤器"
+    lore: 
+      - "&f&l召唤一只&b&l温顺的小猫咪?"
+      - "&a&l但如果同时存在俩只..."
+      - "&f&l胜者组会继续哈气，直至决出{#4f4559}&l猫王"
+      - "&l我去不早说&7&l还有第二关?"
+  recipe_type: ENHANCED_CRAFTING_TABLE
+  recipe:
+    2:
+      material_type: slimefun
+      material: chicken_jerky
+    5:
+      material_type: mc
+      material: string
+    8:
+      material_type: mc
+      material: egg
+  script: 老吴召唤器
+Tr_hq:
+  lateInit: false
+  placeable: false
+  item_group: Tr_czjjcl
+  item:
+    glow: true
+    material_type: skull_base64
+    material: eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvZTM2ODAyMTY1OGJmYzIxY2NjNDRjZjExZTQwNThmZDE3ZjMzNWMyNmE4MjY1ZGQ4NzBkMTkyNGExYThkNmQ2NSJ9fX0=
+    name: "{#b8f2e6}&l哈{#8ad4e0}&l气"
+    lore: 
+      - "&4&l老吴~老吴!"
+  recipe_type: TR_HQ_RECIPE_TYPE
+  recipe:
+    5:
+      material_type: slimefun
+      material: Tr_hqsjq
+Tr_mwbzq:
+  lateInit: false
+  item_group: Tr_czdj
+  item:
+    glow: true
+    material_type: mc
+    material: lead
+    name: "{#4f4559}&l猫王 &d&l捕捉器"
+    lore: 
+      - "&f&l这是一只&b&l温顺&f&l的{#4f4559}&l猫 &f&l你敢和它对视吗"
+  recipe_type: ENHANCED_CRAFTING_TABLE
+  recipe:
+    1:
+      material_type: mc
+      material: string
+    2:
+      material_type: mc
+      material: string
+    3:
+      material_type: mc
+      material: string
+    4:
+      material_type: mc
+      material: string
+    5:
+      material_type: mc
+      material: tropical_fish
+    6:
+      material_type: mc
+      material: string
+    7:
+      material_type: mc
+      material: string
+    8:
+      material_type: mc
+      material: string
+    9:
+      material_type: mc
+      material: string
+Tr_mw:
+  lateInit: false
+  placeable: false
+  item_group: Tr_czjjcl
+  item:
+    glow: true
+    material_type: skull_base64
+    material: eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvOTFlN2Y4OTI2ODM3NDJlOWNkYjJjMGFlODkyNjAzODI4Y2MwNGRmNTNhNzQ0OTlhNjYwOWJjNDJjOWM3YjIxNyJ9fX0=
+    name: "{#4f4559}&l猫王"
+    lore: 
+      - "&6&l恰似故人来"
+      - "&4马亥死我口里&f!"
+  recipe_type: TR_MW_RECIPE_TYPE
+  recipe:
+    5:
+      material_type: slimefun
+      material: Tr_mwbzq
+Tr_zmhq:
+  lateInit: false
+  placeable: false
+  item_group: Tr_czjjcl
+  item:
+    glow: true
+    material_type: skull_base64
+    material: eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvZmUzZjhjY2NlMzMxZGM0Mjg3NWY3OGY4YjUyMjNkZWNmNDg3ZTY4YTE4OTExMjJkZGYyZjEyZGJkNzMxODdjYSJ9fX0=
+    name: "{#3d405b}&l致{#1f2233}&l密{#b8f2e6}&l哈{#8ad4e0}&l气"
+    lore: 
+      - "{#4e6e5e}&l沾{#3d5a50}&l染{#335043}&l着{#2f3f4f}&l基{#332c55}&l米{#42275e}&l们{#5c2364}&l的{#752c50}&l怨{#8f2530}&l念"
+  recipe_type: ENHANCED_CRAFTING_TABLE
+  recipe:
+    1:
+      material_type: slimefun
+      material: Tr_hq
+    2:
+      material_type: slimefun
+      material: Tr_hq
+    3:
+      material_type: slimefun
+      material: Tr_hq
+    4:
+      material_type: slimefun
+      material: Tr_hq
+    5:
+      material_type: slimefun
+      material: Tr_hq
+    6:
+      material_type: slimefun
+      material: Tr_hq
+    7:
+      material_type: slimefun
+      material: Tr_hq
+    8:
+      material_type: slimefun
+      material: Tr_hq
+    9:
+      material_type: slimefun
+      material: Tr_hq
+Tr_hjx:
+  lateInit: false
+  placeable: false
+  item_group: Tr_czjjcl
+  item:
+    glow: true
+    material_type: skull_base64
+    material: eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvOTc4ZDQwNTFmNjRkNDViODM2ZmNlZTBiYjQ0OGVjZDQ0ODZjNjBhZWEwMjJmYTBlOTNlMjliODlkZmJlM2FhYiJ9fX0=
+    name: "{#ffd166}&l哈{#f4a259}&l基{#e07a3f}&l仙"
+    lore: 
+      - "{#ff5c33}&l劳{#ff3b30}&l不{#e8291f}&l死{#d42020}&l的{#b81717}&l给{#a31212}&l你{#8c0e0e}&l达{#7a0909}&l斯{#660404}&l!"
+      - "&4&l凶狠至极!&7&l锋利的爪子可以杀穿万界"
+      - "&b&l但凡事都有另一面?"
+  recipe_type: ENHANCED_CRAFTING_TABLE
+  recipe:
+    1:
+      material_type: slimefun
+      material: Tr_zmhq
+    2:
+      material_type: slimefun
+      material: Tr_zmhq
+    3:
+      material_type: slimefun
+      material: Tr_zmhq
+    4:
+      material_type: slimefun
+      material: Tr_zmhq
+    5:
+      material_type: slimefun
+      material: Tr_cjsmhhw
+    6:
+      material_type: slimefun
+      material: Tr_zmhq
+    7:
+      material_type: slimefun
+      material: Tr_zmhq
+    8:
+      material_type: slimefun
+      material: Tr_zmhq
+    9:
+      material_type: slimefun
+      material: Tr_zmhq
+Tr_zwxyp:
+  lateInit: false
+  item_group: Tr_czjjcl
+  item:
+    glow: true
+    material_type: mc
+    material: disc_fragment_5
+    name: "{#7b2ff7}&l造{#5533d6}&l物{#2563eb}&l匣{#00b3d6}&l原{#5ff2d0}&l片"
+    lore: 
+  recipe_type: ENHANCED_CRAFTING_TABLE
+  recipe:
+    1:
+      material_type: mc
+      material: nether_star
+    2:
+      material_type: slimefun
+      material: TR_CJSMHHW
+    3:
+      material_type: mc
+      material: ender_eye
+    4:
+      material_type: slimefun
+      material: VANILLA_AUTO_CRAFTER
+    5:
+      material_type: mc
+      material: crafting_table
+    6:
+      material_type: slimefun
+      material: ENHANCED_AUTO_CRAFTER
+    7:
+      material_type: mc
+      material: echo_shard
+    8:
+      material_type: slimefun
+      material: TR_CJSMHHW
+    9:
+      material_type: mc
+      material: heart_of_the_sea
+Tr_zwdz:
+  lateInit: false
+  item_group: Tr_czjjcl
+  item:
+    glow: true
+    material_type: mc
+    material: polished_blackstone_bricks
+    name: "{#a78bfa}&l造物底座"
+  recipe_type: ENHANCED_CRAFTING_TABLE
+  recipe:
+    1:
+      material_type: mc
+      material: crying_obsidian
+    2:
+      material_type: mc
+      material: polished_blackstone_brick_slab
+    3:
+      material_type: mc
+      material: crying_obsidian
+    4:
+      material_type: mc
+      material: soul_sand
+    5:
+      material_type: slimefun
+      material: TR_DLJX
+    6:
+      material_type: mc
+      material: soul_sand
+    7:
+      material_type: mc
+      material: crying_obsidian
+    8:
+      material_type: mc
+      material: polished_blackstone_brick_slab
+    9:
+      material_type: mc
+      material: crying_obsidian
+Tr_zslqts:
+  lateInit: false
+  placeable: true
+  script: 致死量全糖水
+  item_group: Tr_czdj
+  item:
+    glow: true
+    material_type: mc
+    material: splash_potion
+    name: "&4&l致死量&b&l全糖水"
+    lore:
+      - "{#498c9c}&l被喷中有福啦"
+      - "&7&l对所有无命名生物造成20%最大生命值伤害"
+      - "&f&l玩家额外获得一些buff?"
+      - "&3&l对玩家附有额外的追加伤害"
+  recipe_type: ENHANCED_CRAFTING_TABLE
+  recipe:
+    1:
+      material_type: slimefun
+      material: Tr_tj
+    2:
+      material_type: slimefun
+      material: Tr_cts
+    3:
+      material_type: slimefun
+      material: Tr_tj
+    4:
+      material_type: slimefun
+      material: Tr_tj
+    5:
+      material_type: slimefun
+      material: Tr_zmhq
+    6:
+      material_type: slimefun
+      material: Tr_tj
+    7:
+      material_type: slimefun
+      material: Tr_tj
+    8:
+      material_type: slimefun
+      material: Tr_cts
+    9:
+      material_type: slimefun
+      material: Tr_tj
+Tr_tthj:
+  lateInit: false
+  placeable: false
+  script: 糖天画戟
+  item_group: Tr_czdj
+  item:
+    glow: true
+    material_type: mc
+    material: trident
+    name: "{#4A0E1F}&l糖{#8C1C3A}&l天{#C86B85}&l画{#E8F1F2}&l戟"
+    lore:
+      - "&7&l!?戟戟?!"
+      - "{#498c9c}&l兄弟我们一起糖破天际！！！"
+      - "&9&l右键丢出§4§l致死量§b§l全糖水&7&l(冷却5秒)"
+      - "&f&l蹲下右键蓄力3秒释放糖之力！"
+      - "&7&l(蓄力结束后对前方半径6格，160°范围内的非无敌生物造成1145+其14%最大生命值的伤害，冷却6秒)"
+      - "&4&l击杀生物60%掉落 {#6E1A1A}&l余{#7A1A1A}&l恨{#9D2933}&l砂"
+  recipe_type: ENHANCED_CRAFTING_TABLE
+  recipe:
+    1:
+      material_type: slimefun
+      material: Tr_zslqts
+    2:
+      material_type: slimefun
+      material: Tr_tj
+    3:
+      material_type: slimefun
+      material: Tr_zslqts
+    4:
+      material_type: slimefun
+      material: Tr_txsj
+    5:
+      material_type: slimefun
+      material: Tr_hjx
+    6:
+      material_type: slimefun
+      material: Tr_txsj
+    8:
+      material_type: slimefun
+      material: Tr_zwxyp
+Tr_yhs:
+  placeable: false
+  lateInit: false
+  item_group: Tr_czjjcl
+  item:
+    glow: true
+    material_type: mc
+    material: gunpowder
+    name: "{#6E1A1A}&l余{#7A1A1A}&l恨{#9D2933}&l砂"
+    lore: 
+      - "{#A63A32}&l细{#9F372F}&l沙{#99342D}&l般{#92312A}&l的{#8C2D28}&l颗{#852A25}&l粒{#7F2723}&l，{#782420}&l握{#71211D}&l在{#6B1E1B}&l手{#641B18}&l中{#5E1716}&l略{#571413}&l感{#511111}&l刺{#4A0E0E}&l痛"
+  recipe_type: TR_TTHJ_RECIPE_TYPE
+  recipe:
+    5:
+      material_type: slimefun
+      material: Tr_tthj
+Tr_ycky:
+  placeable: false
+  lateInit: false
+  item_group: Tr_czdj
+  script: 原初刻印
+  item:
+    glow: true
+    material_type: mc
+    material: end_crystal
+    name: "{#b22e82}&l原{#49006b}&l初{#6856f0}&l刻{#304673}&l印"
+    lore: 
+      - '{#ffd700}&l绝{#ffb300}&l对{#ff8f00}&l的{#ff6d00}&l法{#ff3d00}&l则'
+      - '&f&l撬开真理之门'
+  recipe_type: TR_AKXZJ_RECIPE_TYPE
+  recipe:
+    5:
+      material_type: slimefun
+      material: Tr_akxzj
+Tr_fj:
+  placeable: false
+  lateInit: false
+  item_group: Tr_zzfzcl
+  item:
+    glow: true
+    material_type: mc
+    material: gold_ingot
+    name: "{#ffd700}&l锋{#ffb300}&l寂"
+    lore:
+      - "&6至锐之金，斩断因果"
+      - "&7原初刻印的馈赠"
+  recipe_type: TR_YCKY_RECIPE_TYPE
+  recipe:
+    5:
+      material_type: slimefun
+      material: Tr_ycky
+Tr_sl:
+  placeable: false
+  lateInit: false
+  item_group: Tr_zzfzcl
+  item:
+    glow: true
+    material_type: mc
+    material: oak_sapling
+    name: "{#2ecc71}&l森{#27ae60}&l罗"
+    lore:
+      - "&a万木成森，生生不息"
+      - "&7原初刻印的馈赠"
+  recipe_type: TR_YCKY_RECIPE_TYPE
+  recipe:
+    5:
+      material_type: slimefun
+      material: Tr_ycky
+Tr_yl:
+  placeable: false
+  lateInit: false
+  item_group: Tr_zzfzcl
+  item:
+    glow: true
+    material_type: mc
+    material: prismarine_shard
+    name: "{#00bfff}&l渊{#1e90ff}&l澜"
+    lore:
+      - "&b深渊之澜，无声吞噬"
+      - "&7原初刻印的馈赠"
+  recipe_type: TR_YCKY_RECIPE_TYPE
+  recipe:
+    5:
+      material_type: slimefun
+      material: Tr_ycky
+Tr_jm:
+  placeable: false
+  lateInit: false
+  item_group: Tr_zzfzcl
+  item:
+    glow: true
+    material_type: mc
+    material: blaze_powder
+    name: "{#ff4500}&l烬{#ff0000}&l灭"
+    lore:
+      - "&c焚尽万物，归于烬灭"
+      - "&7原初刻印的馈赠"
+  recipe_type: TR_YCKY_RECIPE_TYPE
+  recipe:
+    5:
+      material_type: slimefun
+      material: Tr_ycky
+Tr_ch:
+  placeable: false
+  lateInit: false
+  item_group: Tr_zzfzcl
+  item:
+    glow: true
+    material_type: mc
+    material: dirt
+    name: "{#a0522d}&l尘{#8b4513}&l寰"
+    lore:
+      - "&6厚土承天，尘寰永固"
+      - "&7原初刻印的馈赠"
+  recipe_type: TR_YCKY_RECIPE_TYPE
+  recipe:
+    5:
+      material_type: slimefun
+      material: Tr_ycky
+Tr_yc:
+  placeable: false
+  lateInit: false
+  item_group: Tr_zzfzcl
+  item:
+    glow: true
+    material_type: mc
+    material: glowstone_dust
+    name: "{#fff59d}&l曜{#ffd54f}&l辰"
+    lore:
+      - "&e曜日星辰，皆为指引"
+      - "&7原初刻印的馈赠"
+  recipe_type: TR_YCKY_RECIPE_TYPE
+  recipe:
+    5:
+      material_type: slimefun
+      material: Tr_ycky
+Tr_yy:
+  placeable: false
+  lateInit: false
+  item_group: Tr_zzfzcl
+  item:
+    glow: true
+    material_type: mc
+    material: black_dye
+    name: "{#4b0082}&l幽{#2e004f}&l湮"
+    lore:
+      - "&8幽暗湮没，万物沉寂"
+      - "&7原初刻印的馈赠"
+  recipe_type: TR_YCKY_RECIPE_TYPE
+  recipe:
+    5:
+      material_type: slimefun
+      material: Tr_ycky
+Tr_te:
+  placeable: false
+  lateInit: false
+  item_group: Tr_zzfzcl
+  item:
+    glow: true
+    material_type: mc
+    material: lightning_rod
+    name: "{#00e5ff}&l霆{#2979ff}&l殛"
+    lore:
+      - "&b雷霆一怒，天罚降临"
+      - "&7原初刻印的馈赠"
+  recipe_type: TR_YCKY_RECIPE_TYPE
+  recipe:
+    5:
+      material_type: slimefun
+      material: Tr_ycky
+Tr_xs:
+  placeable: false
+  lateInit: false
+  item_group: Tr_zzfzcl
+  item:
+    glow: true
+    material_type: mc
+    material: blue_ice
+    name: "{#e0f7fa}&l雪{#81d4fa}&l殇"
+    lore:
+      - "&f霜雪为殇，冻结永恒"
+      - "&7原初刻印的馈赠"
+  recipe_type: TR_YCKY_RECIPE_TYPE
+  recipe:
+    5:
+      material_type: slimefun
+      material: Tr_ycky
+Tr_bxs:
+  placeable: false
+  lateInit: false
+  item_group: Tr_czjjcl
+  item:
+    glow: true
+    material_type: skull_base64
+    material: eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvY2ZiYjk1NTAyZTBmZDBkYmE2MGJiZTU4MThlMmZkNTI3OGVkYTI5OTljYzJkNzgxMDljMmNhNTc3NTU3YTBhNiJ9fX0=
+    name: "{#00e5c7}&l碧{#00b8a9}&l息{#009688}&l石"
+    lore:
+      - "{#a7ffeb}&l万物生息，凝于一石"
+      - "&7&l草木与血肉的共鸣"
+  recipe_type: ENHANCED_CRAFTING_TABLE
+  recipe:
+    1:
+      material_type: mc
+      material: beef
+    2:
+      material_type: mc
+      material: porkchop
+    3:
+      material_type: mc
+      material: chicken
+    4:
+      material_type: mc
+      material: mutton
+    5:
+      material_type: mc
+      material: mossy_cobblestone
+    6:
+      material_type: mc
+      material: feather
+    7:
+      material_type: mc
+      material: wheat
+    8:
+      material_type: mc
+      material: carrot
+    9:
+      material_type: mc
+      material: apple
+Tr_hqy:
+  placeable: false
+  lateInit: false
+  item_group: Tr_czjjcl
+  item:
+    glow: true
+    material_type: skull_base64
+    material: eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvMjQ0MmExZTA4ZWE3N2ZkMTQ0YzhmZjRjZGFlZjZlMGE5YWFmYjgzZmRjZjM5OGQxNDhkOGYxNzQ0NGM4ZmE2NyJ9fX0=
+    name: "{#ffd700}&l黄{#e6a800}&l泉{#b8860b}&l引"
+    lore:
+      - "{#ffe082}&l黄泉路远，引魂归乡"
+      - "&7&l怨念与残骸的沉淀"
+  recipe_type: ENHANCED_CRAFTING_TABLE
+  recipe:
+    1:
+      material_type: mc
+      material: rotten_flesh
+    2:
+      material_type: mc
+      material: bone
+    3:
+      material_type: mc
+      material: string
+    4:
+      material_type: mc
+      material: spider_eye
+    5:
+      material_type: mc
+      material: gunpowder
+    6:
+      material_type: mc
+      material: ender_pearl
+    7:
+      material_type: mc
+      material: blaze_rod
+    8:
+      material_type: mc
+      material: ghast_tear
+    9:
+      material_type: mc
+      material: phantom_membrane
+Tr_jsllz:
+  placeable: false
+  lateInit: false
+  item_group: Tr_zzfzcl
+  item:
+    glow: true
+    material_type: skull_base64
+    material: eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvYjRiNzhjYjhmODMyMmU3NDM0MjQyNjlhODZlZDc0MzcyY2JjMjUyYzYzMzNhYmI5NWY2ODQ5NjQzNWFhMWU2OSJ9fX0=
+    name: "{#ff6b6b}&l九{#ffa94d}&l色{#ffd43b}&l琉{#69db7c}&l璃{#4dabf7}&l珠"
+    lore:
+      - "{#d0bfff}&l九种元素交织而成的奇迹琉璃"
+      - "&7&l金木水火土光暗雷冰，尽归其中"
+  recipe_type: ENHANCED_CRAFTING_TABLE
+  recipe:
+    1:
+      material_type: slimefun
+      material: Tr_fj
+    2:
+      material_type: slimefun
+      material: Tr_sl
+    3:
+      material_type: slimefun
+      material: Tr_yl
+    4:
+      material_type: slimefun
+      material: Tr_jm
+    5:
+      material_type: slimefun
+      material: Tr_ch
+    6:
+      material_type: slimefun
+      material: Tr_yc
+    7:
+      material_type: slimefun
+      material: Tr_yy
+    8:
+      material_type: slimefun
+      material: Tr_te
+    9:
+      material_type: slimefun
+      material: Tr_xs
+Tr_wtyd:
+  placeable: false
+  lateInit: false
+  script: 道法/天道货币兑换
+  item_group: Tr_zzdj
+  item:
+    glow: true
+    material_type: mc
+    material: music_disc_5
+    name: "{#d4f1f9}&l问{#a8e6f0}&l天{#7fd4e6}&l玉{#5bb8d8}&l碟{#e8f8ff}&l"
+    lore:
+      - "{#e0f7fa}&l问天一问，玉碟轻旋"
+      - "&7&l右键此碟可将背包中的{#f0f4ff}&l法{#dbe7ff}&l则{#b8c8ff}&l材{#9db8ff}&l料&7&l兑换成天道货币"
+  recipe_type: TR_YGYLS_TYPE
+  recipe:
+    1:
+      material_type: mc
+      material: compass
+    2:
+      material_type: slimefun
+      material: Tr_jsllz
+      amount: 2
+Tr_cwkjkps:
+  placeable: false
+  lateInit: false
+  script: 道法/储物空间开辟
+  item_group: Tr_zzdj
+  item:
+    glow: true
+    material_type: mc
+    material: quartz
+    name: '{#e8f6ff}&l储{#b8e3ff}&l物{#7fc9e8}&l空{#4aa3c7}&l间{#d4f1f9}&l开{#b8e3ff}&l辟{#7fc9e8}&l石{#e8f6ff}&l'
+    lore:
+    - '{#e8f6ff}&l一念洞天开，万物流转间'
+    - '{#b8e3ff}&l右击此石，开辟专属储物空间'
+    - '{#7fc9e8}&l尚未开辟储物空间则无法打开储物空间'
+  recipe_type: TR_FSDP
+Tr_lz01_seed:
+  placeable: false
+  lateInit: false
+  item_group: Tr_zzlzcl
+  item:
+    glow: true
+    material_type: mc
+    material: wheat_seeds
+    name: '{#a7f3d0}&l灵{#86efac}&l蕴{#65d69a}&l草&7&l种子'
+    lore:
+    - '{#d1fae5}&l蕴含一缕灵气的种子'
+    - '&7&l可培育灵蕴草，凝聚灵蕴'
+  recipe_type: TR_FSDP
+Tr_lz01_fruit:
+  placeable: false
+  lateInit: false
+  item_group: Tr_zzlzcl
+  item:
+    glow: true
+    material_type: mc
+    material: wheat
+    name: '{#a7f3d0}&l灵{#86efac}&l蕴{#65d69a}&l草&7&l穗'
+    lore:
+    - '{#d1fae5}&l灵气充盈的灵植果实'
+    - '&7&l可用于炼丹与兑换功德'
+  recipe_type: TR_LP
+Tr_lz02_seed:
+  placeable: false
+  lateInit: false
+  item_group: Tr_zzlzcl
+  item:
+    glow: true
+    material_type: mc
+    material: torchflower_seeds
+    name: '{#bae6fd}&l凝{#7dd3fc}&l露{#38bdf8}&l花&7&l种子'
+    lore:
+    - '{#e0f2fe}&l凝露成花的灵种'
+    - '&7&l可培育凝露花，采集晨露精华'
+  recipe_type: TR_FSDP
+Tr_lz02_fruit:
+  placeable: false
+  lateInit: false
+  item_group: Tr_zzlzcl
+  item:
+    glow: true
+    material_type: mc
+    material: allium
+    name: '{#bae6fd}&l凝{#7dd3fc}&l露{#38bdf8}&l花'
+    lore:
+    - '{#e0f2fe}&l晨露凝成的灵花'
+    - '&7&l可入药、炼丹、兑换功德'
+  recipe_type: TR_LP
+Tr_lz03_seed:
+  placeable: false
+  lateInit: false
+  item_group: Tr_zzlzcl
+  item:
+    glow: true
+    material_type: mc
+    material: melon_seeds
+    name: '{#fca5a5}&l赤{#f87171}&l炎{#ef4444}&l果&7&l种子'
+    lore:
+    - '{#fee2e2}&l蕴含火属性灵气的种子'
+    - '&7&l可培育赤炎果，火灵浓郁'
+  recipe_type: TR_FSDP
+Tr_lz03_fruit:
+  placeable: false
+  lateInit: false
+  item_group: Tr_zzlzcl
+  item:
+    glow: true
+    material_type: mc
+    material: sweet_berries
+    name: '{#fca5a5}&l赤{#f87171}&l炎{#ef4444}&l果'
+    lore:
+    - '{#fee2e2}&l赤红如火，灵气温热'
+    - '&7&l可用于火系炼丹与兑换功德'
+  recipe_type: TR_LP
+Tr_lz04_seed:
+  placeable: false
+  lateInit: false
+  item_group: Tr_zzlzcl
+  item:
+    glow: true
+    material_type: mc
+    material: beetroot_seeds
+    name: '{#bae6fd}&l寒{#7dd3fc}&l霜{#38bdf8}&l参&7&l种子'
+    lore:
+    - '{#e0f2fe}&l蕴含冰属性灵气的种子'
+    - '&7&l可培育寒霜参，性寒益神'
+  recipe_type: TR_FSDP
+Tr_lz04_fruit:
+  placeable: false
+  lateInit: false
+  item_group: Tr_zzlzcl
+  item:
+    glow: true
+    material_type: mc
+    material: beetroot
+    name: '{#bae6fd}&l寒{#7dd3fc}&l霜{#38bdf8}&l参'
+    lore:
+    - '{#e0f2fe}&l霜雪凝成，灵气温润'
+    - '&7&l可用于冰系炼丹与兑换功德'
+  recipe_type: TR_LP
+Tr_lz05_seed:
+  placeable: false
+  lateInit: false
+  item_group: Tr_zzlzcl
+  item:
+    glow: true
+    material_type: mc
+    material: cocoa_beans
+    name: '{#c4b5fd}&l紫{#a78bfa}&l电{#8b5cf6}&l藤&7&l种子'
+    lore:
+    - '{#ede9fe}&l蕴含雷属性灵气的种子'
+    - '&7&l可培育紫电藤，雷纹缠绕'
+  recipe_type: TR_FSDP
+Tr_lz05_fruit:
+  placeable: false
+  lateInit: false
+  item_group: Tr_zzlzcl
+  item:
+    glow: true
+    material_type: mc
+    material: cocoa_beans
+    name: '{#c4b5fd}&l紫{#a78bfa}&l电{#8b5cf6}&l藤&7&l果'
+    lore:
+    - '{#ede9fe}&l紫电微芒，灵气炽烈'
+    - '&7&l可用于雷系炼丹与兑换功德'
+  recipe_type: TR_LP
+Tr_lz06_seed:
+  placeable: false
+  lateInit: false
+  item_group: Tr_zzlzcl
+  item:
+    glow: true
+    material_type: mc
+    material: pumpkin_seeds
+    name: '{#fde68a}&l金{#fcd34d}&l髓{#fbbf24}&l稻&7&l种子'
+    lore:
+    - '{#fef3c7}&l蕴含金行灵气的种子'
+    - '&7&l可培育金髓稻，穗如金砂'
+  recipe_type: TR_FSDP
+Tr_lz06_fruit:
+  placeable: false
+  lateInit: false
+  item_group: Tr_zzlzcl
+  item:
+    glow: true
+    material_type: mc
+    material: wheat
+    name: '{#fde68a}&l金{#fcd34d}&l髓{#fbbf24}&l稻&7&l穗'
+    lore:
+    - '{#fef3c7}&l金髓凝穗，灵气沉厚'
+    - '&7&l可用于金系炼丹与兑换功德'
+  recipe_type: TR_LP
+Tr_lz07_seed:
+  placeable: false
+  lateInit: false
+  item_group: Tr_zzlzcl
+  item:
+    glow: true
+    material_type: mc
+    material: brown_mushroom
+    name: '{#86efac}&l青{#4ade80}&l木{#22c55e}&l芝&7&l孢子'
+    lore:
+    - '{#dcfce7}&l蕴含木行灵气的孢子'
+    - '&7&l可培育青木芝，木灵盎然'
+  recipe_type: TR_FSDP
+Tr_lz07_fruit:
+  placeable: false
+  lateInit: false
+  item_group: Tr_zzlzcl
+  item:
+    glow: true
+    material_type: mc
+    material: brown_mushroom
+    name: '{#86efac}&l青{#4ade80}&l木{#22c55e}&l芝'
+    lore:
+    - '{#dcfce7}&l青木之气凝成灵芝'
+    - '&7&l可用于木系炼丹与兑换功德'
+  recipe_type: TR_LP
+Tr_lz08_seed:
+  placeable: false
+  lateInit: false
+  item_group: Tr_zzlzcl
+  item:
+    glow: true
+    material_type: mc
+    material: kelp
+    name: '{#67e8f9}&l玄{#22d3ee}&l水{#06b6d4}&l莲&7&l种子'
+    lore:
+    - '{#cffafe}&l蕴含水行灵气的种子'
+    - '&7&l可培育玄水莲，生于灵水'
+  recipe_type: TR_FSDP
+Tr_lz08_fruit:
+  placeable: false
+  lateInit: false
+  item_group: Tr_zzlzcl
+  item:
+    glow: true
+    material_type: mc
+    material: lily_pad
+    name: '{#67e8f9}&l玄{#22d3ee}&l水{#06b6d4}&l莲子'
+    lore:
+    - '{#cffafe}&l玄水凝子，灵气清冽'
+    - '&7&l可用于水系炼丹与兑换功德'
+  recipe_type: TR_LP
+Tr_lz09_seed:
+  placeable: false
+  lateInit: false
+  item_group: Tr_zzlzcl
+  item:
+    glow: true
+    material_type: mc
+    material: pitcher_pod
+    name: '{#d6a35c}&l厚{#c68b4e}&l土{#b57b42}&l根&7&l种子'
+    lore:
+    - '{#f5e1c0}&l蕴含土行灵气的种子'
+    - '&7&l可培育厚土根，扎根大地'
+  recipe_type: TR_FSDP
+Tr_lz09_fruit:
+  placeable: false
+  lateInit: false
+  item_group: Tr_zzlzcl
+  item:
+    glow: true
+    material_type: mc
+    material: potato
+    name: '{#d6a35c}&l厚{#c68b4e}&l土{#b57b42}&l根'
+    lore:
+    - '{#f5e1c0}&l厚土凝根，灵气厚重'
+    - '&7&l可用于土系炼丹与兑换功德'
+  recipe_type: TR_LP
+Tr_lz10_seed:
+  placeable: false
+  lateInit: false
+  item_group: Tr_zzlzcl
+  item:
+    glow: true
+    material_type: mc
+    material: torchflower_seeds
+    name: '{#fef08a}&l曜{#fde047}&l光{#facc15}&l葵&7&l种子'
+    lore:
+    - '{#fef9c3}&l蕴含光行灵气的种子'
+    - '&7&l可培育曜光葵，向阳而生'
+  recipe_type: TR_FSDP
+Tr_lz10_fruit:
+  placeable: false
+  lateInit: false
+  item_group: Tr_zzlzcl
+  item:
+    glow: true
+    material_type: mc
+    material: sunflower
+    name: '{#fef08a}&l曜{#fde047}&l光{#facc15}&l葵'
+    lore:
+    - '{#fef9c3}&l曜光凝瓣，灵气明亮'
+    - '&7&l可用于光系炼丹与兑换功德'
+  recipe_type: TR_LP
+Tr_lz11_seed:
+  placeable: false
+  lateInit: false
+  item_group: Tr_zzlzcl
+  item:
+    glow: true
+    material_type: mc
+    material: red_mushroom
+    name: '{#a78bfa}&l幽{#8b5cf6}&l影{#7c3aed}&l菇&7&l孢子'
+    lore:
+    - '{#ede9fe}&l蕴含暗行灵气的孢子'
+    - '&7&l可培育幽影菇，生于幽暗'
+  recipe_type: TR_FSDP
+Tr_lz11_fruit:
+  placeable: false
+  lateInit: false
+  item_group: Tr_zzlzcl
+  item:
+    glow: true
+    material_type: mc
+    material: red_mushroom
+    name: '{#a78bfa}&l幽{#8b5cf6}&l影{#7c3aed}&l菇'
+    lore:
+    - '{#ede9fe}&l幽影凝菇，灵气晦暗'
+    - '&7&l可用于暗系炼丹与兑换功德'
+  recipe_type: TR_LP
+Tr_lz12_seed:
+  placeable: false
+  lateInit: false
+  item_group: Tr_zzlzcl
+  item:
+    glow: true
+    material_type: mc
+    material: bamboo
+    name: '{#7dd3fc}&l雷{#38bdf8}&l音{#0ea5e9}&l竹&7&l笋'
+    lore:
+    - '{#e0f2fe}&l蕴含雷音之气的竹笋'
+    - '&7&l可培育雷音竹，闻雷而长'
+  recipe_type: TR_FSDP
+Tr_lz12_fruit:
+  placeable: false
+  lateInit: false
+  item_group: Tr_zzlzcl
+  item:
+    glow: true
+    material_type: mc
+    material: bamboo
+    name: '{#7dd3fc}&l雷{#38bdf8}&l音{#0ea5e9}&l竹'
+    lore:
+    - '{#e0f2fe}&l雷音凝竹，灵气铿锵'
+    - '&7&l可用于雷系炼丹与兑换功德'
+  recipe_type: TR_LP
+Tr_lz13_seed:
+  placeable: false
+  lateInit: false
+  item_group: Tr_zzlzcl
+  item:
+    glow: true
+    material_type: mc
+    material: sweet_berries
+    name: '{#bae6fd}&l冰{#7dd3fc}&l心{#38bdf8}&l梅&7&l种子'
+    lore:
+    - '{#e0f2fe}&l蕴含冰心之气的种子'
+    - '&7&l可培育冰心梅，傲雪凌霜'
+  recipe_type: TR_FSDP
+Tr_lz13_fruit:
+  placeable: false
+  lateInit: false
+  item_group: Tr_zzlzcl
+  item:
+    glow: true
+    material_type: mc
+    material: sweet_berries
+    name: '{#bae6fd}&l冰{#7dd3fc}&l心{#38bdf8}&l梅'
+    lore:
+    - '{#e0f2fe}&l冰心凝果，灵气清寒'
+    - '&7&l可用于冰系炼丹与兑换功德'
+  recipe_type: TR_LP
+Tr_lz14_seed:
+  placeable: false
+  lateInit: false
+  item_group: Tr_zzlzcl
+  item:
+    glow: true
+    material_type: mc
+    material: glow_berries
+    name: '{#fca5a5}&l火{#f87171}&l灵{#ef4444}&l椒&7&l种子'
+    lore:
+    - '{#fee2e2}&l蕴含火灵之气的种子'
+    - '&7&l可培育火灵椒，辛辣如火'
+  recipe_type: TR_FSDP
+Tr_lz14_fruit:
+  placeable: false
+  lateInit: false
+  item_group: Tr_zzlzcl
+  item:
+    glow: true
+    material_type: mc
+    material: glow_berries
+    name: '{#fca5a5}&l火{#f87171}&l灵{#ef4444}&l椒'
+    lore:
+    - '{#fee2e2}&l火灵凝椒，灵气灼热'
+    - '&7&l可用于火系炼丹与兑换功德'
+  recipe_type: TR_LP
+Tr_lz15_seed:
+  placeable: false
+  lateInit: false
+  item_group: Tr_zzlzcl
+  item:
+    glow: true
+    material_type: mc
+    material: kelp
+    name: '{#a7f3d0}&l风{#6ee7b7}&l语{#34d399}&l藤&7&l种子'
+    lore:
+    - '{#d1fae5}&l蕴含风灵之气的种子'
+    - '&7&l可培育风语藤，随风而舞'
+  recipe_type: TR_FSDP
+Tr_lz15_fruit:
+  placeable: false
+  lateInit: false
+  item_group: Tr_zzlzcl
+  item:
+    glow: true
+    material_type: mc
+    material: kelp
+    name: '{#a7f3d0}&l风{#6ee7b7}&l语{#34d399}&l藤&7&l果'
+    lore:
+    - '{#d1fae5}&l风语凝果，灵气轻盈'
+    - '&7&l可用于风系炼丹与兑换功德'
+  recipe_type: TR_LP
+Tr_lz16_seed:
+  placeable: false
+  lateInit: false
+  item_group: Tr_zzlzcl
+  item:
+    glow: true
+    material_type: mc
+    material: sea_pickle
+    name: '{#fde68a}&l星{#fcd34d}&l辰{#fbbf24}&l麦&7&l种子'
+    lore:
+    - '{#fef3c7}&l蕴含星辰之气的种子'
+    - '&7&l可培育星辰麦，穗映星河'
+  recipe_type: TR_FSDP
+Tr_lz16_fruit:
+  placeable: false
+  lateInit: false
+  item_group: Tr_zzlzcl
+  item:
+    glow: true
+    material_type: mc
+    material: sea_pickle
+    name: '{#fde68a}&l星{#fcd34d}&l辰{#fbbf24}&l麦&7&l穗'
+    lore:
+    - '{#fef3c7}&l星辰凝穗，灵气璀璨'
+    - '&7&l可用于炼丹与兑换功德'
+  recipe_type: TR_LP
+Tr_hmzq:
+  placeable: false
+  lateInit: false
+  item_group: Tr_zzfzcl
+  item:
+    glow: true
+    material_type: mc
+    material: amethyst_shard
+    name: '{#c4b5fd}&l鸿{#a78bfa}&l蒙{#8b5cf6}&l紫{#7c3aed}&l气'
+    lore:
+    - '{#ede9fe}&l天地初开时的一缕紫气'
+    - '&7&l蕴含无上道韵，可助修行'
+  recipe_type: TR_FSDP
+Tr_qmlp:
+  placeable: false
+  lateInit: false
+  item_group: Tr_zzdj
+  item:
+    glow: true
+    material_type: skull_hash
+    material: 'eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNzQxOGU2NTFjMDU3MDJmNTViZTQzNGYyZTRmYTJhNDI5ODI4MGZhMGQ2ODkwNDc3NDFiNjgyNzM2MjdlYTdiMyJ9fX0='
+    name: '{#86efac}&l青{#4ade80}&l木{#22c55e}&l灵{#16a34a}&l圃'
+    lore:
+    - '{#dcfce7}&l青木灵气,滋养灵土'
+    - '&7&l拉完了'
+  recipe_type: TR_FSDP
+Tr_xhlp:
+  placeable: false
+  lateInit: false
+  item_group: Tr_zzdj
+  item:
+    glow: true
+    material_type: skull_hash
+    material: 'eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvZjFkYTM4YjFiYzc1YTM5ZTcxYzdkY2IzY2FiNzNjMjZjODI2ZjgyNmM1OWU4YTQ0MTRjMThjNDU1Y2VlOWE2MiJ9fX0='
+    name: '{#c4b5fd}&l星{#a78bfa}&l辉{#8b5cf6}&l灵{#7c3aed}&l圃'
+    lore:
+    - '{#ede9fe}&l星辉洒落，灵机自生'
+    - '&7&l增加成熟速度与产量!'
+  recipe_type: TR_FSDP
+Tr_hmsg:
+  placeable: false
+  lateInit: false
+  item_group: Tr_zzdj
+  item:
+    glow: true
+    material_type: skull_hash
+    material: 'eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvOWI3ZjZiZGMyZTE2MDM4ZmVmOGM4ZmM3NDRiZjk1N2M0YWQxYzFjOTk3NmZlMTVkOTEwOTQ2M2QwZDlkMTA1In19fQ=='
+    name: '{#f0abfc}&l鸿{#d946ef}&l蒙{#c026d3}&l神{#a21caf}&l圃'
+    lore:
+    - '{#fae8ff}&l鸿蒙初开，神土自成'
+    - '&7&l自动收获，更快成熟速度与产量!'
+  recipe_type: TR_FSDP
+
+Tr_jls:
+  placeable: false
+  lateInit: false
+  item_group: Tr_zzdj
+  item:
+    glow: true
+    material_type: mc
+    material: bone_meal
+    name: '{#e2e8f0}&l聚{#cbd5e1}&l灵{#94a3b8}&l散'
+    lore:
+    - '{#f1f5f9}&l汇聚灵气的催熟药散'
+    - '&7&l拖动点击带有作物的灵圃，可减少10秒成熟时间'
+  recipe_type: TR_FSDP
+Tr_fdsz01:
+  placeable: false
+  lateInit: false
+  item_group: Tr_fdsz
+  item:
+    glow: true
+    material_type: mc
+    material: iron_ingot
+    name: '{#cbd5e1}&l星{#94a3b8}&l纹{#64748b}&l铁'
+    lore:
+    - '&7&l蕴含星纹的稀有材料'
+    - '&7&l福地生珍材料，可用于炼丹与兑换道源'
+  recipe_type: TR_FDSZ
+Tr_fdsz02:
+  placeable: false
+  lateInit: false
+  item_group: Tr_fdsz
+  item:
+    glow: true
+    material_type: mc
+    material: glowstone_dust
+    name: '{#fef3c7}&l月{#fde68a}&l华{#fcd34d}&l砂'
+    lore:
+    - '&7&l月华凝成的灵砂'
+    - '&7&l福地生珍材料，可用于炼丹与兑换道源'
+  recipe_type: TR_FDSZ
+Tr_fdsz03:
+  placeable: false
+  lateInit: false
+  item_group: Tr_fdsz
+  item:
+    glow: true
+    material_type: mc
+    material: quartz
+    name: '{#e9d5ff}&l灵{#d8b4fe}&l犀{#c084fc}&l玉'
+    lore:
+    - '&7&l通灵宝玉，蕴含灵犀'
+    - '&7&l福地生珍材料，可用于炼丹与兑换道源'
+  recipe_type: TR_FDSZ
+Tr_fdsz04:
+  placeable: false
+  lateInit: false
+  item_group: Tr_fdsz
+  item:
+    glow: true
+    material_type: mc
+    material: prismarine_shard
+    name: '{#a5f3fc}&l青{#67e8f9}&l冥{#22d3ee}&l石'
+    lore:
+    - '&7&l青冥深处的奇石'
+    - '&7&l福地生珍材料，可用于炼丹与兑换道源'
+  recipe_type: TR_FDSZ
+Tr_fdsz05:
+  placeable: false
+  lateInit: false
+  item_group: Tr_fdsz
+  item:
+    glow: true
+    material_type: mc
+    material: amethyst_shard
+    name: '{#ddd6fe}&l紫{#c4b5fd}&l电{#a78bfa}&l晶'
+    lore:
+    - '&7&l紫电凝聚的水晶'
+    - '&7&l福地生珍材料，可用于炼丹与兑换道源'
+  recipe_type: TR_FDSZ
+Tr_fdsz06:
+  placeable: false
+  lateInit: false
+  item_group: Tr_fdsz
+  item:
+    glow: true
+    material_type: mc
+    material: ice
+    name: '{#e0f2fe}&l玄{#bae6fd}&l冰{#7dd3fc}&l魄'
+    lore:
+    - '&7&l玄冰之魄，寒气逼人'
+    - '&7&l福地生珍材料，可用于炼丹与兑换道源'
+  recipe_type: TR_FDSZ
+Tr_fdsz07:
+  placeable: false
+  lateInit: false
+  item_group: Tr_fdsz
+  item:
+    glow: true
+    material_type: mc
+    material: blaze_powder
+    name: '{#fecaca}&l赤{#f87171}&l炎{#ef4444}&l髓'
+    lore:
+    - '&7&l赤炎凝成的精髓'
+    - '&7&l福地生珍材料，可用于炼丹与兑换道源'
+  recipe_type: TR_FDSZ
+Tr_fdsz08:
+  placeable: false
+  lateInit: false
+  item_group: Tr_fdsz
+  item:
+    glow: true
+    material_type: mc
+    material: feather
+    name: '{#d1fae5}&l风{#6ee7b7}&l灵{#34d399}&l羽'
+    lore:
+    - '&7&l风灵化羽，轻盈如风'
+    - '&7&l福地生珍材料，可用于炼丹与兑换道源'
+  recipe_type: TR_FDSZ
+Tr_fdsz09:
+  placeable: false
+  lateInit: false
+  item_group: Tr_fdsz
+  item:
+    glow: true
+    material_type: mc
+    material: string
+    name: '{#f5d0fe}&l天{#e879f9}&l机{#c026d3}&l丝'
+    lore:
+    - '&7&l天机一线，玄妙难测'
+    - '&7&l福地生珍材料，可用于炼丹与兑换道源'
+  recipe_type: TR_FDSZ
+Tr_fdsz10:
+  placeable: false
+  lateInit: false
+  item_group: Tr_fdsz
+  item:
+    glow: true
+    material_type: mc
+    material: water_bucket
+    name: '{#bae6fd}&l太{#7dd3fc}&l一{#38bdf8}&l真{#0ea5e9}&l水'
+    lore:
+    - '&7&l太一真水，万水之源'
+    - '&7&l福地生珍材料，可用于炼丹与兑换道源'
+  recipe_type: TR_FDSZ
+Tr_fdsz11:
+  placeable: false
+  lateInit: false
+  item_group: Tr_fdsz
+  item:
+    glow: true
+    material_type: mc
+    material: soul_sand
+    name: '{#e9d5ff}&l鸿{#d8b4fe}&l蒙{#c084fc}&l尘'
+    lore:
+    - '&7&l鸿蒙初开时的一缕尘埃'
+    - '&7&l福地生珍材料，可用于炼丹与兑换道源'
+  recipe_type: TR_FDSZ
+Tr_fdsz12:
+  placeable: false
+  lateInit: false
+  item_group: Tr_fdsz
+  item:
+    glow: true
+    material_type: mc
+    material: copper_ingot
+    name: '{#fde68a}&l万{#fcd34d}&l象{#fbbf24}&l铜'
+    lore:
+    - '&7&l万象皆可铸的奇铜'
+    - '&7&l福地生珍材料，可用于炼丹与兑换道源'
+  recipe_type: TR_FDSZ
+Tr_fdsz13:
+  placeable: false
+  lateInit: false
+  item_group: Tr_fdsz
+  item:
+    glow: true
+    material_type: mc
+    material: blaze_rod
+    name: '{#fed7aa}&l涅{#fdba74}&l槃{#fb923c}&l火{#f97316}&l种'
+    lore:
+    - '&7&l涅槃重生的火种'
+    - '&7&l福地生珍材料，可用于炼丹与兑换道源'
+  recipe_type: TR_FDSZ
+Tr_fdsz14:
+  placeable: false
+  lateInit: false
+  item_group: Tr_fdsz
+  item:
+    glow: true
+    material_type: mc
+    material: iron_block
+    name: '{#c4b5fd}&l九{#a78bfa}&l幽{#8b5cf6}&l铁'
+    lore:
+    - '&7&l九幽深处淬炼的铁'
+    - '&7&l福地生珍材料，可用于炼丹与兑换道源'
+  recipe_type: TR_FDSZ
+Tr_fdsz15:
+  placeable: false
+  lateInit: false
+  item_group: Tr_fdsz
+  item:
+    glow: true
+    material_type: mc
+    material: iron_ingot
+    name: '{#e0f2fe}&l星{#bae6fd}&l辰{#7dd3fc}&l钢'
+    lore:
+    - '&7&l星辰之力铸成的钢材'
+    - '&7&l福地生珍材料，可用于炼丹与兑换道源'
+  recipe_type: TR_FDSZ
+Tr_fdsz16:
+  placeable: false
+  lateInit: false
+  item_group: Tr_fdsz
+  item:
+    glow: true
+    material_type: mc
+    material: nether_star
+    name: '{#f0abfc}&l混{#d946ef}&l沌{#c026d3}&l源{#a21caf}&l核'
+    lore:
+    - '&7&l混沌初开的源核'
+    - '&7&l福地生珍材料，可用于炼丹与兑换道源'
+  recipe_type: TR_FDSZ
+Tr_fdsz17:
+  placeable: false
+  lateInit: false
+  item_group: Tr_fdsz
+  item:
+    glow: true
+    material_type: mc
+    material: paper
+    name: '{#fef9c3}&l造{#fde047}&l化{#facc15}&l玉{#eab308}&l碟&7&l碎片'
+    lore:
+    - '&7&l造化玉碟的残片'
+    - '&7&l福地生珍材料，可用于炼丹与兑换道源'
+  recipe_type: TR_FDSZ
+Tr_fdsz18:
+  placeable: false
+  lateInit: false
+  item_group: Tr_fdsz
+  item:
+    glow: true
+    material_type: mc
+    material: wheat_seeds
+    name: '{#bbf7d0}&l大{#86efac}&l道{#4ade80}&l之{#22c55e}&l种'
+    lore:
+    - '&7&l蕴含大道的种子'
+    - '&7&l福地生珍材料，可用于炼丹与兑换道源'
+  recipe_type: TR_FDSZ
+Tr_fdsz19:
+  placeable: false
+  lateInit: false
+  item_group: Tr_fdsz
+  item:
+    glow: true
+    material_type: mc
+    material: oak_log
+    name: '{#a7f3d0}&l永{#6ee7b7}&l恒{#34d399}&l神{#10b981}&l木'
+    lore:
+    - '&7&l永恒不灭的神木'
+    - '&7&l福地生珍材料，可用于炼丹与兑换道源'
+  recipe_type: TR_FDSZ
+Tr_fdsz20:
+  placeable: false
+  lateInit: false
+  item_group: Tr_fdsz
+  item:
+    glow: true
+    material_type: mc
+    material: amethyst_block
+    name: '{#e9d5ff}&l鸿{#d8b4fe}&l蒙{#c084fc}&l紫{#7c3aed}&l晶'
+    lore:
+    - '&7&l鸿蒙紫气凝成的神晶'
+    - '&7&l福地生珍材料，可用于炼丹与兑换道源'
+  recipe_type: TR_FDSZ
+Tr_fdszsxq:
+  placeable: false
+  lateInit: false
+  item_group: Tr_zzdj
+  item:
+    glow: true
+    material_type: mc
+    material: paper
+    name: '{#fef9c3}&l福{#fde047}&l地{#facc15}&l生{#eab308}&l珍&7&l刷新券'
+    lore:
+    - '{#fef3c7}&l可清除福地生珍的刷新冷却'
+    - '&7&l仅在进入冷却时可以使用'
+  recipe_type: TR_FSDP
+Tr_yh01:
+  placeable: false
+  lateInit: false
+  item_group: Tr_zzdj
+  item:
+    glow: true
+    material_type: mc
+    material: gold_nugget
+    name: '{#fde68a}&l玄{#fcd34d}&l金{#fbbf24}&l焚{#f59e0b}&l天{#b45309}&l炎'
+    lore: '&7&l金行异火，锋芒焚天'
+  recipe_type: TR_FSDP
+Tr_yh02:
+  placeable: false
+  lateInit: false
+  item_group: Tr_zzdj
+  item:
+    glow: true
+    material_type: mc
+    material: jungle_sapling
+    name: '{#86efac}&l青{#4ade80}&l木{#22c55e}&l长{#16a34a}&l生{#15803d}&l焰'
+    lore: '&7&l木行异火，生生不息'
+  recipe_type: TR_FSDP
+Tr_yh03:
+  placeable: false
+  lateInit: false
+  item_group: Tr_zzdj
+  item:
+    glow: true
+    material_type: mc
+    material: prismarine_crystals
+    name: '{#67e8f9}&l沧{#22d3ee}&l溟{#06b6d4}&l玄{#0891b2}&l水{#0e7490}&l焱'
+    lore: '&7&l水行异火，沧溟玄水焱'
+  recipe_type: TR_FSDP
+Tr_yh04:
+  placeable: false
+  lateInit: false
+  item_group: Tr_zzdj
+  item:
+    glow: true
+    material_type: mc
+    material: blaze_rod
+    name: '{#fca5a5}&l赤{#f87171}&l霄{#ef4444}&l焚{#dc2626}&l灵{#b91c1c}&l炎'
+    lore: '&7&l火行异火，赤霄焚灵'
+  recipe_type: TR_FSDP
+Tr_yh05:
+  placeable: false
+  lateInit: false
+  item_group: Tr_zzdj
+  item:
+    glow: true
+    material_type: mc
+    material: clay_ball
+    name: '{#d6a35c}&l厚{#c68b4e}&l土{#b57b42}&l地{#a1622f}&l心{#8c4a1f}&l火'
+    lore: '&7&l土行异火，地心沉厚'
+  recipe_type: TR_FSDP
+Tr_yh06:
+  placeable: false
+  lateInit: false
+  item_group: Tr_zzdj
+  item:
+    glow: true
+    material_type: mc
+    material: glowstone
+    name: '{#fef08a}&l曜{#fde047}&l日{#facc15}&l净{#eab308}&l世{#ca8a04}&l炎'
+    lore: '&7&l光行异火，净世曜日'
+  recipe_type: TR_FSDP
+Tr_yh07:
+  placeable: false
+  lateInit: false
+  item_group: Tr_zzdj
+  item:
+    glow: true
+    material_type: mc
+    material: ink_sac
+    name: '{#a78bfa}&l冥{#8b5cf6}&l渊{#7c3aed}&l噬{#6d28d9}&l魂{#581c87}&l火'
+    lore: '&7&l暗行异火，冥渊噬魂'
+  recipe_type: TR_FSDP
+Tr_yh08:
+  placeable: false
+  lateInit: false
+  item_group: Tr_zzdj
+  item:
+    glow: true
+    material_type: mc
+    material: redstone_torch
+    name: '{#7dd3fc}&l九{#38bdf8}&l霄{#0ea5e9}&l紫{#0284c7}&l雷{#0369a1}&l炎'
+    lore: '&7&l雷行异火，九霄紫雷'
+  recipe_type: TR_FSDP
+Tr_yh09:
+  placeable: false
+  lateInit: false
+  item_group: Tr_zzdj
+  item:
+    glow: true
+    material_type: mc
+    material: ice
+    name: '{#bae6fd}&l霜{#7dd3fc}&l雪{#38bdf8}&l凝{#0ea5e9}&l神{#0284c7}&l焰'
+    lore: '&7&l冰行异火，霜雪凝神'
+  recipe_type: TR_FSDP
+Tr_kh:
+  placeable: false
+  lateInit: false
+  script: 道法/异火选择
+  item_group: Tr_zzdj
+  item:
+    glow: true
+    material_type: mc
+    material: fire_charge
+    name: '{#fca5a5}&l控{#f87171}&l火{#ef4444}&l'
+    lore:
+    - '&7&l长按右键发射异火'
+    - '&7&lShift+左键切换异火'
+  recipe_type: TR_YGYLS_TYPE
+  recipe:
+    1:
+      material_type: slimefun
+      material: Tr_jsllz
+      amount: 4
+    2:
+      material_type: slimefun
+      material: Tr_fdsz13
+    3:
+      material_type: mc
+      material: dispenser
+Tr_dy01:
+  placeable: false
+  lateInit: false
+  item_group: Tr_zzdj
+  item:
+    glow: true
+    material_type: mc
+    material: glowstone_dust
+    name: '{#a7f3d0}&l灵{#86efac}&l蕴{#65d69a}&l丹'
+    lore:
+    - '&7&l以灵蕴草穗炼成的丹药'
+    - '&7服用后增加糖之力突破进度'
+    - '&7服用后回复糖之力'
+  recipe_type: TR_DY
+  recipe:
+    5:
+      material_type: slimefun
+      material: Tr_txlll
+Tr_dy02:
+  placeable: false
+  lateInit: false
+  item_group: Tr_zzdj
+  item:
+    glow: true
+    material_type: mc
+    material: sugar
+    name: '{#bae6fd}&l凝{#7dd3fc}&l露{#38bdf8}&l丹'
+    lore:
+    - '&7&l以凝露花炼成的丹药'
+    - '&7服用后增加灵露润体进度'
+    - '&7效果：提升护甲值'
+  recipe_type: TR_DY
+  recipe:
+    5:
+      material_type: slimefun
+      material: Tr_txlll
+Tr_dy03:
+  placeable: false
+  lateInit: false
+  item_group: Tr_zzdj
+  item:
+    glow: true
+    material_type: mc
+    material: blaze_powder
+    name: '{#fca5a5}&l赤{#f87171}&l炎{#ef4444}&l丹'
+    lore:
+    - '&7&l以赤炎果炼成的丹药'
+    - '&7服用后增加焚天烈力进度'
+    - '&7效果：提升近战攻击力'
+  recipe_type: TR_DY
+  recipe:
+    5:
+      material_type: slimefun
+      material: Tr_txlll
+Tr_dy04:
+  placeable: false
+  lateInit: false
+  item_group: Tr_zzdj
+  item:
+    glow: true
+    material_type: mc
+    material: packed_ice
+    name: '{#e0f2fe}&l寒{#bae6fd}&l霜{#7dd3fc}&l丹'
+    lore:
+    - '&7&l以寒霜参炼成的丹药'
+    - '&7服用后增加寒晶坚壁进度'
+    - '&7效果：提升护甲韧性'
+  recipe_type: TR_DY
+  recipe:
+    5:
+      material_type: slimefun
+      material: Tr_txlll
+Tr_dy05:
+  placeable: false
+  lateInit: false
+  item_group: Tr_zzdj
+  item:
+    glow: true
+    material_type: mc
+    material: amethyst_shard
+    name: '{#c4b5fd}&l紫{#a78bfa}&l电{#8b5cf6}&l丹'
+    lore:
+    - '&7&l以紫电藤果炼成的丹药'
+    - '&7服用后增加雷亟疾影进度'
+    - '&7效果：提升移动速度'
+  recipe_type: TR_DY
+  recipe:
+    5:
+      material_type: slimefun
+      material: Tr_txlll
+Tr_dy06:
+  placeable: false
+  lateInit: false
+  item_group: Tr_zzdj
+  item:
+    glow: true
+    material_type: mc
+    material: gold_nugget
+    name: '{#fde68a}&l金{#fcd34d}&l髓{#fbbf24}&l丹'
+    lore:
+    - '&7&l以金髓稻穗炼成的丹药'
+    - '&7服用后增加金髓连击进度'
+    - '&7效果：提升攻击速度'
+  recipe_type: TR_DY
+  recipe:
+    5:
+      material_type: slimefun
+      material: Tr_txlll
+Tr_dy07:
+  placeable: false
+  lateInit: false
+  item_group: Tr_zzdj
+  item:
+    glow: true
+    material_type: mc
+    material: brown_mushroom
+    name: '{#86efac}&l青{#4ade80}&l木{#22c55e}&l丹'
+    lore:
+    - '&7&l以青木芝炼成的丹药'
+    - '&7服用后增加青木生机进度'
+    - '&7效果：提升最大生命值'
+  recipe_type: TR_DY
+  recipe:
+    5:
+      material_type: slimefun
+      material: Tr_txlll
+Tr_dy08:
+  placeable: false
+  lateInit: false
+  item_group: Tr_zzdj
+  item:
+    glow: true
+    material_type: mc
+    material: prismarine_crystals
+    name: '{#67e8f9}&l玄{#22d3ee}&l水{#06b6d4}&l丹'
+    lore:
+    - '&7&l以玄水莲子炼成的丹药'
+    - '&7服用后增加玄水潜息进度'
+    - '&7效果：提升水下挖掘速度'
+  recipe_type: TR_DY
+  recipe:
+    5:
+      material_type: slimefun
+      material: Tr_txlll
+Tr_dy09:
+  placeable: false
+  lateInit: false
+  item_group: Tr_zzdj
+  item:
+    glow: true
+    material_type: mc
+    material: clay_ball
+    name: '{#d6a35c}&l厚{#c68b4e}&l土{#b57b42}&l丹'
+    lore:
+    - '&7&l以厚土根炼成的丹药'
+    - '&7服用后增加厚土镇岳进度'
+    - '&7效果：提升击退抗性'
+  recipe_type: TR_DY
+  recipe:
+    5:
+      material_type: slimefun
+      material: Tr_txlll
+Tr_zlz:
+  placeable: false
+  lateInit: false
+  item_group: Tr_zzdj
+  item:
+    glow: true
+    material_type: mc
+    material: ender_pearl
+    name: '{#fde68a}&l镇{#fcd34d}&l炉{#fbbf24}&l珠'
+    lore:
+    - '&7&l可保护太虚琉璃炉一次不炸炉'
+  recipe_type: TR_FSDP
+
+Tr_zdldq:
+  placeable: false
+  lateInit: false
+  script: 道法/丹药
+  item_group: Tr_zzdj
+  item:
+    glow: true
+    material_type: mc
+    material: paper
+    name: '{#fde68a}&l自{#fcd34d}&l动{#fbbf24}&l炼{#f59e0b}&l丹{#d97706}&l券'
+    lore:
+    - '&7&l炼丹开始后右键太虚琉璃炉，立即完成本次炼丹'
+  recipe_type: TR_FSDP
+
+Tr_xsd:
+  placeable: false
+  lateInit: false
+  script: 道法/境界
+  item_group: Tr_zzdj
+  item:
+    glow: true
+    material_type: mc
+    material: golden_apple
+    name: '{#fde68a}&l洗{#fcd34d}&l髓{#fbbf24}&l丹'
+    lore:
+    - '&7&l开辟丹田，踏入糖丸境界'
+  recipe_type: TR_FSDP
+
+Tr_xpsj:
+  placeable: false
+  lateInit: false
+  item_group: Tr_zzfzcl
+  item:
+    glow: true
+    material_type: skull_base64
+    material: eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvYmY1N2ZjOGE2ODg5MGIxZTAwZDRjYTM4YzY4ZjI5M2U2YWE3ZTc4MTI2ZTBhM2FhMDA5ZmVmYzhlN2I3ZjM2NSJ9fX0=
+    name: '{#e0f2fe}&l下{#bae6fd}&l品{#7dd3fc}&l神{#38bdf8}&l晶'
+    lore:
+    - '&7&l甘霖神龛凝聚的下品神晶'
+  recipe_type: TR_GL
+  recipe:
+    5:
+      material_type: slimefun
+      material: Tr_glsk
+Tr_zpsj:
+  placeable: false
+  lateInit: false
+  item_group: Tr_zzfzcl
+  item:
+    glow: true
+    material_type: skull_base64
+    material: eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvMzM1NTAwYTM0OGIwMDY1MWU3ZmY1MWRiOTJhYmI2NDdhNmNjZTM3MzM5N2M0MWFhZmNiZDQwNGNhZjhmY2JmNiJ9fX0=
+    name: '{#bbf7d0}&l中{#86efac}&l品{#4ade80}&l神{#22c55e}&l晶'
+    lore:
+    - '&7&l甘霖神龛凝聚的中品神晶'
+  recipe_type: TR_GL
+  recipe:
+    5:
+      material_type: slimefun
+      material: Tr_glsk
+Tr_spsj:
+  placeable: false
+  lateInit: false
+  item_group: Tr_zzfzcl
+  item:
+    glow: true
+    material_type: skull_base64
+    material: eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvMTNjZmMzY2JjMGNmNmY4MTc3NGZhMzdiMWY2NjA4NDE3YzM2YWExOWU1YTQyOWM5NzY5OGZmOTRkYWZiM2E2In19fQ==
+    name: '{#fde68a}&l上{#fcd34d}&l品{#fbbf24}&l神{#f59e0b}&l晶'
+    lore:
+    - '&7&l甘霖神龛凝聚的上品神晶'
+  recipe_type: TR_GL
+  recipe:
+    5:
+      material_type: slimefun
+      material: Tr_glsk
+Tr_tssj:
+  placeable: false
+  lateInit: false
+  item_group: Tr_zzfzcl
+  item:
+    glow: true
+    material_type: skull_base64
+    material: eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNGNhNDA3ZDNiZGI1ZDBkODAzYjViZmU1MWU4NmU5MWY4YTI5ZTg2NWZjNGNkMzYwMmVhZjA3N2EwYjg1ZGQ2NSJ9fX0=
+    name: '{#f0abfc}&l糖{#d946ef}&l神{#c026d3}&l神{#a21caf}&l晶'
+    lore:
+    - '&7&l甘霖神龛凝聚的糖神神晶'
+  recipe_type: TR_GL
+  recipe:
+    5:
+      material_type: slimefun
+      material: Tr_glsk
+Tr_fsy:
+  lateInit: false
+  placeable: false
+  script: 道法/浮生当铺
+  item_group: Tr_zzdj
+  item:
+    glow: true
+    material_type: mc
+    material: emerald
+    name: '{#d4f1f9}&l浮{#a8e6f0}&l生{#7fd4e6}&l仪'
+    lore:
+    - '&7右键快捷打开浮生当铺'
+  recipe_type: TR_FSDP
+Tr_njd:
+  lateInit: false
+  placeable: false
+  script: 道法/储物空间
+  item_group: Tr_zzdj
+  item:
+    glow: true
+    material_type: mc
+    material: bundle
+    name: '{#e8f6ff}&l纳{#b8e3ff}&l界{#7fc9e8}&l袋'
+    lore:
+    - '&7一方纳界，万象可藏'
+    - '&7右键快捷打开储物空间主菜单'
+  recipe_type: TR_FSDP
+Tr_dxjgtcb:
+  lateInit: false
+  placeable: false
+  item_group: Tr_zzdj
+  script: 道法/大型结构填充
+  item:
+    glow: true
+    material_type: mc
+    material: blaze_rod
+    name: '{#ffd166}&l大{#f4a259}&l型{#e07a3f}&l结{#c44d2a}&l构{#8b1e1e}&l填{#5e0000}&l充{#3b0a0a}&l棒'
+    lore:
+    - '&7右键大型结构机器核心'
+    - '&7自动消耗背包材料填充方块。'
+    - '&7材料不足时会提示缺少物品。'
+  recipe_type: TR_YGYLS_TYPE
+  recipe:
+    1:
+      material_type: slimefun
+      material: STAFF_ELEMENTAL
+    2:
+      material_type: slimefun
+      material: Tr_tthj
+    3:
+      material_type: slimefun
+      material: STAFF_ELEMENTAL
+    4:
+      material_type: slimefun
+      material: STAFF_ELEMENTAL
+    5:
+      material_type: slimefun
+      material: Tr_fdsz17
+    6:
+      material_type: slimefun
+      material: STAFF_ELEMENTAL
+    7:
+      material_type: slimefun
+      material: STAFF_ELEMENTAL
+    8:
+      material_type: mc
+      material: heavy_core
+    9:
+      material_type: slimefun
+      material: STAFF_ELEMENTAL
+
+Tr_dun:
+  lateInit: false
+  placeable: false
+  item_group: Tr_zzfzcl
+  item:
+    glow: true
+    material_type: skull_base64
+    material: eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvZWQxMDhiMzRkZDU3Y2UwNWFhZDNhOTZhMGM4OTgxMGM3MzljZWM2Y2JkNGVlNzNiZGU4NzgxNmZlZTUxY2EwZSJ9fX0=
+    name: '{#f5d0fe}&l沌'
+    lore:
+    - '&7混沌未分，元素归一。'
+    - '&7九种元素的本源凝合。'
+  recipe_type: TR_HTY
+  recipe:
+    5:
+      material_type: slimefun
+      material: Tr_hty
+
+Tr_cui:
+  lateInit: false
+  placeable: false
+  item_group: Tr_zzfzcl
+  item:
+    glow: true
+    material_type: skull_base64
+    material: eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvZTI3MzFiOWI3YmFkZjM5ZTE1NGRmODdjNDQ0ZjQxNWQ1NTk4YmRjZmE3NDA4YzZmNjhkMGVkZWY1MGI2MzU4OSJ9fX0=
+    name: '{#a3e635}&l萃'
+    lore:
+    - '&7所有灵植的集合体。'
+    - '&7凝聚了十六种灵植的精华。'
+  recipe_type: TR_HTY
+  recipe:
+    5:
+      material_type: slimefun
+      material: Tr_hty
+
+Tr_cai:
+  lateInit: false
+  placeable: false
+  item_group: Tr_zzfzcl
+  item:
+    glow: true
+    material_type: skull_base64
+    material: eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvMjBkZTEzMzg5NjgwNzQxYjYyZTUxOGIxMDkzNzI3N2E3OWNkODQwMDRjOWQxYjg3YjZlYTQ0NTUyOWU4MjEwMyJ9fX0=
+    name: '{#fbbf24}&l材'
+    lore:
+    - '&7所有洞天福地材料的集合体。'
+    - '&7凝聚了二十种福地材料的精华。'
+  recipe_type: TR_HTY
+  recipe:
+    5:
+      material_type: slimefun
+      material: Tr_hty
+
+Tr_lxj:
+  lateInit: false
+  placeable: false
+  item_group: Tr_zhuangbei
+  script: 道法/装备
+  item:
+    glow: true
+    material_type: mc
+    material: wooden_sword
+    name: "§c§l戮仙剑"
+    lore:
+      - "§7【戮仙剑】"
+      - "§7攻击目标会引落无焰雷霆。"
+      - "§7右键御剑 / 收剑下剑，WASD 移动。"
+      - "§7前后移动时高度跟随准星。"
+      - "§7Shift 逐渐降落。"
+      - "§7御剑撞击生物：每 0.1 秒造成 3% 最大生命伤害，每 1 级锋利额外 +0.05%。"
+  recipe_type: TR_JBTR_RECIPE_TYPE
+Tr_ktg:
+  lateInit: false
+  placeable: false
+  item_group: Tr_zhuangbei
+  item:
+    glow: true
+    material_type: mc
+    material: stone_pickaxe
+    name: "§6§l鸿蒙开天镐"
+    lore:
+      - "§f一镐开天，万矿朝宗。"
+      - "§7适合范围挖矿、自动熔炼、自动入包。"
+      - "§7石质工具，挖掘矿物掉落视作下界合金材质。"
+      - "§d鸿蒙开天，太虚斩劫；九幽覆海，长生种道。"
+      - "§7可以 shift 右键来打开功能菜单"
+  recipe_type: TR_JBTR_RECIPE_TYPE
+Tr_zjf:
+  lateInit: false
+  placeable: false
+  item_group: Tr_zhuangbei
+  item:
+    glow: true
+    material_type: mc
+    material: stone_axe
+    name: "§5§l太虚斩劫斧"
+    lore:
+      - "§f一斧斩劫，万木归元。"
+      - "§7适合连锁伐木与树叶、自动收集木头"
+      - "§7石质工具，挖掘矿物掉落视作下界合金材质。"
+      - "§d鸿蒙开天，太虚斩劫；九幽覆海，长生种道。"
+      - "§7可以 shift 右键来打开功能菜单"
+  recipe_type: TR_JBTR_RECIPE_TYPE
+Tr_fhc:
+  lateInit: false
+  placeable: false
+  item_group: Tr_zhuangbei
+  item:
+    glow: true
+    material_type: mc
+    material: stone_shovel
+    name: "§3§l九幽覆海铲"
+    lore:
+      - "§f一铲覆海，群山平岳。"
+      - "§7适合范围铲土、平整地形、填海造陆。"
+      - "§7石质工具，挖掘矿物掉落视作下界合金材质。"
+      - "§d鸿蒙开天，太虚斩劫；九幽覆海，长生种道。"
+      - "§7可以 shift 右键来打开功能菜单"
+  recipe_type: TR_JBTR_RECIPE_TYPE
+Tr_zdc:
+  lateInit: false
+  placeable: false
+  item_group: Tr_zhuangbei
+  item:
+    glow: true
+    material_type: mc
+    material: stone_hoe
+    name: "§a§l长生种道锄"
+    lore:
+      - "§f一锄种道，万灵长生。"
+      - "§7适合范围耕地、自动播种（种子优先取副手，再按背包从上到下从左到右）"
+      - "§7右键成熟作物：5×5 范围收割并自动补种"
+      - "§7右键未成熟作物：5×5 范围催熟"
+      - "§7石质工具，挖掘矿物掉落视作下界合金材质。"
+      - "§d鸿蒙开天，太虚斩劫；九幽覆海，长生种道。"
+      - "§7可以 shift 右键来打开功能菜单"
+  recipe_type: TR_JBTR_RECIPE_TYPE
+
+# ===== 中章管理员物品（组 Tr_glywp）：全解 =====
+Tr_dlqj:
+  lateInit: false
+  placeable: false
+  item_group: Tr_glywp
+  script: 道法/全解
+  item:
+    glow: true
+    material_type: mc
+    material: blaze_powder
+    name: '{#ffd700}&l丹{#ffb300}&l类{#ff8f00}&l全{#ff5722}&l解'
+    lore:
+      - '&7右键使用：解锁全部 9 种丹方'
+      - '&7丹道熟练度直接提升至 &e2000&7（&6丹帝&7）'
+      - '&7解锁全部异火'
+      - '&8中章管理员物品'
+  recipe_type: TR_WFZZ_TYPE
+Tr_jjqj:
+  lateInit: false
+  placeable: false
+  item_group: Tr_glywp
+  script: 道法/全解
+  item:
+    glow: true
+    material_type: mc
+    material: sugar
+    name: '{#8b5cf6}&l境{#6366f1}&l界{#3b82f6}&l全{#0ea5e9}&l解'
+    lore:
+      - '&7右键使用：直接开辟境界并成就 &d糖帝&7 境界'
+      - '&8中章管理员物品'
+  recipe_type: TR_WFZZ_TYPE
+Tr_zkhctbyq:
+  lateInit: false
+  placeable: false
+  item_group: Tr_glywp
+  script: 道法/终刻合成台编译器
+  item:
+    glow: true
+    material_type: mc
+    material: crafter
+    name: '{#e879f9}&l终{#c026d3}&l刻{#7c3aed}&l合{#6366f1}&l成{#0ea5e9}&l台&d&l编译器'
+    lore:
+      - '&7管理员专用'
+      - '&8中章管理员物品'
+  recipe_type: TR_WFZZ_TYPE
+Tr_tzqyqcq:
+  lateInit: false
+  placeable: false
+  item_group: Tr_zzdj
+  script: 道法/清理挑战区域
+  item:
+    glow: true
+    material_type: mc
+    material: slime_ball
+    name: '{#a3e635}&l挑战区域清除器'
+    lore:
+      - '&7右键挑战区域最上层的基岩，将整个挑战区域清空'
+      - '&a一般在服务器意外重启，场地未能清除时使用'
+      - '&b当然，你也可以在上一次挑战区域旁再开启一场新挑战来清除上一次挑战区域残留'
+  recipe_type: TR_YGYLS_TYPE
+  recipe:
+    5:
+      material_type: mc
+      material: slime_ball
+    8:
+      material_type: slimefun
+      material: magic_sugar
+    
+
+# ===== 破法弓（双子经营小游戏的最终产物）=====
+Tr_pfg:
+  lateInit: false
+  placeable: false
+  item_group: Tr_zhuangbei
+  script: 道法/装备
+  item:
+    glow: true
+    material_type: mc
+    material: bow
+    name: '{#f0abfc}&l破{#e879f9}&l法{#d946ef}&l弓'
+    lore:
+      - '{#e879f9}----我听见了破万法的回响'
+      - '{#fde68a}shift左键打开功能菜单，选择是否开启特殊箭与是否启用功能'
+      - '{#7dd3fc}开启特殊箭模式，手持右键背包中无需箭便可发射一支速度20格/s的直线轨道箭，'
+      - '{#fca5a5}对命中目标造成8%生命值上限+力量效果蓄力满伤害的真实伤害。'
+      - '&8&l或许能破末影人的法?'
+  recipe_type: TR_JBTR_RECIPE_TYPE
+
+# ===== 糖心（中章法则材料）=====
+Tr_tangxin:
+  lateInit: false
+  placeable: false
+  item_group: Tr_zzfzcl
+  item:
+    glow: true
+    material_type: skull_base64
+    material: eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvZWZmN2I5N2U2NDY1NTM0ZjM4YjJhZmI0MDUxYzk0OWYyNjczYTY0ZjE0NTNlZjY5ODY1OTQyNGFhNWM0ZWYxZiJ9fX0=
+    name: '{#f9a8d4}&l糖{#f472b6}&l心'
+    lore:
+      - '{#fbcfe8}一颗凝结了糖然法则的心脏。'
+      - '{#c4b5fd}可在任务九换取中章装备全套。'
+  recipe_type: TR_ZKHCT_TYPE
