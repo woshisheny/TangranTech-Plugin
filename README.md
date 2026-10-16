@@ -1,6 +1,16 @@
 # TangranTech（糖然科技）
 
-RSC（RykenSlimefunCustomizer）附属项目 **糖然科技 TangranTech** 的原生化版本：
+>糖丸了
+
+**[糖王]**(https://github.com/tangran666)一大*力♂作*！
+为粘液科技添加了许多糖分超标的妙妙机制与神秘机器❤️
+为你的粘液之路加点糖😋！！！
+
+~~去码头整点薯条~~
+
+## 项目介绍
+
+RSC（RykenSlimefunCustomizer）附属项目 **糖然科技 TangranTech**[tangran666](https://github.com/tangran666) 的原生化版本：
 把原来依赖 RSC 运行时 + Graal.js 脚本的附属，改写为**独立可运行的 Slimefun 附属插件 jar**。
 
 - 目标环境：Paper 1.21.x（编译期对齐 1.21.11 API），Slimefun4 4.9.x（`Slimefun4-*-Beta.jar`）
