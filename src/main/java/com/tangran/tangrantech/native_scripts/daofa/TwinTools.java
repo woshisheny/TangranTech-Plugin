@@ -387,15 +387,15 @@ public final class TwinTools {
         return applyMeta(item, def, silk);
     }
 
-    /** 判断物品是不是这四件之一（按显示名认，渐变色码会被绕过）。 */
+    /** 判断物品是不是这四件之一（只认粘液 id；显示名可被铁砧伪造，不能作判据）。 */
     public static boolean isTool(ItemStack item, String defId) {
         try {
             if (item == null) return false;
-            String name = plainName(item.getItemMeta());
-            if (name == null) return false;
+            String sf = TT.sfIdOf(item);
+            if (sf == null) return false;
             for (Def d : DEFS) {
                 if (defId != null && !d.id().equals(defId)) continue;
-                if (name.contains(d.plain())) return true;
+                if (sf.equalsIgnoreCase(d.id())) return true;
             }
         } catch (Throwable ignored) {
             // 视为不是

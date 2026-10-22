@@ -136,6 +136,16 @@ public class ScriptMachineItem extends SlimefunItem implements EnergyNetComponen
         MenuDef menu = TT.menus.get(getId().toUpperCase(Locale.ROOT));
         if (menu == null) return;
 
+        // 进度槽与输入/输出槽重叠时弃用（与 TTRecipeMachine 同一防御）：
+        // MenuDef.progressSlot 默认 22，而哈气收集器 / 甘霖神龛 / 轨迹织机的 output
+        // 恰好覆盖 22。不拦的话进度占位（打火石）会赖在输出槽里 —— GUI 多一块垃圾，
+        // 且脚本按「空槽」找输出位时永远跳过它，凭空少一个可用输出槽。
+        int pslot = menu.progressSlot;
+        if (pslot >= 0 && overlapsFunctional(pslot)) {
+            TT.log(getId() + " 的进度槽 " + pslot + " 与输入/输出槽重叠（menus.yml 缺 progressbar 配置？），已禁用进度占位");
+            pslot = -1;
+        }
+
         Set<Integer> placed = new HashSet<>();
         for (Map.Entry<Integer, ItemStack> e : menu.items.entrySet()) {
             preset.addItem(e.getKey(), e.getValue(), ChestMenuUtils.getEmptyClickHandler());
@@ -145,13 +155,13 @@ public class ScriptMachineItem extends SlimefunItem implements EnergyNetComponen
         Set<Integer> functional = new HashSet<>();
         for (int s : input) functional.add(s);
         for (int s : output) functional.add(s);
-        if (menu.progressSlot >= 0) functional.add(menu.progressSlot);
+        if (pslot >= 0) functional.add(pslot);
 
         int declared = (menu.size > 0) ? menu.size : 27;
         int maxSlot = declared - 1;
         for (int s : input) maxSlot = Math.max(maxSlot, s);
         for (int s : output) maxSlot = Math.max(maxSlot, s);
-        if (menu.progressSlot >= 0) maxSlot = Math.max(maxSlot, menu.progressSlot);
+        if (pslot >= 0) maxSlot = Math.max(maxSlot, pslot);
         for (int s : placed) maxSlot = Math.max(maxSlot, s);
         int size = Math.min(54, Math.max(declared, ((maxSlot / 9) + 1) * 9));
 
@@ -180,11 +190,19 @@ public class ScriptMachineItem extends SlimefunItem implements EnergyNetComponen
                     });
         }
 
-        if (menu.progressSlot >= 0 && !placed.contains(menu.progressSlot)) {
-            preset.addItem(menu.progressSlot, menu.progressItem != null
+        if (pslot >= 0 && !placed.contains(pslot)) {
+            preset.addItem(pslot, menu.progressItem != null
                     ? menu.progressItem : new ItemStack(Material.FLINT_AND_STEEL),
                     ChestMenuUtils.getEmptyClickHandler());
         }
+    }
+
+    /** 候选进度槽是否与输入/输出槽重叠（重叠则进度占位会赖在功能槽里）。 */
+    private boolean overlapsFunctional(int slot) {
+        if (slot < 0) return false;
+        for (int s : input) if (s == slot) return true;
+        for (int s : output) if (s == slot) return true;
+        return false;
     }
 
     /** 交给脚本 tick 的上下文（字段名与原 JS 里访问的一致）。 */

@@ -1531,7 +1531,7 @@ public final class TwinMinigame {
         try {
             if (player == null || !player.isOnline()) return 0;
             if (hasPofabow(player)) return 0;
-            ItemStack bow = Pofabow.make();
+            ItemStack bow = Pofabow.make(player);
             var left = player.getInventory().addItem(bow);
             if (!left.isEmpty()) {
                 player.getWorld().dropItemNaturally(player.getLocation(), bow);

@@ -16,6 +16,7 @@ import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
+import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
 import org.bukkit.potion.PotionEffect;
@@ -48,14 +49,17 @@ public final class SaccharinScript implements NativeLifecycleScript {
             case "onUse":
                 if (args.length > 0 && args[0] instanceof PlayerInteractEvent event) {
                     if (isTrSugar(event.getItem())) {
-                        grantSaturationAndConsume(event.getPlayer());
+                        // 副手也要能扣：ScriptItemListener 用 e.getItem() 派发（副手事件也命中），
+                        // 若只扣主手，副手持糖右键就是「效果照发、糖不扣」的无限白嫖。
+                        EquipmentSlot hand = event.getHand() != null ? event.getHand() : EquipmentSlot.HAND;
+                        grantSaturationAndConsume(event.getPlayer(), hand);
                         return Boolean.TRUE;
                     }
                 }
                 return Boolean.FALSE;
             case "eat":
                 if (args.length > 0 && args[0] instanceof Player p) {
-                    grantSaturationAndConsume(p);
+                    grantSaturationAndConsume(p, EquipmentSlot.HAND);
                     return Boolean.TRUE;
                 }
                 return Boolean.FALSE;
@@ -67,12 +71,14 @@ public final class SaccharinScript implements NativeLifecycleScript {
     /** 判断物品是否为「糖然牌糖」。 */
     public static boolean isTrSugar(ItemStack item) {
         if (item == null || item.getType().isAir()) return false;
-        SlimefunItem sugar = SlimefunItem.getById(SUGAR_ID);
-        return sugar != null && sugar.getItem().isSimilar(item);
+        // 只认粘液 id（硬约定 #3）：isSimilar 不比 PDC，
+        // 铁砧把普通糖改成同名即可伪造触发（原写法 sugar.getItem().isSimilar(item) 有这个洞）。
+        String id = TT.sfIdOf(item);
+        return id != null && SUGAR_ID.equalsIgnoreCase(id);
     }
 
     /** 吃掉一颗糖并安排后续产出。 */
-    public static void grantSaturationAndConsume(Player player) {
+    public static void grantSaturationAndConsume(Player player, EquipmentSlot hand) {
         try {
             player.addPotionEffect(new PotionEffect(
                     PotionEffectType.SATURATION,
@@ -85,7 +91,7 @@ public final class SaccharinScript implements NativeLifecycleScript {
             // 效果添加失败不阻断后续流程
         }
 
-        removeOneSugar(player);
+        removeOneSugar(player, hand);
         playSound(player, "entity.generic.eat", 1.0f, 1.0f);
         player.sendMessage("§x§b§e§6§c§0§e吃饱啦！");
 
@@ -133,16 +139,18 @@ public final class SaccharinScript implements NativeLifecycleScript {
         SUCCESS_CHANCE.put(player.getUniqueId(), Math.min(100, Math.max(0, value)));
     }
 
-    private static void removeOneSugar(Player player) {
+    /** 从触发事件对应的那只手扣掉一颗糖。 */
+    private static void removeOneSugar(Player player, EquipmentSlot hand) {
         PlayerInventory inv = player.getInventory();
-        ItemStack hand = inv.getItemInMainHand();
-        if (hand == null || hand.getType().isAir()) return;
-        int amount = hand.getAmount();
+        boolean off = hand == EquipmentSlot.OFF_HAND;
+        ItemStack held = off ? inv.getItemInOffHand() : inv.getItemInMainHand();
+        if (held == null || held.getType().isAir()) return;
+        int amount = held.getAmount();
         if (amount > 1) {
-            hand.setAmount(amount - 1);
-            inv.setItemInMainHand(hand);
+            held.setAmount(amount - 1);
+            if (off) inv.setItemInOffHand(held); else inv.setItemInMainHand(held);
         } else {
-            inv.setItemInMainHand(null);
+            if (off) inv.setItemInOffHand(null); else inv.setItemInMainHand(null);
         }
     }
 

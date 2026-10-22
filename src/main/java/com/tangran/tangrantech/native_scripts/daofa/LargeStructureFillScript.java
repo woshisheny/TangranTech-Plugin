@@ -86,6 +86,13 @@ public final class LargeStructureFillScript implements NativeLifecycleScript {
             SlimefunItem sf = BlockStorage.check(block);
             if (!(sf instanceof TTSuperMultiBlockMachine machine)) return Boolean.FALSE;
 
+            // 确认要处理才取消：填充棒对着别的东西右键不该被拦（blaze_rod 本身没有原版行为，
+            // 但结构与填充是「消耗背包材料」的重操作，取消掉同 tick 的其它交互语义更干净）
+            try {
+                event.setCancelled(true);
+            } catch (Throwable ignored) {
+                // 事件不可取消时忽略
+            }
             fill(player, machine, block);
             return Boolean.TRUE;
         } catch (Throwable t) {

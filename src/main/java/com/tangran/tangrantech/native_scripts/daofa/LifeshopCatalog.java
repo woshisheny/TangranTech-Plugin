@@ -295,6 +295,19 @@ public final class LifeshopCatalog {
         return id;
     }
 
+    /**
+     * 福地生珍 20 号材料的中文名。
+     *
+     * <p><b>必须声明在 {@link #NEED_ITEM_NAMES} 之前</b>：Java 静态字段按文本顺序初始化，
+     * {@code needItemNames()} 在类初始化期读本数组，若声明在后会读到 null 抛 NPE，
+     * 导致 ExceptionInInitializerError —— 之后每次访问本类都抛
+     * {@code NoClassDefFoundError: Could not initialize class}（实机：浮生当铺全部入口打不开）。</p>
+     */
+    private static final String[] FDSZ_NAMES = {
+            "星纹铁", "月华砂", "灵犀玉", "青冥石", "紫电晶", "玄冰魄", "赤炎髓", "风灵羽",
+            "天机丝", "太一真水", "鸿蒙尘", "万象铜", "涅槃火种", "九幽铁", "星辰钢",
+            "混沌源核", "造化玉碟碎片", "大道之种", "永恒神木", "鸿蒙紫晶"};
+
     /** 额外需求物品的中文名表（原脚本 {@code NEED_ITEM_NAMES}）。 */
     private static final Map<String, String> NEED_ITEM_NAMES = needItemNames();
 
@@ -316,17 +329,13 @@ public final class LifeshopCatalog {
         m.put("Tr_lz14_fruit", "火灵椒");
         m.put("Tr_lz15_fruit", "风语藤");
         m.put("Tr_lz16_fruit", "星辰麦");
-        for (int i = 1; i <= 20; i++) {
-            String key = String.format(Locale.ROOT, "Tr_fdsz%02d", i);
-            m.put(key, FDSZ_NAMES[i - 1]);
+        // 按数组长度迭代：数组增删元素时循环自动跟随，不会越界也不会漏项
+        for (int i = 0; i < FDSZ_NAMES.length; i++) {
+            String key = String.format(Locale.ROOT, "Tr_fdsz%02d", i + 1);
+            m.put(key, FDSZ_NAMES[i]);
         }
         return Map.copyOf(m);
     }
-
-    private static final String[] FDSZ_NAMES = {
-            "星纹铁", "月华砂", "灵犀玉", "青冥石", "紫电晶", "玄冰魄", "赤炎髓", "风灵羽",
-            "天机丝", "太一真水", "鸿蒙尘", "万象铜", "涅槃火种", "九幽铁", "星辰钢",
-            "混沌源核", "造化玉碟碎片", "大道之种", "永恒神木", "鸿蒙紫晶"};
 
     /**
      * 造一件「干净」商品底物（无自定义名与 lore）。

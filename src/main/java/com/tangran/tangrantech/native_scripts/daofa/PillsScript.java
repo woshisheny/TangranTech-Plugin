@@ -39,7 +39,9 @@ import org.bukkit.event.block.Action;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryCloseEvent;
+import org.bukkit.event.inventory.InventoryDragEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
+import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
@@ -76,6 +78,10 @@ import com.tangran.tangrantech.native_scripts.daofa.RealmScript;
  * 未入阶 → 丹士(100) → 丹师(300) → 丹宗(700) → 丹尊(1200) → 丹帝(2000)。
  * 开始炼丹每次消耗糖之力 {@code max(0, 50 - 品阶序号×10)}，走
  * {@link RealmScript#consumeSugarPower}（统一到境界那份实现，不再各写一份读文件逻辑）。</p>
+ *
+ * <p><b>下线中止</b>：炼丹小游戏全程需要本人在场，因此推进任务里检查玩家在线状态，
+ * 下线即干净中止（撤投影、停任务、不发丹不炸炉，已扣糖之力作废）——
+ * 杜绝「开始炼丹后下线挂机、回来白拿一炉凡品丹」（以及控火事件超时炸掉基地里的炉子）。</p>
  *
  * <p>与 1.21 的适配：投影用 {@link TextDisplay}（原脚本也是），文本走 Adventure。</p>
  */
@@ -1107,6 +1113,20 @@ public final class PillsScript implements NativeLifecycleScript {
 
     private static void tickAlchemy(Player player, State state) {
         try {
+            // 玩家下线 → 干净中止本次炼丹。
+            //
+            // 炼丹是全程需要本人操作的小游戏（投料/加水/控火都有秒级窗口）。
+            // 早先这里不检查在线状态：下线后计时任务照跑，剩余事件全部按超时自动
+            // 「失败」，到点照样 spawnPillReward 掉一炉凡品丹（挂机白拿），
+            // 控火事件还会因火候不动而判失败炸掉基地里的炉子。
+            // 现在人不在线就中止：撤投影、停任务、清状态，不发丹也不炸炉；
+            // 开始炼丹时扣的糖之力视为本次尝试作废（与主动破坏炉鼎的炸炉惩罚区分开）。
+            if (player == null || !player.isOnline()) {
+                TT.log("[丹药] 玩家 " + state.playerName + " 下线，本次炼丹中止（未发丹）");
+                abortAlchemy(state);
+                return;
+            }
+
             long now = System.currentTimeMillis();
             long elapsed = now - state.startTime;
 
@@ -1492,6 +1512,22 @@ public final class PillsScript implements NativeLifecycleScript {
         }
     }
 
+    /**
+     * 干净中止一次炼丹：撤投影、停任务、清状态。
+     *
+     * <p>目前唯一调用方是 {@link #tickAlchemy} 的「玩家下线」分支：
+     * 不发丹也不炸炉，开始炼丹时扣的糖之力视为本次尝试作废。</p>
+     */
+    private static void abortAlchemy(State state) {
+        try {
+            removeProjection(state);
+            cancel(state.task);
+            ALCHEMY.remove(state.uuid);
+        } catch (Throwable ignored) {
+            // 忽略
+        }
+    }
+
     // ------------------------------------------------------------------
     // 材料匹配（炼丹投入时用）
     // ------------------------------------------------------------------
@@ -1592,15 +1628,26 @@ public final class PillsScript implements NativeLifecycleScript {
         }
     }
 
-    /** 取走手持物品的 count 个（减到 0 就清空主手）。 */
-    private static void consumeMainHand(Player player, ItemStack item, int count) {
+    /**
+     * 取走手持物品的 count 个（减到 0 就清空对应手的槽位）。
+     *
+     * <p><b>必须按 {@code event.getHand()} 分手</b>：{@code onInteract} 里 {@code item} 取自
+     * {@code event.getItem()}，玩家用副手持丹/糖水/材料右键时命中的是副手槽。原写法无条件写回
+     * 主手，会把副手物品复制进主手（同一引用进两个槽）或清错手——副手消耗写主手。与
+     * {@code SaccharinScript} 的副手扣减保持同一口径。</p>
+     */
+    private static void consumeFromHand(Player player, EquipmentSlot hand, ItemStack item, int count) {
         try {
+            PlayerInventory inv = player.getInventory();
+            boolean off = hand == EquipmentSlot.OFF_HAND;
             int left = item.getAmount() - count;
             if (left <= 0) {
-                player.getInventory().setItemInMainHand(null);
+                if (off) inv.setItemInOffHand(null);
+                else inv.setItemInMainHand(null);
             } else {
                 item.setAmount(left);
-                player.getInventory().setItemInMainHand(item);
+                if (off) inv.setItemInOffHand(item);
+                else inv.setItemInMainHand(item);
             }
         } catch (Throwable ignored) {
             // 忽略
@@ -1626,6 +1673,8 @@ public final class PillsScript implements NativeLifecycleScript {
                 Player player = event.getPlayer();
                 ItemStack item = event.getItem() != null
                         ? event.getItem() : player.getInventory().getItemInMainHand();
+                // 消耗按实际手持的手走（副手持物右键命中副手槽），与 SaccharinScript 同口径
+                EquipmentSlot hand = event.getHand() != null ? event.getHand() : EquipmentSlot.HAND;
                 java.util.UUID uuid = player.getUniqueId();
                 State state = ALCHEMY.get(uuid);
                 Action action = event.getAction();
@@ -1696,7 +1745,7 @@ public final class PillsScript implements NativeLifecycleScript {
                 // 自动炼丹券：右键立即完成本次炼丹
                 if (isSf(item, "TR_ZDLDQ")) {
                     if (!tryConsumeInput(player, DEFAULT_INPUT_COOLDOWN_MS)) return;
-                    consumeMainHand(player, item, 1);
+                    consumeFromHand(player, hand, item, 1);
                     double r = RANDOM.nextDouble();
                     String autoQuality = r < 0.40 ? "凡品" : r < 0.70 ? "？？"
                             : r < 0.90 ? "珍品" : r < 0.99 ? "绝品" : "无暇";
@@ -1712,7 +1761,7 @@ public final class PillsScript implements NativeLifecycleScript {
                     int consume = player.isSneaking()
                             ? Math.min(item.getAmount(), state.currentEvent.amount) : 1;
                     if (consume > 0) {
-                        consumeMainHand(player, item, consume);
+                        consumeFromHand(player, hand, item, consume);
                         state.currentEvent.amount -= consume;
                         try {
                             player.playSound(player.getLocation(),
@@ -1738,7 +1787,7 @@ public final class PillsScript implements NativeLifecycleScript {
                         int consume = player.isSneaking()
                                 ? Math.min(item.getAmount(), mat.need) : 1;
                         if (consume > 0) {
-                            consumeMainHand(player, item, consume);
+                            consumeFromHand(player, hand, item, consume);
                             mat.need -= consume;
                             try {
                                 player.playSound(player.getLocation(),
@@ -1906,6 +1955,19 @@ public final class PillsScript implements NativeLifecycleScript {
                 refresh(top, player);
             } catch (Throwable t) {
                 TT.log("[丹药] 菜单点击处理出错: " + t);
+            }
+        }
+
+        @EventHandler(priority = EventPriority.NORMAL)
+        public void onDrag(InventoryDragEvent event) {
+            // 拖拽是独立于 InventoryClickEvent 的一条通路：onClick 里 setCancelled 管不到它。
+            // 不拦的话玩家把物品拖进菜单 → refresh() 重建时直接被抹掉 / 关闭时随界面丢弃，
+            // 都等于凭空消失。与其余 8 个脚本菜单（异火选择 / 浮生当铺 / 堆叠机…）保持一致。
+            try {
+                Inventory top = Views.top(event.getView());
+                if (top != null && ACTIVE.contains(top)) event.setCancelled(true);
+            } catch (Throwable ignored) {
+                // 忽略
             }
         }
 

@@ -21,6 +21,11 @@ public final class ScriptItemListener implements Listener {
 
     @EventHandler(priority = EventPriority.NORMAL, ignoreCancelled = false)
     public void onInteract(PlayerInteractEvent e) {
+        // 只放行右键：Bukkit 对左键空挥 / 开始挖矿 / 踩踏耕地也派发本事件，
+        // 不过滤会让「挥一下糖精就吃一颗糖」这类误触发生（多个脚本的 onUse 自身不校验 action）。
+        Action action = e.getAction();
+        if (action != Action.RIGHT_CLICK_AIR && action != Action.RIGHT_CLICK_BLOCK) return;
+
         ItemStack item = e.getItem();
         if (item != null && !item.getType().isAir()) {
             SlimefunItem sf = SlimefunItem.getByItem(item);

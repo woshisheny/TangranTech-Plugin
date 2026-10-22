@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Random;
+import java.util.Set;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 import org.bukkit.Bukkit;
@@ -93,6 +94,39 @@ public final class TaixuHubScript implements NativeLifecycleScript {
 
     /** 原版物品池，首次使用时构建一次。 */
     private static volatile List<Material> vanillaPool;
+
+    /**
+     * 创造模式专属 / 生存不可得的物品名黑名单（不进奖池）。
+     *
+     * <p>Bukkit 没有「仅创造」判定 API（{@link Material#getCreativeCategory()} 对生存
+     * 物品同样非空），只能按名单过滤；所有刷怪蛋另按 {@code _SPAWN_EGG} 后缀统一排除。
+     * 这些物品进了奖池等于免费发创造物品（基岩/屏障/命令方块/刷怪笼），会直接冲垮经济。</p>
+     */
+    private static final Set<String> CREATIVE_ONLY = Set.of(
+            "BEDROCK",
+            "BARRIER",
+            "END_PORTAL_FRAME",
+            "SPAWNER",
+            "TRIAL_SPAWNER",
+            "VAULT",
+            "OMINOUS_VAULT",
+            "CREAKING_HEART",
+            "COMMAND_BLOCK",
+            "CHAIN_COMMAND_BLOCK",
+            "REPEATING_COMMAND_BLOCK",
+            "COMMAND_BLOCK_MINECART",
+            "STRUCTURE_BLOCK",
+            "STRUCTURE_VOID",
+            "JIGSAW",
+            "DEBUG_STICK",
+            "KNOWLEDGE_BOOK",
+            "DRAGON_EGG",
+            "DRAGON_HEAD",
+            "PIGLIN_HEAD",
+            "LIGHT",
+            "REINFORCED_DEEPSLATE",
+            "PETRIFIED_OAK_SLAB",
+            "BUDDING_AMETHYST");
 
     /** 滚动阶段 pling 音效：原脚本枚举名。 */
     private static final String[] AMETHYST_SOUNDS = {
@@ -401,7 +435,8 @@ public final class TaixuHubScript implements NativeLifecycleScript {
      * 全部可作为物品的材质（首次构建一次）。
      *
      * <p>原脚本对没有 {@code isItem()} 的老版本做了名字黑名单兜底；本项目目标 1.21，
-     * 直接走 {@link Material#isItem()} 即可。</p>
+     * 直接走 {@link Material#isItem()} 即可。同时要排除创造模式专属/生存不可得的物品
+     * （见 {@link #CREATIVE_ONLY}），否则奖池能刷出基岩、命令方块这类破坏经济的物品。</p>
      */
     private static List<Material> vanillaPool() {
         List<Material> cached = vanillaPool;
@@ -409,7 +444,10 @@ public final class TaixuHubScript implements NativeLifecycleScript {
         List<Material> tmp = new ArrayList<>();
         for (Material m : Material.values()) {
             try {
-                if (m.isItem()) tmp.add(m);
+                if (!m.isItem()) continue;
+                if (m.name().endsWith("_SPAWN_EGG")) continue;
+                if (CREATIVE_ONLY.contains(m.name())) continue;
+                tmp.add(m);
             } catch (Throwable ignored) {
                 // 已移除的材质跳过
             }

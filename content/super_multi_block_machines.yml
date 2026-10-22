@@ -358,8 +358,10 @@ TR_CZJT:
   speed: 1
 
   hideAllRecipes: false
-  #script: 初章祭坛
-  #大型多方快结构机器装载脚本会占用大量的粘液刻，所以停用了(
+  # 初章祭坛的仪式动画不走机器脚本绑定：SuperMultiBlockMachinesLoader 不读 script: 字段，
+  # 且原 RSC 的机器 tick 通道会按粘液刻调用脚本、开销大（老注释因此把它注释掉）。
+  # 原生实现 FirstChapterAltarScript 是纯监听器驱动：右键核心半径 8 格内即挂观察者，
+  # 与机器 tick 无关，无需在此处配置。
 
 
   input: [2,6,9,17,36,44,47,51]
@@ -755,7 +757,6 @@ TR_HTY:
           material_type: slimefun
           material: Tr_hmsg
           amount: 64
-          noConsume: true
       output:
         1:
           material_type: slimefun

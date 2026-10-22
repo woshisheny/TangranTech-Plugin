@@ -148,6 +148,19 @@ public final class RealmScript implements NativeLifecycleScript {
             switch (fn) {
                 case "onUse" -> {
                     if (args.length > 0 && args[0] instanceof PlayerInteractEvent event) {
+                        // 洗髓丹 / 丹药的右键由 RealmListener.onInteract 统一处理（开辟 / 服用 + 消耗），
+                        // 此处必须让位：yml 给 Tr_xsd 绑了本脚本，ScriptItemListener 会派发 onUse，
+                        // 若这里也开菜单就会与 RealmListener 双触发（先提示「已开辟过」又弹界面）。
+                        // 丹药（Tr_dy*）没有 script 绑定，只走 RealmListener 一条路。
+                        ItemStack held = event.getItem() != null
+                                ? event.getItem()
+                                : event.getPlayer().getInventory().getItemInMainHand();
+                        String heldId = TT.sfIdOf(held);
+                        if (heldId != null
+                                && (REALM_PILL_ID.equalsIgnoreCase(heldId)
+                                    || heldId.toLowerCase(Locale.ROOT).startsWith(PILL_PREFIX))) {
+                            return Boolean.FALSE;
+                        }
                         openRealmMenu(event.getPlayer());
                     }
                     return Boolean.FALSE;
@@ -195,6 +208,36 @@ public final class RealmScript implements NativeLifecycleScript {
 
     private static void save(Player player, Map<String, Object> data) {
         AddonPaths.writeJson(realmFile(player), data);
+    }
+
+    /**
+     * 境界存档的<b>单点读-改-写入口</b>（供其他脚本安全修改境界数据）。
+     *
+     * <p>背景：{@code DivineCrystalScript}（神晶获取）早年自带一份
+     * {@code realmFile/loadRealm/saveRealm}，与本类拼出同一路径
+     * （{@code addon_configs/糖然科技/境界/<玩家>.json}）各写各的 —— 两条独立的
+     * 「读-改-写」路径对着同一个文件，任一改成异步、或在读写之间让出主线程，
+     * 就会发生静默丢失更新（一方的扣除被另一方持有的旧副本盖回）。
+     * 现将文件访问统一收口到本类，调用方只描述「怎么改」。</p>
+     *
+     * <p>未开辟境界（或读档异常）时返回 false 且不写文件；{@code edit} 回调里抛出的
+     * 异常同样被捕获、不落盘 —— 保证不会写出改了一半的存档。</p>
+     *
+     * @param player 目标玩家
+     * @param edit   对存档 Map 的修改，在 load 之后、save 之前同步执行
+     * @return 是否完成了 load → edit → save 全流程
+     */
+    public static boolean editRealm(Player player, java.util.function.Consumer<Map<String, Object>> edit) {
+        try {
+            Map<String, Object> data = load(player);
+            if (data == null || !Json.bool(data, "opened", false)) return false;
+            edit.accept(data);
+            save(player, data);
+            return true;
+        } catch (Throwable t) {
+            TT.log("境界 editRealm 异常 " + player.getName() + ": " + t);
+            return false;
+        }
     }
 
     /** 全新存档（开辟境界）。 */

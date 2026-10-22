@@ -40,11 +40,23 @@ public final class SuperMultiBlockMachinesLoader {
 
                 int[] input = MachinesLoader.toIntArray(s.getIntegerList("input"));
                 int[] output = MachinesLoader.toIntArray(s.getIntegerList("output"));
-                List<TTRecipe> recipes = Recipes.readAll(s.getConfigurationSection("recipes"), 9);
+                // inputSize 必须是本机器的真实输入槽数——此前硬编码 9（照抄 mb_machines
+                // 的发射器 9 槽），导致 TR_YTC（2 槽）等机器每条配方的输入数组里被
+                // 填入大量 null 需求，配合旧 distinct 检查把所有配方无声拒绝
+                // （「输入槽位被重复占用」案，2026-10-23）。
+                List<TTRecipe> recipes = Recipes.readAll(s.getConfigurationSection("recipes"), input.length);
 
                 List<List<List<String>>> structure = TTSuperMultiBlockMachine.parseStructure(s);
                 TTSuperMultiBlockMachine.MappingResult mr =
                         TTSuperMultiBlockMachine.parseMapping(s.getConfigurationSection("mapping"), structure);
+
+                TTSuperMultiBlockMachine.SuperFlags flags = new TTSuperMultiBlockMachine.SuperFlags(
+                        s.getBoolean("displayProjectiles", true),
+                        s.getBoolean("checkFormed", true),
+                        s.getBoolean("openMenuWhenClickedParts", true),
+                        s.getBoolean("noMenuWhenNotFormed", true),
+                        s.getBoolean("allowSwitchDisplayLayer", true),
+                        s.getBoolean("defaultNotice", true));
 
                 TTSuperMultiBlockMachine machine = new TTSuperMultiBlockMachine(g,
                         new SlimefunItemStack(id, display),
@@ -56,7 +68,7 @@ public final class SuperMultiBlockMachinesLoader {
                         Math.max(1, s.getInt("speed", 1)),
                         TT.menus.get(id.toUpperCase(java.util.Locale.ROOT)),
                         s.getBoolean("hideAllRecipes", false),
-                        structure, mr.map, mr.core);
+                        structure, mr.map, mr.core, flags);
                 machine.register(TT.plugin);
                 ok++;
             } catch (Exception e) {
@@ -65,5 +77,9 @@ public final class SuperMultiBlockMachinesLoader {
             }
         }
         TT.plugin.getLogger().info("super_multi_block_machines.yml: 注册 " + ok + ", 跳过 " + skip);
+        if (ok > 0) {
+            // 超多方块管理器：方向感知结构 / dirty 逐格检测 / 投影层 / 部件点击开菜单（RSC 逻辑复原）
+            com.tangran.tangrantech.machines.superblock.SuperBlocks.registerOnce();
+        }
     }
 }

@@ -66,6 +66,17 @@ public final class MobDropsLoader {
         }
         TT.plugin.getLogger().info("mob_drops.yml: 注册 " + ok + ", 跳过 " + skip);
 
+        // 行为表填好了，但 DeathListener 还没注册的话，上面摘掉的原生掉落就「双输」：
+        // 原生 100% 通道被摘、behavior 的 chance 通道又没监听器 → 自定义掉落 100% 不掉。
+        // （曾经的 bug：MobDrops.register 全库无调用方）
+        if (ok > 0) {
+            try {
+                com.tangran.tangrantech.behavior.MobDrops.register(TT.plugin);
+            } catch (Throwable t) {
+                TT.log("[mob_drops] 掉落监听器注册失败（自定义掉落将不生效）: " + t);
+            }
+        }
+
         // 防双倍掉落：注册成功后 Slimefun 原生表会 100% 掉落该物品，
         // 而我们的 behavior.MobDrops 按 yml 的 chance 概率掉——把原生表里自己的条目摘掉，
         // 掉落单一来源归 behavior.MobDrops。
@@ -90,11 +101,13 @@ public final class MobDropsLoader {
     /**
      * 中心槽来源蛋：显示名 = 实体枚举名（Slimefun 据此 EntityType.valueOf）。
      *
-     * <p>实体名不合法（valueOf 抛异常会让整个物品加载失败）或没有刷怪蛋材质时，
-     * 退回无名蛋 + 普通配方占位——此时改用 {@link RecipeType#NULL}，
-     * 掉落仍由 behavior.MobDrops 驱动，只是向导里不显示 MOB_DROP 配方。</p>
+     * <p>实体名不合法（valueOf 抛异常会让整个物品加载失败）或没有刷怪蛋材质时
+     * （原版没有 {@code WITHER_SPAWN_EGG} / {@code ENDER_DRAGON_SPAWN_EGG}），
+     * 返回 null 由调用方退回 {@link RecipeType#NULL}，掉落仍由 behavior.MobDrops 驱动，
+     * 只是向导里不显示 MOB_DROP 配方。</p>
      *
-     * @return recipe[4] 应放的物品；若实体名不可解析返回 null（调用方退回 NULL 配方类型）
+     * @return recipe[4] 应放的物品；实体名不可解析或原版没有对应刷怪蛋时返回 null
+     *         （调用方退回 NULL 配方类型）
      */
     private static ItemStack namedEgg(String entity) {
         String name = (entity == null) ? "" : entity.trim().toUpperCase(java.util.Locale.ROOT);
@@ -105,7 +118,13 @@ public final class MobDropsLoader {
             return null;
         }
         org.bukkit.Material egg = org.bukkit.Material.matchMaterial(type.name() + "_SPAWN_EGG");
-        ItemStack it = new ItemStack(egg != null ? egg : org.bukkit.Material.STONE);
+        if (egg == null) {
+            // 与 javadoc 契约对齐：原实现这里退回 STONE 占位，而 javadoc 约定的是
+            // 返回 null 走 NULL 配方。STONE 分支的后果是向导里出现一块写着实体名的
+            // 石头当「刷怪蛋」，纯误导（实际掉落不受影响，behavior.MobDrops 照常驱动）。
+            return null;
+        }
+        ItemStack it = new ItemStack(egg);
         org.bukkit.inventory.meta.ItemMeta meta = it.getItemMeta();
         if (meta != null) {
             meta.setDisplayName(name);

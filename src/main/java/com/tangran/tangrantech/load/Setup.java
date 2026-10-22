@@ -79,23 +79,6 @@ public final class Setup {
         } catch (Throwable ignored) {
             // 忽略
         }
-
-        // 诊断：物品数为 0 的子分类（帮助定位「分类点进去空无一物」——
-        // 若某组为空，说明它的条目在上方某个 loader 里注册失败/被跳过，往前翻日志即可）
-        try {
-            StringBuilder emptyGroups = new StringBuilder();
-            for (var e : TT.groups.entrySet()) {
-                if (e.getValue().getItems().isEmpty()) {
-                    if (emptyGroups.length() > 0) emptyGroups.append(", ");
-                    emptyGroups.append(e.getKey());
-                }
-            }
-            if (emptyGroups.length() > 0) {
-                TT.log("诊断：以下分组没有任何物品（对应条目注册失败或被跳过）: " + emptyGroups);
-            }
-        } catch (Throwable ignored) {
-            // 忽略
-        }
         TT.preload.clear();
 
         TT.plugin.getLogger().info("基础内容加载完成，耗时 " + (System.currentTimeMillis() - t) + "ms");

@@ -116,6 +116,13 @@ public final class FinalCraftingCompilerScript implements NativeLifecycleScript 
                         return Boolean.FALSE;
                     }
                     Player player = event.getPlayer();
+                    // 编译器是 crafter（可放置方块）材质：不取消原版交互会
+                    // 「放下一个 crafter + 打开编译器」双发。管理员物品，任何情况都不该被当作方块放置。
+                    try {
+                        event.setCancelled(true);
+                    } catch (Throwable ignored) {
+                        // 事件不可取消时忽略
+                    }
                     if (!checkOp(player, "右键编译器")) return Boolean.TRUE;
                     // 延后 1 刻再开界面：避开同 tick 的其它交互处理
                     NativePluginHelper.runLater(() -> openEditor(player), 1L);

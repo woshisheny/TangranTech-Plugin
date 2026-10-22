@@ -200,10 +200,19 @@ public final class BossArena {
     public static final String XU_META = "Tr_xu_servant";
 
     /**
+     * 双子本体（天虚恼鬼 / 天实悦灵）的 metadata 标记。
+     *
+     * <p>{@link #isBossBody} 的 VEX/ALLAY 类型兜底靠它做归属校验——
+     * 没有这层标记时，一只野生的悦灵/恼鬼就能让 {@link #hasLiveBossAnywhere()}
+     * 恒为真，把「重启自清理」与「孤儿备份返还」两道安全闸永久关死。</p>
+     */
+    public static final String TWIN_BODY_META = "Tr_boss_twin_body";
+
+    /**
      * 这个实体是不是「挑战本体」（糖然 / 护法 / 双子 / 虚仆）。
      *
      * <p>判定口径照抄原脚本 {@code xuHasLiveBossAnywhere} / {@code arenaHasLiveBoss}：
-     * 优先看 metadata（虚仆），再退到自定义名与实体类型兜底 ——
+     * 优先看 metadata（虚仆 / 双子本体），再退到自定义名与实体类型兜底 ——
      * 名字判定的容错是刻意的：脚本重载后 metadata 可能还在，但名字一定还在。</p>
      */
     public static boolean isBossBody(Entity e) {
@@ -212,6 +221,7 @@ public final class BossArena {
             if (!e.isValid()) return false;
             if (e instanceof Player) return false;
             if (e.hasMetadata(XU_META)) return true;                 // 虚仆
+            if (e.hasMetadata(TWIN_BODY_META)) return true;          // 双子本体（生成时打标）
             String name = "";
             try {
                 name = String.valueOf(e.getCustomName());
@@ -222,7 +232,13 @@ public final class BossArena {
             if (name.contains("[天")) return true;                    // 双子（含头顶展示盔甲架）
             if (name.contains("护法")) return true;
             String type = String.valueOf(e.getType());
-            return "VEX".equals(type) || "ALLAY".equals(type);        // 双子本体（未命名兜底）
+            if ("VEX".equals(type) || "ALLAY".equals(type)) {
+                // 双子本体的类型兜底（未命名时）必须带归属校验：
+                // 野生的悦灵/恼幻（自然生成 / 宠物 / 唤魔者召唤）不认，
+                // 否则 hasLiveBossAnywhere() 会被一只野生悦灵永久置真。
+                return BossFight.byEntity(e) != null;
+            }
+            return false;
         } catch (Throwable ignored) {
             return false;
         }

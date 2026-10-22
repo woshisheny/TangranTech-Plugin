@@ -122,16 +122,23 @@ public final class AutoTaixuHubScript implements NativeLifecycleScript {
 
         progress++;
         if (progress >= PROGRESS_MAX) {
-            consumeInput(menu);
             ItemStack out = randomOutputStack();
-            if (out != null) addToOutput(menu, out);
-            PROGRESS.put(key, 0);
-            updateProgress(menu, 0);
-            try {
-                loc.getWorld().playSound(loc.clone().add(0.5, 0.5, 0.5),
-                        "entity.experience_orb.pickup", 1.0f, 1.5f);
-            } catch (Throwable ignored) {
-                // 音效失败忽略
+            // 先塞输出、成功才扣输入：addToOutput 在输出槽满时返回 false，
+            // 原顺序（先 consumeInput）会把命轨星屑吞掉且产出蒸发。
+            if (out != null && addToOutput(menu, out)) {
+                consumeInput(menu);
+                PROGRESS.put(key, 0);
+                updateProgress(menu, 0);
+                try {
+                    loc.getWorld().playSound(loc.clone().add(0.5, 0.5, 0.5),
+                            "entity.experience_orb.pickup", 1.0f, 1.5f);
+                } catch (Throwable ignored) {
+                    // 音效失败忽略
+                }
+            } else {
+                // 输出满（或产出异常）：不扣输入、保持满进度，等玩家取货后下一拍自然重试
+                PROGRESS.put(key, PROGRESS_MAX);
+                updateProgress(menu, BAR_LENGTH);
             }
         } else {
             PROGRESS.put(key, progress);
@@ -205,28 +212,40 @@ public final class AutoTaixuHubScript implements NativeLifecycleScript {
         }
     }
 
-    /** 把产出塞进输出槽：先并入同类堆叠，再找第一个空槽。 */
-    private static void addToOutput(BlockMenu menu, ItemStack stack) {
+    /**
+     * 把产出塞进输出槽：先并入同类堆叠，再找第一个空槽；全部放下返回 true。
+     *
+     * <p>部分合并不会丢数量：同类堆叠装不下的部分继续找后续槽位/空槽，放不下才整体
+     * 返回 false（由调用方决定不扣输入）。原实现一次合并后直接 return，同类堆叠
+     * 剩余空间装不下整个堆叠时（如 63 + 4）多出的几个会静默蒸发。</p>
+     */
+    private static boolean addToOutput(BlockMenu menu, ItemStack stack) {
         try {
-            if (stack == null) return;
+            if (stack == null) return false;
+            ItemStack remain = stack.clone();
 
-            for (int slot = OUTPUT_SLOT_FROM; slot <= OUTPUT_SLOT_TO; slot++) {
+            for (int slot = OUTPUT_SLOT_FROM; slot <= OUTPUT_SLOT_TO && remain.getAmount() > 0; slot++) {
                 ItemStack old = menu.getItemInSlot(slot);
-                if (old != null && old.isSimilar(stack) && old.getAmount() < old.getMaxStackSize()) {
-                    int add = Math.min(stack.getAmount(), old.getMaxStackSize() - old.getAmount());
-                    old.setAmount(old.getAmount() + add);
-                    menu.replaceExistingItem(slot, old);
-                    return;
-                }
+                if (old == null || !old.isSimilar(remain)) continue;
+                int space = old.getMaxStackSize() - old.getAmount();
+                if (space <= 0) continue;
+                int add = Math.min(remain.getAmount(), space);
+                old.setAmount(old.getAmount() + add);
+                remain.setAmount(remain.getAmount() - add);
+                menu.replaceExistingItem(slot, old);
             }
-            for (int slot = OUTPUT_SLOT_FROM; slot <= OUTPUT_SLOT_TO; slot++) {
-                if (menu.getItemInSlot(slot) == null) {
-                    menu.replaceExistingItem(slot, stack.clone());
-                    return;
-                }
+            for (int slot = OUTPUT_SLOT_FROM; slot <= OUTPUT_SLOT_TO && remain.getAmount() > 0; slot++) {
+                if (menu.getItemInSlot(slot) != null) continue;
+                int put = Math.min(remain.getAmount(), remain.getMaxStackSize());
+                ItemStack placing = remain.clone();
+                placing.setAmount(put);
+                menu.replaceExistingItem(slot, placing);
+                remain.setAmount(remain.getAmount() - put);
             }
+            return remain.getAmount() <= 0;
         } catch (Throwable ignored) {
             // 输出满/槽位异常
+            return false;
         }
     }
 

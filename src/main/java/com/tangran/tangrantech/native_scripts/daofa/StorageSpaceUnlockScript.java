@@ -72,8 +72,8 @@ public final class StorageSpaceUnlockScript implements NativeLifecycleScript {
             return;
         }
 
-        consumeOne(player);
-
+        // 先落盘再扣道具：原顺序是 consumeOne 之后才 Files.write，一旦写入抛
+        // IOException（磁盘满/目录权限），开辟石已经被扣掉但开辟没生效 —— 吞物。
         Map<String, Object> data = new LinkedHashMap<>();
         data.put("unlocked", Boolean.TRUE);
         try {
@@ -85,6 +85,8 @@ public final class StorageSpaceUnlockScript implements NativeLifecycleScript {
             player.sendMessage(PREFIX + "§c储物空间开辟失败，请联系管理！");
             return;
         }
+
+        consumeOne(player);
 
         playEffects(player);
         player.sendMessage(PREFIX + "§a储物空间开辟成功！现在可以使用储物空间了。");

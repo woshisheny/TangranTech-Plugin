@@ -99,6 +99,13 @@ public final class TangtianHalberdScript implements NativeLifecycleScript {
     private static final Map<UUID, Charge> CHARGING = new ConcurrentHashMap<>();
     /** 被糖天画戟技能命中的实体，用于在死亡事件里判断是否需要掉落。 */
     private static final Set<UUID> SKILL_HIT = ConcurrentHashMap.newKeySet();
+    /**
+     * 蓄力横扫正在造成伤害的目标（executeSweep 持有期间生效）。
+     *
+     * <p>技能伤害同样是 {@code ENTITY_ATTACK}，不屏蔽的话会被
+     * {@link #applyLeftClickBonus} 当成普通左键再追加一刀。</p>
+     */
+    private static final Set<UUID> BONUS_SUPPRESS = ConcurrentHashMap.newKeySet();
     /** 防止左键追加伤害触发的二次事件递归。 */
     private static final Set<UUID> BONUS_GUARD = ConcurrentHashMap.newKeySet();
 
@@ -378,7 +385,12 @@ public final class TangtianHalberdScript implements NativeLifecycleScript {
                     double damage = SWEEP_DAMAGE + living.getMaxHealth() * SWEEP_DAMAGE_PERCENT / 100.0;
                     UUID eid = living.getUniqueId();
                     SKILL_HIT.add(eid);
-                    living.damage(damage, player);
+                    BONUS_SUPPRESS.add(eid);
+                    try {
+                        living.damage(damage, player);
+                    } finally {
+                        BONUS_SUPPRESS.remove(eid);
+                    }
                     // 没死就不需要走掉落判定，及时清掉避免集合膨胀
                     if (!living.isDead()) {
                         SKILL_HIT.remove(eid);
@@ -416,6 +428,9 @@ public final class TangtianHalberdScript implements NativeLifecycleScript {
             ensureUnbreakable(damager, item);
 
             UUID eid = entity.getUniqueId();
+            // 蓄力横扫自己的伤害不吃本加成：否则技能伤害被追加（玩家体感“横扫误触左键”），
+            // 且追加的那一击在一刻后补刀时 SKILL_HIT 已被「没死就清」分支移除 → 击杀不掉落。
+            if (BONUS_SUPPRESS.contains(eid)) return;
             if (BONUS_GUARD.contains(eid)) return;
 
             double extra = BONUS_DAMAGE + entity.getMaxHealth() * BONUS_DAMAGE_PERCENT / 100.0;
@@ -491,6 +506,13 @@ public final class TangtianHalberdScript implements NativeLifecycleScript {
                         ? event.getItem()
                         : player.getInventory().getItemInMainHand();
                 if (!isWeapon(item)) return;
+                // 三叉戟材质：原版右键（尤其蹲下蓄力后松手）会把武器本身投出去。
+                // 不取消 = 自定义技能照发 + 画戟被当三叉戟抛出直接丢失，必须先掐掉原版 use。
+                try {
+                    event.setCancelled(true);
+                } catch (Throwable ignored) {
+                    // 事件不可取消时忽略
+                }
                 ensureUnbreakable(player, item);
 
                 if (player.isSneaking()) {
@@ -521,6 +543,7 @@ public final class TangtianHalberdScript implements NativeLifecycleScript {
         }
         CHARGING.clear();
         SKILL_HIT.clear();
+        BONUS_SUPPRESS.clear();
         BONUS_GUARD.clear();
     }
 }

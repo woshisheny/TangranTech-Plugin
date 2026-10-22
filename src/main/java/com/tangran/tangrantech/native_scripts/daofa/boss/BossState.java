@@ -158,9 +158,29 @@ public final class BossState {
     public boolean isDead() {
         try {
             if (removing) return true;
+            // 三/四阶段：糖然本体已被主动换成决斗体（僵尸）/ 跪像，stand 被摘置空。
+            // 此时若仍以 stand 判活，isActive 恒 false，后果：
+            // ① 玩家掉线重进 → JoinListener 走「!isActive」分支 → 背包被日常装偷换；
+            // ② 重复召唤入口不拦截 → 进行中的局被 forceStop 强收后从一阶段重开。
+            if (tangran.standSwapped) {
+                Entity duel = tangran.duelMob;
+                Entity kneel = tangran.kneelStand;
+                if (duel == null && kneel == null) return false;  // 换形态过渡中：局还活着
+                if (duel != null && !safeValid(duel)) return true;
+                if (kneel != null && !safeValid(kneel)) return true;
+                return false;
+            }
             return stand == null || !stand.isValid();
         } catch (Throwable ignored) {
             return true;
+        }
+    }
+
+    private static boolean safeValid(Entity e) {
+        try {
+            return e != null && e.isValid();
+        } catch (Throwable ignored) {
+            return false;
         }
     }
 

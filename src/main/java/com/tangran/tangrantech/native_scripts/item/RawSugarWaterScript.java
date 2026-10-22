@@ -67,6 +67,14 @@ public final class RawSugarWaterScript implements NativeLifecycleScript {
     /** 玩家 UUID → 累计状态。 */
     private static final Map<UUID, PlayerState> STATES = new ConcurrentHashMap<>();
 
+    /**
+     * 玩家 UUID → 保底计数（累计成功结算次数，每满 {@link #GUARANTEE_EVERY} 次出保底）。
+     *
+     * <p>跨局保留：{@code stopWatcher} 只清单轮累计状态，不清保底计数（对应原脚本
+     * 全局对象的跨局语义）。</p>
+     */
+    private static final Map<UUID, Integer> SETTLEMENTS = new ConcurrentHashMap<>();
+
     @Override
     public Object invoke(String fn, Object... args) {
         return null;
@@ -204,9 +212,38 @@ public final class RawSugarWaterScript implements NativeLifecycleScript {
         if (state.tzCount < 0) state.tzCount = 0;
         if (state.bottleCount < 0) state.bottleCount = 0;
 
+        settleGuarantee(player, spawnLoc);
+
         playFishingSound(player);
         stopWatcher(player);
         return true;
+    }
+
+    /**
+     * 每第 {@link #GUARANTEE_EVERY} 次结算保底：在产物位置额外掉落
+     * {@link #HEAVY_CORE_AMOUNT} 个沉重核心（原脚本的整蛊设定）。
+     *
+     * <p>计数器按玩家维度累计，跨局不清；与单轮累计状态（{@code STATES}）解耦，
+     * 避免 {@code stopWatcher} 把保底进度一起抹掉。</p>
+     */
+    private static void settleGuarantee(Player player, Location loc) {
+        UUID id = player.getUniqueId();
+        int count = SETTLEMENTS.getOrDefault(id, 0) + 1;
+        if (count < GUARANTEE_EVERY) {
+            SETTLEMENTS.put(id, count);
+            return;
+        }
+        SETTLEMENTS.put(id, 0);
+        try {
+            World world = player.getWorld();
+            if (world == null) return;
+            ItemStack core = new ItemStack(Material.HEAVY_CORE, HEAVY_CORE_AMOUNT);
+            world.dropItemNaturally(loc, core);
+            player.sendMessage("§d§l第 " + GUARANTEE_EVERY
+                    + " 次结算保底：§f§l沉重核心 x" + HEAVY_CORE_AMOUNT);
+        } catch (Throwable t) {
+            TT.log("粗糖水保底产出出错: " + t);
+        }
     }
 
     /** 规划消耗：数量不够则整体返回 null，不做部分消耗。 */

@@ -1887,60 +1887,18 @@ public final class StorageSpaceScript implements NativeLifecycleScript {
     /**
      * 灵圃界面里「光标物品」的 id。
      *
-     * <p>先按粘液 id 判；判不到再按显示名反推（原脚本 {@code getLingpuItemId}）。
-     * 显示名反推是给「粘液 id 读不到」的兜底——比如物品经过某些插件转发后 PDC 丢失。</p>
+     * <p>只认粘液 id：原脚本 {@code getLingpuItemId} 的「显示名反推」兜底已移除——
+     * 铁砧能把普通物品改成「青木灵圃」「灵蕴草种子」等名字，假灵圃/假种子会被种进玩家地块。</p>
      */
     private static String lingpuItemId(ItemStack stack) {
-        String sf = slimefunIdOf(stack);
-        if (sf != null) return sf;
-        try {
-            ItemMeta meta = stack.getItemMeta();
-            if (meta == null || !meta.hasDisplayName()) return null;
-            String name = Colors.strip(
-                    LegacyComponentSerializer.legacySection().serialize(meta.displayName()));
-            for (Map.Entry<String, String> e : LINGPU_NAME_TO_ID.entrySet()) {
-                if (name.contains(e.getKey())) return e.getValue();
-            }
-            for (Map.Entry<String, String> e : LINGPU_SEED_NAMES.entrySet()) {
-                if (name.contains(e.getKey())) return e.getValue();
-            }
-        } catch (Throwable ignored) {
-            // 判不出来就当没有
-        }
-        return null;
+        return slimefunIdOf(stack);
     }
-
-    /** 显示名 → 灵圃/聚灵散 id（原脚本 {@code LINGPU_NAME_TO_ID}）。 */
-    private static final Map<String, String> LINGPU_NAME_TO_ID = Map.of(
-            "青木灵圃", "TR_QMLP",
-            "星辉灵圃", "TR_XHLP",
-            "鸿蒙神圃", "TR_HMSG",
-            "聚灵散", "TR_JLS");
-
-    /** 显示名 → 种子 id（原脚本 {@code LINGPU_SEED_NAMES}）。 */
-    private static final Map<String, String> LINGPU_SEED_NAMES = Map.ofEntries(
-            Map.entry("灵蕴草种子", "TR_LZ01_SEED"),
-            Map.entry("凝露花种子", "TR_LZ02_SEED"),
-            Map.entry("赤炎果种子", "TR_LZ03_SEED"),
-            Map.entry("寒霜参种子", "TR_LZ04_SEED"),
-            Map.entry("紫电藤种子", "TR_LZ05_SEED"),
-            Map.entry("金髓稻种子", "TR_LZ06_SEED"),
-            Map.entry("青木芝孢子", "TR_LZ07_SEED"),
-            Map.entry("玄水莲种子", "TR_LZ08_SEED"),
-            Map.entry("厚土根种子", "TR_LZ09_SEED"),
-            Map.entry("曜光葵种子", "TR_LZ10_SEED"),
-            Map.entry("幽影菇孢子", "TR_LZ11_SEED"),
-            Map.entry("雷音竹笋", "TR_LZ12_SEED"),
-            Map.entry("冰心梅种子", "TR_LZ13_SEED"),
-            Map.entry("火灵椒种子", "TR_LZ14_SEED"),
-            Map.entry("风语藤种子", "TR_LZ15_SEED"),
-            Map.entry("星辰麦种子", "TR_LZ16_SEED"));
 
     /**
      * 纳界袋退回：把袋子里的东西倒回背包，倒不下的掉脚下。
      *
-     * <p>只在判定为纳界袋（{@code TR_NJD}，或显示名含「纳界袋」）时动它。原脚本的判定还带了
-     * 一条「名字里同时含纳/界/袋」的宽松分支，这里一起保留。</p>
+     * <p>只认粘液 id {@code TR_NJD}：显示名分支（含「纳界袋」及纳/界/袋宽松匹配）可被铁砧
+     * 伪造，普通 Bundle 改个名就会被倒空，已移除。</p>
      */
     private static void returnNjdContents(Player player, ItemStack item) {
         if (!isNjdItem(item)) return;
@@ -1971,16 +1929,6 @@ public final class StorageSpaceScript implements NativeLifecycleScript {
         try {
             SlimefunItem sf = SlimefunItem.getByItem(stack);
             if (sf != null && ITEM_NJD.equalsIgnoreCase(String.valueOf(sf.getId()))) return true;
-        } catch (Throwable ignored) {
-            // 继续按显示名判
-        }
-        try {
-            ItemMeta meta = stack.getItemMeta();
-            if (meta != null && meta.hasDisplayName()) {
-                String dn = LegacyComponentSerializer.legacySection().serialize(meta.displayName());
-                if (dn.contains("纳界袋")) return true;
-                if (dn.contains("纳") && dn.contains("界") && dn.contains("袋")) return true;
-            }
         } catch (Throwable ignored) {
             // 判不出来就当不是
         }

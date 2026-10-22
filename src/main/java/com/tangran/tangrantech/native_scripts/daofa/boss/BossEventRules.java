@@ -1,5 +1,7 @@
 package com.tangran.tangrantech.native_scripts.daofa.boss;
 
+import com.tangran.tangrantech.native_scripts.daofa.LuxianSword;
+import com.tangran.tangrantech.native_scripts.daofa.TwinTools;
 import java.util.Iterator;
 import java.util.List;
 import org.bukkit.Location;
@@ -472,9 +474,11 @@ public final class BossEventRules {
             if (st == null) st = BossFight.byName(player.getName());
             if (st == null) return true;      // 没有战局：锁是残留，不拦
             if (st.tangran.phaseThreeStarted) return true;
-            for (BossState.GuardianSlot slot : st.guardians.all()) {
-                if (alive(slot.body) || alive(slot.body2)) return true;
-            }
+            // 曾经的 bug：这里还有一段「任何护法活着就放行」的兜底。
+            // 二阶段 setLock 生效时 zqx125 必然在场（正常顺序或读档直开），
+            // 于是 twinStageUnlocked 恒 true → 四道 isPhaseTwoLocked 检查全部放行：
+            // 挑战途中能开容器、能丢任务道具（可丢进岩浆永久丢失），锁定形同虚设。
+            // 双子阶段的放行口径只认 inTwinStage（上面已判），护法在场恰恰说明还在打。
             return false;
         } catch (Throwable ignored) {
             return false;
@@ -527,16 +531,19 @@ public final class BossEventRules {
         return false;
     }
 
-    /** 中章装备（戮仙剑 + 糖b四工具）不许丢出 / 进容器（原脚本 isProtectedTwinStageStack）。 */
+    /**
+     * 中章装备（戮仙剑 + 糖b四工具）不许丢出 / 进容器（原脚本 isProtectedTwinStageStack）。
+     *
+     * <p><b>只认粘液 id（硬约定 #3）</b>：原实现按显示名 {@code contains} 判两方向都错 ——
+     * 真剑被铁砧改名后漏出保护（挑战期可丢/可进容器，配合阶段还包逻辑有刷物品风险），
+     * 带「戮仙剑」字样的假货又被误拦。戮仙剑与糖b四工具都有 canonical 判定，直接复用。</p>
+     */
     private static boolean isProtectedTwinStack(ItemStack stack) {
         try {
-            if (stack == null || !stack.hasItemMeta()) return false;
-            String name = stack.getItemMeta().getDisplayName();
-            if (name == null) return false;
-            if (name.contains("戮仙剑")) return true;
-            // 糖b四工具：按名字兜底（四件工具的名字固定）
-            return name.contains("鸿蒙开天镐") || name.contains("太虚斩劫斧")
-                    || name.contains("九幽覆海铲") || name.contains("长生种道锄");
+            if (stack == null) return false;
+            if (LuxianSword.isSword(stack)) return true;
+            return TwinTools.isTool(stack, "Tr_ktg") || TwinTools.isTool(stack, "Tr_zjf")
+                    || TwinTools.isTool(stack, "Tr_fhc") || TwinTools.isTool(stack, "Tr_zdc");
         } catch (Throwable ignored) {
             return false;
         }

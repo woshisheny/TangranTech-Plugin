@@ -39,8 +39,4 @@ public class TTMaterialGenerator extends TTRecipeMachine {
                 : java.util.Collections.emptySet();
     }
 
-    @Override
-    public List<ItemStack> getDisplayRecipes() {
-        return super.getDisplayRecipes();
-    }
 }

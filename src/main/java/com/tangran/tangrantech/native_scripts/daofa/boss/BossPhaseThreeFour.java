@@ -862,7 +862,7 @@ public final class BossPhaseThreeFour {
             // 2) 破法弓（已有就不重复发）
             try {
                 if (!TwinMinigame.hasPofabow(player)) {
-                    ItemStack bow = Pofabow.make();
+                    ItemStack bow = Pofabow.make(player);
                     var left = player.getInventory().addItem(bow);
                     if (!left.isEmpty()) {
                         player.getWorld().dropItemNaturally(player.getLocation(), bow);

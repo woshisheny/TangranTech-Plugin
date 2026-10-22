@@ -11,6 +11,7 @@ import java.util.UUID;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
+import org.bukkit.NamespacedKey;
 import org.bukkit.Particle;
 import org.bukkit.World;
 import org.bukkit.entity.Entity;
@@ -20,9 +21,11 @@ import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
+import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
+import org.bukkit.persistence.PersistentDataType;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.scheduler.BukkitTask;
 
@@ -55,6 +58,18 @@ public final class QiaoleziCoolantScript implements NativeLifecycleScript {
     private static final Map<UUID, BukkitTask> ACTIVE_TASKS = new HashMap<>();
     /** 玩家 UUID → 正在场上的雪傀儡实体。 */
     private static final Map<UUID, Entity> ACTIVE_ENTITIES = new HashMap<>();
+    /** 玩家 UUID → 定身前的原始移速（下线未恢复时用于上线补恢复）。 */
+    private static final Map<UUID, Float> FROZEN_SPEED = new HashMap<>();
+    /**
+     * 定身标记的 PDC 键（存原始移速）。
+     *
+     * <p>为什么必须落 PDC：{@code setWalkSpeed(0)} 写的是持久化的 movement_speed 基值，
+     * 若玩家在 10 刻定身窗口内下线，原实现直接跳过恢复 → 移速 0 写进 playerdata，
+     * 玩家再上线永久不能动（软锁）。PDC 随玩家数据持久化，上线时可补恢复。</p>
+     */
+    private static NamespacedKey freezeKey() {
+        return new NamespacedKey(TT.plugin(), "tr_coolant_freeze");
+    }
 
     @Override
     public Object invoke(String fn, Object... args) {
@@ -78,13 +93,43 @@ public final class QiaoleziCoolantScript implements NativeLifecycleScript {
     private static void freezeBriefly(Player player) {
         float original = player.getWalkSpeed();
         player.setWalkSpeed(0f);
+        FROZEN_SPEED.put(player.getUniqueId(), original);
+        try {
+            player.getPersistentDataContainer().set(freezeKey(), PersistentDataType.FLOAT, original);
+        } catch (Throwable ignored) {
+            // PDC 写失败不阻断定身本身（上线恢复会退化为无效，但不会更糟）
+        }
         NativePluginHelper.runLater(() -> {
-            try {
-                if (player.isOnline()) player.setWalkSpeed(original);
-            } catch (Throwable ignored) {
-                // 玩家已离线则无需恢复
-            }
+            // 离线时不能在这里恢复（Player 对象已脱离实体，写入丢失），
+            // 由 PlayerJoinEvent 读 PDC 补恢复 —— 否则移速 0 会被持久化造成软锁
+            if (player.isOnline()) restoreFreeze(player);
         }, FREEZE_TICKS);
+    }
+
+    /** 解除定身：恢复原移速并清掉内存/PDC 记录。 */
+    private static void restoreFreeze(Player player) {
+        if (player == null) return;
+        // 先读后删：顺序反了会永远读到 null
+        Float original = FROZEN_SPEED.remove(player.getUniqueId());
+        if (original == null) {
+            try {
+                original = player.getPersistentDataContainer()
+                        .get(freezeKey(), PersistentDataType.FLOAT);
+            } catch (Throwable ignored) {
+                // 忽略
+            }
+        }
+        try {
+            player.getPersistentDataContainer().remove(freezeKey());
+        } catch (Throwable ignored) {
+            // 忽略
+        }
+        if (original == null) return;
+        try {
+            player.setWalkSpeed(original);
+        } catch (Throwable ignored) {
+            // 忽略
+        }
     }
 
     /** 从背包移除一个指定 id 的粘液物品；成功返回 true。 */
@@ -203,9 +248,11 @@ public final class QiaoleziCoolantScript implements NativeLifecycleScript {
 
     /** 掉落奖励并播放雪花特效。 */
     private static void giveReward(World world, Location dropLoc, Player online) {
-        SlimefunItem sf = SlimefunItem.getById(ITEM_ID);
+        // 注意：掉的是奖励物 TR_QLZPLQJ（冷却剂），不是刚消耗的 TR_ZXF。
+        // 曾经的 bug：这里误用 ITEM_ID，跑完赛只能原价拿回消耗品，奖励物永远拿不到。
+        SlimefunItem sf = SlimefunItem.getById(REWARD_ID);
         if (sf == null) {
-            online.sendMessage("§c无法生成" + ITEM_ID + "物品，请联系管理");
+            online.sendMessage("§c无法生成" + REWARD_ID + "物品，请联系管理");
             return;
         }
         ItemStack reward = sf.getItem().clone();
@@ -263,6 +310,31 @@ public final class QiaoleziCoolantScript implements NativeLifecycleScript {
                 handle(event.getPlayer());
             } catch (Throwable t) {
                 TT.log("俏了滋牌冷却剂交互出错: " + t);
+            }
+        }
+
+        /**
+         * 下线清理：停任务、收实体。
+         *
+         * <p><b>刻意不动移速</b>：定身中的玩家下线时 {@code setWalkSpeed} 写不回去，
+         * 原始值已存 PDC，由 {@link #onJoin} 上线时补恢复；这里若强行恢复只会写丢。</p>
+         */
+        @EventHandler(priority = EventPriority.NORMAL)
+        public void onQuit(PlayerQuitEvent event) {
+            try {
+                cleanup(event.getPlayer().getUniqueId());
+            } catch (Throwable ignored) {
+                // 忽略
+            }
+        }
+
+        /** 上线补恢复：定身窗口内下线的玩家，移速从这里救回（防永久软锁）。 */
+        @EventHandler(priority = EventPriority.NORMAL)
+        public void onJoin(PlayerJoinEvent event) {
+            try {
+                restoreFreeze(event.getPlayer());
+            } catch (Throwable ignored) {
+                // 忽略
             }
         }
     }

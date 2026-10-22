@@ -683,6 +683,14 @@ public final class BossTwin implements BossGuardian {
                     : world.spawn(new Location(world, x, y, z), Allay.class);
             boss.setCustomName("§c§l[" + title + "]§e§l" + id);
             boss.setCustomNameVisible(true);
+            // 归属标记：isBossBody 的 VEX/ALLAY 类型兜底靠它把双子本体与
+            // 野生悦灵/恼鬼区分开（名字会被其它插件改掉时这层仍然可靠）
+            try {
+                boss.setMetadata(BossArena.TWIN_BODY_META,
+                        new org.bukkit.metadata.FixedMetadataValue(TT.plugin(), 1));
+            } catch (Throwable ignored) {
+                // 打标失败不阻断生成
+            }
             boss.setPersistent(true);
             boss.setRemoveWhenFarAway(false);
             boss.setCanPickupItems(false);
@@ -834,6 +842,12 @@ public final class BossTwin implements BossGuardian {
                     if (!alive(a) && !alive(b)) {
                         BossState.cancelTask(slot.trackTask);
                         slot.trackTask = null;
+                        // 双子本体全灭（/kill / 虚空 / 外力清除）：只停任务不收场会让战局悬挂 ——
+                        // BossFight 局不 remove、双血条不清、二阶段锁不清，玩家卡在「已在挑战中」。
+                        // 与 BossKatarina 的本体无效分支（ defeat(p) ）保持对称。
+                        Player pp = (player != null && player.isOnline())
+                                ? player : Bukkit.getPlayerExact(state.playerName);
+                        defeat(pp);
                         return;
                     }
                     Player p = (player != null && player.isOnline())

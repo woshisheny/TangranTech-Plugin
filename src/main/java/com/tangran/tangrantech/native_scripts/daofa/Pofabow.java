@@ -100,6 +100,18 @@ public final class Pofabow {
     private static final long NORMAL_LIFE_MS = 60_000L;
     /** 药水箭命中后的效果持续时长（刻）——10 秒。 */
     private static final int POTION_TICKS = 20 * 10;
+    /**
+     * 末影人预结算距离（格）：箭进入这个半径就先结算，绕开原版
+     * 「被弹射物命中就瞬移」的规避（见类注释「必须保留的细节」第 1 条）。
+     */
+    private static final double ENDERMAN_PRE_HIT_RANGE = 1.5d;
+    /**
+     * 发射瞬间沿视线锁定末影人的最大距离（格）。
+     *
+     * <p>取 64 是为了覆盖特殊箭的完整射程（寿命 3 秒 × 1 格/刻 = 60 格），
+     * 免得远距离瞄准的末影人锁不上、回退到「打不到」的原版表现。</p>
+     */
+    private static final double ENDERMAN_LOCK_RANGE = 64.0d;
 
     private static final String TITLE_MAIN = "§d§l破法弓 · 功能菜单";
     private static final String TITLE_MAIN_KEY = "破法弓 · 功能菜单";
@@ -176,37 +188,12 @@ public final class Pofabow {
      * <p>渐变名会把色码插在字与字之间，不剥掉的话 {@code indexOf("破法弓")} 永远匹配不到，
      * 破法弓识别就会失败 → 所有功能失效。</p>
      */
-    static String plain(String text) {
-        try {
-            String s = String.valueOf(text);
-            s = s.replaceAll("\\{#[0-9a-fA-F]{6}\\}", "");
-            s = s.replaceAll("§x(§[0-9a-fA-F]){6}", "");
-            s = s.replaceAll("§[0-9a-fk-orA-FK-OR]", "");
-            s = s.replaceAll("&x(&[0-9a-fA-F]){6}", "");
-            s = s.replaceAll("&[0-9a-fk-orA-FK-OR]", "");
-            return s;
-        } catch (Throwable ignored) {
-            return String.valueOf(text);
-        }
-    }
-
-    private static String rawName(ItemStack item) {
-        try {
-            ItemMeta meta = item == null ? null : item.getItemMeta();
-            if (meta != null && meta.hasDisplayName()) {
-                return LegacyComponentSerializer.legacySection().serialize(meta.displayName());
-            }
-        } catch (Throwable ignored) {
-            // 忽略
-        }
-        return null;
-    }
-
     public static boolean isBow(ItemStack item) {
         try {
             if (item == null || item.getType() != Material.BOW) return false;
-            String name = rawName(item);
-            return name != null && plain(name).contains(BOW_NAME);
+            // 只认粘液 id：显示名可被铁砧伪造，普通弓改个名就能冒充破法弓
+            String sf = TT.sfIdOf(item);
+            return sf != null && sf.equalsIgnoreCase(BOW_ID);
         } catch (Throwable ignored) {
             return false;
         }
@@ -310,11 +297,36 @@ public final class Pofabow {
         return item;
     }
 
-    /** 造一把破法弓（优先用注册的物品，取不到退化成普通弓）。 */
+    /**
+     * 造一把破法弓（优先用注册的物品，取不到退化成普通弓）。
+     *
+     * <p>没有玩家上下文时用默认档：无火矢、有无限。要按玩家开关定型的走
+     * {@link #make(Player)}。</p>
+     */
     public static ItemStack make() {
+        return make(null);
+    }
+
+    /**
+     * 造一把破法弓，并按玩家当前的开关状态把附魔<b>一次性定型</b>。
+     *
+     * <p><b>为什么改成发放时定型</b>：原脚本（以及照抄它的第一版原生实现）是
+     * 「发放时只给一把普通弓，等玩家右键时再按状态补一遍附魔」——于是弓刚到手时附魔
+     * 恒为默认档（无火矢、有无限），跟玩家菜单里的实际开关对不上；弓被交易/丢给
+     * 别的玩家后，附魔还停留在旧主人的状态。改成发放当下就按归属玩家的状态构造
+     * （{@link #applyEnchant} 本来就是幂等的保底），拿到手即是最终形态。</p>
+     *
+     * <p>右键时那次 {@link #applyEnchant} 同步<b>不删</b>，它兜的是另外两种情况：
+     * 老档里本来就没附过魔的弓，以及玩家在弓躺在背包里时改过开关。
+     * 菜单里切火矢/无限同理，只改主手那一把（见 {@code handleMenuClick}）。</p>
+     *
+     * @param player 归属玩家；为 null 时按默认状态构造
+     */
+    public static ItemStack make(Player player) {
         ItemStack bow = LuxianSword.slimefunItem(BOW_ID);
         if (bow == null) bow = new ItemStack(Material.BOW);
-        return applyEnchant(bow, false, true);
+        State st = (player == null) ? new State() : stateOf(player);
+        return applyEnchant(bow, st.flame, st.infinity);
     }
 
     // ==================================================================
@@ -368,6 +380,18 @@ public final class Pofabow {
         final int punch;
         final double arrowBase;
         boolean healed;
+        /**
+         * 发射瞬间沿视线锁定的末影人（可能为 null）。
+         *
+         * <p>原来是「每刻对每支箭做一次 {@code getNearbyEntities} 盒查询」来找末影人
+         * —— 飞行中的箭越多，每刻的盒查询次数越多（N 支箭 = 20N 次/秒），每次都要扫一遍
+         * 所在区块的实体表。这里改成发射时沿视线锁一只，之后每刻只对它做 {@code O(1)}
+         * 的距离比较，飞行途中不再有盒查询。</p>
+         *
+         * <p>副作用（已确认可接受）：飞行途中才走进弹道的末影人不再被预结算，
+         * 交给原版 {@code ProjectileHitEvent} 正常处理。</p>
+         */
+        java.util.UUID target;
 
         ArrowRec(Arrow arrow, double base, int punch, double arrowBase) {
             this.arrow = arrow;
@@ -537,7 +561,11 @@ public final class Pofabow {
             }
 
             if (special) {
-                SPECIAL.add(new ArrowRec(arrow, baseDamage(player), punchLevel(player), arrowBaseDamage(player)));
+                ArrowRec rec = new ArrowRec(arrow, baseDamage(player), punchLevel(player),
+                        arrowBaseDamage(player));
+                // 发射时沿视线锁一只末影人；之后每刻只对它做距离比较，不再每刻扫实体盒
+                rec.target = lockEnderman(player, eye, dir);
+                SPECIAL.add(rec);
             }
             try {
                 player.playSound(player.getLocation(),
@@ -966,7 +994,7 @@ public final class Pofabow {
                     if (!ok || (now - rec.born) > NORMAL_LIFE_MS) continue;
                     try {
                         Arrow arrow = rec.arrow;
-                        LivingEntity pre = findEndermanNear(arrow.getLocation(), 1.5);
+                        LivingEntity pre = endermanOf(rec, arrow.getLocation());
                         if (pre != null) {
                             endermanPreHit(pre, arrow, rec, false);
                             continue;   // 已结算并收箭
@@ -1016,7 +1044,7 @@ public final class Pofabow {
                 }
                 try {
                     Location loc = a.getLocation();
-                    LivingEntity pre = findEndermanNear(loc, 1.5);
+                    LivingEntity pre = endermanOf(rec, loc);
                     if (pre != null) {
                         endermanPreHit(pre, a, rec, true);
                         continue;   // 已结算并收箭
@@ -1039,13 +1067,20 @@ public final class Pofabow {
         }
     }
 
+    /**
+     * 半径内找一只活的末影人。
+     *
+     * <p>用 {@code getNearbyEntitiesByType} 只取末影人 —— 与 LaowuSummonerScript 里的
+     * 猫查找是同一个套路。原来是先用 {@code getNearbyEntities} 把半径内<b>全部</b>实体
+     * 取回来再逐个 {@code getType() == ENDERMAN} 判一遍，等于每刻为箭周围每件无关实体
+     * （掉落物、盔甲架、其他生物…）都白付一次遍历和装箱开销。语义完全等价。</p>
+     */
     private static LivingEntity findEndermanNear(Location loc, double radius) {
         try {
-            for (Entity e : loc.getWorld().getNearbyEntities(loc, radius, radius, radius)) {
+            for (org.bukkit.entity.Enderman e : loc.getWorld()
+                    .getNearbyEntitiesByType(org.bukkit.entity.Enderman.class, loc, radius, radius, radius)) {
                 try {
-                    if (e.getType() == org.bukkit.entity.EntityType.ENDERMAN && e.isValid() && !e.isDead()) {
-                        return (LivingEntity) e;
-                    }
+                    if (e.isValid() && !e.isDead()) return e;
                 } catch (Throwable ignored) {
                     // 忽略
                 }
@@ -1054,6 +1089,67 @@ public final class Pofabow {
             // 忽略
         }
         return null;
+    }
+
+    /**
+     * 发射瞬间沿视线锁定一只末影人，之后每刻只做 {@code O(1)} 的距离比较。
+     *
+     * <p><b>为什么改</b>：原来是「每刻对每支箭做一次 {@code getNearbyEntities} 盒查询」
+     * 来找末影人 —— 飞行中的箭越多，每刻盒查询次数越多（N 支箭 = 20N 次/秒），
+     * 每次都要扫一遍所在区块的实体表。这里改成发射时沿视线射一次线，
+     * 锁住玩家实际瞄准的那一只，飞行途中不再有盒查询。</p>
+     *
+     * <p><b>副作用（可接受）</b>：飞行途中才走进弹道的末影人不再被预结算，
+     * 交给原版 {@code ProjectileHitEvent} 正常处理。</p>
+     */
+    private static java.util.UUID lockEnderman(Player player, Location from, Vector dir) {
+        try {
+            org.bukkit.util.RayTraceResult hit = player.getWorld().rayTraceEntities(
+                    from, dir, ENDERMAN_LOCK_RANGE, ENDERMAN_PRE_HIT_RANGE,
+                    e -> e instanceof org.bukkit.entity.Enderman);
+            if (hit != null && hit.getHitEntity() instanceof org.bukkit.entity.Enderman em) {
+                return em.getUniqueId();
+            }
+        } catch (Throwable ignored) {
+            // 服务端不支持带过滤的射线时，退回一次盒查询
+            try {
+                LivingEntity near = findEndermanNear(from, ENDERMAN_LOCK_RANGE);
+                if (near != null) return near.getUniqueId();
+            } catch (Throwable ignored2) {
+                // 放弃
+            }
+        }
+        return null;
+    }
+
+    /**
+     * 取「发射时已锁定、且此刻已进入预结算范围」的末影人；没有则返回 null。
+     *
+     * <p>这是原来每刻 {@code findEndermanNear} 的等价替代：判定口径仍是
+     * 「箭当前位置与末影人距离 ≤ {@link #ENDERMAN_PRE_HIT_RANGE}」，
+     * 只是不再做实体盒查询 —— 只对锁定的那一只做距离比较。</p>
+     */
+    private static LivingEntity endermanOf(ArrowRec rec, Location arrowLoc) {
+        if (rec == null) return null;
+        try {
+            if (rec.target != null) {
+                org.bukkit.entity.Entity e = Bukkit.getEntity(rec.target);
+                if (e instanceof LivingEntity le && le.isValid() && !le.isDead()) {
+                    Location el = le.getLocation();
+                    if (el.getWorld() != null && el.getWorld() == arrowLoc.getWorld()
+                            && el.distance(arrowLoc) <= ENDERMAN_PRE_HIT_RANGE) {
+                        return le;      // 常见路径：锁定成功，O(1) 距离比较
+                    }
+                    return null;
+                }
+                rec.target = null;      // 目标没了就解锁，交给下面的兜底
+            }
+            // 没锁定（发射时视线上没有末影人，或目标已失效）：退回一次盒查询。
+            // 这是原实现的行为，保留它以免「飞行途中才有末影人靠近」的情况被漏掉。
+            return findEndermanNear(arrowLoc, ENDERMAN_PRE_HIT_RANGE);
+        } catch (Throwable ignored) {
+            return null;
+        }
     }
 
     /**
@@ -1079,17 +1175,17 @@ public final class Pofabow {
                 }
                 double base = (rec != null && rec.arrowBase > 0) ? rec.arrowBase : arrowBaseDamage(shooter);
                 double dmg = Math.max(1.0, Math.ceil(speed * base));
+                // 关键：末影人在 EnderMan.hurt() 里，只要 DamageSource 带 IS_PROJECTILE 标签
+                // （箭、三叉戟、雪球…）就会随机瞬移并 return false —— 即免疫伤害。
+                // 所以这里<b>不能</b>拿 arrow 当伤害源（那样预结算出来的伤害同样被吞掉，
+                // 箭还被 remove，等于白射一箭）；必须以「玩家」为源，末影人才会正常掉血。
                 try {
-                    target.damage(dmg, arrow);
+                    target.damage(dmg, shooter);
                 } catch (Throwable ignored) {
                     try {
-                        target.damage(dmg, shooter);
+                        target.damage(dmg);
                     } catch (Throwable ignored2) {
-                        try {
-                            target.damage(dmg);
-                        } catch (Throwable ignored3) {
-                            // 放弃
-                        }
+                        // 放弃
                     }
                 }
             }
@@ -1398,8 +1494,17 @@ public final class Pofabow {
             if (!isBow(bow)) bow = shooter.getInventory().getItemInMainHand();
             if (!isBow(bow)) return;
             if (!(event.getProjectile() instanceof Arrow arrow)) return;
-            NORMAL.add(new ArrowRec(arrow, baseDamage(shooter), punchLevel(shooter),
-                    arrowBaseDamage(shooter)));
+            ArrowRec rec = new ArrowRec(arrow, baseDamage(shooter), punchLevel(shooter),
+                    arrowBaseDamage(shooter));
+            try {
+                Vector v = arrow.getVelocity();
+                if (v.lengthSquared() > 0.0d) {
+                    rec.target = lockEnderman(shooter, arrow.getLocation(), v.clone().normalize());
+                }
+            } catch (Throwable ignored) {
+                // 拿不到速度就不锁定，交给原版命中事件
+            }
+            NORMAL.add(rec);
         } catch (Throwable ignored) {
             // 忽略
         }

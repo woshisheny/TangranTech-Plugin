@@ -77,11 +77,31 @@ public final class NativeScriptRegistry {
         return Collections.unmodifiableSet(REGISTERED);
     }
 
-    /** 调用于所有内容注册完成之后：为每个脚本注册其运行期监听器。 */
+    /**
+     * 调用于所有内容注册完成之后：为每个脚本注册其运行期监听器。
+     *
+     * <p><b>历史坑（2026-10 修复）</b>：原实现只调用 {@link NativeScript#registerListeners}，
+     * 而 31 个脚本实现的是 {@link NativeLifecycleScript#listeners()}——
+     * 后者唯一的上链路径是 {@code ScriptEval#doInit → NativeScriptEval.evalFunction("init")
+     * → NativeLifecycle.registerLifecycleOnce}，但 {@code doInit()} 与 {@code ScriptLoader.load()}
+     * 全库无调用方（RSC 时代的「求值触发 init」链在原生版被弃用后没有补接线），
+     * 导致这些脚本的监听器<b>从未注册</b>：老吴召唤器、境界糖之力循环、装备三件套、
+     * BOSS战全部事件、堆叠机界面防护等大量玩法静默失效，且日志无任何报错。</p>
+     *
+     * <p>现在统一在这里补登：{@code registerListeners}（5 个脚本的自家初始化）与
+     * {@code listeners()}（34 处事件监听器，经 {@link NativeLifecycle} 幂等去重）都走本方法。</p>
+     */
     public static void registerLifecycleListeners(@Nullable Plugin plugin) {
         for (Map.Entry<String, NativeScript> e : SCRIPTS.entrySet()) {
+            NativeScript script = e.getValue();
             try {
-                e.getValue().registerListeners(plugin);
+                // ① 脚本自家初始化（破法弓任务 / EquipmentBridge 注册 / 灵圃自动收获等）
+                script.registerListeners(plugin);
+                // ② 事件监听器：NativeLifecycleScript 的 listeners() 经幂等注册器登记
+                //    （同一脚本被多条 yml 引用也只注册一次）
+                if (script instanceof NativeLifecycleScript lifecycle) {
+                    NativeLifecycle.registerLifecycleOnce(lifecycle, plugin);
+                }
             } catch (Throwable t) {
                 TT.log("脚本 " + e.getKey() + " 注册监听器失败: " + t);
             }

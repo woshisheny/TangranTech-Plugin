@@ -6,10 +6,6 @@ import com.tangran.tangrantech.native_scripts.NativeLifecycleScript;
 import com.tangran.tangrantech.util.Json;
 import com.tangran.tangrantech.util.Views;
 import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItem;
-import java.io.File;
-import java.io.IOException;
-import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
 import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
@@ -30,6 +26,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.entity.EntityDismountEvent;
 import org.bukkit.event.entity.PlayerDeathEvent;
+import org.bukkit.event.inventory.InventoryAction;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryOpenEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
@@ -47,8 +44,8 @@ import org.bukkit.scheduler.BukkitTask;
  * 第 4 格开始凝聚、第 5 格结束凝聚、第 49 格关闭；产出堆进 9~44 号槽。</p>
  *
  * <p>点「开始凝聚」后：把玩家传送到神龛上方并用一个隐形 {@link ArmorStand} 当坐骑让他「骑」上去，
- * 之后每秒扣一次对应数量的糖之力（写 {@code addon_configs/糖然科技/境界/<玩家名>.json}），
- * 累计 3000 进度（= 3 秒）产出一枚神晶。</p>
+ * 之后每秒扣一次对应数量的糖之力（经 {@link RealmScript#editRealm} 写
+ * {@code addon_configs/糖然科技/境界/<玩家名>.json}），累计 3000 进度（= 3 秒）产出一枚神晶。</p>
  *
  * <p>终止条件：玩家潜行 / 下线 / 死亡 / 传送 / 下车 / 神龛被挖，任一满足即停。
  * 与原脚本一致，<b>糖之力不足时不会中断，只是不推进</b>。</p>
@@ -66,9 +63,6 @@ import org.bukkit.scheduler.BukkitTask;
  * 这个事件名是对的（盔甲架不是 {@code Vehicle}，用 {@code VehicleExitEvent} 是抓不到的）。</p>
  */
 public final class DivineCrystalScript implements NativeLifecycleScript {
-
-    /** 境界存档目录（与「境界/全解」共用）。 */
-    private static final String REALM_DIR = "addon_configs/糖然科技/境界";
 
     /** 输出槽区间：9 ~ 44（闭区间）。 */
     private static final int OUTPUT_FROM = 9;
@@ -154,53 +148,29 @@ public final class DivineCrystalScript implements NativeLifecycleScript {
     // 存档
     // ------------------------------------------------------------------
 
-    private static File realmFile(String playerName) {
-        File dir = new File(TT.plugin.getDataFolder(), REALM_DIR);
-        if (!dir.exists() && !dir.mkdirs()) {
-            TT.log("境界存档目录创建失败: " + dir.getAbsolutePath());
-        }
-        return new File(dir, playerName + ".json");
-    }
-
-    private static Map<String, Object> loadRealm(String playerName) {
-        try {
-            File f = realmFile(playerName);
-            if (!f.exists()) return null;
-            String text = new String(Files.readAllBytes(f.toPath()), StandardCharsets.UTF_8);
-            return Json.parseObject(text);
-        } catch (Throwable t) {
-            return null;
-        }
-    }
-
-    private static void saveRealm(String playerName, Map<String, Object> data) {
-        try {
-            Files.write(realmFile(playerName).toPath(),
-                    Collections.singletonList(Json.writePretty(data)),
-                    StandardCharsets.UTF_8);
-        } catch (IOException e) {
-            TT.log("境界存档写入失败 " + playerName + ": " + e);
-        }
-    }
-
     /**
      * 扣除糖之力。
      *
      * <p>返回 false 表示「这次不推进」——原因可能是没开辟境界、或糖之力不足。
      * 与原脚本一致：不足时不会中断凝聚，只是原地等待。</p>
      *
-     * <p>原脚本在这里还读了一个 {@code max}（{@code 100 + attrs['Tr_dy01']}）但从未使用，
-     * 属于死代码，此处不再复刻。</p>
+     * <p>文件访问统一走 {@link RealmScript#editRealm}（load → edit → save 同一临界区）。
+     * 历史上本类自带一份 {@code realmFile/loadRealm/saveRealm}，与 {@code RealmScript}
+     * 拼出同一路径各写各的，存在丢失更新风险，现已删除。</p>
      */
     private static boolean consumeSugar(Player player, int amount) {
         try {
-            Map<String, Object> data = loadRealm(player.getName());
-            if (data == null || !Json.bool(data, "opened", false)) return false;
-            double sugar = Json.dbl(data, "sugarPower", 0);
-            if (sugar < amount) return false;
-            data.put("sugarPower", sugar - amount);
-            saveRealm(player.getName(), data);
-            return true;
+            boolean[] ok = {false};
+            if (!RealmScript.editRealm(player, data -> {
+                double sugar = Json.dbl(data, "sugarPower", 0);
+                if (sugar >= amount) {
+                    data.put("sugarPower", sugar - amount);
+                    ok[0] = true;
+                }
+            })) {
+                return false;
+            }
+            return ok[0];
         } catch (Throwable ignored) {
             return false;
         }
@@ -566,22 +536,47 @@ public final class DivineCrystalScript implements NativeLifecycleScript {
                     return;
                 }
 
-                // 输出槽：允许拿取；只有「光标上拿着非神晶物品」时才拦
+                // 输出槽：只放行「取出」类操作；任何形式的塞入一律拦。
+                // 原实现只看光标上有没有非神晶物品，数字键交换（HOTBAR_SWAP）、
+                // F 键卸副手（SWAP_OFFHAND）、SWAP_WITH_CURSOR 时光标是空的，
+                // 判断被绕过，任意物品都能换进输出槽 —— 改为按动作白名单放行。
                 if (slot >= OUTPUT_FROM && slot <= OUTPUT_TO) {
-                    ItemStack cursor = event.getView().getCursor();
-                    if (cursor != null && !cursor.getType().isAir()) {
-                        String cursorId = "";
-                        try {
-                            SlimefunItem cursorSf = SlimefunItem.getByItem(cursor);
-                            if (cursorSf != null) {
-                                cursorId = String.valueOf(cursorSf.getId()).toLowerCase(Locale.ROOT);
+                    switch (event.getAction()) {
+                        case PICKUP_ALL:
+                        case PICKUP_SOME:
+                        case PICKUP_HALF:
+                        case PICKUP_ONE:
+                        case MOVE_TO_OTHER_INVENTORY:
+                        case DROP_ALL_SLOT:
+                        case DROP_ONE_SLOT:
+                        case COLLECT_TO_CURSOR:
+                            return; // 取出 / 移走 / 掉落：放行
+                        case PLACE_ALL:
+                        case PLACE_SOME:
+                        case PLACE_ONE: {
+                            // 光标放置：保持原设计，只允许神晶
+                            ItemStack cursor = event.getView().getCursor();
+                            if (cursor != null && !cursor.getType().isAir()) {
+                                String cursorId = "";
+                                try {
+                                    SlimefunItem cursorSf = SlimefunItem.getByItem(cursor);
+                                    if (cursorSf != null) {
+                                        cursorId = String.valueOf(cursorSf.getId()).toLowerCase(Locale.ROOT);
+                                    }
+                                } catch (Throwable ignored) {
+                                    // 按非神晶处理
+                                }
+                                if (CRYSTAL_IDS.contains(cursorId)) return;
                             }
-                        } catch (Throwable ignored) {
-                            // 按非神晶处理
+                            event.setCancelled(true);
+                            return;
                         }
-                        if (!CRYSTAL_IDS.contains(cursorId)) event.setCancelled(true);
+                        default:
+                            // HOTBAR_SWAP / HOTBAR_MOVE_AND_READD / SWAP_WITH_CURSOR /
+                            // F 键 SWAP_OFFHAND / CLONE_STACK / bundle 系 / UNKNOWN：全拦
+                            event.setCancelled(true);
+                            return;
                     }
-                    return;
                 }
 
                 event.setCancelled(true);

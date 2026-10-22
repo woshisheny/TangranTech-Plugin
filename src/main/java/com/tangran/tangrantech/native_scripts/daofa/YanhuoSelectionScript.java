@@ -258,6 +258,13 @@ public final class YanhuoSelectionScript implements NativeLifecycleScript {
 
     /** 右键 / Shift+左键的统一入口（原脚本的 onUse）。 */
     private static void handleUse(PlayerInteractEvent event) {
+        // 控火道具是 fire_charge 材质：不取消原版交互，右键会「原版点火 + 我们的粒子/提示」双发，
+        // 左键也会照常开始挖掘。ScriptItem.onRightClick 不看返回值，必须自己 setCancelled。
+        try {
+            event.setCancelled(true);
+        } catch (Throwable ignored) {
+            // 事件不可取消时忽略
+        }
         Player player = event.getPlayer();
         ItemStack item = player.getInventory().getItemInMainHand();
         SlimefunItem sf = item == null ? null : SlimefunItem.getByItem(item);
@@ -1193,21 +1200,37 @@ public final class YanhuoSelectionScript implements NativeLifecycleScript {
 
         // ---- 厚土地心火：免疫高等级瞬间治疗 ----
 
+        /**
+         * 厚土玩家免疫治疗药水：先把他们的强度归零，只有在「受影响的全是厚土玩家」时
+         * 才取消整瓶药水。
+         *
+         * <p>原实现见到第一个厚土玩家就 {@code setCancelled(true)} 并 return ——
+         * 队友在同一瓶药水的溅射范围内时会一起被作废（误伤队友）。瞬间治疗的最终
+         * 拦截由 {@link #onPotionEffect} 按实体兜底，这里不必靠整瓶取消来兜底。</p>
+         */
         @EventHandler(priority = EventPriority.HIGHEST)
         public void onPotionSplash(PotionSplashEvent event) {
             try {
                 Collection<LivingEntity> affected = event.getAffectedEntities();
+                boolean anyEarth = false;
+                boolean allEarth = true;
                 for (LivingEntity entity : affected) {
-                    if (!(entity instanceof Player player)) continue;
-                    if (!EARTH_ID.equals(selectedYanhuo(player.getName()))) continue;
-                    event.setIntensity(player, 0);
-                    // 如果药水只影响厚土地心火玩家，直接取消整瓶药水
+                    boolean earth = entity instanceof Player player
+                            && EARTH_ID.equals(selectedYanhuo(player.getName()));
+                    if (earth) {
+                        anyEarth = true;
+                        event.setIntensity(entity, 0);
+                    } else {
+                        allEarth = false;
+                    }
+                }
+                // 只有「没人受益」时才整瓶作废，避免误伤同范围的队友
+                if (anyEarth && allEarth) {
                     try {
                         event.setCancelled(true);
                     } catch (Throwable ignored) {
                         // 忽略
                     }
-                    return;
                 }
             } catch (Throwable ignored) {
                 // 忽略

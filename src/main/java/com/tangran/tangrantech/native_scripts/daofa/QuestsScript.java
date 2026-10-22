@@ -15,12 +15,14 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
+import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.function.Predicate;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
+import org.bukkit.NamespacedKey;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
@@ -36,6 +38,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.SkullMeta;
+import org.bukkit.persistence.PersistentDataType;
 import com.tangran.tangrantech.native_scripts.daofa.boss.BossBattleBridge;
 import com.tangran.tangrantech.native_scripts.daofa.EquipmentBridge;
 
@@ -68,14 +71,27 @@ import com.tangran.tangrantech.native_scripts.daofa.EquipmentBridge;
  * 「通关三阶段后任务八显示已完成」也能正确工作。</p>
  *
  * <p>另有一个防漏机制：菜单里的物品（「阶段 N」「关闭菜单」「读取存档」「任务其…」等）
- * 一旦被玩家顺走就会一直留在背包里，因此上线时与打开菜单时都会按显示名清扫一遍
- * （{@link #cleanLeakedMenuItems}）。这是原脚本为解决实际反馈的刷物/残留问题加的。</p>
+ * 一旦被玩家顺走就会一直留在背包里，因此上线时与打开菜单时都会清扫一遍
+ * （{@link #cleanLeakedMenuItems}）。这是原脚本为解决实际反馈的刷物/残留问题加的。
+ * <b>认物方式已从「按显示名匹配」改为 PDC 标记</b>（{@link #MENU_ITEM_KEY}）：
+ * 早年按名字匹配时，玩家任何被铁砧改名为「关闭菜单」「阶段 N」的私人物品，
+ * 都会在登录/开菜单时被 {@code inv.remove} 当菜单残留误删 —— 显示名可伪造，
+ * 不能用来判物品身份（项目硬约定③）。</p>
  */
 public final class QuestsScript implements NativeLifecycleScript {
 
     private static final String GUI_TITLE = Colors.c("{#c084fc}&l中{#a855f7}&l章{#8b5cf6}&l任{#6366f1}&l务");
     private static final int CLOSE_SLOT = 49;
     private static final int MENU_SIZE = 54;
+
+    /**
+     * 菜单物品的 PDC 标记。
+     *
+     * <p>防漏清理（{@link #cleanLeakedMenuItems}）靠它认「这是我们菜单里的物品」。
+     * 早年用显示名子串匹配，会把玩家改过名的私人物品当残留误删，故改为 PDC。</p>
+     */
+    private static final NamespacedKey MENU_ITEM_KEY =
+            new NamespacedKey(TT.plugin, "tangran_quest_menu_item");
 
     private static final int[] PRODUCT_SLOTS = {
             10, 11, 12, 13, 14, 15, 16,
@@ -198,6 +214,13 @@ public final class QuestsScript implements NativeLifecycleScript {
                     if (args.length > 0 && args[0] instanceof PlayerInteractEvent event) {
                         Action a = event.getAction();
                         if (a == Action.RIGHT_CLICK_AIR || a == Action.RIGHT_CLICK_BLOCK) {
+                            // 任务书若绑定成物品，右键只该开菜单：取消原版交互防止双发
+                            // （当前 yml 只从指南按钮组进入，这里是为将来的物品绑定兜底）
+                            try {
+                                event.setCancelled(true);
+                            } catch (Throwable ignored) {
+                                // 事件不可取消时忽略
+                            }
                             openTaskMenu(event.getPlayer());
                         }
                     }
@@ -232,6 +255,24 @@ public final class QuestsScript implements NativeLifecycleScript {
         return TT.sfIdOf(stack);
     }
 
+    /**
+     * 给菜单物品打 PDC 标记，供 {@link #isOurMenuItem} 识别。
+     *
+     * <p>打不上标记不影响物品正常使用，只是防漏清理会漏掉它（可接受）——
+     * 绝不能反过来用显示名兜底，那会误删玩家私人物品。</p>
+     */
+    private static void tagMenuItem(ItemStack stack) {
+        try {
+            if (stack == null) return;
+            ItemMeta meta = stack.getItemMeta();
+            if (meta == null) return;
+            meta.getPersistentDataContainer().set(MENU_ITEM_KEY, PersistentDataType.STRING, "menu");
+            stack.setItemMeta(meta);
+        } catch (Throwable ignored) {
+            // 见 javadoc：允许静默失败
+        }
+    }
+
     private static ItemStack glass(String name, String material) {
         Material mat = Material.matchMaterial(material);
         if (mat == null) mat = Material.STONE;
@@ -241,6 +282,7 @@ public final class QuestsScript implements NativeLifecycleScript {
             meta.displayName(legacy(name));
             it.setItemMeta(meta);
         }
+        tagMenuItem(it);
         return it;
     }
 
@@ -263,6 +305,7 @@ public final class QuestsScript implements NativeLifecycleScript {
             }
             it.setItemMeta(meta);
         }
+        tagMenuItem(it);
         return it;
     }
 
@@ -270,65 +313,204 @@ public final class QuestsScript implements NativeLifecycleScript {
     // 物品计数（含副手）
     // ------------------------------------------------------------------
 
-    private static int countItem(Player player, String sfId) {
-        int count = 0;
+    // ------------------------------------------------------------------
+    // 背包快照：同一刻内只扫一次背包
+    // ------------------------------------------------------------------
+
+    /** 缓存所属的游戏刻。 */
+    private static volatile long snapTick = Long.MIN_VALUE;
+
+    /** 玩家 → 该刻的背包快照；跨刻自动作废。 */
+    private static final Map<UUID, InvSnap> SNAP_CACHE = new ConcurrentHashMap<>();
+
+    /**
+     * 取玩家的背包快照 —— 同一刻内多次调用共用同一份数据。
+     *
+     * <p><b>为什么需要它</b>：任务的条件检查（{@code check}）、缺料提示
+     * （{@code failMessage}）与扣除（{@code consume}）各自都要把背包从头扫一遍，
+     * 一次提交下来同一个背包被扫三四遍；打开/刷新任务菜单时更是 9 个任务各扫两三遍
+     * （37 次 {@code getItem} × 20+ 遍）。改成「一次扫描 → 之后所有判断与扣除
+     * 都基于快照」后，一次菜单打开只有 1 次全扫。</p>
+     *
+     * <p><b>为什么可以整刻缓存</b>：任务的一次提交（检查 → 提示 → 扣除）全部在
+     * 同一个 {@code InventoryClickEvent} 里同步跑完，中间不会有别的插件改动背包；
+     * 跨刻自动作废，不会读到过期数据。</p>
+     */
+    private static InvSnap snapOf(Player player) {
         try {
-            PlayerInventory inv = player.getInventory();
-            for (int i = 0; i < 36; i++) {
-                ItemStack stack = inv.getItem(i);
-                if (stack == null || stack.getType().isAir()) continue;
-                String id = sfId(stack);
-                if (id != null && id.equalsIgnoreCase(sfId)) count += stack.getAmount();
+            long t = Bukkit.getCurrentTick();
+            if (t != snapTick) {
+                snapTick = t;
+                SNAP_CACHE.clear();
             }
-            ItemStack off = inv.getItem(40);
-            if (off != null && !off.getType().isAir()) {
-                String id = sfId(off);
-                if (id != null && id.equalsIgnoreCase(sfId)) count += off.getAmount();
-            }
+            if (player == null) return InvSnap.EMPTY;
+            return SNAP_CACHE.computeIfAbsent(player.getUniqueId(), k -> InvSnap.of(player));
         } catch (Throwable ignored) {
-            // 忽略
+            return InvSnap.EMPTY;
         }
-        return count;
     }
 
-    /** 从背包（含副手）扣除指定数量的物品；不足时返回 false 且不做扣除。 */
+    /** 统计背包（含副手）里该粘液物品的总数（基于快照，不再重复扫背包）。 */
+    private static int countItem(Player player, String sfId) {
+        return snapOf(player).count(sfId);
+    }
+
+    /**
+     * 从背包（含副手）足额扣除 amount 个；<b>不足则一个都不动</b>。
+     *
+     * <p>修正：原来循环走完无条件 {@code return true}，少扣（或中途异常只扣了一部分）
+     * 也会被当成成功放行，玩家白拿任务奖励。</p>
+     */
     private static boolean takeItem(Player player, String sfId, int amount) {
-        if (countItem(player, sfId) < amount) return false;
-        try {
-            PlayerInventory inv = player.getInventory();
-            int remain = amount;
-            for (int i = 0; i < 36 && remain > 0; i++) {
-                ItemStack stack = inv.getItem(i);
-                if (stack == null || stack.getType().isAir()) continue;
-                String id = sfId(stack);
-                if (id == null || !id.equalsIgnoreCase(sfId)) continue;
-                int take = Math.min(stack.getAmount(), remain);
-                int left = stack.getAmount() - take;
-                if (left <= 0) {
-                    inv.setItem(i, null);
-                } else {
-                    stack.setAmount(left);
+        InvSnap snap = snapOf(player);
+        if (snap.count(sfId) < amount) return false;
+        return snap.take(sfId, amount);
+    }
+
+    /**
+     * 背包（含副手）的一次性快照：37 个格子的「粘液 id + 数量」。
+     *
+     * <p>一次 {@code of()} 只扫一遍背包；之后的 {@link #count(String)} 与
+     * {@link #take(String, int)} 全部基于这份快照完成，
+     * 扣除只在最后把真正动过的格子写回背包。</p>
+     */
+    private static final class InvSnap {
+
+        /** 空快照（玩家为 null 等异常场合使用）。 */
+        static final InvSnap EMPTY = new InvSnap(null, new String[0], new int[0]);
+
+        private final PlayerInventory inv;
+        /** 下标 0-35 对应背包槽 0-35；下标 36 对应副手槽 40。 */
+        private final String[] ids;
+        private final int[] amounts;
+
+        private InvSnap(PlayerInventory inv, String[] ids, int[] amounts) {
+            this.inv = inv;
+            this.ids = ids;
+            this.amounts = amounts;
+        }
+
+        /** 扫一遍背包（含副手）建立快照。 */
+        static InvSnap of(Player player) {
+            if (player == null) return EMPTY;
+            String[] ids = new String[37];
+            int[] amounts = new int[37];
+            try {
+                PlayerInventory inv = player.getInventory();
+                for (int i = 0; i < 36; i++) {
+                    ItemStack stack = inv.getItem(i);
+                    if (stack == null || stack.getType().isAir()) continue;
+                    ids[i] = sfId(stack);
+                    amounts[i] = stack.getAmount();
                 }
-                remain -= take;
-            }
-            if (remain > 0) {
                 ItemStack off = inv.getItem(40);
                 if (off != null && !off.getType().isAir()) {
-                    String id = sfId(off);
-                    if (id != null && id.equalsIgnoreCase(sfId)) {
-                        int take = Math.min(off.getAmount(), remain);
-                        if (off.getAmount() - take <= 0) {
-                            inv.setItem(40, null);
-                        } else {
-                            off.setAmount(off.getAmount() - take);
-                        }
-                        remain -= take;
+                    ids[36] = sfId(off);
+                    amounts[36] = off.getAmount();
+                }
+                return new InvSnap(inv, ids, amounts);
+            } catch (Throwable ignored) {
+                return EMPTY;
+            }
+        }
+
+        /** 该粘液物品在背包里的总数。 */
+        int count(String want) {
+            if (want == null) return 0;
+            int n = 0;
+            for (int i = 0; i < ids.length; i++) {
+                if (ids[i] != null && ids[i].equalsIgnoreCase(want)) n += amounts[i];
+            }
+            return n;
+        }
+
+        /**
+         * 从快照里扣掉 amount 个并写回背包。
+         *
+         * @return 足额扣除才返回 true；不足时返回 false 且<b>背包完全没动</b>
+         */
+        boolean take(String want, int amount) {
+            if (inv == null || want == null || amount <= 0) return false;
+            boolean[] touched = new boolean[ids.length];
+            int remain = amount;
+            for (int i = 0; i < ids.length && remain > 0; i++) {
+                if (ids[i] == null || !ids[i].equalsIgnoreCase(want)) continue;
+                int t = Math.min(amounts[i], remain);
+                amounts[i] -= t;
+                remain -= t;
+                touched[i] = true;
+            }
+            if (remain > 0) return false;
+            // 只把动过的格子写回背包，避免整包回写
+            for (int i = 0; i < ids.length; i++) {
+                if (!touched[i]) continue;
+                int slot = (i == 36) ? 40 : i;
+                try {
+                    if (amounts[i] <= 0) {
+                        inv.setItem(slot, null);
+                    } else {
+                        ItemStack cur = inv.getItem(slot);
+                        if (cur != null) cur.setAmount(amounts[i]);
                     }
+                } catch (Throwable ignored) {
+                    // 单个格子写回失败不影响其它格子
                 }
             }
             return true;
-        } catch (Throwable ignored) {
+        }
+    }
+
+    /**
+     * 一次性扣除多种材料（每种各 {@code amount} 个）：要么全扣，要么一个都不动。
+     *
+     * <p>做法：先把每种都数一遍，任一种不够就直接返回 false（此时背包还没动过）；
+     * 够的话再逐个扣，扣除过程中任何一步返回 false 或抛异常，就把前面已经扣掉的
+     * 数量按原样还回去。</p>
+     *
+     * <p><b>为什么需要它</b>：原来写成 {@code !take(a) || !take(b) || !take(c)} 的
+     * 短路链 —— b 一旦失败，a 的 128 个已经被扣走且不会还，玩家白白损失材料，
+     * 还只收到一句「提交失败」。</p>
+     *
+     * @return 全部扣除成功才返回 true
+     */
+    private static boolean takeAll(Player player, String[][] need, int amount) {
+        if (player == null || need == null || amount <= 0) return false;
+        // 1) 整体预检：任一种不够就不动背包
+        for (String[] n : need) {
+            if (countItem(player, n[0]) < amount) return false;
+        }
+        // 2) 逐个扣除，失败或异常则回滚已扣的
+        int[] taken = new int[need.length];
+        try {
+            for (int i = 0; i < need.length; i++) {
+                if (!takeItem(player, need[i][0], amount)) {
+                    giveBack(player, need, taken);
+                    return false;
+                }
+                taken[i] = amount;
+            }
+            return true;
+        } catch (Throwable t) {
+            giveBack(player, need, taken);
             return false;
+        }
+    }
+
+    /** 把 {@code taken} 里记录的数量按原样还给玩家（背包满了就掉地上）。 */
+    private static void giveBack(Player player, String[][] need, int[] taken) {
+        for (int i = 0; i < need.length; i++) {
+            if (taken[i] <= 0) continue;
+            try {
+                ItemStack stack = LuxianSword.slimefunItem(need[i][0]);
+                if (stack == null) continue;
+                stack.setAmount(taken[i]);
+                var left = player.getInventory().addItem(stack);
+                for (ItemStack rest : left.values()) {
+                    player.getWorld().dropItemNaturally(player.getLocation(), rest);
+                }
+            } catch (Throwable ignored) {
+                // 还回去失败也不能打断主流程
+            }
         }
     }
 
@@ -464,8 +646,15 @@ public final class QuestsScript implements NativeLifecycleScript {
         return null;
     }
 
-    private static boolean completeTask(String playerName, String taskId) {
-        Map<String, Object> data = loadTaskData(playerName);
+    /**
+     * 标记任务完成。
+     *
+     * <p>唯一入口就是带 {@code data} 的这个版本：调用方为了算前置任务本来就得读一次
+     * 存档（handleTask / handleFinalHour），传进来即可，不必同一次交互里读两遍。</p>
+     *
+     * @param data 已经读好的存档（非 null）
+     */
+    private static boolean completeTask(String playerName, String taskId, Map<String, Object> data) {
         if (hasCompleted(data, taskId)) return false;
         int index = taskIndex(taskId);
         if (index > 0) {
@@ -541,9 +730,10 @@ public final class QuestsScript implements NativeLifecycleScript {
     /**
      * 「中章装备全套」还缺哪几件。
      *
-     * <p>认法：先看它注册成哪个粘液物品（最可靠，不受渐变名影响），再退回按去色后的名字认。
-     * 原脚本注释说明为什么不能只靠名字——RSC 的 {@code {#hex}} 渐变名会把色码插在字与字之间，
-     * 比如「破法弓」三个字并不连续，纯字符串匹配必然失败。</p>
+     * <p>认法一律走粘液物品 id（{@link #sfId}）：最可靠，不受渐变名影响、也不能被铁砧伪造。
+     * 早年还有一条「按去色显示名兜底」的分支（弓含「破法弓」、剑含「戮仙剑」），
+     * 已删除：渐变名本来就会让纯字符串匹配不可靠，而这条兜底真正能命中的反而是
+     * 玩家改过名的私人物品 —— 把私人物品当成套装部件，奖励就漏发了。</p>
      */
     private static List<String> midChapterKitMissing(Player player) {
         List<String> miss = new ArrayList<>();
@@ -554,23 +744,13 @@ public final class QuestsScript implements NativeLifecycleScript {
 
             for (ItemStack st : player.getInventory().getContents()) {
                 if (st == null || st.getType().isAir()) continue;
-                String nm = "";
-                try {
-                    ItemMeta meta = st.getItemMeta();
-                    if (meta != null && meta.hasDisplayName()) {
-                        nm = Colors.strip(LegacyComponentSerializer.legacySection()
-                                .serialize(meta.displayName()));
-                    }
-                } catch (Throwable ignored) {
-                    nm = "";
-                }
                 String id = sfId(st);
                 if (id == null) id = "";
 
-                if (!bow && (id.equalsIgnoreCase(EquipmentBridge.BOW_ID) || nm.contains("破法弓"))) {
+                if (!bow && id.equalsIgnoreCase(EquipmentBridge.BOW_ID)) {
                     bow = true;
                 }
-                if (!sword && (id.equalsIgnoreCase(EquipmentBridge.SWORD_ID) || nm.contains("戮仙剑"))) {
+                if (!sword && id.equalsIgnoreCase(EquipmentBridge.SWORD_ID)) {
                     sword = true;
                 }
                 for (int t = 0; t < EquipmentBridge.TWIN_TOOL_IDS.length; t++) {
@@ -810,6 +990,9 @@ public final class QuestsScript implements NativeLifecycleScript {
                     if (icon == null || icon.getType() != Material.PLAYER_HEAD) {
                         // 兜底：拿不到头颅时用普通头颅，但名字 / lore 仍需正确
                         icon = named(Material.PLAYER_HEAD, iconName, lore);
+                    } else {
+                        // 头颅产自 BossBattleBridge，不过 named() 工厂，手动补标记
+                        tagMenuItem(icon);
                     }
                 }
                 inv.setItem(GUARDIAN_SLOTS[shown], icon);
@@ -840,19 +1023,20 @@ public final class QuestsScript implements NativeLifecycleScript {
     }
 
     /**
-     * 菜单里的物品（「阶段 N / 关闭菜单 / 读取存档 / 任务其…」等）一旦被顺走就会留在背包里，
-     * 靠这个方法识别并清理。
+     * 是不是我们菜单里的物品 —— 只认 {@link #MENU_ITEM_KEY} PDC 标记，不看显示名。
+     *
+     * <p>被顺走的菜单物品（「阶段 N / 关闭菜单 / 读取存档 / 任务其…」等）会留在背包里，
+     * 靠这个方法识别并清理。早年按显示名子串匹配，误删过玩家改过名的私人物品
+     * （铁砧可伪造名字，显示名不能用来判物品身份）；现在只认 PDC。
+     * 代价：本次修复前就已经漏进背包的旧菜单物品认不出来、会一直留着
+     * （纯外观垃圾且不会复发）—— 比误删玩家物品可接受得多。</p>
      */
     private static boolean isOurMenuItem(ItemStack stack) {
         try {
             if (stack == null || stack.getType().isAir()) return false;
             ItemMeta meta = stack.getItemMeta();
-            if (meta == null || !meta.hasDisplayName()) return false;
-            String n = LegacyComponentSerializer.legacySection().serialize(meta.displayName());
-            if (n.isEmpty()) return false;
-            return n.contains("阶段 ") || n.contains("此阶段您尚未解锁")
-                    || n.contains("关闭菜单") || n.contains("读取存档")
-                    || n.contains("开始挑战中章BOSS") || n.contains("任务其");
+            if (meta == null) return false;
+            return meta.getPersistentDataContainer().has(MENU_ITEM_KEY, PersistentDataType.STRING);
         } catch (Throwable ignored) {
             return false;
         }
@@ -1084,7 +1268,7 @@ public final class QuestsScript implements NativeLifecycleScript {
                 player.playSound(player.getLocation(), "entity.villager.no", 1.0f, 1.0f);
                 return;
             }
-            if (completeTask(playerName, task.id())) {
+            if (completeTask(playerName, task.id(), data)) {
                 player.sendMessage("§a任务完成！" + Colors.strip(task.name()));
                 player.playSound(player.getLocation(), "entity.player.levelup", 0.8f, 1.2f);
                 if (task.reward() != null && !task.reward().test(player)) {
@@ -1133,10 +1317,13 @@ public final class QuestsScript implements NativeLifecycleScript {
                 return;
             }
 
-            if (!takeItem(player, "Tr_dun", 128)
-                    || !takeItem(player, "Tr_cui", 128)
-                    || !takeItem(player, "Tr_cai", 128)) {
+            // 三种材料一次性结算：要么全扣、要么一个都不扣（回滚见 takeAll 的说明）。
+            // 原来这里是 !take(沌) || !take(萃) || !take(材) 的短路链 —— 一旦「萃」
+            // 失败（比如扣到一半抛异常），「沌」的 128 个已经被扣走且不会还回来，
+            // 玩家白丢材料，只收到一句「提交失败」。
+            if (!takeAll(player, need, 128)) {
                 player.sendMessage("§c提交失败，请确认材料数量是否足够。");
+                player.playSound(player.getLocation(), "entity.villager.no", 1.0f, 1.0f);
                 return;
             }
 

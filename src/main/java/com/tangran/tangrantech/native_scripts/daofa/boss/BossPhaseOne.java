@@ -360,6 +360,15 @@ public final class BossPhaseOne {
                     }
                 }
             }
+            // 落盘记录必须跟着删：buildArena 时按 state.key 存了 _arena_<uuid>.json，
+            // 只清方块不删记录的话，重启后 cleanupStaleStartup 会按这份旧记录
+            // 把玩家后来建在场地里的建筑当成残留清掉（「重启一次家没了」）。
+            // 二阶段的 restoreArena 同位置就是删的（deleteRecord(state.playerName)），两条路径对齐。
+            try {
+                BossArena.deleteRecord(state.key);
+            } catch (Throwable ignored) {
+                // 记录删不掉只影响下次启动自清理，不阻断还原
+            }
         } catch (Throwable t) {
             BossLog.warn("还原阶段一挑战区域失败: " + t);
         }

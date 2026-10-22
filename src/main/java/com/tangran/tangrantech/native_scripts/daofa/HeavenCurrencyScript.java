@@ -620,9 +620,13 @@ public final class HeavenCurrencyScript implements NativeLifecycleScript {
                 if (stack == null || stack.getType().isAir()) continue;
                 String id = sfId(stack);
                 if (id == null) continue;
+                // 必须与上面的统计循环同一判定：不在兑换表里的物品不能清槽。
+                // 曾经的 bug：这里只跳过 id==null，玩家放进来的任意粘液物品
+                // （工具/装备/其它材料）会被直接删除且零收益。
                 Double dr = EXCHANGE_RATES.get(id);
-                if (dr != null) gainedDaoyuan += stack.getAmount() * dr;
                 Double gr = GONGDE_RATES.get(id);
+                if (dr == null && gr == null) continue;
+                if (dr != null) gainedDaoyuan += stack.getAmount() * dr;
                 if (gr != null) gainedGongde += stack.getAmount() * gr;
                 inv.setItem(slot, null);
             }
@@ -681,11 +685,14 @@ public final class HeavenCurrencyScript implements NativeLifecycleScript {
                 if (top == null || !ACTIVE.contains(top)) return;
                 if (!(event.getWhoClicked() instanceof Player player)) return;
 
-                org.bukkit.inventory.Inventory clicked = event.getClickedInventory();
                 int slot = event.getRawSlot();
 
                 // 点到自己背包：不处理（允许正常整理）
-                if (clicked != top) return;
+                //
+                // 注意：别写成 clicked != top（getClickedInventory() 拿到的对象与
+                // getTopInventory() 不保证同一引用，那样守卫会恒真、点击全被吞掉）。
+                // 这里用 rawSlot 是否落在顶层菜单范围内来判断点击来源。
+                if (slot < 0 || slot >= top.getSize()) return;
 
                 if (slot == CONFIRM_SLOT) {
                     event.setCancelled(true);

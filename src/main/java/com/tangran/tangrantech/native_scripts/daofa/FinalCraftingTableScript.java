@@ -125,6 +125,13 @@ public final class FinalCraftingTableScript implements NativeLifecycleScript {
                         Player player = event.getPlayer();
                         if (!player.isOnline()) return Boolean.FALSE;
                         if (!checkPerm(player)) return Boolean.TRUE;
+                        // 合成台若绑定成物品，右键只该开界面：取消原版交互防止双发
+                        // （当前 yml 只从指南按钮组进入，这里是为将来的物品绑定兜底）
+                        try {
+                            event.setCancelled(true);
+                        } catch (Throwable ignored) {
+                            // 事件不可取消时忽略
+                        }
                         NativePluginHelper.runLater(() -> openMain(player), 1L);
                         return Boolean.TRUE;
                     }
@@ -641,10 +648,11 @@ public final class FinalCraftingTableScript implements NativeLifecycleScript {
                 }
                 if (expected != null && sameButton(cur, expected)) {
                     // 同款：多了的数量还回去（比如 shift 塞进来的第 2 个黄色玻璃板）
+                    // 不能按 MAX_STACK 截断：giveBack 会把装不下的掉脚下，截断等于吞物
                     int extra = cur.getAmount() - expected.getAmount();
                     if (extra > 0) {
                         ItemStack back = cur.clone();
-                        back.setAmount(Math.min(extra, MAX_STACK));
+                        back.setAmount(extra);
                         giveBack(player, back);
                         inv.setItem(slot, expected);
                     }
@@ -776,24 +784,70 @@ public final class FinalCraftingTableScript implements NativeLifecycleScript {
     // 合成
     // ------------------------------------------------------------------
 
-    private static int findOutputSlot(Inventory inv, ItemStack out) {
+    /** 第 9 列对 {@code out} 的可用空间总量：同类堆叠剩余空间 + 空格数 × 每组上限。 */
+    private static int outputSpace(Inventory inv, ItemStack out) {
+        int space = 0;
         try {
+            if (inv == null || out == null) return 0;
             ItemInfo outInfo = itemInfo(out);
-            // ① 同种成品且没满 → 叠加
             for (int slot : COL9) {
                 ItemStack st = inv.getItem(slot);
-                if (st == null || st.getType().isAir()) continue;
-                if (outInfo != null && sameItem(st, outInfo) && st.getAmount() < MAX_STACK) return slot;
-            }
-            // ② 第一个空格
-            for (int slot : COL9) {
-                ItemStack st = inv.getItem(slot);
-                if (st == null || st.getType().isAir()) return slot;
+                if (st == null || st.getType().isAir()) {
+                    space += MAX_STACK;
+                    continue;
+                }
+                if (outInfo != null && sameItem(st, outInfo)) {
+                    space += Math.max(0, MAX_STACK - st.getAmount());
+                }
             }
         } catch (Throwable ignored) {
             // 忽略
         }
-        return -1;
+        return space;
+    }
+
+    /**
+     * 把成品放进第 9 列：先填同类堆叠的剩余空间，再按每组上限填空格；放不下返回 false。
+     *
+     * <p>原实现（{@code findOutputSlot} + {@code setAmount(min(MAX_STACK, 现有 + 产出))}）
+     * 在同类堆叠剩余空间装不下整个产出时（如槽里 60 个、产出 10 个），多出的部分被
+     * 静默蒸发。这里先算总容量再分配，部分填满同类堆叠、余量进空格，任何情况不丢数。</p>
+     */
+    private static boolean placeOutput(Inventory inv, ItemStack out) {
+        try {
+            if (inv == null || out == null) return false;
+            if (outputSpace(inv, out) < out.getAmount()) return false;
+            ItemInfo outInfo = itemInfo(out);
+
+            int remain = out.getAmount();
+            // ① 并入同类堆叠（允许只填一部分，剩余继续找槽）
+            for (int slot : COL9) {
+                if (remain <= 0) break;
+                ItemStack st = inv.getItem(slot);
+                if (st == null || st.getType().isAir()) continue;
+                if (outInfo == null || !sameItem(st, outInfo)) continue;
+                int free = MAX_STACK - st.getAmount();
+                if (free <= 0) continue;
+                int add = Math.min(remain, free);
+                st.setAmount(st.getAmount() + add);
+                remain -= add;
+                inv.setItem(slot, st);
+            }
+            // ② 剩下的按每组上限进空格
+            for (int slot : COL9) {
+                if (remain <= 0) break;
+                ItemStack st = inv.getItem(slot);
+                if (st != null && !st.getType().isAir()) continue;
+                int put = Math.min(remain, MAX_STACK);
+                ItemStack placing = out.clone();
+                placing.setAmount(put);
+                inv.setItem(slot, placing);
+                remain -= put;
+            }
+            return remain <= 0;
+        } catch (Throwable ignored) {
+            return false;
+        }
     }
 
     private static void craft(Player player, Inventory inv, Session sess) {
@@ -863,8 +917,8 @@ public final class FinalCraftingTableScript implements NativeLifecycleScript {
                 player.sendMessage("§c成品取不出来（配方里的物品 id 可能已经变了）。");
                 return;
             }
-            int outSlot = findOutputSlot(inv, out);
-            if (outSlot < 0) {
+            // ③ 成品与输出位：先查总容量再动手，放不下就不扣料
+            if (outputSpace(inv, out) < out.getAmount()) {
                 player.sendMessage("§c第九列已经满了，先把成品取走再合成。");
                 return;
             }
@@ -885,13 +939,10 @@ public final class FinalCraftingTableScript implements NativeLifecycleScript {
                 }
             }
 
-            ItemStack curOut = inv.getItem(outSlot);
-            if (curOut != null && !curOut.getType().isAir()) {
-                int merged = Math.min(MAX_STACK, curOut.getAmount() + out.getAmount());
-                curOut.setAmount(merged);
-                inv.setItem(outSlot, curOut);
-            } else {
-                inv.setItem(outSlot, out);
+            // ⑤ 放成品（容量上一步已预检；真放不下就退给玩家，绝不蒸发）
+            if (!placeOutput(inv, out)) {
+                TT.log("[终刻合成台] 成品放置失败，退给玩家: " + out);
+                giveBack(player, out);
             }
 
             try {

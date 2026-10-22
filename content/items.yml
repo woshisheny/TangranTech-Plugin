@@ -300,7 +300,11 @@ Tr_sugar:
   recipe_type: TR_JCWZ_RECIPE_TYPE
   script: 糖精获取
 Tr_zwf:
-  item_group: Tr_jcwzhq
+  # 修正：原来写的是 Tr_jcwzhq —— 那是 groups.yml 里的一个「按钮」（type: button），
+  # Slimefun 的按钮属于 FlexItemGroup，不允许往里 add 物品，于是启动期抛
+  # "You cannot add items to a FlexItemGroup!" 并跳过注册。
+  # 它是菜单占位用的空格玻璃板，归到「初章材料」组。
+  item_group: Tr_czcl
   item:
     name: ' '
     lore:

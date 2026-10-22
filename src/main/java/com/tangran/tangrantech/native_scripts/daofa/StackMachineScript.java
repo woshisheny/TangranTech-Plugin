@@ -1122,22 +1122,31 @@ public final class StackMachineScript implements NativeLifecycleScript {
             // 1) 内存里那份缓存界面里的玩家物品
             String key = StackMachineStore.locKey(loc);
             ParentCache pc = (key != null) ? PARENT_CACHE.get(key) : null;
+            boolean haveParentCache = pc != null && pc.inv != null;
             List<ItemStack> fromCache = new ArrayList<>();
-            if (pc != null && pc.inv != null) {
+            if (haveParentCache) {
                 fromCache.addAll(StackMachineStore.takePlayerItems(pc.inv, specialSlotsOfKind(pc.kind)));
             }
             ConfigCache cc = (key != null) ? CONFIG_CACHE.get(key) : null;
-            if (cc != null && cc.inv != null) {
+            boolean haveConfigCache = cc != null && cc.inv != null;
+            if (haveConfigCache) {
                 fromCache.addAll(StackMachineStore.takePlayerItems(cc.inv, CFG_SPECIAL));
             }
 
-            // 2) 盘上那份（reload 之后内存是空的，内容只在盘上）
-            fromCache.addAll(StackMachineStore.harvestMenuData(loc, StackMachineStore.DATA_MENU,
-                    () -> Bukkit.createInventory(new ParentHolder(), SIZE, legacy(TITLE)),
-                    DEFAULT_SPECIAL));
-            fromCache.addAll(StackMachineStore.harvestMenuData(loc, StackMachineStore.DATA_CFG,
-                    () -> Bukkit.createInventory(new ConfigHolder(), CFG_SIZE_2, legacy(CFG_TITLE)),
-                    CFG_SPECIAL));
+            // 2) 盘上那份（reload 之后内存是空的，内容只在盘上）。
+            //    ★ 只在没有对应缓存时才收：缓存在 ⇒ 它是从盘上加载、并一直被同步回去的那一份，
+            //    盘上只是同一批东西的镜像，两边都收就是双倍掉落（开过界面就拆 = 物品翻倍）。
+            //    缓存不在（重启后这台机器还没被 tick / 打开过）⇒ 盘上是唯一副本，必须收。
+            if (!haveParentCache) {
+                fromCache.addAll(StackMachineStore.harvestMenuData(loc, StackMachineStore.DATA_MENU,
+                        () -> Bukkit.createInventory(new ParentHolder(), SIZE, legacy(TITLE)),
+                        DEFAULT_SPECIAL));
+            }
+            if (!haveConfigCache) {
+                fromCache.addAll(StackMachineStore.harvestMenuData(loc, StackMachineStore.DATA_CFG,
+                        () -> Bukkit.createInventory(new ConfigHolder(), CFG_SIZE_2, legacy(CFG_TITLE)),
+                        CFG_SPECIAL));
+            }
 
             // 3) 全部掉在机器位置
             int dropped = 0;
@@ -1284,12 +1293,35 @@ public final class StackMachineScript implements NativeLifecycleScript {
         }
     }
 
-    /** 本机当前打开着的父界面（没有返回 null）。 */
+    /**
+     * 本机的父界面；没有打开过就从盘上复原一份（缓存后不再返回 null）。
+     *
+     * <p>对齐 {@link #configInvFor} 的对称设计：父界面是机器的输入/输出仓，
+     * tick 每刻都要往里投产出、取输入，<b>不能只在玩家开着界面时才存在</b>。
+     * 重启后 {@link #PARENT_CACHE} 是空的，若不自愈，tick 里 {@code inv == null}
+     * 直接走「只刷条不生产」分支 ⇒ 没被右键打开过的机器永不生产（P0 实机漏洞）。</p>
+     *
+     * <p>自愈条目与「玩家打开过」的条目完全同构：之后 {@code openParent} 复用它，
+     * {@link #onBreak} 也只收它这一份（见那边的防双倍收割）。</p>
+     */
     private static Inventory parentInvOf(Location loc) {
         try {
             String key = StackMachineStore.locKey(loc);
-            ParentCache c = (key != null) ? PARENT_CACHE.get(key) : null;
-            return (c != null) ? c.inv : null;
+            if (key == null) return null;
+            ParentCache c = PARENT_CACHE.get(key);
+            if (c != null && c.inv != null) return c.inv;
+            String kind = parentKind(StackMachineStore.getType(loc));
+            Inventory inv = Bukkit.createInventory(new ParentHolder(), SIZE, legacy(TITLE));
+            try {
+                StackMachineStore.loadMenu(inv, loc, StackMachineStore.DATA_MENU, specialSlotsOfKind(kind));
+            } catch (Throwable ignored) {
+                // 读不出来（作废 / 损坏 / 没有）就当作空仓
+            }
+            ParentCache fresh = new ParentCache();
+            fresh.inv = inv;
+            fresh.kind = kind;
+            PARENT_CACHE.put(key, fresh);
+            return inv;
         } catch (Throwable ignored) {
             return null;
         }

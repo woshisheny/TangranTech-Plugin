@@ -267,7 +267,7 @@ public final class TwinShop {
                     }
                     if (gd.bow()) {
                         // 破法弓：按钮直接用本体（不是普通弓），价格/状态补在 lore 里
-                        ItemStack bowBtn = Pofabow.make();
+                        ItemStack bowBtn = Pofabow.make(player);
                         ItemMeta bm = bowBtn.getItemMeta();
                         if (bm != null) {
                             List<String> bl2 = new ArrayList<>(lore);
@@ -454,7 +454,7 @@ public final class TwinShop {
                 return;
             }
             if (gd.bow()) {
-                giveItem(player, Pofabow.make());
+                giveItem(player, Pofabow.make(player));
                 TwinMinigame.unlockTwinBow(player);
             } else {
                 give(player, gd);
@@ -841,8 +841,13 @@ public final class TwinShop {
                 }
             }
             if (!hit) {
-                // 兜底：名字里带"天实/天虚"的实体（展示头颅等）也算
+                // 兜底：名字里带"天实/天虚"的实体（展示头颅等）也算。
+                // 但只在该玩家正处于双子经营阶段时兜底 —— 展示架只在该阶段存在，
+                // 且没有这道阶段闸的话，一张命名牌把任意实体改叫"天实"就能在
+                // 阶段外打开商店 GUI、花掉残留账本（含破法弓兑换）。
+                // 上面的 canonical 实体身份比对（same(...)）不受此闸影响。
                 try {
+                    if (!TwinMinigame.active(event.getPlayer())) return false;
                     String n = clicked.getCustomName();
                     if (n != null) {
                         if (n.contains("天虚")) {

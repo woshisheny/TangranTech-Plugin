@@ -104,12 +104,35 @@ public final class TTRecipe extends MachineRecipe {
             if (RANDOM.nextInt(100) >= outputChance(i)) continue;
             ItemStack give = out.clone();
             if (mult > 1) {
-                long scaled = (long) give.getAmount() * mult;
-                give.setAmount((int) Math.min(scaled, give.getMaxStackSize()));
+                // 倍率放大后总量可能远超单格上限：早年直接
+                // setAmount(min(scaled, maxStackSize))，多出来的部分凭空蒸发
+                // （模板堆叠 64 × 单个产出 4 = 256 → 只给 64，丢 192）。
+                // 改为按单格上限拆成多份依次推入输出槽；放不下就停，
+                // 剩下的等玩家取走后再产（物品不丢）。
+                int max = Math.max(1, give.getMaxStackSize());
+                long remain = (long) give.getAmount() * mult;
+                boolean full = false;
+                while (remain > 0) {
+                    give.setAmount((int) Math.min(remain, max));
+                    // pushItem 不回写传入堆（字节码实证：setAmount 改的是槽内物品），
+                    // 未推完时返回「剩余数量的新堆」，全部推完返回 null——
+                    // 必须用返回值计算推入量；旧代码读 give.getAmount() 恒等于 before，
+                    // pushed 恒 0 → 第一个输出推完即误判「槽满」→ 每次只产一个输出。
+                    // 快照取在调用前，兼容「运行时构建原地回写」的行为差异。
+                    int snapshot = give.getAmount();
+                    ItemStack rest = inv.pushItem(give, outputSlots);
+                    int pushed = (rest == null) ? snapshot : snapshot - rest.getAmount();
+                    if (pushed <= 0) { full = true; break; }
+                    remain -= pushed;
+                }
+                // 本产出没推完 = 输出槽已满，后续产出也不再尝试（与原语义一致）
+                if (full || remain > 0) break;
+                continue;
             }
-            int before = give.getAmount();
-            inv.pushItem(give, outputSlots);
-            if (give.getAmount() >= before) break;
+            // 同上：用返回值判断是否一件都没推入（推满返回 null）
+            int snapshot = give.getAmount();
+            ItemStack rest = inv.pushItem(give, outputSlots);
+            if (rest != null && rest.getAmount() >= snapshot) break;
         }
     }
 

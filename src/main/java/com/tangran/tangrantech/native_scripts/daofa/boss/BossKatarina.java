@@ -3,7 +3,6 @@ package com.tangran.tangrantech.native_scripts.daofa.boss;
 import com.tangran.tangrantech.TT;
 import java.util.ArrayList;
 import java.util.List;
-import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
 import org.bukkit.Bukkit;
 import org.bukkit.Color;
 import org.bukkit.Location;
@@ -1876,8 +1875,7 @@ public final class BossKatarina implements BossGuardian {
             int removed = 0;
             for (Entity e : world.getNearbyEntities(center, 60, 60, 60)) {
                 if (!(e instanceof ItemDisplay display)) continue;
-                // 性能优化：先做廉价的区域裁剪，再序列化名字（ItemDisplay 本就稀少，
-                // 名字序列化是 LegacyComponentSerializer，能省则省）
+                // 性能优化：先做廉价的区域裁剪，再做身份判定（ItemDisplay 本就稀少）
                 if (region != null) {
                     Location loc = e.getLocation();
                     if (loc.getX() < region.minX() - 3 || loc.getX() > region.maxX() + 3
@@ -1886,17 +1884,10 @@ public final class BossKatarina implements BossGuardian {
                         continue;
                     }
                 }
-                String name = "";
-                try {
-                    ItemStack st = display.getItemStack();
-                    if (st != null && st.hasItemMeta() && st.getItemMeta().hasDisplayName()) {
-                        name = LegacyComponentSerializer.legacySection()
-                                .serialize(st.getItemMeta().displayName());
-                    }
-                } catch (Throwable ignored) {
-                    name = "";
-                }
-                if (!name.contains("戮仙剑")) continue;
+                // 只认粘液 id（硬约定 #3）：原实现按展示物物品的显示名 contains「戮仙剑」
+                // 判定，会误删玩家自己放的、展示带该字样物品的 ItemDisplay；且真剑若被
+                // 铁砧改名反而漏删。展示物持的就是真剑物品本身，走 canonical 判定即可。
+                if (!LuxianSword.isSword(display.getItemStack())) continue;
                 BossState.removeEntity(display);
                 removed++;
             }

@@ -116,6 +116,9 @@ public final class InjectionScript implements NativeLifecycleScript {
         for (Entity ent : world.getNearbyEntities(loc, radius, radius, radius)) {
             if (!(ent instanceof Item item)) continue;
             try {
+                // 已被其他动画接手的实体要跳过，继续找下一件：
+                // 否则「先丢的半成品还在飞」时，后丢的那件会被孤立（永远不处理）。
+                if (PROCESSING.contains(ent.getUniqueId())) continue;
                 ItemStack stack = item.getItemStack();
                 if (stack == null) continue;
                 String id = sfIdOf(stack);
@@ -197,7 +200,7 @@ public final class InjectionScript implements NativeLifecycleScript {
                         }
 
                         if (RANDOM.nextDouble() < SUCCESS_CHANCE) {
-                            playSound(player, "entity_tnt_primed");
+                            playSound(player, "entity.tnt.primed");
                         } else {
                             playSound(player, "item.totem.use");
                         }

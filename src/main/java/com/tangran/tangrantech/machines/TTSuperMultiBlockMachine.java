@@ -24,23 +24,49 @@ import org.bukkit.inventory.ItemStack;
  */
 public class TTSuperMultiBlockMachine extends TTRecipeMachine {
 
+    /** RSC 行为开关（super_multi_block_machines.yml 的六个布尔字段，默认值对齐 RSC 读取器）。 */
+    public record SuperFlags(boolean displayProjectiles, boolean checkFormed,
+                             boolean openMenuWhenClickedParts, boolean noMenuWhenNotFormed,
+                             boolean allowSwitchDisplayLayer, boolean defaultNotice) {}
+
     /** 结构：层 → 行 → 列 的字符 token。 */
     private final List<List<List<String>>> structure;
     /** 字符 → 期望物品；null 表示通配（structure 里的 "__"）。 */
     private final java.util.Map<String, ItemStack> mapping;
     /** 核心相对位置：{层偏移, 行偏移, 列偏移}。 */
     private final int[] coreOffset;
+    /** RSC 行为开关。 */
+    private final SuperFlags flags;
 
     public TTSuperMultiBlockMachine(ItemGroup group, SlimefunItemStack item, RecipeType rt, ItemStack[] recipe,
                                     int[] input, int[] output, List<TTRecipe> recipes,
                     int capacity, int consumption, int speed, MenuDef menu, boolean hideAll,
                     List<List<List<String>>> structure, java.util.Map<String, ItemStack> mapping,
-                    int[] coreOffset) {
+                    int[] coreOffset, SuperFlags flags) {
         super(group, item, rt, recipe, input, output, recipes, capacity, consumption, speed, menu, hideAll);
         this.structure = structure;
         this.mapping = mapping;
         this.coreOffset = coreOffset;
+        this.flags = flags;
+        // 放置核心时记录玩家朝向（对齐 RSC BlockPlaceHandler + setHorizonDirection），
+        // 结构匹配按该朝向旋转（SuperBlocks.onCorePlaced 持久化，重启不丢）
+        addItemHandler(new io.github.thebusybiscuit.slimefun4.core.handlers.BlockPlaceHandler(false) {
+            @Override
+            public void onPlayerPlace(org.bukkit.event.block.BlockPlaceEvent e) {
+                com.tangran.tangrantech.machines.superblock.SuperBlocks.onCorePlaced(
+                        e.getBlock().getLocation(),
+                        com.tangran.tangrantech.machines.superblock.SuperBlocks.Dir.fromYaw(
+                                e.getPlayer().getLocation().getYaw()));
+            }
+        });
     }
+
+    /** RSC 行为开关。 */
+    public SuperFlags flags() { return flags; }
+
+    /** 超多方块机器打开运行期诊断（排查成形/匹配/电力）。 */
+    @Override
+    protected boolean diagEnabled() { return true; }
 
     /** 结构（层/行/列字符 token）。 */
     public List<List<List<String>>> getStructure() { return structure; }
@@ -50,6 +76,52 @@ public class TTSuperMultiBlockMachine extends TTRecipeMachine {
 
     /** 核心在结构中的相对偏移 {层, 行, 列}。 */
     public int[] getCoreOffset() { return coreOffset; }
+
+    /**
+     * 结构不完整就暂停生产：不扣电、不推进、不出货。
+     *
+     * <p>{@link #isFormed(Block)} 早年<b>零调用方</b>——yml 里四台机器都写着
+     * {@code checkFormed: true}，loader 却不读这个标记，isFormed 也没人调，
+     * 结果机器退化成普通配方机：结构拆了照样按菜单里的输入继续生产。
+     * 现在每次 tick 前校验一次（{@code checkFormed} 语义对全部四台都是 true，
+     * 无需按条目区分）。</p>
+     *
+     * <p>进行中的操作选择「暂停」而非「作废」：输入在开机时就已消耗，
+     * 此时 {@code endOperation} 会让这批输入凭空蒸发；结构修好后自然续跑。</p>
+     */
+    /**
+     * 生产前先走超多方块管理器（首刻建档 / 500 tick 自愈），成形与否以管理器缓存的
+     * 逐格状态为准（dirty 事件驱动，结构被拆即刻停机）。
+     *
+     * <p>历史：本方法早年曾<b>每 tick 全结构扫描</b>（浑天仪约六百格 × 每刻 × 每台），
+     * 现改为 {@link com.tangran.tangrantech.machines.superblock.SuperBlocks} 的缓存判定，
+     * 语义不变、开销降为 O(1)。</p>
+     */
+    @Override
+    protected void tick(Block b) {
+        com.tangran.tangrantech.machines.superblock.SuperBlocks.onMachineTick(this, b);
+        if (flags.checkFormed() && !com.tangran.tangrantech.machines.superblock.SuperBlocks.isFormed(b.getLocation())) {
+            return;
+        }
+        super.tick(b);
+    }
+
+    /**
+     * 核心被破坏：先销毁超多方块实例与投影（对齐 RSC destroySuperMultiBlock），
+     * 再走基类的掉落/停机清理。
+     */
+    @Override
+    protected io.github.thebusybiscuit.slimefun4.core.handlers.BlockBreakHandler onBlockBreak() {
+        io.github.thebusybiscuit.slimefun4.implementation.handlers.SimpleBlockBreakHandler base =
+                (io.github.thebusybiscuit.slimefun4.implementation.handlers.SimpleBlockBreakHandler) super.onBlockBreak();
+        return new io.github.thebusybiscuit.slimefun4.implementation.handlers.SimpleBlockBreakHandler() {
+            @Override
+            public void onBlockBreak(Block b) {
+                com.tangran.tangrantech.machines.superblock.SuperBlocks.destroyAt(b.getLocation());
+                base.onBlockBreak(b);
+            }
+        };
+    }
 
     /**
      * 判定以 {@code core} 为核心的结构是否完整成形。
@@ -81,8 +153,8 @@ public class TTSuperMultiBlockMachine extends TTRecipeMachine {
         return true;
     }
 
-    /** 单格比对：粘液物品按 id，原版按材质。 */
-    private static boolean matchesBlock(Block actual, ItemStack expect) {
+    /** 单格比对：粘液物品按 id，原版按材质（SuperBlocks 逐格检测复用同一规则）。 */
+    public static boolean matchesBlock(Block actual, ItemStack expect) {
         String wantSfId = slipId(expect);
         if (wantSfId != null) {
             String got = com.tangran.tangrantech.native_scripts.SlimefunBridge.blockId(actual);

@@ -27,6 +27,7 @@ import org.bukkit.event.entity.EntityPickupItemEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerItemHeldEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
+import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
@@ -54,6 +55,9 @@ import com.tangran.tangrantech.native_scripts.daofa.boss.BossBattleBridge;
  *       否则玩家会固定往南推。</li>
  *   <li>御剑是创造飞行，收剑时必须<b>恢复玩家原本的允许飞行/正在飞行状态</b>，
  *       否则会把普通玩家的飞行能力一直开着。</li>
+ *   <li>御剑中退出要在 {@code PlayerQuitEvent} 里收剑：CraftBukkit 先发退出事件、
+ *       后存玩家数据，只靠 tick 的「下线自清理」来不及（存档已带着 {@code flying=true}
+ *       落盘），重进就永久卡飞行。</li>
  *   <li>Katarina 阶段（BOSS战给玩家打的 metadata {@code TR_BOSS_NO_SWORD_RIDE}）强制下剑。</li>
  *   <li>剑的物品 id 在注册表里是大写（{@code Tr_lxj} → {@code TR_LXJ}），
  *       直接按原文查会拿到 null、退化成普通木剑 —— 所以按大小写变体轮试。</li>
@@ -73,8 +77,6 @@ public final class LuxianSword {
 
     /** 显示名。 */
     private static final String SWORD_NAME = "§c§l戮仙剑";
-    /** 名字里用于识别的关键词。 */
-    private static final String NAME_KEY = "戮仙剑";
 
     /** lore 的标识行（判断是否已补过 lore）。 */
     private static final String LORE_KEY = "【戮仙剑】";
@@ -95,6 +97,8 @@ public final class LuxianSword {
     private static final int RAM_INTERVAL_TICKS = 2;
     /** 水平推进速度。 */
     private static final double MOVE_SPEED = 0.75;
+    /** 御剑 tick 连续异常到这个次数就整体收剑（约 1 秒）。 */
+    private static final int RIDE_ERROR_LIMIT = 20;
 
     /** 玩家 UUID → 御剑状态。 */
     private static final Map<String, Ride> RIDES = new ConcurrentHashMap<>();
@@ -107,6 +111,8 @@ public final class LuxianSword {
         final boolean originalAllowFlight;
         final boolean originalFlying;
         int tick;
+        /** 连续异常刻数：单刻异常重试，持续异常到阈值整体收剑（防卡半飞状态）。 */
+        int errors;
         final Map<String, Integer> ramCooldown = new ConcurrentHashMap<>();
 
         Ride(Player player) {
@@ -273,12 +279,12 @@ public final class LuxianSword {
         return applyEnchant(sword);
     }
 
-    /** 是不是戮仙剑（只认木剑材质 + 名字含关键词）。 */
+    /** 是不是戮仙剑（只认粘液 id；显示名可被铁砧伪造，不能作判据）。 */
     public static boolean isSword(ItemStack item) {
         try {
             if (item == null || item.getType() != Material.WOODEN_SWORD) return false;
-            String name = plainName(item.getItemMeta());
-            return name != null && name.contains(NAME_KEY);
+            String sf = TT.sfIdOf(item);
+            return sf != null && sf.equalsIgnoreCase(SWORD_ID);
         } catch (Throwable ignored) {
             return false;
         }
@@ -538,12 +544,17 @@ public final class LuxianSword {
 
             ride.tick++;
             applyRamDamage(player, ride);
-        } catch (Throwable ignored) {
-            // 单刻异常不能让任务停摆
-            try {
-                if (ride.task != null) ride.task.cancel();
-            } catch (Throwable ignored2) {
-                // 忽略
+        } catch (Throwable t) {
+            // 单刻异常不能让任务停摆（原注释的口径）：保留任务，下一刻重试。
+            // 但原实现是直接 cancel 任务——玩家还开着 flying、任务却死了，
+            // 人就卡在半飞状态（剑影冻结、移动失灵），这就是「骑乘异常卡飞行」。
+            // 折中：记连续异常数，到阈值才整体收剑（stopRide 会恢复飞行状态）。
+            ride.errors++;
+            if (ride.errors >= RIDE_ERROR_LIMIT) {
+                TT.log("[装备/戮仙剑] 御剑连续异常 " + ride.errors + " 次，强制收剑: " + t);
+                stopRide(player);
+            } else if (ride.errors == 1) {
+                TT.log("[装备/戮仙剑] 御剑单刻异常（下一刻重试）: " + t);
             }
         }
     }
@@ -659,6 +670,21 @@ public final class LuxianSword {
         public void onJoin(PlayerJoinEvent event) {
             try {
                 enchantAll(event.getPlayer());
+            } catch (Throwable ignored) {
+                // 忽略
+            }
+        }
+
+        @EventHandler(priority = EventPriority.NORMAL)
+        public void onQuit(PlayerQuitEvent event) {
+            try {
+                // 御剑中退出必须在这里收剑。CraftBukkit 的 PlayerList.remove 先触发
+                // PlayerQuitEvent、再 this.save(player)（注释原话：「Quitting must be
+                // before we do final save of data, in case plugins need to modify it」）。
+                // 此刻把飞行状态恢复原样才会随存档落盘；若只靠 tick 里的「下线自清理」，
+                // 那一刻发生在存档之后 —— flying=true 已被存下，重进就永久卡飞行
+                // （生存模式也能飞，且没人再帮他恢复）。
+                stopRide(event.getPlayer());
             } catch (Throwable ignored) {
                 // 忽略
             }
