@@ -31,8 +31,8 @@ public class TTSuperMultiBlockMachine extends TTRecipeMachine {
 
     /** 结构：层 → 行 → 列 的字符 token。 */
     private final List<List<List<String>>> structure;
-    /** 字符 → 期望物品；null 表示通配（structure 里的 "__"）。 */
-    private final java.util.Map<String, ItemStack> mapping;
+    /** 字符 → 期望方块；null 表示通配（structure 里的 "__"）。 */
+    private final java.util.Map<String, Expect> mapping;
     /** 核心相对位置：{层偏移, 行偏移, 列偏移}。 */
     private final int[] coreOffset;
     /** RSC 行为开关。 */
@@ -41,7 +41,7 @@ public class TTSuperMultiBlockMachine extends TTRecipeMachine {
     public TTSuperMultiBlockMachine(ItemGroup group, SlimefunItemStack item, RecipeType rt, ItemStack[] recipe,
                                     int[] input, int[] output, List<TTRecipe> recipes,
                     int capacity, int consumption, int speed, MenuDef menu, boolean hideAll,
-                    List<List<List<String>>> structure, java.util.Map<String, ItemStack> mapping,
+                    List<List<List<String>>> structure, java.util.Map<String, Expect> mapping,
                     int[] coreOffset, SuperFlags flags) {
         super(group, item, rt, recipe, input, output, recipes, capacity, consumption, speed, menu, hideAll);
         this.structure = structure;
@@ -72,7 +72,7 @@ public class TTSuperMultiBlockMachine extends TTRecipeMachine {
     public List<List<List<String>>> getStructure() { return structure; }
 
     /** 字符映射表。 */
-    public java.util.Map<String, ItemStack> getMapping() { return mapping; }
+    public java.util.Map<String, Expect> getMapping() { return mapping; }
 
     /** 核心在结构中的相对偏移 {层, 行, 列}。 */
     public int[] getCoreOffset() { return coreOffset; }
@@ -140,8 +140,8 @@ public class TTSuperMultiBlockMachine extends TTRecipeMachine {
                 List<String> cols = rows.get(r);
                 if (cols == null) continue;
                 for (int c = 0; c < cols.size(); c++) {
-                    ItemStack expect = mapping.get(cols.get(c));
-                    if (expect == null || expect.getType().isAir()) continue;
+                    Expect expect = mapping.get(cols.get(c));
+                    if (expect == null || expect.material().isAir()) continue;
                     Block actual = w.getBlockAt(
                             core.getX() + (c - coreOffset[2]),
                             core.getY() + (coreOffset[0] - l),
@@ -153,27 +153,33 @@ public class TTSuperMultiBlockMachine extends TTRecipeMachine {
         return true;
     }
 
+    /**
+     * 结构格的期望：原版方块按材质比对（材质可以不是物品，如水），粘液方块按 id 比对。
+     *
+     * <p>以前这里直接放 ItemStack，而 Paper 的 ItemStack 构造器拒绝非物品材质
+     * （mapping 里的 {@code a6: water} 抛 "WATER isn't an item"，整台机器注册失败）——
+     * 结构比对本来只需要材质与粘液 id，不需要一个真实存在的物品。</p>
+     */
+    public record Expect(Material material, String sfId) {}
+
     /** 单格比对：粘液物品按 id，原版按材质（SuperBlocks 逐格检测复用同一规则）。 */
-    public static boolean matchesBlock(Block actual, ItemStack expect) {
-        String wantSfId = slipId(expect);
-        if (wantSfId != null) {
+    public static boolean matchesBlock(Block actual, Expect expect) {
+        if (expect.sfId() != null) {
             String got = com.tangran.tangrantech.native_scripts.SlimefunBridge.blockId(actual);
-            return wantSfId.equalsIgnoreCase(got);
+            return expect.sfId().equalsIgnoreCase(got);
         }
-        return actual.getType() == expect.getType();
+        return actual.getType() == expect.material();
     }
 
     /**
      * 一个结构格的现状快照。供「大型结构填充棒」统计缺失与补齐。
      *
      * @param block        该格的实际方块
-     * @param expect       期望物品（可能带粘液 id）；空表示该格不限材质
-     * @param expectSfId   期望的粘液 id；null 表示期望的是原版方块
      * @param wantMaterial 期望摆成的材质（补齐时用这个 setType）
+     * @param expectSfId   期望的粘液 id；null 表示期望的是原版方块
      * @param ok           当前是否已符合
      */
-    public record Cell(Block block, ItemStack expect, String expectSfId,
-                       Material wantMaterial, boolean ok) {}
+    public record Cell(Block block, Material wantMaterial, String expectSfId, boolean ok) {}
 
     /**
      * 扫一遍结构，逐格给出「期望物品 + 现状」。
@@ -194,9 +200,9 @@ public class TTSuperMultiBlockMachine extends TTRecipeMachine {
                 List<String> cols = rows.get(r);
                 if (cols == null) continue;
                 for (int c = 0; c < cols.size(); c++) {
-                    ItemStack expect = mapping.get(cols.get(c));
+                    Expect expect = mapping.get(cols.get(c));
                     // 与 isFormed 一致：空（null 或 AIR）表示该格不限材质，不参与比对
-                    if (expect == null || expect.getType().isAir()) continue;
+                    if (expect == null || expect.material().isAir()) continue;
 
                     Block actual = w.getBlockAt(
                             core.getX() + (c - coreOffset[2]),
@@ -204,7 +210,7 @@ public class TTSuperMultiBlockMachine extends TTRecipeMachine {
                             core.getZ() + (r - coreOffset[1]));
 
                     boolean ok = matchesBlock(actual, expect);
-                    out.add(new Cell(actual, expect, slipId(expect), expect.getType(), ok));
+                    out.add(new Cell(actual, expect.material(), expect.sfId(), ok));
                 }
             }
         }
@@ -244,19 +250,27 @@ public class TTSuperMultiBlockMachine extends TTRecipeMachine {
     }
 
     /**
-     * 解析 mapping 段：字符 → 物品；并定位核心偏移。
+     * 解析 mapping 段：字符 → 期望方块；并定位核心偏移。
+     *
+     * <p>原版条目直接按材质解析——mapping 里可以有「非物品」的纯方块（如水），
+     * 走 {@link Read#item} 会抛 "WATER isn't an item"；粘液条目仍按物品解析取 id。</p>
      */
     @SuppressWarnings("unchecked")
     public static MappingResult parseMapping(ConfigurationSection mappingSec,
                                               List<List<List<String>>> structure) {
-        java.util.Map<String, ItemStack> map = new java.util.HashMap<>();
+        java.util.Map<String, Expect> map = new java.util.HashMap<>();
         int[] core = new int[] {0, 0, 0};
         if (mappingSec != null) {
             for (String ch : mappingSec.getKeys(false)) {
                 ConfigurationSection itemSec = mappingSec.getConfigurationSection(ch);
                 if (itemSec == null) continue;
-                ItemStack it = Read.item(itemSec, false);
-                if (it != null) map.put(ch, it);
+                if ("slimefun".equalsIgnoreCase(itemSec.getString("material_type", "mc"))) {
+                    ItemStack it = Read.item(itemSec, false);
+                    if (it != null) map.put(ch, new Expect(it.getType(), slipId(it)));
+                } else {
+                    Material m = Material.matchMaterial(itemSec.getString("material", ""));
+                    if (m != null) map.put(ch, new Expect(m, null));
+                }
                 if (itemSec.getBoolean("core", false) && structure != null) {
                     int[] found = findToken(structure, ch);
                     if (found != null) core = found;
@@ -284,10 +298,10 @@ public class TTSuperMultiBlockMachine extends TTRecipeMachine {
 
     /** mapping 解析结果：字符映射表 + 核心偏移。 */
     public static final class MappingResult {
-        public final java.util.Map<String, ItemStack> map;
+        public final java.util.Map<String, Expect> map;
         /** {层, 行, 列} */
         public final int[] core;
-        MappingResult(java.util.Map<String, ItemStack> map, int[] core) {
+        MappingResult(java.util.Map<String, Expect> map, int[] core) {
             this.map = map;
             this.core = core;
         }

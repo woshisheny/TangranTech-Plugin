@@ -113,6 +113,16 @@ public final class BossKatarina implements BossGuardian {
     /** 剑气风暴伤害。 */
     private static final int STORM_DAMAGE = 1;
 
+    /**
+     * 剑气车道半宽（格）：每道剑气是以 {@code lane.fixed} 为中心、长度方向半宽
+     * {@code STORM_HALF_LEN} 的车道段。spawnStormWave 的车道间隔 gap（6 + 轮×2）
+     * 必须大于 2×此值，车道之间才留得出走位缝隙。
+     */
+    private static final double STORM_HALF_LEN = 1.5d;
+
+    /** 剑气命中半径（格），即 {@link #STORM_HIT_SQ} 的开方。 */
+    private static final double STORM_HIT_R = 0.75d;
+
     /** 加强甘露存在时长（刻，20 秒）。 */
     private static final int NECTAR_LIFETIME = 400;
 
@@ -544,7 +554,9 @@ public final class BossKatarina implements BossGuardian {
             WitherSkeleton boss = world.spawn(spawnLoc, WitherSkeleton.class);
             boss.setCustomName("§c§l[天裁]§e§lKatarina");
             boss.setCustomNameVisible(true);
-            boss.setPersistent(true);
+            // persistent(false)：不随区块保存，重启后不留残留本体（同 zqx125 的口径）
+            boss.setPersistent(false);
+            BossArena.tagEntity(boss);
             boss.setRemoveWhenFarAway(false);
             boss.setCanPickupItems(false);
             boss.setAware(true);            // 保留 AI：会自己追击/攻击玩家
@@ -1547,9 +1559,14 @@ public final class BossKatarina implements BossGuardian {
                 lane.pos += lane.speed * lane.dir;
                 double minPos = lane.alongX ? region.minZ() : region.minX();
                 double maxPos = lane.alongX ? region.maxZ() : region.maxX();
-                // 剑气沿「整条线的长度方向」铺开：alongX=true 时线沿 X 轴，扫动方向是 Z
-                double startA = lane.alongX ? (region.minX() + 1) : (region.minZ() + 1);
-                double endA = lane.alongX ? (region.maxX() - 1) : (region.maxZ() - 1);
+                // 剑气是一条以 lane.fixed 为中心、长度方向半宽 STORM_HALF_LEN 的车道段；
+                // 扫动方向：alongX=true 时沿 Z。原脚本（RSC BOSS战.js 的 updateKatarinaStorms）
+                // 算了 fixed 却把剑气铺满全场——整波 n 道完全重叠成同一面全宽墙：
+                // 玩家被扫中时 n 条 lane 各结一次伤害（单拍最多 n 连击）、粒子 ×n，
+                // 且与 spawnStormWave 注释里「一轴成群才有跳/走位绕开的空间」的玩法意图
+                // 矛盾。这里按车道段实现，车道之间留出走位缝隙（跳起来同样可躲）。
+                double startA = lane.fixed - STORM_HALF_LEN;
+                double endA = lane.fixed + STORM_HALF_LEN;
                 // 采样点：沿扫动方向 5 层 × 沿整条线长每 1.2 格（与画面粒子同一套坐标）
                 // 性能优化：pts 列表原先只服务于碰撞判定——改成直算 + 先做「玩家离
                 // 扫动面多远」的快速拒绝，绝大多数 tick 零分配零采样
@@ -1565,9 +1582,13 @@ public final class BossKatarina implements BossGuardian {
                     double fx = plNow.getX();
                     double fz = plNow.getZ();
                     double fy = plNow.getY();
-                    // 快速拒绝：玩家到扫动面的距离超过 2.5 格（最厚 slice 1.0 + 命中半径）就没必要采样
+                    // 快速拒绝：玩家到扫动面的距离超过 2.5 格（最厚 slice 1.0 + 命中半径）、
+                    // 或沿车道长度方向到车道中心线的距离超出车道段范围（车道半宽 + 命中半径），
+                    // 都没必要采样
                     double playerAlong = lane.alongX ? fz : fx;
-                    if (Math.abs(playerAlong - lane.pos) <= 2.6d) {
+                    double playerLen = lane.alongX ? fx : fz;
+                    if (Math.abs(playerAlong - lane.pos) <= 2.6d
+                            && Math.abs(playerLen - lane.fixed) <= STORM_HALF_LEN + STORM_HIT_R) {
                         int lenSamples = Math.max(2, (int) Math.floor((endA - startA) / 1.2));
                         double span = endA - startA;
                         outer:
@@ -1605,7 +1626,7 @@ public final class BossKatarina implements BossGuardian {
                         // 忽略
                     }
                 }
-                // 粒子：每层 2 次批量调用沿整条线长铺开粒子墙，玩家附近再加密一层
+                // 粒子：沿车道段（startA..endA 已是 fixed±STORM_HALF_LEN）铺开粒子墙，玩家附近再加密一层
                 double midLen = (startA + endA) / 2;
                 double halfLen = (endA - startA) / 2;
                 double[] drawSlices = {-1.0, 0, 1.0};
@@ -1622,15 +1643,21 @@ public final class BossKatarina implements BossGuardian {
                         // 忽略
                     }
                     if (plNow != null) {
-                        double ox2 = lane.alongX ? 5.0 : 0.2;
-                        double oz2 = lane.alongX ? 0.2 : 5.0;
-                        double cxp2 = lane.alongX ? plNow.getX() : dPos;
-                        double czp2 = lane.alongX ? dPos : plNow.getZ();
-                        try {
-                            world.spawnParticle(org.bukkit.Particle.CRIT, cxp2, floorY + 0.8, czp2,
-                                    8, ox2, 0.35, oz2, 0.01);
-                        } catch (Throwable ignored) {
-                            // 忽略
+                        double nearLen = lane.alongX ? plNow.getX() : plNow.getZ();
+                        // 车道收窄后加密层只铺在车道段内，且玩家确实在这条车道附近才画
+                        // （玩家通常至多贴近一两道，省掉与其余车道的无谓粒子）
+                        if (Math.abs(nearLen - lane.fixed) <= STORM_HALF_LEN + 6.0d) {
+                            double clamped = Math.max(startA, Math.min(endA, nearLen));
+                            double ox2 = lane.alongX ? STORM_HALF_LEN : 0.2;
+                            double oz2 = lane.alongX ? 0.2 : STORM_HALF_LEN;
+                            double cxp2 = lane.alongX ? clamped : dPos;
+                            double czp2 = lane.alongX ? dPos : clamped;
+                            try {
+                                world.spawnParticle(org.bukkit.Particle.CRIT, cxp2, floorY + 0.8, czp2,
+                                        8, ox2, 0.35, oz2, 0.01);
+                            } catch (Throwable ignored) {
+                                // 忽略
+                            }
                         }
                     }
                     try {
@@ -1732,7 +1759,10 @@ public final class BossKatarina implements BossGuardian {
                         ok = false;
                     }
                     if (!ok) {
-                        // 本体没了（被真实伤害打死 / 被异常清除）→ 退场结算
+                        // 本体没了（被真实伤害打死 / 被异常清除）→ 退场结算。
+                        // 先排除「本体所在区块被卸载」的暂时失效（isValid 同样为 false）：
+                        // 区块没回来之前不判负，任务保持运行（否则玩家远离就白捡通关）。
+                        if (BossArena.inUnloadedChunk(slot.body)) return;
                         BossState.cancelTask(trackTask);
                         trackTask = null;
                         Player p = (player != null && player.isOnline())

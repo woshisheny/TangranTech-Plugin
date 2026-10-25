@@ -200,7 +200,11 @@ public final class Zqx125Guardian implements BossGuardian {
             skeleton.setShouldBurnInDay(false);
             skeleton.setCustomName("§c§l[天殛]§e§l" + id());
             skeleton.setCustomNameVisible(true);
-            skeleton.setPersistent(true);
+            // persistent(false)：本体不随区块保存——崩溃 / 重启后不会留下一个
+            // 无敌骷髅把「场上还有活着的挑战本体」安全闸永久关死。挑战期间玩家
+            // 被锁在场地内、区块不会卸载，持久化与否不影响对局。
+            skeleton.setPersistent(false);
+            BossArena.tagEntity(skeleton);
             skeleton.setRemoveWhenFarAway(false);
             skeleton.setCanPickupItems(false);
             // ★ 原脚本这里写的是 skeleton.setAI(false)，而 setAI 在 1.21 已改名 setAware，
@@ -780,7 +784,7 @@ public final class Zqx125Guardian implements BossGuardian {
                 if (canHit && a.hasLast
                         && BossFx.segmentsHitPlayer(from, loc.getX(), loc.getY(), loc.getZ(),
                                 nowLoc, playerLast)) {
-                    a.resolved = true;
+                    // resolved 标记由 resolveArrowHit 内部统一查写（幂等），这里不再预置
                     resolveArrowHit(e);
                     continue;
                 }
@@ -833,13 +837,9 @@ public final class Zqx125Guardian implements BossGuardian {
             if (st.playerName == null || !st.playerName.equals(victim.getName())) return false;
             if (st.guardians.zqx125.defeated) return false;
             event.setCancelled(true);
-            for (BossState.ArrowEntry entry : st.guardians.arrows) {
-                if (entry.entity != null && entry.entity.getUniqueId().equals(arrow.getUniqueId())) {
-                    entry.resolved = true;
-                    break;
-                }
-            }
             if (st.guardians.active instanceof Zqx125Guardian zq) {
+                // resolved 标记由 resolveArrowHit 内部统一查写（幂等）：
+                // 每拍扫掠与这里谁先到谁结算，后到的直接跳过
                 zq.resolveArrowHit(arrow);
             } else {
                 // 护法实例不在（读档续战等边缘）：退回「固定 1 点」的保底口径
@@ -859,6 +859,23 @@ public final class Zqx125Guardian implements BossGuardian {
             if (state == null) return;
             Player p = this.player;
             if (p == null) return;
+            // 幂等守卫：本方法被「每拍扫掠」与「原版伤害事件」两条路径共用，而
+            // entry.resolved 此前只写不读——两条路径对同一支箭先后到达就会双重结算
+            // （玩家双扣血 / 盾双消耗）。这里统一查写：谁先到谁结算，后到的直接跳过。
+            if (arrowEntity != null) {
+                try {
+                    java.util.UUID uid = arrowEntity.getUniqueId();
+                    for (BossState.ArrowEntry entry : state.guardians.arrows) {
+                        if (entry.entity != null && uid.equals(entry.entity.getUniqueId())) {
+                            if (entry.resolved) return;
+                            entry.resolved = true;
+                            break;
+                        }
+                    }
+                } catch (Throwable ignored) {
+                    // 查表失败不拦截结算（保持原行为）
+                }
+            }
             if (BossPhaseTwoItems.isBlocking(state, p)
                     && BossPhaseTwoItems.has(p, BossPhaseTwoItems.SHIELD)) {
                 BossState.removeEntity(arrowEntity);

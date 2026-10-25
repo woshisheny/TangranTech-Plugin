@@ -103,9 +103,12 @@ public final class BossBattleScript implements NativeLifecycleScript {
         // 再把没归还的备份还了、解锁滞留玩家。顺序有讲究 ——
         // 先清场（涉及方块/实体），再还物品，再解锁（涉及属性），
         // 反过来也行，但这个顺序让异常更容易归因。
+        // cleanupStaleStartup 仍会清理旧版本在主世界留下的场地记录；
+        // 专用世界（tangran_space）的常驻场地则由 resetAll 重建/重置成干净模板。
         int stale = BossArena.cleanupStaleStartup();
         int restored = BossInventory.restoreOrphans();
         int unlocked = recoverStranded();
+        TangranSpace.resetAll();
 
         BossLog.warn("BOSS战 已全量接入：日志/存档/场地/战局/背包安全网/阶段一/二阶段(zqx125+Katarina+双子)"
                 + "/三·四阶段/天实商店/账本/事件层/BGM 就绪"
@@ -210,6 +213,13 @@ public final class BossBattleScript implements NativeLifecycleScript {
                 // 忽略
             }
             try {
+                // 两座常驻场地都重置回模板（清掉本场改动 → 重建）：
+                // 一阶段场地在胜利路径不再清（玩家要在场内缓降/过场），统一在收场重置
+                BossPhaseOne.restoreArena(state);
+            } catch (Throwable ignored) {
+                // 忽略
+            }
+            try {
                 BossPhaseTwo.restoreArena(state);
             } catch (Throwable ignored) {
                 // 忽略
@@ -223,6 +233,24 @@ public final class BossBattleScript implements NativeLifecycleScript {
                 owner = null;
             }
             if (owner != null) {
+                // 专用世界：把挑战者送回入口前的位置（失败/退出/通关收场统一走这里）。
+                // 玩家已死亡时传送不可靠——复活落点由 JoinListener 的 Respawn 处理兜底。
+                try {
+                    if (TangranSpace.isSpace(owner.getWorld())) {
+                        org.bukkit.Location back = state.arena.returnLoc;
+                        if (back == null || back.getWorld() == null) back = TangranSpace.mainWorldSpawn();
+                        if (back != null) {
+                            state.ignoringTeleport = true;
+                            owner.teleport(back);
+                            BukkitTask clearTp = (TT.plugin == null) ? null
+                                    : Bukkit.getScheduler().runTaskLater(TT.plugin,
+                                            () -> state.ignoringTeleport = false, 20L);
+                            if (clearTp == null) state.ignoringTeleport = false;
+                        }
+                    }
+                } catch (Throwable ignored) {
+                    // 忽略
+                }
                 // 御剑：收场时一定要下剑，否则玩家会带着飞行状态掉进虚空
                 try {
                     com.tangran.tangrantech.native_scripts.daofa.LuxianSword.stopRide(owner);
@@ -301,6 +329,11 @@ public final class BossBattleScript implements NativeLifecycleScript {
                     if (touched) {
                         n++;
                         try {
+                            // 滞留玩家若人还在专用世界里（重载期间战局丢失），送回主世界
+                            if (TangranSpace.isSpace(p.getWorld())) {
+                                org.bukkit.Location back = TangranSpace.mainWorldSpawn();
+                                if (back != null) p.teleport(back);
+                            }
                             p.sendMessage("§e[糖然科技] §f检测到挑战已中断：挑战锁已解除、"
                                     + "境界属性开关已还原；异火需要重新选择。");
                         } catch (Throwable ignored) {
@@ -672,11 +705,37 @@ public final class BossBattleScript implements NativeLifecycleScript {
                     LuxianSword.clearNoSwordRide(p);
                     // 上一次挑战中途退出的话，包里可能还留着盾/甘露
                     BossPhaseTwoItems.cleanResidual(p);
+                    // 专用世界安全网：战局已不在（中途退出/重载丢失），人却留在挑战空间里
+                    if (TangranSpace.isSpace(p.getWorld())) {
+                        org.bukkit.Location back = TangranSpace.mainWorldSpawn();
+                        if (back != null) {
+                            p.teleport(back);
+                            p.sendMessage("§7已从挑战空间送回主世界。");
+                        }
+                    }
                 }
                 // 账本里买过的增益：只在本局双子阶段生效，重连时重套/收掉（批次 6c/8）
                 TwinShop.onJoin(p);
             } catch (Throwable t) {
                 BossLog.warn("加入时恢复失败: " + t);
+            }
+        }
+
+        /**
+         * 复活落点兜底：挑战空间里死亡（虚空坠落等）且收场时的传送未能生效的话，
+         * 玩家会复活在 tangran_space 的世界出生点——重定向回主世界，别让人被困在
+         * 屏障围起来的场地里。
+         */
+        @EventHandler(priority = EventPriority.NORMAL)
+        public void onRespawn(org.bukkit.event.player.PlayerRespawnEvent event) {
+            try {
+                if (TangranSpace.isSpace(event.getRespawnLocation().getWorld())
+                        && !BossFight.isActive(event.getPlayer())) {
+                    org.bukkit.Location back = TangranSpace.mainWorldSpawn();
+                    if (back != null) event.setRespawnLocation(back);
+                }
+            } catch (Throwable ignored) {
+                // 忽略
             }
         }
     }
@@ -943,13 +1002,16 @@ public final class BossBattleScript implements NativeLifecycleScript {
     }
 
     /**
-     * 插件卸载时收掉所有战局并清表。
+     * 插件卸载时收掉所有战局并清表（{@link NativeScript#onUnload()} 钩子，
+     * 由 {@code NativeScriptRegistry#shutdown()} 逐脚本调用）。
      *
-     * <p>与项目里其它脚本的约定一致（{@code EquipmentScript#shutdown} /
-     * {@code StackMachineScript#shutdown}），是<b>静态方法</b>而不是接口成员 ——
-     * 脚本接口没有卸载钩子，由拥有方按需调用。</p>
+     * <p>不收的后果：战局表（含 World/Entity 引用）与残留实体一起活过重载，
+     * 「场上还有活着的挑战本体」安全闸被自己的残留实体关死，
+     * 启动自清理与孤儿背包返还全部失效。静态 shutdown() 时代全库无调用方，
+     * 卸载链实际断裂——现已改挂接口钩子，onDisable 必达。</p>
      */
-    public static void shutdown() {
+    @Override
+    public void onUnload() {
         try {
             for (BossState st : BossFight.all()) {
                 forceStop(st, "插件卸载");

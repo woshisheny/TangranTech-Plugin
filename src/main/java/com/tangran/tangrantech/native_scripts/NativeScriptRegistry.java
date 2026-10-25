@@ -113,8 +113,19 @@ public final class NativeScriptRegistry {
         }
     }
 
-    /** 插件卸载时清理运行期资源。 */
+    /**
+     * 插件卸载时清理运行期资源：先逐脚本回调 {@link NativeScript#onUnload()}
+     * （收战局 / 停任务 / 落盘 / 清静态表，单条失败不影响其他脚本），
+     * 再重置生命周期注册器。onDisable 阶段仍在主线程，实体 / 方块操作合法。
+     */
     public static void shutdown() {
+        for (Map.Entry<String, NativeScript> e : SCRIPTS.entrySet()) {
+            try {
+                e.getValue().onUnload();
+            } catch (Throwable t) {
+                TT.log("脚本 " + e.getKey() + " 卸载清理失败: " + t);
+            }
+        }
         NativeLifecycle.reset();
     }
 

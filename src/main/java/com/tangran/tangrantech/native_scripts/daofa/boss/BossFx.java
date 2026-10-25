@@ -295,36 +295,55 @@ public final class BossFx {
     /**
      * 按可见性刷新血条上的玩家（糖然主血条 + 护法血条 + 双子血条）。
      *
-     * <p><b>只 add/remove 单个玩家，绝不清空重加</b>：清空会让血条闪一下，
-     * 多玩家并行时还会互相覆盖。</p>
+     * <p><b>差量更新</b>：本方法被多个秒级任务高频调用（血量刷新 / 甘露刷新 / 追踪任务），
+     * 原实现每次对「全服在线玩家 × 全部血条」无差别 add/remove——这两个调用每个都是
+     * 一次发往客户端的包，随在线人数线性放大。现在先算一次期望可见集，再对每条血条
+     * 与其实际玩家列表做差：变化的才发包。以 {@code bar.getPlayers()}（本地列表，
+     * 不发包）为基准，外部直接 addPlayer 的玩家也能被正确接管。</p>
      */
     public static void updateBarPlayers(BossState state, Location center) {
         try {
             if (state == null) return;
+            java.util.List<org.bukkit.entity.Player> want = new java.util.ArrayList<>();
             for (org.bukkit.entity.Player p : org.bukkit.Bukkit.getOnlinePlayers()) {
                 if (p == null) continue;
-                boolean visible;
                 try {
-                    visible = barVisibleTo(state, center, p.getLocation());
-                } catch (Throwable ignored) {
-                    visible = false;
-                }
-                try {
-                    if (state.bar != null) {
-                        if (visible) state.bar.addPlayer(p);
-                        else state.bar.removePlayer(p);
-                    }
+                    if (barVisibleTo(state, center, p.getLocation())) want.add(p);
                 } catch (Throwable ignored) {
                     // 忽略
                 }
-                for (BossState.GuardianSlot slot : state.guardians.all()) {
-                    if (slot.bar == null) continue;
+            }
+            diffBar(state.bar, want);
+            for (BossState.GuardianSlot slot : state.guardians.all()) {
+                diffBar(slot.bar, want);
+                diffBar(slot.bar2, want);
+            }
+        } catch (Throwable ignored) {
+            // 忽略
+        }
+    }
+
+    /** 把血条上的玩家集差量刷成 {@code want}：只对变化的玩家 add/remove。 */
+    private static void diffBar(org.bukkit.boss.BossBar bar, java.util.List<org.bukkit.entity.Player> want) {
+        if (bar == null) return;
+        try {
+            java.util.List<org.bukkit.entity.Player> have = bar.getPlayers();
+            if (have != null && !have.isEmpty()) {
+                for (org.bukkit.entity.Player p : have) {
+                    if (p == null || want.contains(p)) continue;
                     try {
-                        if (visible) slot.bar.addPlayer(p);
-                        else slot.bar.removePlayer(p);
+                        bar.removePlayer(p);
                     } catch (Throwable ignored) {
                         // 忽略
                     }
+                }
+            }
+            for (org.bukkit.entity.Player p : want) {
+                if (have != null && have.contains(p)) continue;
+                try {
+                    bar.addPlayer(p);
+                } catch (Throwable ignored) {
+                    // 忽略
                 }
             }
         } catch (Throwable ignored) {

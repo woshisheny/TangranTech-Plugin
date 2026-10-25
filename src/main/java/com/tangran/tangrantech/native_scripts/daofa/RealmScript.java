@@ -311,12 +311,22 @@ public final class RealmScript implements NativeLifecycleScript {
     // 糖之力（含跨脚本接口）
     // ------------------------------------------------------------------
 
+    /** 动作栏去重（玩家 UUID → 上次展示的文本）：糖之力每轮回 1，只有数值变化才值得发包。 */
+    private static final Map<java.util.UUID, String> LAST_SUGAR_BAR = new java.util.concurrent.ConcurrentHashMap<>();
+
     private static void sendSugarBar(Player player, Map<String, Object> data) {
         try {
-            if (Boolean.FALSE.equals(data.get("showSugarBar"))) return;
+            if (Boolean.FALSE.equals(data.get("showSugarBar"))) {
+                LAST_SUGAR_BAR.remove(player.getUniqueId());
+                return;
+            }
             double max = maxSugar(data);
             double cur = Math.min(sugarPower(data), max);
-            player.sendActionBar("§b§l糖之力§f§l: §e§l" + num(cur) + "§f§l/§d§l" + num(max));
+            String text = "§b§l糖之力§f§l: §e§l" + num(cur) + "§f§l/§d§l" + num(max);
+            // ★ 数值有变化才展示：addSugarPower 每轮回 1，满值时数值不变——
+            //   原实现每周期无条件发包，动作栏被糖之力常驻占据
+            if (text.equals(LAST_SUGAR_BAR.put(player.getUniqueId(), text))) return;
+            player.sendActionBar(text);
         } catch (Throwable ignored) {
             // actionBar 失败忽略
         }
@@ -847,10 +857,19 @@ public final class RealmScript implements NativeLifecycleScript {
     // 跨脚本接口（供 BOSS战 / 丹药 / 异火调用）
     // ------------------------------------------------------------------
 
-    /** 挑战开场立刻压一次糖帝属性，不用等 27 刻一轮的循环。 */
+    /**
+     * 挑战开场立刻压一次糖帝属性，不用等 27 刻一轮的循环。
+     *
+     * <p>已在强制关闭名单（{@code PHASE2_FORCED}）里的玩家直接返回：本方法被
+     * 二阶段 lockWatcher 每 0.5 秒调一次，每次 {@code load()} 都是一次同步 JSON
+     * 文件读——原写法整场挑战持续 2 次读/秒。名单内的玩家由 {@link #sugarTick}
+     * 每轮重压兜底，短路不丢失任何行为（挑战开场的前一次压制由
+     * {@code challengeLock(on=true)} 完成，它本就调用过 applyAttributeEffects）。</p>
+     */
     public static boolean forceOff(Player player) {
         try {
             if (player == null) return false;
+            if (PHASE2_FORCED.contains(player.getName())) return true;
             Map<String, Object> data = load(player);
             if (data == null || !Json.bool(data, "opened", false)) return false;
             PHASE2_FORCED.add(player.getName());
@@ -1131,5 +1150,6 @@ public final class RealmScript implements NativeLifecycleScript {
         ACTIVE.clear();
         MENU_TYPE.clear();
         PHASE2_FORCED.clear();
+        LAST_SUGAR_BAR.clear();
     }
 }

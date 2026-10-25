@@ -2044,8 +2044,9 @@ public final class StackMachineScript implements NativeLifecycleScript {
         return String.valueOf(v);
     }
 
-    /** 供调试/卸载使用。 */
-    public static void shutdown() {
+    /** 卸载钩子（原为 static shutdown()，全库无调用方；现挂 {@code NativeScript#onUnload()}）。 */
+    @Override
+    public void onUnload() {
         CFG_SESS.clear();
         LAST_MACHINE.clear();
         PARENT_CACHE.clear();

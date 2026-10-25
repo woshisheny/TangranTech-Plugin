@@ -71,11 +71,7 @@ public final class BossPhaseTwo {
     // 常量（原脚本 1844-1846 / 2847-2857 行）
     // ==================================================================
 
-    /** 场地半宽（2×25+1 = 51）。 */
-    private static final int ARENA_HALF = 25;
-
-    /** 场地高度（含地板层与天花板层）。 */
-    private static final int ARENA_HEIGHT = 20;
+    // （场地尺寸常量已移入 TangranSpace：石英场是专用世界里的常驻固定场地）
 
     /** 召唤仪式：双手粒子线的推进速度（格/刻，0.2 = 4 格/秒）。 */
     private static final double LINE_SPEED = 0.2d;
@@ -85,12 +81,6 @@ public final class BossPhaseTwo {
 
     /** 召唤仪式：六芒星半径（6×6）。 */
     private static final double STAR_RADIUS = 3.0d;
-
-    /** 建场每批放置的方块数。 */
-    private static final int BUILD_BATCH = 400;
-
-    /** 建场粒子：最多保留多少个发光点。 */
-    private static final int MAX_SPARKS = 30;
 
     /** 抽剑花总拍数（每拍 3 刻，共 60 刻 = 3 秒）。 */
     private static final int FLOURISH_TICKS = 20;
@@ -500,10 +490,19 @@ public final class BossPhaseTwo {
     private static void beginSwordSequence(BossState state, Player player) {
         try {
             Entity stand = state.stand;
-            if (stand == null || !stand.isValid()) return;
+            if (stand == null || !stand.isValid()) {
+                // 本体失效（被外力移除等）也必须把流程走完：prepareChallenge 在本方法之前
+                // 已经清背包、上锁、起 lockWatcher，直接 return 会让玩家永远拿不到剑、
+                // 战斗永不开始、卡死在锁里。走 throwSword 同款兜底：直接发剑 → 介绍 → 开打。
+                LuxianSword.giveSword(player);
+                state.phaseTwo.swordGranted = true;
+                startSwordIntro(state, player);
+                return;
+            }
             try {
-                if (stand instanceof ArmorStand as) {
-                    as.getEquipment().setItemInMainHand(LuxianSword.make());
+                var equip = ((org.bukkit.entity.LivingEntity) stand).getEquipment();
+                if (equip != null) {
+                    equip.setItemInMainHand(LuxianSword.make());
                 }
             } catch (Throwable ignored) {
                 // 装备槽设置失败不影响后续（只是少一段演出）
@@ -520,23 +519,30 @@ public final class BossPhaseTwo {
                         return;
                     }
                     Entity cur = state.stand;
-                    if (cur == null || !cur.isValid() || !(cur instanceof ArmorStand as)) {
+                    if (cur == null || !cur.isValid()) {
                         BossState.cancelTask(state.sword.flourishTask);
                         state.sword.flourishTask = null;
                         return;
                     }
-                    // 刀花：右臂正弦摆动，左臂半举
-                    double angle = Math.sin(tick[0] * 0.9d) * 0.9d;
-                    as.setRightArmPose(new EulerAngle(-Math.PI / 2 + angle * 0.3, 0, angle));
-                    as.setLeftArmPose(new EulerAngle(-Math.PI / 4, 0, -0.4));
+                    // 刀花：右臂正弦摆动，左臂半举——只有盔甲架回退形态有关节可摆，
+                    // 玩家模型（Mannequin）跳过摆臂，但计时与终点发剑必须照走
+                    ArmorStand as = (cur instanceof ArmorStand ast) ? ast : null;
+                    if (as != null) {
+                        double angle = Math.sin(tick[0] * 0.9d) * 0.9d;
+                        as.setRightArmPose(new EulerAngle(-Math.PI / 2 + angle * 0.3, 0, angle));
+                        as.setLeftArmPose(new EulerAngle(-Math.PI / 4, 0, -0.4));
+                    }
                     tick[0]++;
                     if (tick[0] >= FLOURISH_TICKS) {
                         BossState.cancelTask(state.sword.flourishTask);
                         state.sword.flourishTask = null;
                         try {
-                            as.setRightArmPose(EulerAngle.ZERO);
-                            as.setLeftArmPose(EulerAngle.ZERO);
-                            as.getEquipment().setItemInMainHand(null);
+                            if (as != null) {
+                                as.setRightArmPose(EulerAngle.ZERO);
+                                as.setLeftArmPose(EulerAngle.ZERO);
+                            }
+                            var equip = ((org.bukkit.entity.LivingEntity) cur).getEquipment();
+                            if (equip != null) equip.setItemInMainHand(null);
                         } catch (Throwable ignored) {
                             // 忽略
                         }
@@ -659,13 +665,16 @@ public final class BossPhaseTwo {
     // ==================================================================
 
     /**
-     * 传送门特效 → 20 刻后选址 → 分批建造 → 传送入场 → {@code onDone}
+     * 传送门特效 → 20 刻后传送进入专用世界的常驻石英场 → {@code onDone}
      * （原脚本 {@code startPhaseTwoArenaSequence}）。
+     *
+     * <p>场地是 tangran_space 里的固定场地，跨场次复用——不再选址/建造；
+     * 若场地被外力清掉（管理员清场等），入场前由 {@link TangranSpace#ensureBuiltTwo()}
+     * 原地重建模板。</p>
      */
     public static void startArenaSequence(BossState state, Player player, Runnable onDone) {
         try {
-            Location anchor = player.getLocation().clone();
-            playPortalEffect(player.getWorld(), anchor);
+            playPortalEffect(player.getWorld(), player.getLocation());
             try {
                 player.sendMessage("§5§l传送门展开中……");
             } catch (Throwable ignored) {
@@ -673,22 +682,22 @@ public final class BossPhaseTwo {
             }
             Plugin plugin = TT.plugin();
             if (plugin == null) return;
+            // 常驻场地直接登记（世界/区域/中心都是固定值），下游逻辑照常读取
+            org.bukkit.World world = TangranSpace.getOrCreate();
+            state.arena.twoWorld = world;
+            state.arena.twoRegion = TangranSpace.REGION_TWO;
+            state.arena.twoCenter = new Location(world,
+                    TangranSpace.TWO_CX, TangranSpace.TWO_CY, TangranSpace.TWO_CZ);
             state.arena.twoBuildTask = Bukkit.getScheduler().runTaskLater(plugin, () -> {
                 try {
                     if (!isCurrent(state)) return;
                     if (player == null || !player.isOnline()) return;
-                    Found found = findArena(player);
-                    if (found == null) {
-                        try {
-                            player.sendMessage("§c附近没有足够的空域构建二阶段场地！");
-                        } catch (Throwable ignored) {
-                            // 忽略
-                        }
-                        return;
-                    }
-                    startArenaBuild(state, player, found, anchor, onDone);
+                    TangranSpace.ensureBuiltTwo();
+                    finishArena(state, player, onDone);
                 } catch (Throwable t) {
-                    BossLog.warn("二阶段场地定位失败: " + t);
+                    BossLog.warn("二阶段场地入场失败: " + t);
+                    // 入场回调里抛异常同样会卡死流程，统一走收场兜底
+                    fail(state, player, "进入二阶段场地时出错。");
                 }
             }, 20L);
         } catch (Throwable t) {
@@ -697,223 +706,17 @@ public final class BossPhaseTwo {
     }
 
     /**
-     * 选址：在玩家周围找一块「天然就在所有非空气方块上方」的空域
-     * （原脚本 {@code findPhaseTwoArena}）。
-     *
-     * <p>候选点 5 个（本列 + 四轴各 26 格），取 {@code |cy - 玩家Y|} 最小者；
-     * 与「别人正在打的场地」重叠（半宽 +1 的膨胀区）的一律跳过。</p>
-     */
-    private static Found findArena(Player player) {
-        try {
-            org.bukkit.World world = player.getWorld();
-            Location loc = player.getLocation();
-            int px = loc.getBlockX();
-            int py = loc.getBlockY();
-            int pz = loc.getBlockZ();
-            int maxBuildY = world.getLogicalHeight() - (ARENA_HEIGHT + 4);
-
-            int[][] offsets = {{0, 0}, {26, 0}, {-26, 0}, {0, 26}, {0, -26}};
-            Found best = null;
-            for (int[] off : offsets) {
-                int cx = px + off[0];
-                int cz = pz + off[1];
-                int cy = arenaMaxY(world, cx, cz) + 1;
-                if (cy + ARENA_HEIGHT - 1 > maxBuildY) continue;
-                if (arenaBlockedByActiveFight(world, cx, cy, cz)) continue;
-                int diff = Math.abs(cy - py);
-                if (best == null || diff < best.diff()) best = new Found(cx, cy, cz, diff);
-            }
-            if (best == null) {
-                // 兜底：本列最高方块上方
-                int cy = arenaMaxY(world, px, pz) + 1;
-                if (cy + ARENA_HEIGHT - 1 <= maxBuildY && !arenaBlockedByActiveFight(world, px, cy, pz)) {
-                    best = new Found(px, cy, pz, Math.abs(cy - py));
-                }
-            }
-            return best;
-        } catch (Throwable t) {
-            BossLog.warn("二阶段选址失败: " + t);
-            return null;
-        }
-    }
-
-    /** 一片 (2r+1)² 区域的最高非空气方块 Y（原脚本 {@code getArenaMaxY}）。 */
-    private static int arenaMaxY(org.bukkit.World world, int cx, int cz) {
-        int maxY = -9999;
-        for (int x = cx - ARENA_HALF; x <= cx + ARENA_HALF; x++) {
-            for (int z = cz - ARENA_HALF; z <= cz + ARENA_HALF; z++) {
-                int y = world.getHighestBlockYAt(x, z);
-                if (y > maxY) maxY = y;
-            }
-        }
-        return maxY;
-    }
-
-    /** 新场地会不会和「别人正在打的场地」叠在一起（原脚本 {@code arenaBlockedByActiveFight}）。 */
-    private static boolean arenaBlockedByActiveFight(org.bukkit.World world, int cx, int cy, int cz) {
-        int half = ARENA_HALF + 1;
-        int x1 = cx - half, x2 = cx + half;
-        int y1 = cy, y2 = cy + ARENA_HEIGHT - 1;
-        int z1 = cz - half, z2 = cz + half;
-        for (BossState st : BossFight.all()) {
-            if (st == null) continue;
-            for (BossArena.Region r : st.arena.regions()) {
-                // 同世界才判重叠（跨世界两块地永远不叠）
-                org.bukkit.World other = (r == st.arena.twoRegion) ? st.arena.twoWorld : st.arena.oneWorld;
-                if (other != null && other != world) continue;
-                if (x1 <= r.maxX() && x2 >= r.minX()
-                        && y1 <= r.maxY() && y2 >= r.minY()
-                        && z1 <= r.maxZ() && z2 >= r.minZ()) {
-                    return true;
-                }
-            }
-        }
-        return false;
-    }
-
-    /**
-     * 分批建造：每刻放 {@value #BUILD_BATCH} 块，玩家每刻被钉在原地（可转头）
-     * （原脚本 {@code startPhaseTwoArenaBuild}）。
-     *
-     * <p>三个细节：</p>
-     * <ul>
-     *   <li><b>顶层正中间一格放基岩</b> = 挑战区域标记，「清理挑战区域」脚本靠右键它反推整块场地；</li>
-     *   <li><b>装饰实体保护格跳过</b>（展示框/画及其依附格）—— 不跳的话框会被石英块挤掉；</li>
-     *   <li><b>已有非空气方块跳过</b> —— 只在空气里长外壳，不破坏既有地形。</li>
-     * </ul>
-     */
-    private static void startArenaBuild(BossState state, Player player, Found found,
-                                        Location anchor, Runnable onDone) {
-        Plugin plugin = TT.plugin();
-        if (plugin == null) return;
-        org.bukkit.World world = player.getWorld();
-        int cx = found.cx(), cy = found.cy(), cz = found.cz();
-        BossArena.Region region = new BossArena.Region(
-                cx - ARENA_HALF, cx + ARENA_HALF,
-                cy, cy + ARENA_HEIGHT - 1,
-                cz - ARENA_HALF, cz + ARENA_HALF);
-
-        // 预计算外壳坐标（按 y 从下到上，看起来像从地板长起来）
-        List<int[]> positions = new ArrayList<>();
-        for (int y = region.minY(); y <= region.maxY(); y++) {
-            boolean onFloorLayer = (y == region.minY());
-            boolean onCeilLayer = (y == region.maxY());
-            for (int x = region.minX(); x <= region.maxX(); x++) {
-                for (int z = region.minZ(); z <= region.maxZ(); z++) {
-                    boolean onShell = onFloorLayer || onCeilLayer
-                            || x == region.minX() || x == region.maxX()
-                            || z == region.minZ() || z == region.maxZ();
-                    if (onShell) positions.add(new int[]{x, y, z, onFloorLayer ? 1 : 0});
-                }
-            }
-        }
-        state.arena.twoWorld = world;
-        state.arena.twoRegion = region;
-        state.arena.twoCenter = new Location(world, cx, cy, cz);
-        // 落盘记录：服务器直接重启也能在下次启动时自清理这块场地（每玩家一份，用玩家名命名）
-        try {
-            BossArena.saveRecord(world, region, cx, cy, cz, state.playerName);
-        } catch (Throwable ignored) {
-            // 记录写不出去不影响本局，只影响重启后的自清理
-        }
-
-        java.util.Set<String> protectedCells = BossArena.collectDecorativeCells(world, region);
-
-        final int[] index = {0};
-        final int[] tick = {0};
-        state.arena.twoBuildTask = Bukkit.getScheduler().runTaskTimer(plugin, () -> {
-            try {
-                if (!isCurrent(state)) {
-                    BossState.cancelTask(state.arena.twoBuildTask);
-                    state.arena.twoBuildTask = null;
-                    return;
-                }
-                if (player == null || !player.isOnline()) {
-                    BossState.cancelTask(state.arena.twoBuildTask);
-                    state.arena.twoBuildTask = null;
-                    return;
-                }
-                tick[0]++;
-
-                // 1) 每刻把玩家拉回原地（保留当前视角）
-                try {
-                    Location cur = player.getLocation();
-                    if (cur.getWorld() == anchor.getWorld() && cur.distanceSquared(anchor) > 0.01d) {
-                        Location back = anchor.clone();
-                        back.setYaw(cur.getYaw());
-                        back.setPitch(cur.getPitch());
-                        state.ignoringTeleport = true;
-                        player.teleport(back);
-                    }
-                } catch (Throwable ignored) {
-                    // 忽略
-                }
-
-                // 2) 分批放置外壳
-                int placed = 0;
-                List<int[]> sparks = new ArrayList<>();
-                while (index[0] < positions.size() && placed < BUILD_BATCH) {
-                    int[] pos = positions.get(index[0]++);
-                    placed++;
-                    boolean isMarker = (pos[3] == 0 && pos[1] == region.maxY()
-                            && pos[0] == cx && pos[2] == cz);
-                    if (!isMarker && protectedCells.contains(BossArena.cellKey(pos[0], pos[1], pos[2]))) {
-                        continue;
-                    }
-                    org.bukkit.block.Block block = world.getBlockAt(pos[0], pos[1], pos[2]);
-                    if (!block.getType().isAir()) continue;
-                    block.setType(isMarker ? Material.BEDROCK
-                            : (pos[3] == 1 ? Material.QUARTZ_BLOCK : Material.BARRIER), false);
-                    if (sparks.size() < MAX_SPARKS && index[0] % 25 == 0) sparks.add(pos);
-                }
-
-                // 3) 建造粒子 + 音效
-                for (int[] sp : sparks) {
-                    try {
-                        world.spawnParticle(org.bukkit.Particle.PORTAL,
-                                sp[0] + 0.5, sp[1] + 0.5, sp[2] + 0.5,
-                                3, 0.35, 0.35, 0.35, 0.06);
-                    } catch (Throwable ignored) {
-                        // 忽略
-                    }
-                }
-                if (tick[0] % 5 == 0) {
-                    try {
-                        world.playSound(anchor, "block.beacon.charge", 0.7f, 1.2f + tick[0] * 0.01f);
-                    } catch (Throwable ignored) {
-                        // 忽略
-                    }
-                }
-
-                // 4) 建完 → 传送入场
-                if (index[0] >= positions.size()) {
-                    BossState.cancelTask(state.arena.twoBuildTask);
-                    state.arena.twoBuildTask = null;
-                    try {
-                        world.playSound(anchor, "block.beacon.activate", 1.0f, 1.0f);
-                    } catch (Throwable ignored) {
-                        // 忽略
-                    }
-                    finishArena(state, player, found, onDone);
-                }
-            } catch (Throwable t) {
-                BossLog.warn("二阶段场地建造异常: " + t);
-            }
-        }, 0L, 1L);
-    }
-
-    /**
      * 传送入场：玩家落到靠 +Z 一侧，糖然搬到场地正中央最高处
      * （原脚本 {@code finishPhaseTwoArena}）。
      */
-    private static void finishArena(BossState state, Player player, Found found, Runnable onDone) {
+    private static void finishArena(BossState state, Player player, Runnable onDone) {
         try {
-            org.bukkit.World world = player.getWorld();
-            int cx = found.cx(), cy = found.cy(), cz = found.cz();
-            // 玩家入场点：靠 +Z 一侧（离墙 1.5 格），面朝 -Z（场地中心的糖然）
-            Location dest = new Location(world, cx + 0.5, cy + 1, cz + ARENA_HALF - 2.5);
+            org.bukkit.World world = TangranSpace.getOrCreate();
+            int cx = TangranSpace.TWO_CX, cy = TangranSpace.TWO_CY, cz = TangranSpace.TWO_CZ;
+            // 玩家入场点：靠 +Z 一侧（离墙 2.5 格），面朝 -Z（场地中心的糖然）
+            Location dest = new Location(world, cx + 0.5, cy + 1, cz + 25 - 2.5);
             // 糖然：场地正中央、最高处（留出盔甲架约 2 格高度，避免顶进天花板）
-            Location bossLoc = new Location(world, cx + 0.5, cy + ARENA_HEIGHT - 3, cz + 0.5);
+            Location bossLoc = new Location(world, cx + 0.5, cy + 20 - 3, cz + 0.5);
             try {
                 double dx = bossLoc.getX() - dest.getX();
                 double dz = bossLoc.getZ() - dest.getZ();
@@ -976,18 +779,17 @@ public final class BossPhaseTwo {
     }
 
     /**
-     * 还原二阶段场地：整块清空 + 删落盘记录（原脚本 {@code restorePhaseTwoArena}）。
+     * 二阶段收场：把专用世界的常驻石英场重置回模板（清掉本场改动 → 重建模板）。
      *
-     * <p>整块清空（连双子阶段的太极图案、玩家在场地里放的方块一起）——
-     * 只清屏障/石英会留下玩家放置物。装饰格照旧跳过。</p>
+     * <p>本场的改动（zqx 红石雷击、双子经营的树/土壤/矿石、玩家放置物等）不再
+     * 「整块清成空气删记录」——场地跨场次复用，重置后下一场开局即是干净石英场。
+     * 同步执行成本很低：清场对空气快速跳过，真实改动通常只有几百格。</p>
      */
     public static void restoreArena(BossState state) {
         if (state == null) return;
-        org.bukkit.World world = state.arena.twoWorld;
-        BossArena.Region region = state.arena.twoRegion;
-        if (world == null || region == null) return;
+        if (state.arena.twoWorld == null || state.arena.twoRegion == null) return;
         try {
-            BossArena.clearAll(world, region, BossArena.collectDecorativeCells(world, region));
+            TangranSpace.resetTwo();
         } catch (Throwable t) {
             BossLog.warn("还原二阶段挑战场地失败: " + t);
         }
@@ -995,12 +797,6 @@ public final class BossPhaseTwo {
         state.arena.twoRegion = null;
         state.arena.twoCenter = null;
         state.arena.taijiCenter = null;   // 双子太极阵中心（随场地一起清）
-        // 只删自己那份记录（别人的圈地记录不能动）
-        try {
-            BossArena.deleteRecord(state.playerName);
-        } catch (Throwable ignored) {
-            // 忽略
-        }
     }
 
     // ==================================================================
@@ -1175,11 +971,13 @@ public final class BossPhaseTwo {
                 BossFx.updateBarPlayers(state, player.getLocation());
             }
 
-            // 1) 清背包（备份 + 清空，和正常流程完全一致）
-            try {
-                BossInventory.beginBackup(player, state);
-            } catch (Throwable t) {
-                BossLog.warn("直开护法：背包备份失败 " + t);
+            // 1) 清背包（备份 + 清空，和正常流程完全一致）。
+            //    失败必须中止：beginBackup 只在「备份写盘成功」后才清背包，失败时背包
+            //    还完好在身——带着全套装备开挑战等于白送开局物资，且与 handleAccept
+            //    的「失败即止」口径不一致。
+            if (!BossInventory.beginBackup(player, state)) {
+                fail(state, player, "背包备份失败，读档挑战未开始。");
+                return;
             }
             // 2) 上锁 / 清异火 / 硬关糖帝 / 饱和 / 直接发剑（跳过抽剑演出）
             prepareChallenge(state, player, false, true);
@@ -1515,7 +1313,4 @@ public final class BossPhaseTwo {
             // 忽略
         }
     }
-
-    /** 选址结果（原脚本 {@code findPhaseTwoArena} 返回的 {@code {cx, cy, cz, diff}}）。 */
-    private record Found(int cx, int cy, int cz, int diff) {}
 }

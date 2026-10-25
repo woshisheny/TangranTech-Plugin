@@ -54,7 +54,7 @@ public final class MachinesLoader {
 
                 ScriptMachineItem item = new ScriptMachineItem(g, sfis, rt, recipe, script,
                         capacity, etype, toIntArray(s.getIntegerList("input")),
-                        toIntArray(s.getIntegerList("output")));
+                        toIntArray(s.getIntegerList("output")), spec.tick);
                 item.register(TT.plugin);
                 ok++;
             } catch (Exception e) {

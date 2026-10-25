@@ -34,6 +34,8 @@ public class ItemSpec {
     public String energyType;
     /** setUseableInWorkbench。 */
     public boolean vanilla;
+    /** 是否进 Slimefun tick 周期（machines.yml 用）；默认 true，纯事件驱动机器可关。 */
+    public boolean tick = true;
     /** drop_from：方块材质名。 */
     public String dropFrom;
     /** drop_chance：0-100，缺省 100。 */
@@ -50,6 +52,7 @@ public class ItemSpec {
         spec.radiation = s.getString("radiation");
         if (s.isSet("piglin_trade_chance")) spec.piglinChance = s.getInt("piglin_trade_chance", 100);
         spec.vanilla = s.getBoolean("vanilla", false);
+        spec.tick = s.getBoolean("tick", true);
         spec.dropFrom = s.getString("drop_from");
         spec.dropChance = s.getInt("drop_chance", 100);
 

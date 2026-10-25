@@ -153,10 +153,12 @@ public class TTRecipeMachine extends AContainer implements RecipeDisplayItem, Po
         this.progressBar = (menu != null && menu.progressItem != null)
                 ? menu.progressItem : new ItemStack(Material.FLINT_AND_STEEL);
         // 进度槽冲突防御：菜单漏配 progressbar 时回退 22，而某些大型工作台输入槽恰好覆盖 22，
-        // 默认进度占位会叠进输入格成为「来路不明又点不走的物品」。重叠即弃用并告警。
+        // 默认进度占位会叠进输入格成为「来路不明又点不走的物品」。
+        // 冲突时先回退到 9（造物匣系列等布局的空闲展示位，内容侧已查验），9 也被占用才禁用。
         int ps = (menu != null && menu.progressSlot >= 0) ? menu.progressSlot : 22;
+        if (overlapsFunctional(ps)) ps = 9;
         if (overlapsFunctional(ps)) {
-            TT.log(getId() + " 的进度槽 " + ps + " 与输入/输出槽重叠（menus.yml 缺 progressbar 配置？），已禁用进度占位");
+            TT.log(getId() + " 的进度槽 " + ps + " 与输入/输出槽重叠，无法展示进度，已禁用进度占位");
             ps = -1;
         }
         this.progressSlotResolved = ps;
@@ -265,6 +267,12 @@ public class TTRecipeMachine extends AContainer implements RecipeDisplayItem, Po
         for (int s : extra) maxSlot = Math.max(maxSlot, s);
         for (int s : placed) maxSlot = Math.max(maxSlot, s);
         int size = Math.min(54, Math.max(declared, ((maxSlot / 9) + 1) * 9));
+        // ★ 显式 setSize（向上取整到 9 的倍数）：ChestMenu 的真实尺寸只随「实际放置的
+        // 物品」自动增长，而输入/输出槽只挂 click handler、不放物品，declared 只约束
+        // 上面背景循环的边界——一旦 menu 查空（无装饰可放），最高放置槽可能只有 26，
+        // 预设实际 27 格，输出槽 ≥27 的机器在 fitAll/getItemInSlot 时数组越界
+        // （Tr_cjzryhj 实机报错 2026-10-25）。显式设一次，保证 inventory 覆盖全部功能槽。
+        preset.setSize(Math.min(54, Math.max(9, ((size + 8) / 9) * 9)));
 
         for (int i = 0; i < size; i++) {
             if (!functional.contains(i) && !placed.contains(i) && !extra.contains(i)) {
@@ -291,7 +299,9 @@ public class TTRecipeMachine extends AContainer implements RecipeDisplayItem, Po
             });
         }
 
-        if (pslot >= 0 && !placed.contains(pslot)) {
+        // menus.yml 显式配置的 progressbar 槽位是内容侧的刻意安排，覆盖同槽位的装饰物品；
+        // 默认回退槽（22/9）仍让位给装饰
+        if (pslot >= 0 && (menu != null && menu.progressFromConfig || !placed.contains(pslot))) {
             preset.addItem(pslot, progressBar, ChestMenuUtils.getEmptyClickHandler());
         }
     }

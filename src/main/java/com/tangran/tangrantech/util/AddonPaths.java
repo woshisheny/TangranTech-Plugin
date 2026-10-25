@@ -123,7 +123,14 @@ public final class AddonPaths {
         }
     }
 
-    /** 写一个 JSON 对象文件（2 空格缩进，与原脚本 {@code JSON.stringify(x, null, 2)} 一致）。 */
+    /**
+     * 写一个 JSON 对象文件（2 空格缩进，与原脚本 {@code JSON.stringify(x, null, 2)} 一致）。
+     *
+     * <p><b>先写 {@code .tmp} 临时文件再替换</b>：直接覆写在进程崩溃 / 服务器被 kill 时
+     * 会留下半个 JSON，下次读出来就是空的（调用方的缓存一旦以此为权威就会把玩家存档
+     * 清零）。替换尽量走 {@link java.nio.file.StandardCopyOption#ATOMIC_MOVE}；
+     * 文件系统不支持时退化为普通替换，仍优于直接覆写。失败时旧文件保持原样，返回 false。</p>
+     */
     public static boolean writeJson(File file, Object data) {
         try {
             if (file == null) return false;
@@ -132,9 +139,18 @@ public final class AddonPaths {
                 TT.log("目录创建失败: " + parent.getAbsolutePath());
                 return false;
             }
-            Files.write(file.toPath(),
+            java.nio.file.Path target = file.toPath();
+            java.nio.file.Path tmp = target.resolveSibling(target.getFileName().toString() + ".tmp");
+            Files.write(tmp,
                     Collections.singletonList(Json.writePretty(data)),
                     StandardCharsets.UTF_8);
+            try {
+                Files.move(tmp, target,
+                        java.nio.file.StandardCopyOption.REPLACE_EXISTING,
+                        java.nio.file.StandardCopyOption.ATOMIC_MOVE);
+            } catch (java.nio.file.AtomicMoveNotSupportedException e) {
+                Files.move(tmp, target, java.nio.file.StandardCopyOption.REPLACE_EXISTING);
+            }
             return true;
         } catch (IOException | RuntimeException e) {
             TT.log("写 JSON 失败 " + (file == null ? "?" : file.getAbsolutePath()) + ": " + e);

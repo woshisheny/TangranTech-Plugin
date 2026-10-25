@@ -92,44 +92,76 @@ public final class TwinLedger {
         return led;
     }
 
-    /** 读账本（缺失/损坏时返回全 0 的空账本）。 */
+    /**
+     * 读账本：文件缺失（新玩家）时返回并缓存全 0 空账本；文件存在但读不出（损坏 /
+     * 半截 JSON）时只返回<b>不缓存</b>的临时空账本。
+     *
+     * <p>两者的区别是数据安全的分界线：缺失文件的全 0 就是权威数据，必须缓存——否则
+     * add/pay 会落在临时对象上被丢弃；而损坏文件的全 0 绝不能缓存成权威——否则任何
+     * 一次入账置脏后，5 秒内 flush 会用全 0 覆盖玩家的完好存档（点数与增益次数永久
+     * 清零）。损坏窗口内读操作按 0 看、写操作不落盘，等文件被修复或删除后自动恢复。</p>
+     */
     public static Map<String, Integer> of(Player player) {
         String name = player.getName();
         Map<String, Integer> cached = CACHE.get(name);
         if (cached != null) return cached;
         Map<String, Integer> led = blank();
         try {
-            Map<String, Object> data = AddonPaths.readJson(fileOf(name));
-            if (data != null) {
-                for (String key : NAMES.keySet()) {
-                    Object v = data.get(key);
-                    if (v instanceof Number n) led.put(key, Math.max(0, n.intValue()));
-                }
+            File f = fileOf(name);
+            if (!f.exists()) {
+                // 首次玩家：还没有存档，全 0 即权威，必须缓存
+                CACHE.put(name, led);
+                return led;
             }
-            // ★ 静态审查修正：只有读成功才进缓存。读失败时若把空账本放进 CACHE，
-            //   之后任何一次 add/pay 都会置脏，5 秒内 flush 用全 0 覆盖完好存档——
-            //   点数与增益次数永久丢失。读失败只返回临时空账本，下次再读。
+            Map<String, Object> data = AddonPaths.readJson(f);
+            if (data == null) {
+                // 注意 readJson 对损坏文件是吞异常返回 null，不会抛——必须在这里拦
+                warnBad(name, "双子账本文件存在但无法解析，暂不载入也不覆写"
+                        + "（期间点数按 0 显示、变动不落盘）");
+                return led;
+            }
+            for (String key : NAMES.keySet()) {
+                Object v = data.get(key);
+                if (v instanceof Number n) led.put(key, Math.max(0, n.intValue()));
+            }
             CACHE.put(name, led);
         } catch (Throwable t) {
-            Long logged = BAD_LOGGED.get(name);
-            if (logged == null || System.currentTimeMillis() - logged > 60_000L) {
-                BAD_LOGGED.put(name, System.currentTimeMillis());
-                BossLog.warn("双子账本读取失败（" + name + "）：" + t);
-            }
+            warnBad(name, "双子账本读取失败：" + t);
         }
         return led;
     }
 
-    /** 落盘（临时文件 + 原子替换；只写有变化的玩家）。 */
+    /** 同一玩家的异常告警 60 秒最多一条（坏文件 / 写盘失败共用，避免刷屏）。 */
+    private static void warnBad(String name, String msg) {
+        Long logged = BAD_LOGGED.get(name);
+        if (logged == null || System.currentTimeMillis() - logged > 60_000L) {
+            BAD_LOGGED.put(name, System.currentTimeMillis());
+            BossLog.warn(msg + "（" + name + "）");
+        }
+    }
+
+    /**
+     * 落盘（.tmp + 原子替换由 {@link AddonPaths#writeJson} 负责；只写有变化的玩家）。
+     *
+     * <p>写失败时<b>保留脏标记</b>，由 5 秒冲刷任务下轮重试——writeJson 失败不抛异常
+     * 只返回 false，不看返回值就会把整批变更静默丢掉。缓存里没有该玩家（含「文件损坏
+     * 不缓存」的窗口）时无可落盘内容，摘掉脏标记防止每 5 秒空转。</p>
+     */
     private static void flush(String playerName) {
         try {
             Map<String, Integer> led = CACHE.get(playerName);
-            if (led == null) return;
+            if (led == null) {
+                DIRTY.remove(playerName);
+                return;
+            }
             Map<String, Object> data = new LinkedHashMap<>(led);
-            AddonPaths.writeJson(fileOf(playerName), data);
-            DIRTY.remove(playerName);
+            if (AddonPaths.writeJson(fileOf(playerName), data)) {
+                DIRTY.remove(playerName);
+            } else {
+                warnBad(playerName, "双子账本写盘失败，变更保留待重试");
+            }
         } catch (Throwable t) {
-            BossLog.warn("双子账本写盘失败（" + playerName + "）：" + t);
+            warnBad(playerName, "双子账本写盘异常，变更保留待重试：" + t);
         }
     }
 

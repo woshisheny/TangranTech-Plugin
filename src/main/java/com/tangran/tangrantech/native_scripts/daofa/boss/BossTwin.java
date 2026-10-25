@@ -472,6 +472,12 @@ public final class BossTwin implements BossGuardian {
     public void cleanup() {
         defeated = true;
         stopAll();
+        // 限流表条目随局清理：FOREIGN_ARROW_LOG 按战局键累积，不清会跨局单调增长
+        try {
+            if (state != null) FOREIGN_ARROW_LOG.remove(state.key);
+        } catch (Throwable ignored) {
+            // 忽略
+        }
         if (slot != null) {
             BossState.removeEntity(slot.body);
             slot.body = null;
@@ -683,15 +689,12 @@ public final class BossTwin implements BossGuardian {
                     : world.spawn(new Location(world, x, y, z), Allay.class);
             boss.setCustomName("§c§l[" + title + "]§e§l" + id);
             boss.setCustomNameVisible(true);
-            // 归属标记：isBossBody 的 VEX/ALLAY 类型兜底靠它把双子本体与
-            // 野生悦灵/恼鬼区分开（名字会被其它插件改掉时这层仍然可靠）
-            try {
-                boss.setMetadata(BossArena.TWIN_BODY_META,
-                        new org.bukkit.metadata.FixedMetadataValue(TT.plugin(), 1));
-            } catch (Throwable ignored) {
-                // 打标失败不阻断生成
-            }
-            boss.setPersistent(true);
+            // 归属标记走 PDC（isBossBody 读它，把双子本体与野生悦灵/恼鬼区分开）：
+            // metadata 不持久化且按插件实例配对，/reload 后旧标记认不出、也删不掉
+            BossArena.tagEntity(boss);
+            // persistent(false)：不随区块保存，重启后不留无敌恼鬼/悦灵与隐形 marker 架
+            // （此前用 metadata 打标 + persistent(true)，重启后清理逻辑认不出残留）
+            boss.setPersistent(false);
             boss.setRemoveWhenFarAway(false);
             boss.setCanPickupItems(false);
             if (boss instanceof org.bukkit.entity.Mob mob) {
@@ -744,7 +747,8 @@ public final class BossTwin implements BossGuardian {
             stand.setInvulnerable(true);
             stand.setSilent(true);
             stand.setCollidable(false);
-            stand.setPersistent(true);
+            stand.setPersistent(false);     // 同本体：不随区块保存，重启无残留
+            BossArena.tagEntity(stand);
             stand.setCustomName("§c§l[" + title + "]" + id + " 头颅");
             stand.setCustomNameVisible(false);
             try {
@@ -840,6 +844,11 @@ public final class BossTwin implements BossGuardian {
                     org.bukkit.entity.LivingEntity a = living(slot.body);
                     org.bukkit.entity.LivingEntity b = living(slot.body2);
                     if (!alive(a) && !alive(b)) {
+                        // 先排除「本体所在区块被卸载」的暂时失效（isValid 同样为 false）：
+                        // 区块没回来之前不判负，任务保持运行（否则玩家远离就白捡通关）。
+                        if (BossArena.inUnloadedChunk(slot.body) || BossArena.inUnloadedChunk(slot.body2)) {
+                            return;
+                        }
                         BossState.cancelTask(slot.trackTask);
                         slot.trackTask = null;
                         // 双子本体全灭（/kill / 虚空 / 外力清除）：只停任务不收场会让战局悬挂 ——

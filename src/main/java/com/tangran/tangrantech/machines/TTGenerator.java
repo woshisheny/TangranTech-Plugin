@@ -55,10 +55,18 @@ public class TTGenerator extends AGenerator {
     }
 
     @Override
-    public int[] getInputSlots() { return input; }
+    public int[] getInputSlots() {
+        // ★ 空值守卫：AGenerator 的构造器会自建预设并调 constructMenu，其中经虚方法
+        //   getOutputSlots() 取输出槽——此刻本类字段尚未赋值（super 还没返回），
+        //   返回 null 会让父类的 for 循环 NPE（TR_CJHFYD 注册失败案）。
+        //   super 阶段返回空数组即可（自建预设随后会被本类构造器末尾的 createPreset 覆盖）。
+        return (input == null) ? new int[0] : input;
+    }
 
     @Override
-    public int[] getOutputSlots() { return output; }
+    public int[] getOutputSlots() {
+        return (output == null) ? new int[0] : output;
+    }
 
     @Override
     public int getCapacity() { return Math.max(1, capacity); }
@@ -92,8 +100,15 @@ public class TTGenerator extends AGenerator {
         }
     }
 
-    /** 按 menus.yml 布局绘制 GUI；仅在存在 {@link MenuDef} 时被调用。 */
+    /** 按 menus.yml 布局绘制 GUI；无 menus.yml 条目时退化为「只保证覆盖功能槽」。 */
     protected void constructMenu(BlockMenuPreset preset) {
+        if (menu == null) {
+            int maxSlot = 26;
+            for (int s : input) maxSlot = Math.max(maxSlot, s);
+            for (int s : output) maxSlot = Math.max(maxSlot, s);
+            preset.setSize(Math.min(54, Math.max(27, ((maxSlot / 9) + 1) * 9)));
+            return;
+        }
         Set<Integer> placed = new HashSet<>();
         for (Map.Entry<Integer, ItemStack> e : menu.items.entrySet()) {
             preset.addItem(e.getKey(), e.getValue(), ChestMenuUtils.getEmptyClickHandler());
@@ -114,6 +129,9 @@ public class TTGenerator extends AGenerator {
         if (menu.progressSlot >= 0) maxSlot = Math.max(maxSlot, menu.progressSlot);
         for (int s : placed) maxSlot = Math.max(maxSlot, s);
         int size = Math.min(54, Math.max(declared, ((maxSlot / 9) + 1) * 9));
+        // ★ 显式 setSize（向上取整到 9 的倍数）：同 TTRecipeMachine 的教训——
+        // 装饰不盖住顶部行时预设实际尺寸会小于功能槽，取输出槽即越界。
+        preset.setSize(Math.min(54, Math.max(9, ((size + 8) / 9) * 9)));
 
         for (int i = 0; i < size; i++) {
             if (!functional.contains(i) && !placed.contains(i)) {

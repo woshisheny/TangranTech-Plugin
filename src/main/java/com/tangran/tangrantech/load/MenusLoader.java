@@ -35,11 +35,18 @@ public final class MenusLoader {
                             if (isProgress) {
                                 menu.progressSlot = slot;
                                 menu.progressItem = item;
+                                menu.progressFromConfig = true;
                             }
                         }
                     }
                 }
-                TT.menus.put(id, menu);
+                // ★ 键统一大写：全部机器加载器（RecipeMachines/Machines/TemplateMachines/
+                // Generators/MaterialGenerators/SuperMultiBlockMachines + ScriptMachineItem
+                // 共 8 处）都按大写 id 取菜单，而 yml 键是混合大小写（Tr_xxx）——原先按原样
+                // 存，所有机器的 menu 一律查空（GUI 无装饰、进度槽失效），并暴露了
+                // constructMenu「无装饰 → 预设只有 27 格」的隐患：输出槽 ≥27 的机器
+                // （Tr_cjzryhj）在 fitAll 取输出槽时数组越界（实机 2026-10-25 报错）。
+                TT.menus.put(TT.upper(id), menu);
                 ok++;
             } catch (Exception e) {
                 TT.log("menus.yml " + id + " 失败: " + e);

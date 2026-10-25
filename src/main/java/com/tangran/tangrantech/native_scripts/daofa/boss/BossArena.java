@@ -1,5 +1,6 @@
 package com.tangran.tangrantech.native_scripts.daofa.boss;
 
+import com.tangran.tangrantech.TT;
 import com.tangran.tangrantech.util.AddonPaths;
 import com.tangran.tangrantech.util.Json;
 import java.io.File;
@@ -209,6 +210,68 @@ public final class BossArena {
     public static final String TWIN_BODY_META = "Tr_boss_twin_body";
 
     /**
+     * 战斗实体的 PDC 归属标记键（本体 / 展示架 / 道具掉落共用）。
+     *
+     * <p>为什么不用 metadata：metadata 不持久化，且按插件实例配对（/reload 后旧实例
+     * 写的标记认不出、也删不掉）；PDC 存在实体数据里，对存活实体始终可识别。
+     * 配合本体 {@code setPersistent(false)}，重启 / 崩溃后不会有残留本体——
+     * 「场上还有活着的挑战本体」安全闸不会再被自己的残留实体关死。</p>
+     */
+    public static final String ENTITY_TAG_KEY = "tangran_boss_entity";
+
+    private static volatile org.bukkit.NamespacedKey entityTagKey;
+
+    private static org.bukkit.NamespacedKey entityTagKey() {
+        org.bukkit.NamespacedKey k = entityTagKey;
+        if (k == null) {
+            k = new org.bukkit.NamespacedKey(TT.plugin, ENTITY_TAG_KEY);
+            entityTagKey = k;
+        }
+        return k;
+    }
+
+    /** 给战斗实体打 PDC 归属标记（护法本体 / 展示架 / 双子本体都用）。 */
+    public static void tagEntity(Entity e) {
+        try {
+            if (e == null || TT.plugin == null) return;
+            e.getPersistentDataContainer().set(entityTagKey(),
+                    org.bukkit.persistence.PersistentDataType.BYTE, (byte) 1);
+        } catch (Throwable ignored) {
+            // 打标失败不阻断生成
+        }
+    }
+
+    /** 该实体是否带战斗归属标记（{@link #tagEntity} 写入）。 */
+    public static boolean hasEntityTag(Entity e) {
+        try {
+            return e != null && e.getPersistentDataContainer().has(entityTagKey(),
+                    org.bukkit.persistence.PersistentDataType.BYTE);
+        } catch (Throwable ignored) {
+            return false;
+        }
+    }
+
+    /**
+     * 实体最后已知位置所在区块是否尚未加载。
+     *
+     * <p>护法追踪任务用：本体 {@code isValid()} 为 false 有两种成因——真被杀 /
+     * 被清除，或本体所在区块被卸载（persistent(false) 后卸载即消失）。后者直接
+     * 走退场结算会把「玩家远离」当成击杀，白捡通关进度；区块没回来之前应当
+     * 保持任务运行再观察。null 不算未加载（本就没本体，按真没了处理）。</p>
+     */
+    public static boolean inUnloadedChunk(Entity e) {
+        if (e == null) return false;
+        try {
+            Location l = e.getLocation();
+            org.bukkit.World w = l.getWorld();
+            if (w == null) return false;
+            return !w.isChunkLoaded(l.getBlockX() >> 4, l.getBlockZ() >> 4);
+        } catch (Throwable ignored) {
+            return false;
+        }
+    }
+
+    /**
      * 这个实体是不是「挑战本体」（糖然 / 护法 / 双子 / 虚仆）。
      *
      * <p>判定口径照抄原脚本 {@code xuHasLiveBossAnywhere} / {@code arenaHasLiveBoss}：
@@ -220,6 +283,7 @@ public final class BossArena {
         try {
             if (!e.isValid()) return false;
             if (e instanceof Player) return false;
+            if (hasEntityTag(e)) return true;                        // PDC 归属标记（护法/双子/展示架）
             if (e.hasMetadata(XU_META)) return true;                 // 虚仆
             if (e.hasMetadata(TWIN_BODY_META)) return true;          // 双子本体（生成时打标）
             String name = "";
@@ -410,9 +474,9 @@ public final class BossArena {
     /**
      * 把区域内所有非空气方块清成空气（跳过保护格）。
      *
-     * <p><b>性能提醒</b>：51×51×20 = 52020 格，逐格 {@code getBlockAt} 是几万个方块访问，
-     * 在 20 TPS 的主线程上会一次性卡住一两拍。原脚本同样如此，而且是<b>玩家手动触发</b>
-     * （右键标记基岩），所以这里保持原样不节流 —— 但要清楚它是「一键大动作」而不是每刻跑的东西。</p>
+     * <p><b>性能提醒</b>：51×51×20 = 52020 格，逐格 {@code getBlockAt} 是几万个方块访问。
+     * 但清场对空气只是 {@code getType} 快速跳过，真实改动通常只有几百格，
+     * 同步执行实测在一拍以内（常驻场地每场结束的重置就走这里）。</p>
      *
      * @return 清掉的方块数
      */
@@ -813,7 +877,11 @@ public final class BossArena {
                     try {
                         if (e instanceof Player) continue;
                         if (!e.isValid()) continue;
-                        if (isBossBody(e) || isDecorative(e) || carriesOurTag(e)) {
+                        // 注意：绝不能把 isDecorative 放进删除条件——它对全服任意世界的
+                        // 展示框/画都返回 true，而本方法每次插件启用都会跑一遍（经
+                        // cleanupStaleStartup），放进来等于「每次开服删光全服展示框与画」。
+                        // 装饰实体的保留纪律由 clearRegion 的按坐标保护（:317/:387）负责。
+                        if (isBossBody(e) || carriesOurTag(e)) {
                             e.remove();
                             n++;
                         }
@@ -828,9 +896,10 @@ public final class BossArena {
         return n;
     }
 
-    /** 带插件标记的残留实体（挑战道具掉落物 / 护法箭矢 / 二阶段道具掉落）。 */
+    /** 带插件标记的残留实体（战斗实体 / 挑战道具掉落物 / 护法箭矢 / 二阶段道具掉落）。 */
     private static boolean carriesOurTag(Entity e) {
         try {
+            if (hasEntityTag(e)) return true;
             if (e.hasMetadata("Tr_xu_challenge")) return true;
             if (e instanceof org.bukkit.entity.AbstractArrow aa
                     && aa.getPersistentDataContainer().has(

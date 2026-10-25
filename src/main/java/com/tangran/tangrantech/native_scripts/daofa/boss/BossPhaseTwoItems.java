@@ -221,6 +221,11 @@ public final class BossPhaseTwoItems {
             if (stack == null) return null;
             Material type = stack.getType();
             if (type == null || type == Material.AIR) return null;
+            // 热路径短路：has() 全背包扫描、掉落物特效每秒 5 次、每次护法箭矢命中
+            // 都会走到这里——绝大多数背包格子是没有 meta 的普通物品，
+            // hasItemMeta() 只是标志位检查，不过这道门就免掉下面的 getItemMeta()
+            // （对完整 meta 的克隆）。有 meta 的物品（含 PDC 标记的挑战道具）照常走全流程。
+            if (!stack.hasItemMeta()) return null;
             ItemMeta meta = stack.getItemMeta();
             if (meta == null) return null;
             String name = "";
@@ -372,7 +377,9 @@ public final class BossPhaseTwoItems {
             org.bukkit.entity.Item item = loc.getWorld().dropItem(loc, stack);
             item.setGravity(false);
             item.setUnlimitedLifetime(true);
-            item.setPersistent(true);
+            // persistent(false)：道具不掉落进存档——重启后不会留下「隔墙发光」的
+            // 无主甘露/盾（挑战中区块不会卸载，对局内无影响）
+            item.setPersistent(false);
             item.setPickupDelay(10);
             item.setCanMobPickup(false);
             // ★ 掉落物实体也发光（隔墙可见），配合示踪粒子，玩家一眼就能找到道具

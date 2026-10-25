@@ -46,7 +46,8 @@ public final class AutoTaixuHubScript implements NativeLifecycleScript {
     private static final int INPUT_SLOT = 4;
     private static final String INPUT_ID = "TR_MGXX";
     private static final String OUTPUT_ID = "TR_TXSJ";
-    private static final int PROGRESS_SLOT = 49;
+    /** 进度条槽位（内容侧 menus.yml 的 Tr_mgzj 也把 8 号槽配成了 progressbar）。 */
+    private static final int PROGRESS_SLOT = 8;
 
     /** 输出槽区间：9 ~ 44（闭区间）。 */
     private static final int OUTPUT_SLOT_FROM = 9;

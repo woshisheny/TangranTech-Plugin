@@ -109,8 +109,10 @@ public final class BossChallengeState {
     /**
      * 摘掉 metadata 锁。
      *
-     * <p>收场与「重载后残留恢复」都用它。之所以要求传 plugin 实例：
-     * {@code removeMetadata} 是按 (键, 所属插件) 配对的，用错实例摘不掉。</p>
+     * <p>收场与「重载后残留恢复」都用它。{@code removeMetadata} 是按 (键, 所属插件实例)
+     * 配对删除的——插件 /reload 后 {@code TT.plugin} 换成新实例，而锁是旧实例写入的，
+     * 只按新实例删会「返回 true 却删不掉」，玩家被压属性压到重新登录。
+     * 所以这里把该键下<b>所有</b>来源的值逐个摘掉。</p>
      *
      * @return 原本有锁（本次摘掉了）返回 true
      */
@@ -118,8 +120,23 @@ public final class BossChallengeState {
         if (player == null) return false;
         try {
             if (!player.hasMetadata(PHASE2_LOCK_KEY)) return false;
-            player.removeMetadata(PHASE2_LOCK_KEY, TT.plugin);
-            return true;
+            boolean removed = false;
+            for (org.bukkit.metadata.MetadataValue v : player.getMetadata(PHASE2_LOCK_KEY)) {
+                try {
+                    org.bukkit.plugin.Plugin owner = v.getOwningPlugin();
+                    if (owner != null) {
+                        player.removeMetadata(PHASE2_LOCK_KEY, owner);
+                        removed = true;
+                    }
+                } catch (Throwable ignored) {
+                    // 单个来源删除失败不影响其余
+                }
+            }
+            // 兜底：再用当前实例删一次（owner 为 null 或遍历遗漏的场合）
+            if (TT.plugin != null) {
+                player.removeMetadata(PHASE2_LOCK_KEY, TT.plugin);
+            }
+            return removed || !player.hasMetadata(PHASE2_LOCK_KEY);
         } catch (Throwable ignored) {
             return false;
         }

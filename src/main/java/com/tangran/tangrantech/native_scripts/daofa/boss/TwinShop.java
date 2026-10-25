@@ -214,6 +214,25 @@ public final class TwinShop {
         }
     }
 
+    /**
+     * 关掉该玩家还开着的本商店 GUI（双子经营收场时调）。
+     *
+     * <p>账本跨局保留，收场后残留的 GUI 若不关闭，点一下仍能走到 {@link #onClick}——
+     * 那里虽有阶段闸兜底，主动关掉才是正道（玩家不用先点一下才发现商店失效）。</p>
+     */
+    public static void closeFor(Player player) {
+        try {
+            if (player == null || !player.isOnline()) return;
+            InventoryView ov = player.getOpenInventory();
+            if (ov != null && ov.getTopInventory() != null
+                    && catOfTitle(ov.getTitle()) != null) {
+                player.closeInventory();
+            }
+        } catch (Throwable ignored) {
+            // 忽略
+        }
+    }
+
     /** 菜单持有者（只做标记；原脚本 XU_TRADE_HOLDER 的 Java 版）。 */
     private static final class Holder implements InventoryHolder {
         @Override
@@ -381,8 +400,21 @@ public final class TwinShop {
             if (view == null) return;
             String cat = catOfTitle(view.getTitle());
             if (cat == null) return;
-            event.setCancelled(true);
             if (!(event.getWhoClicked() instanceof Player player)) return;
+            // 阶段闸 + 召唤者闸（TwinMinigame.active 只认「点击者自己的经营局」）：
+            // 商店 GUI 在收场后不会自动消失，账本又是跨局保留的——没有这道闸，
+            // 残留 GUI 就能在阶段外继续消费（含破法弓兑换），路人也能花别人战局的账本。
+            if (!TwinMinigame.active(player)) {
+                event.setCancelled(true);
+                try {
+                    player.sendMessage("§7双子经营已结束，商店不可用。");
+                    player.closeInventory();
+                } catch (Throwable ignored) {
+                    // 忽略
+                }
+                return;
+            }
+            event.setCancelled(true);
             int slot = event.getRawSlot();
             if (slot == 49) {
                 player.closeInventory();
@@ -667,6 +699,16 @@ public final class TwinShop {
     /** 已储水的炼药锅坐标（原脚本 XU_WATER_SOURCE，重启丢失=重新储，无妨）。 */
     private static final Map<String, Boolean> WATER_SOURCE = new ConcurrentHashMap<>();
 
+    /**
+     * 清空储水炼药锅登记表（双子经营收场时调）。
+     *
+     * <p>表按坐标永久累积、无淘汰也无持久化（注释原话「重启丢失=重新储，无妨」）——
+     * 收场清空与重启丢失同一口径：锅里的水还在，下次储水重新登记即可。</p>
+     */
+    public static void clearWaterSource() {
+        WATER_SOURCE.clear();
+    }
+
     private static String waterKey(org.bukkit.Location loc) {
         return loc.getWorld().getName() + "," + loc.getBlockX() + "," + loc.getBlockY() + "," + loc.getBlockZ();
     }
@@ -863,6 +905,18 @@ public final class TwinShop {
             }
             if (!hit) return false;
             Player player = event.getPlayer();
+            // 召唤者闸：战局是单人挑战，canonical 身份路径同样只对「正在经营中的
+            // 召唤者本人」接管——路人右键别人的天实开不得商店（名字兜底路径
+            // 在上面已过同款闸，这里补齐 canonical 路径）
+            if (!TwinMinigame.active(player)) {
+                try {
+                    event.setCancelled(true);
+                    player.sendMessage("§7这不是你的挑战，无法使用天实商店。");
+                } catch (Throwable ignored) {
+                    // 忽略
+                }
+                return true;
+            }
             // 防重复打开
             try {
                 InventoryView ov = player.getOpenInventory();

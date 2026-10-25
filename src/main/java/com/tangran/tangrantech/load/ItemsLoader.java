@@ -106,6 +106,8 @@ public final class ItemsLoader {
         if (spec.vanilla) {
             try { item.setUseableInWorkbench(true); } catch (Throwable ignored) { }
         }
+        // 破坏掉落不需要任何 handler：Slimefun 的 BlockListener 会调 getDrops()（基类默认
+        // = 本体模板）并 setDropItems(false) 取消原版掉落，这里再手动补一份就是双倍掉落
         item.register(TT.plugin);
         return true;
     }

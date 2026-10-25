@@ -12,7 +12,6 @@ import org.bukkit.Particle;
 import org.bukkit.entity.ArmorStand;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
-import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.persistence.PersistentDataType;
@@ -154,15 +153,35 @@ public final class BossFightEntry {
             if (removed > 0) clearBarsFor(player);
 
             clearBarsFor(player);
+
+            // ★ 单挑战锁：一场战斗同时只允许一名玩家。走到这里时召唤者自己的旧局
+            //   已被上面清掉，表里剩下的都是别人的战局——一律拒绝。
+            for (BossState fighting : BossFight.all()) {
+                String who = (fighting.playerName == null) ? "其他玩家" : fighting.playerName;
+                player.sendMessage("§c有玩家（" + who + "）正在挑战中章BOSS，请等待 TA 打完再来！");
+                return false;
+            }
+
             if (startPhase != 2) {
                 player.sendMessage("§c九霄之外，雷海倒悬，虚空之中显化出中章BOSS");
+            }
+
+            // ★ 专用挑战世界：先记回程位置，再把玩家送进 tangran_space——
+            //   召唤/升空/对白与一、二阶段场地全部在这个世界里发生。
+            //   此刻战局尚未登记，这次传送不会触发「离开挑战区域」判定。
+            Location returnLoc = player.getLocation().clone();
+            Location entry = (startPhase == 2) ? TangranSpace.entryTwo() : TangranSpace.entryOne();
+            try {
+                player.teleport(entry);
+            } catch (Throwable ignored) {
+                // 传送失败也继续：stand 会在玩家当前世界生成（退化为旧行为）
             }
 
             Location eye = player.getEyeLocation();
             Location loc = eye.clone().add(eye.getDirection().multiply(6));
             double startY = loc.getY();
 
-            ArmorStand stand = spawnStand(player, loc);
+            Entity stand = spawnStand(player, loc);
             if (stand == null) {
                 player.sendMessage("§cBOSS召唤失败");
                 return false;
@@ -176,6 +195,7 @@ public final class BossFightEntry {
             state.pendingPhase = startPhase;
             state.choiceStage = "phase1";
             state.choiceMade = false;
+            state.arena.returnLoc = returnLoc;
             BossFight.put(state);
             setMarkedStand(player, stand);
 
@@ -262,18 +282,13 @@ public final class BossFightEntry {
     // 本体
     // ==================================================================
 
-    /** 生成糖然本体：无重力、无敌、不占碰撞、装备全锁。 */
-    private static ArmorStand spawnStand(Player player, Location loc) {
+    /**
+     * 生成糖然本体：玩家模型（Tang_ran 档案）优先、盔甲架回退，无敌、无重力、不占碰撞。
+     * 装备与转向由外层既有的 look/watch 任务与装备写入继续承担。
+     */
+    private static Entity spawnStand(Player player, Location loc) {
         try {
-            ArmorStand stand = player.getWorld().spawn(loc, ArmorStand.class);
-            stand.setInvulnerable(true);
-            stand.setGravity(false);
-            stand.setArms(true);
-            stand.setBasePlate(false);
-            stand.setCanPickupItems(false);
-            stand.setRemoveWhenFarAway(false);
-            stand.setCustomName("§c§l糖然");
-            stand.setCustomNameVisible(true);
+            Entity stand = TangranBody.spawn(player.getWorld(), loc, "§c§l糖然");
             try {
                 stand.getPersistentDataContainer().set(OWNER_KEY, PersistentDataType.STRING,
                         player.getUniqueId().toString());
@@ -281,17 +296,17 @@ public final class BossFightEntry {
                 // 忽略
             }
             try {
-                var equip = stand.getEquipment();
+                var equip = ((org.bukkit.entity.LivingEntity) stand).getEquipment();
                 if (equip != null) {
                     equip.setChestplate(trimmed(Material.NETHERITE_CHESTPLATE));
                     equip.setLeggings(trimmed(Material.NETHERITE_LEGGINGS));
                     equip.setBoots(trimmed(Material.NETHERITE_BOOTS));
-                    equip.setHelmet(makeTangranHead());
-                    // 装备槽全锁：玩家不能脱糖然的装备
-                    stand.setDisabledSlots(new EquipmentSlot[]{
-                            EquipmentSlot.HEAD, EquipmentSlot.CHEST, EquipmentSlot.LEGS,
-                            EquipmentSlot.FEET, EquipmentSlot.HAND, EquipmentSlot.OFF_HAND,
-                    });
+                    // 盔甲架回退形态：头部靠头颅呈现 Tang_ran 皮肤，装备槽全锁；
+                    // 玩家模型的头部本身就是档案皮肤，再戴头颅反而多余
+                    if (!TangranBody.isMannequin(stand)) {
+                        equip.setHelmet(makeTangranHead());
+                        TangranBody.lockArmorStandSlots((org.bukkit.entity.LivingEntity) stand);
+                    }
                 }
             } catch (Throwable t) {
                 BossLog.warn("糖然装备设置失败: " + t);
@@ -638,10 +653,10 @@ public final class BossFightEntry {
     // 孤儿本体清理
     // ==================================================================
 
-    /** 糖然本体上的名字判据（原脚本 {@code isTangranStandName}）。 */
+    /** 糖然本体上的名字判据（原脚本 {@code isTangranStandName}）；玩家模型与盔甲架两种载体都认。 */
     private static boolean isTangranStand(Entity e) {
         try {
-            if (!(e instanceof ArmorStand)) return false;
+            if (!(e instanceof ArmorStand) && !TangranBody.isMannequin(e)) return false;
             String name = e.getCustomName();
             return name != null && name.contains("糖然");
         } catch (Throwable ignored) {
@@ -654,22 +669,30 @@ public final class BossFightEntry {
         return BossFight.byEntity(e) != null;
     }
 
-    /** 带本玩家 owner 标记的本体（先扫附近 64 格，再扫全服）。 */
-    private static ArmorStand findStandByOwner(Player player) {
+    /** 带本玩家 owner 标记的本体（先扫附近 64 格，再扫全服；两种载体都扫）。 */
+    private static Entity findStandByOwner(Player player) {
         try {
             String uuid = player.getUniqueId().toString();
             for (Entity e : player.getWorld().getNearbyEntities(
                     player.getLocation(), 64, 64, 64)) {
-                if (!(e instanceof ArmorStand stand)) continue;
-                String owner = stand.getPersistentDataContainer()
+                if (!(e instanceof ArmorStand) && !TangranBody.isMannequin(e)) continue;
+                String owner = e.getPersistentDataContainer()
                         .get(OWNER_KEY, PersistentDataType.STRING);
-                if (uuid.equals(owner) && stand.isValid()) return stand;
+                if (uuid.equals(owner) && e.isValid()) return e;
             }
             for (org.bukkit.World w : Bukkit.getWorlds()) {
                 for (Entity e : w.getEntitiesByClass(ArmorStand.class)) {
                     String owner = e.getPersistentDataContainer()
                             .get(OWNER_KEY, PersistentDataType.STRING);
-                    if (uuid.equals(owner) && e.isValid()) return (ArmorStand) e;
+                    if (uuid.equals(owner) && e.isValid()) return e;
+                }
+                if (TangranBody.mannequinSupported()) {
+                    for (Entity e : w.getEntitiesByClass(
+                            org.bukkit.entity.Mannequin.class)) {
+                        String owner = e.getPersistentDataContainer()
+                                .get(OWNER_KEY, PersistentDataType.STRING);
+                        if (uuid.equals(owner) && e.isValid()) return e;
+                    }
                 }
             }
         } catch (Throwable ignored) {
@@ -679,7 +702,7 @@ public final class BossFightEntry {
     }
 
     /** 附近 64 格内「叫糖然但没有 owner 标记」的本体。 */
-    private static ArmorStand findNearbyUnmarkedStand(Player player) {
+    private static Entity findNearbyUnmarkedStand(Player player) {
         try {
             for (Entity e : player.getWorld().getNearbyEntities(
                     player.getLocation(), 64, 64, 64)) {
@@ -687,7 +710,7 @@ public final class BossFightEntry {
                 if (usedByAnyFight(e)) continue;      // 别人的局：不碰
                 String owner = e.getPersistentDataContainer()
                         .get(OWNER_KEY, PersistentDataType.STRING);
-                if (owner == null || owner.isEmpty()) return (ArmorStand) e;
+                if (owner == null || owner.isEmpty()) return e;
             }
         } catch (Throwable ignored) {
             // 忽略
@@ -696,7 +719,7 @@ public final class BossFightEntry {
     }
 
     /** 全服「叫糖然但没有 owner 标记」的本体。 */
-    private static ArmorStand findAnyUnmarkedStand() {
+    private static Entity findAnyUnmarkedStand() {
         try {
             for (org.bukkit.World w : Bukkit.getWorlds()) {
                 for (Entity e : w.getEntitiesByClass(ArmorStand.class)) {
@@ -704,7 +727,17 @@ public final class BossFightEntry {
                     if (usedByAnyFight(e)) continue;  // 别人的局：不碰
                     String owner = e.getPersistentDataContainer()
                             .get(OWNER_KEY, PersistentDataType.STRING);
-                    if (owner == null || owner.isEmpty()) return (ArmorStand) e;
+                    if (owner == null || owner.isEmpty()) return e;
+                }
+                if (TangranBody.mannequinSupported()) {
+                    for (Entity e : w.getEntitiesByClass(
+                            org.bukkit.entity.Mannequin.class)) {
+                        if (!isTangranStand(e)) continue;
+                        if (usedByAnyFight(e)) continue;
+                        String owner = e.getPersistentDataContainer()
+                                .get(OWNER_KEY, PersistentDataType.STRING);
+                        if (owner == null || owner.isEmpty()) return e;
+                    }
                 }
             }
         } catch (Throwable ignored) {
@@ -781,34 +814,36 @@ public final class BossFightEntry {
      * 只摘「这个玩家」身上的糖然血条，没人看就整条收掉。
      *
      * <p><b>绝不 {@code removeAll} 全部血条</b> —— 多玩家并行时会把别人正在看的血条一起收掉。</p>
+     *
+     * <p>直接走战局表反查该玩家的主血条与护法血条。原实现遍历
+     * {@code Bukkit.getBossBars()}——那里面只有 <b>keyed</b> 血条，而本插件的血条全用
+     * 非 keyed API 创建，原方法对本插件血条是空转（永远匹配不到）。</p>
      */
     public static void clearBarsFor(Player player) {
         try {
             if (player == null) return;
-            // getBossBars() 返回的是迭代器（且已标记待删除），先收成列表再遍历：
-            // 一边遍历一边 removePlayer 可能让迭代器失效
-            // getBossBars() 是 Iterator<KeyedBossBar>（不是 Iterable，for-each 用不了），
-            // 而且已标记待删除。先手动收成列表再遍历 —— 一边遍历一边 removePlayer
-            // 可能让迭代器失效。
-            List<org.bukkit.boss.BossBar> bars = new ArrayList<>();
-            java.util.Iterator<org.bukkit.boss.KeyedBossBar> bit = Bukkit.getBossBars();
-            while (bit.hasNext()) {
-                org.bukkit.boss.KeyedBossBar kb = bit.next();
-                if (kb != null) bars.add(kb);
+            for (BossState st : BossFight.all()) {
+                if (st == null) continue;
+                // 战局是单人制：按召唤者名过滤（名字改过时 byName 反查兜底）
+                if (st.playerName != null && !st.playerName.equals(player.getName())) continue;
+                removeIfAttached(st.bar, player);
+                for (BossState.GuardianSlot slot : st.guardians.all()) {
+                    removeIfAttached(slot.bar, player);
+                    removeIfAttached(slot.bar2, player);
+                }
             }
-            for (org.bukkit.boss.BossBar bar : bars) {
-                if (bar == null) continue;
-                String title;
-                try {
-                    title = String.valueOf(bar.getTitle());
-                } catch (Throwable ignored) {
-                    continue;
-                }
-                if (!title.contains("糖然")) continue;
-                bar.removePlayer(player);
-                if (bar.getPlayers().isEmpty()) {
-                    bar.setVisible(false);
-                }
+        } catch (Throwable ignored) {
+            // 忽略
+        }
+    }
+
+    private static void removeIfAttached(org.bukkit.boss.BossBar bar, Player player) {
+        if (bar == null) return;
+        try {
+            if (bar.getPlayers() == null || !bar.getPlayers().contains(player)) return;
+            bar.removePlayer(player);
+            if (bar.getPlayers().isEmpty()) {
+                bar.setVisible(false);
             }
         } catch (Throwable ignored) {
             // 忽略

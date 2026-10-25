@@ -29,6 +29,7 @@ import org.bukkit.event.player.PlayerArmorStandManipulateEvent;
 import org.bukkit.event.player.PlayerDropItemEvent;
 import org.bukkit.event.player.PlayerInteractEntityEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
+import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.event.player.PlayerRespawnEvent;
 import org.bukkit.inventory.EntityEquipment;
 import org.bukkit.inventory.ItemStack;
@@ -184,6 +185,8 @@ public final class BossEventRules {
         @EventHandler(priority = EventPriority.LOWEST, ignoreCancelled = true)
         public void onBurn(BlockBurnEvent event) {
             try {
+                // 无战局直接放行：火焰蔓延是高频公共事件
+                if (BossFight.count() == 0) return;
                 if (inAnyFightArena(event.getBlock()) || TwinMinigame.isResourceBlock(event.getBlock())) {
                     event.setCancelled(true);
                 }
@@ -290,11 +293,16 @@ public final class BossEventRules {
             try {
                 List<org.bukkit.block.Block> list = event.blockList();
                 if (list == null || list.isEmpty()) return;
+                // 无战局直接放行：这是全服所有爆炸（TNT/苦力怕/床/水晶）的公共路径。
+                // 大爆炸逐块调 inAnyFightArena 时，区域快照只取一次（原实现在
+                // isPhaseTwoFloorBlock/inAnyFightArena 里每块各自 BossFight.all() 一遍）。
+                if (BossFight.count() == 0) return;
+                List<BossState> fights = BossFight.all();
                 Iterator<org.bukkit.block.Block> it = list.iterator();
                 boolean changed = false;
                 while (it.hasNext()) {
                     org.bukkit.block.Block b = it.next();
-                    if (isPhaseTwoFloorBlock(b) || inAnyFightArena(b)
+                    if (isPhaseTwoFloorBlock(b, fights) || inAnyFightArena(b, fights)
                             || TwinMinigame.isResourceBlock(b)) {
                         it.remove();
                         changed = true;
@@ -363,6 +371,9 @@ public final class BossEventRules {
         @EventHandler(priority = EventPriority.LOWEST, ignoreCancelled = false)
         public void onProjectileHit(ProjectileHitEvent event) {
             try {
+                // 无战局直接放行：这是全服所有箭（骷髅/玩家/发射器）的公共路径，
+                // 后面 byArrow 是「全战局 × 箭矢表」的线性扫
+                if (BossFight.count() == 0) return;
                 if (!(event.getEntity() instanceof org.bukkit.entity.Arrow arrow)) return;
                 if (!(event.getHitEntity() instanceof Player hit)) return;
                 BossState st = BossFight.byArrow(arrow);
@@ -490,17 +501,27 @@ public final class BossEventRules {
         return TwinMinigame.active(player);
     }
 
-    /** 本体倒下前后「格子在任意一局的二阶段场地里」吗（原脚本 xuInAnyFightArena）。 */
+    /** 单方块事件的便捷入口（每次事件自取一次战局快照）。 */
     private static boolean inAnyFightArena(org.bukkit.block.Block b) {
+        return inAnyFightArena(b, BossFight.all());
+    }
+
+    /** 单方块事件的便捷入口（每次事件自取一次战局快照）。 */
+    private static boolean isPhaseTwoFloorBlock(org.bukkit.block.Block b) {
+        return isPhaseTwoFloorBlock(b, BossFight.all());
+    }
+
+    /** 本体倒下前后「格子在任意一局的二阶段场地里」吗（原脚本 xuInAnyFightArena）。 */
+    private static boolean inAnyFightArena(org.bukkit.block.Block b, List<BossState> fights) {
         try {
-            if (b == null) return false;
-            for (BossState st : BossFight.all()) {
+            if (b == null || fights == null || fights.isEmpty()) return false;
+            int x = b.getX();
+            int y = b.getY();
+            int z = b.getZ();
+            for (BossState st : fights) {
                 BossArena.Region r = st.arena.twoRegion;
                 if (r == null) continue;
                 if (st.arena.twoWorld != null && !st.arena.twoWorld.equals(b.getWorld())) continue;
-                int x = b.getX();
-                int y = b.getY();
-                int z = b.getZ();
                 if (x >= r.minX() && x <= r.maxX() && y >= r.minY() && y <= r.maxY()
                         && z >= r.minZ() && z <= r.maxZ()) {
                     return true;
@@ -513,10 +534,11 @@ public final class BossEventRules {
     }
 
     /** 二阶段场地的石英地板层（原脚本 isPhaseTwoArenaFloorBlock）。 */
-    private static boolean isPhaseTwoFloorBlock(org.bukkit.block.Block b) {
+    private static boolean isPhaseTwoFloorBlock(org.bukkit.block.Block b, List<BossState> fights) {
         try {
             if (b == null || b.getType() != Material.QUARTZ_BLOCK) return false;
-            for (BossState st : BossFight.all()) {
+            if (fights == null || fights.isEmpty()) return false;
+            for (BossState st : fights) {
                 BossArena.Region r = st.arena.twoRegion;
                 if (r == null) continue;
                 if (st.arena.twoWorld != null && !st.arena.twoWorld.equals(b.getWorld())) continue;
@@ -578,6 +600,16 @@ public final class BossEventRules {
             if (last != null && now - last < 1500L) return;
             LOCK_MSG.put(player.getName(), now);
             player.sendMessage(msg != null ? msg : "§c糖然二阶段挑战期间，无法与容器交互或打开储物空间！");
+        } catch (Throwable ignored) {
+            // 忽略
+        }
+    }
+
+    /** 玩家退出时清掉限流表条目：LOCK_MSG 按名字累积，不清会随历史玩家名缓慢无限增长。 */
+    @EventHandler(priority = EventPriority.MONITOR)
+    public void onQuitCleanLockMsg(PlayerQuitEvent event) {
+        try {
+            if (event.getPlayer() != null) LOCK_MSG.remove(event.getPlayer().getName());
         } catch (Throwable ignored) {
             // 忽略
         }

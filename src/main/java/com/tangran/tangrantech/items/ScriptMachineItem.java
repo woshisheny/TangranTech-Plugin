@@ -42,6 +42,12 @@ public class ScriptMachineItem extends SlimefunItem implements EnergyNetComponen
     public ScriptMachineItem(ItemGroup group, SlimefunItemStack item, RecipeType rt, ItemStack[] recipe,
                              NativeScript script, int capacity, String energyType,
                              int[] input, int[] output) {
+        this(group, item, rt, recipe, script, capacity, energyType, input, output, true);
+    }
+
+    public ScriptMachineItem(ItemGroup group, SlimefunItemStack item, RecipeType rt, ItemStack[] recipe,
+                             NativeScript script, int capacity, String energyType,
+                             int[] input, int[] output, boolean tick) {
         super(group, item, rt, recipe);
         this.script = script;
         this.capacity = capacity;
@@ -49,7 +55,9 @@ public class ScriptMachineItem extends SlimefunItem implements EnergyNetComponen
         this.input = input;
         this.output = output;
         createPreset(this, getInventoryTitle(), this::constructMenu);
-        installTicker();
+        // tick: false 的机器（如注能器——纯投放物交互，没有任何每刻逻辑）
+        // 不进 Slimefun 的 tick 周期，省一份每刻调度
+        if (tick) installTicker();
     }
 
     /**
@@ -127,6 +135,9 @@ public class ScriptMachineItem extends SlimefunItem implements EnergyNetComponen
 
     @Override
     public EnergyNetComponentType getEnergyComponentType() {
+        // 未配 energy（capacity=0）= 非耗电机器（注能器/甘霖神龛/命轨织机等）：
+        // 不进能源网络，Slimefun 不再为它们做能源网络登记与查询
+        if (capacity <= 0) return EnergyNetComponentType.NONE;
         if ("GENERATOR".equalsIgnoreCase(energyType)) return EnergyNetComponentType.GENERATOR;
         if ("CAPACITOR".equalsIgnoreCase(energyType)) return EnergyNetComponentType.CAPACITOR;
         return EnergyNetComponentType.CONSUMER;
@@ -134,15 +145,26 @@ public class ScriptMachineItem extends SlimefunItem implements EnergyNetComponen
 
     protected void constructMenu(BlockMenuPreset preset) {
         MenuDef menu = TT.menus.get(getId().toUpperCase(Locale.ROOT));
-        if (menu == null) return;
+        if (menu == null) {
+            // 无 menus.yml 条目：没有装饰可放，但预设必须仍覆盖全部功能槽——
+            // ChestMenu 的真实尺寸只随「实际放置的物品」自动增长，不显式 setSize 的话
+            // 预设会停在默认尺寸，输出槽超出即越界（同 TTRecipeMachine 的教训）
+            int maxSlot = 26;
+            for (int s : input) maxSlot = Math.max(maxSlot, s);
+            for (int s : output) maxSlot = Math.max(maxSlot, s);
+            preset.setSize(Math.min(54, Math.max(27, ((maxSlot / 9) + 1) * 9)));
+            return;
+        }
 
         // 进度槽与输入/输出槽重叠时弃用（与 TTRecipeMachine 同一防御）：
         // MenuDef.progressSlot 默认 22，而哈气收集器 / 甘霖神龛 / 轨迹织机的 output
         // 恰好覆盖 22。不拦的话进度占位（打火石）会赖在输出槽里 —— GUI 多一块垃圾，
         // 且脚本按「空槽」找输出位时永远跳过它，凭空少一个可用输出槽。
+        // 冲突时先回退到 9（内容侧已查验这些机器的 9 槽空闲），9 也被占用才禁用。
         int pslot = menu.progressSlot;
+        if (pslot >= 0 && overlapsFunctional(pslot)) pslot = 9;
         if (pslot >= 0 && overlapsFunctional(pslot)) {
-            TT.log(getId() + " 的进度槽 " + pslot + " 与输入/输出槽重叠（menus.yml 缺 progressbar 配置？），已禁用进度占位");
+            TT.log(getId() + " 的进度槽 " + pslot + " 与输入/输出槽重叠，无法展示进度，已禁用进度占位");
             pslot = -1;
         }
 
@@ -164,6 +186,10 @@ public class ScriptMachineItem extends SlimefunItem implements EnergyNetComponen
         if (pslot >= 0) maxSlot = Math.max(maxSlot, pslot);
         for (int s : placed) maxSlot = Math.max(maxSlot, s);
         int size = Math.min(54, Math.max(declared, ((maxSlot / 9) + 1) * 9));
+        // ★ 显式 setSize（向上取整到 9 的倍数）：装饰只盖住声明的槽位，而输入/输出槽
+        // 不放物品——声明装饰不在顶部行时，预设实际尺寸会小于功能槽（同 TTRecipeMachine
+        // 的教训）。显式设一次，保证 inventory 覆盖全部功能槽。
+        preset.setSize(Math.min(54, Math.max(9, ((size + 8) / 9) * 9)));
 
         for (int i = 0; i < size; i++) {
             if (!functional.contains(i) && !placed.contains(i)) {
@@ -190,7 +216,9 @@ public class ScriptMachineItem extends SlimefunItem implements EnergyNetComponen
                     });
         }
 
-        if (pslot >= 0 && !placed.contains(pslot)) {
+        // menus.yml 显式配置的 progressbar 槽位是内容侧的刻意安排（如甘霖神龛/命轨织机的 8 号槽），
+        // 即使该槽位已有装饰物品也要覆盖；默认回退槽（22/9）仍让位给装饰
+        if (pslot >= 0 && (menu.progressFromConfig || !placed.contains(pslot))) {
             preset.addItem(pslot, menu.progressItem != null
                     ? menu.progressItem : new ItemStack(Material.FLINT_AND_STEEL),
                     ChestMenuUtils.getEmptyClickHandler());

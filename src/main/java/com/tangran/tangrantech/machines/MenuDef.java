@@ -18,6 +18,8 @@ public final class MenuDef {
     public final Map<Integer, ItemStack> items = new HashMap<>();
     /** 进度条槽位，默认 22。 */
     public int progressSlot = 22;
+    /** 进度槽是否由 menus.yml 的 progressbar 显式配置（是则覆盖同槽位的装饰物品）。 */
+    public boolean progressFromConfig;
     /** 进度条物品，默认黑色玻璃板。 */
     public ItemStack progressItem;
     /** 菜单大小；-1 或 0 表示由背景槽位自动推导。 */

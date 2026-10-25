@@ -126,7 +126,7 @@ public final class SuperBlocks implements Listener {
         final Location core;
         final Dir dir;
         /** 旋转后的结构格：偏移 → 期望物品（核心本身不在其中，对齐 RSC blockParts）。 */
-        final Map<Off, ItemStack> cells;
+        final Map<Off, TTSuperMultiBlockMachine.Expect> cells;
         final Set<Location> cellLocs;
         /** 各显示层的绝对 Y（升序）。 */
         final int[] layerYs;
@@ -138,7 +138,7 @@ public final class SuperBlocks implements Listener {
         int tickCount;
         int rescanCount;
 
-        Inst(TTSuperMultiBlockMachine machine, Location core, Dir dir, Map<Off, ItemStack> cells) {
+        Inst(TTSuperMultiBlockMachine machine, Location core, Dir dir, Map<Off, TTSuperMultiBlockMachine.Expect> cells) {
             this.machine = machine;
             this.core = core;
             this.dir = dir;
@@ -319,11 +319,11 @@ public final class SuperBlocks implements Listener {
     /** 从机器的结构/mapping/核心偏移构建旋转后的实例（坐标公式与旧 isFormed 一致）。 */
     private static Inst buildInst(TTSuperMultiBlockMachine machine, Location core, Dir dir) {
         List<List<List<String>>> structure = machine.getStructure();
-        Map<String, ItemStack> mapping = machine.getMapping();
+        Map<String, TTSuperMultiBlockMachine.Expect> mapping = machine.getMapping();
         int[] coreOffset = machine.getCoreOffset();
         if (structure == null || structure.isEmpty() || mapping == null || coreOffset == null) return null;
 
-        Map<Off, ItemStack> cells = new java.util.LinkedHashMap<>();
+        Map<Off, TTSuperMultiBlockMachine.Expect> cells = new java.util.LinkedHashMap<>();
         for (int l = 0; l < structure.size(); l++) {
             List<List<String>> rows = structure.get(l);
             if (rows == null) continue;
@@ -333,8 +333,8 @@ public final class SuperBlocks implements Listener {
                 for (int c = 0; c < cols.size(); c++) {
                     // 核心本身不进结构格（对齐 RSC blockParts.remove(corePos)）
                     if (l == coreOffset[0] && r == coreOffset[1] && c == coreOffset[2]) continue;
-                    ItemStack expect = mapping.get(cols.get(c));
-                    if (expect == null || expect.getType().isAir()) continue;   // "__" 通配
+                    TTSuperMultiBlockMachine.Expect expect = mapping.get(cols.get(c));
+                    if (expect == null || expect.material().isAir()) continue;   // "__" 通配
                     int dx = c - coreOffset[2];
                     int dy = coreOffset[0] - l;
                     int dz = r - coreOffset[1];
@@ -468,7 +468,7 @@ public final class SuperBlocks implements Listener {
                 loc.getBlockX() - inst.core.getBlockX(),
                 loc.getBlockY() - inst.core.getBlockY(),
                 loc.getBlockZ() - inst.core.getBlockZ());
-        ItemStack expect = inst.cells.get(key);
+        TTSuperMultiBlockMachine.Expect expect = inst.cells.get(key);
         if (expect == null) return false;
         return TTSuperMultiBlockMachine.matchesBlock(loc.getBlock(), expect);
     }
@@ -593,11 +593,11 @@ public final class SuperBlocks implements Listener {
     private static void spawnProjectilesSync(Inst inst) {
         World w = inst.core.getWorld();
         for (Location l : inst.cellLocs) {
-            ItemStack expect = inst.cells.get(new Off(
+            TTSuperMultiBlockMachine.Expect expect = inst.cells.get(new Off(
                     l.getBlockX() - inst.core.getBlockX(),
                     l.getBlockY() - inst.core.getBlockY(),
                     l.getBlockZ() - inst.core.getBlockZ()));
-            if (expect == null || !expect.getType().isBlock()) continue;   // 非原版方块不给投影，对齐 RSC
+            if (expect == null || expect.sfId() != null || !expect.material().isBlock()) continue;   // 非原版方块不给投影，对齐 RSC
 
             // 重启后世界里的旧投影还活着——按 PDC 收养，避免重复生成（对齐 RSC addProjectile 收养分支）
             Display existing = findAdoptable(w, l);
@@ -607,7 +607,7 @@ public final class SuperBlocks implements Listener {
             }
 
             BlockDisplay d = (BlockDisplay) w.spawnEntity(l, EntityType.BLOCK_DISPLAY);
-            d.setBlock(expect.getType().createBlockData());
+            d.setBlock(expect.material().createBlockData());
             d.setTransformation(defaultTransformation());
             d.getPersistentDataContainer().set(DISPLAY_KEY, PersistentDataType.BOOLEAN, true);
             d.setGlowing(!inst.correct.contains(l));

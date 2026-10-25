@@ -47,12 +47,28 @@ public final class BossProgress {
     }
 
     /**
+     * 进度内存缓存（玩家名 → 已规范化的进度表）。
+     *
+     * <p>进度是「只增不减」的小表，内存即权威、磁盘是落盘副本：load 首次读盘后进缓存，
+     * save 同步刷新缓存并写盘（写穿）。没有这道缓存时，任务菜单渲染反复调
+     * {@code hasBeatenGuardian}/{@code hasPhase}，每次都是一次同步磁盘读。</p>
+     */
+    private static final Map<String, Map<String, Object>> CACHE = new java.util.concurrent.ConcurrentHashMap<>();
+
+    private static String nameKey(String playerName) {
+        return (playerName == null || playerName.isEmpty()) ? "unknown" : playerName;
+    }
+
+    /**
      * 读进度。
      *
      * <p>文件缺失或损坏时返回一份「空进度」而不是 null —— 调用方永远拿到可用的 Map，
      * 这是原脚本 {@code loadBossProgress} 的行为（{@code return { cleared: [] }}）。</p>
      */
     public static Map<String, Object> load(String playerName) {
+        String key = nameKey(playerName);
+        Map<String, Object> cached = CACHE.get(key);
+        if (cached != null) return cached;
         Map<String, Object> data = null;
         try {
             data = AddonPaths.readJson(fileOf(playerName));
@@ -64,12 +80,14 @@ public final class BossProgress {
         // 保证两个数组字段一定存在（原脚本同样做这一步）
         if (!(data.get(KEY_CLEARED) instanceof List)) data.put(KEY_CLEARED, new ArrayList<>());
         if (!(data.get(KEY_GUARDIANS) instanceof List)) data.put(KEY_GUARDIANS, new ArrayList<>());
+        CACHE.put(key, data);
         return data;
     }
 
-    /** 写进度（2 空格缩进，与原脚本的 {@code JSON.stringify(data, null, 2)} 一致）。 */
+    /** 写进度（内存缓存同步刷新；2 空格缩进，与原脚本的 {@code JSON.stringify(data, null, 2)} 一致）。 */
     public static void save(String playerName, Map<String, Object> data) {
         try {
+            CACHE.put(nameKey(playerName), data);
             AddonPaths.writeJson(fileOf(playerName), data);
         } catch (Throwable t) {
             BossLog.warn("写 BOSS战 进度失败 " + playerName + ": " + t);

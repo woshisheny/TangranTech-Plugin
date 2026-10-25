@@ -87,14 +87,7 @@ public final class BossPhaseOne {
     /** 猪导弹存活拍数。 */
     private static final int PIG_LIFE = 260;
 
-    /** 候选场地中心偏移（相对玩家，原脚本那 13 个）。 */
-    private static final int[][] OFFSETS = {
-            {0, 0}, {8, 0}, {-8, 0}, {0, 8}, {0, -8},
-            {8, 8}, {8, -8}, {-8, 8}, {-8, -8},
-            {15, 0}, {-15, 0}, {0, 15}, {0, -15},
-    };
-
-    /** 一次候选场地。 */
+    /** 一次候选场地（现役口径：专用世界的固定场地，见 {@link TangranSpace#ONE_CENTER}）。 */
     public record Center(int cx, int cy, int cz, int diff) {}
 
     // ==================================================================
@@ -104,22 +97,21 @@ public final class BossPhaseOne {
     /**
      * 启动一阶段（幂等：{@code phaseOne.started} 已为 true 时直接返回）。
      *
-     * @return 是否真的启动了（场地找不到等原因会返回 false）
+     * <p>场地是专用世界（tangran_space）里的<b>常驻固定场地</b>——不再按玩家位置选址；
+     * buildArena 只补空气格，对完好的场地是一次快速 no-op。</p>
+     *
+     * @return 是否真的启动了
      */
     public static boolean start(BossState state, Player player) {
         try {
             if (state == null || player == null || !player.isOnline()) return false;
             if (state.phaseOne.started) return false;
 
-            Center center = findArena(player);
-            if (center == null) {
-                BossFx.sendLine(player, "§c附近没有足够的空域生成挑战区域。");
-                return false;
-            }
             state.phaseOne.started = true;
             state.arena.oneStarted = true;
 
-            World world = player.getWorld();
+            World world = TangranSpace.getOrCreate();
+            Center center = TangranSpace.ONE_CENTER;
             buildArena(world, center, state);
 
             // 玩家：21×21 的 +Z 边中点，朝向对面（-Z）；糖然悬在 8 格高的另一侧
@@ -186,98 +178,8 @@ public final class BossPhaseOne {
     }
 
     // ==================================================================
-    // 场地：选址 / 搭建 / 还原
+    // 场地：搭建 / 还原（专用世界常驻固定场地，选址机器已随 tangran_space 移除）
     // ==================================================================
-
-    /** 这块 21×21 区域的最高非空气方块 Y。 */
-    private static int maxSolidY(World world, int cx, int cz, int radius) {
-        int maxY = -9999;
-        for (int x = cx - radius; x <= cx + radius; x++) {
-            for (int z = cz - radius; z <= cz + radius; z++) {
-                int y = world.getHighestBlockYAt(x, z);
-                if (y > maxY) maxY = y;
-            }
-        }
-        return maxY;
-    }
-
-    /**
-     * 新场地和「别人正在打的场地」有没有重叠（阶段一 / 阶段二 / 双子经营共用一套判定）。
-     *
-     * <p><b>这条必须保留</b>：原脚本注释写明「多玩家并行」。
-     * 不判的话 A 的场地会盖在 B 正在打的场地上，B 的地板瞬间消失 = 直接掉虚空。</p>
-     */
-    public static boolean regionBlocked(BossState self, World world,
-                                        int x1, int x2, int y1, int y2, int z1, int z2) {
-        try {
-            for (BossState st : BossFight.all()) {
-                if (st == null || st == self) continue;
-                if (overlaps(world, st.arena.twoWorld, st.arena.twoRegion, x1, x2, y1, y2, z1, z2)) {
-                    return true;
-                }
-                if (overlaps(world, st.arena.oneWorld, st.arena.oneRegion, x1, x2, y1, y2, z1, z2)) {
-                    return true;
-                }
-                if (overlaps(world, st.minigame.world, st.minigame.region, x1, x2, y1, y2, z1, z2)) {
-                    return true;
-                }
-            }
-        } catch (Throwable ignored) {
-            // 忽略
-        }
-        return false;
-    }
-
-    private static boolean overlaps(World world, World arenaWorld, BossArena.Region r,
-                                    int x1, int x2, int y1, int y2, int z1, int z2) {
-        if (r == null) return false;
-        if (arenaWorld != null && !arenaWorld.getName().equals(world.getName())) return false;
-        return x1 <= r.maxX() && x2 >= r.minX() && y1 <= r.maxY() && y2 >= r.minY()
-                && z1 <= r.maxZ() && z2 >= r.minZ();
-    }
-
-    /** 找一块 21×21 的空域。 */
-    public static Center findArena(Player player) {
-        try {
-            World world = player.getWorld();
-            Location loc = player.getLocation();
-            int px = loc.getBlockX();
-            int py = loc.getBlockY();
-            int pz = loc.getBlockZ();
-            int maxBuildY = world.getLogicalHeight() - 7;
-
-            Center best = null;
-            for (int[] off : OFFSETS) {
-                int cx = px + off[0];
-                int cz = pz + off[1];
-                int maxY = maxSolidY(world, cx, cz, RADIUS);
-                int cy = maxY + 1;
-                if (cy > maxBuildY) continue;
-                if (regionBlocked(null, world,
-                        cx - RADIUS, cx + RADIUS, cy, cy + HEIGHT - 1, cz - RADIUS, cz + RADIUS)) {
-                    continue;
-                }
-                int diff = Math.abs(cy - py);
-                if (best == null || diff < best.diff()) {
-                    best = new Center(cx, cy, cz, diff);
-                }
-            }
-            if (best == null) {
-                // 全部候选都被占：退回玩家正下方
-                int maxY2 = maxSolidY(world, px, pz, RADIUS);
-                int cy2 = maxY2 + 1;
-                if (cy2 <= maxBuildY && !regionBlocked(null, world,
-                        px - RADIUS, px + RADIUS, cy2, cy2 + HEIGHT - 1,
-                        pz - RADIUS, pz + RADIUS)) {
-                    best = new Center(px, cy2, pz, Math.abs(cy2 - py));
-                }
-            }
-            return best;
-        } catch (Throwable t) {
-            BossLog.warn("寻找阶段一场地失败: " + t);
-            return null;
-        }
-    }
 
     /**
      * 搭场地：石砖地板 + 四周 10 格屏障 + 顶层屏障封顶（正中间那格是<b>基岩标记</b>）。
@@ -339,36 +241,26 @@ public final class BossPhaseOne {
                 }
             }
 
-            state.arena.oneWorld = world;
-            state.arena.oneRegion = region;
-            BossArena.saveRecord(world, region, cx, cy + 11, cz, state.key);
+            if (state != null) {
+                state.arena.oneWorld = world;
+                state.arena.oneRegion = region;
+            }
+            // 注意：不写场地落盘记录——场地常驻专用世界且每场结束/启动时都会重置，
+            // 写了记录反而会让启动自清理把常驻场地清掉
         } catch (Throwable t) {
             BossLog.warn("搭建阶段一场地失败: " + t);
         }
     }
 
-    /** 还原场地：把整块区域清成空气（只清自己那一块）。 */
+    /**
+     * 一阶段收场：把专用世界的常驻场地重置回模板（清掉本场的改动 → 重建模板）。
+     * 不再「清成空气」——场地跨场次复用，下一场开局即是干净场地；
+     * 同步执行成本很低（清场对空气快速跳过，真实改动通常只有几百格）。
+     */
     public static void restoreArena(BossState state) {
         try {
             if (state == null || state.arena.oneWorld == null || state.arena.oneRegion == null) return;
-            World world = state.arena.oneWorld;
-            BossArena.Region region = state.arena.oneRegion;
-            for (int x = region.minX(); x <= region.maxX(); x++) {
-                for (int y = region.minY(); y <= region.maxY(); y++) {
-                    for (int z = region.minZ(); z <= region.maxZ(); z++) {
-                        world.getBlockAt(x, y, z).setType(Material.AIR, false);
-                    }
-                }
-            }
-            // 落盘记录必须跟着删：buildArena 时按 state.key 存了 _arena_<uuid>.json，
-            // 只清方块不删记录的话，重启后 cleanupStaleStartup 会按这份旧记录
-            // 把玩家后来建在场地里的建筑当成残留清掉（「重启一次家没了」）。
-            // 二阶段的 restoreArena 同位置就是删的（deleteRecord(state.playerName)），两条路径对齐。
-            try {
-                BossArena.deleteRecord(state.key);
-            } catch (Throwable ignored) {
-                // 记录删不掉只影响下次启动自清理，不阻断还原
-            }
+            TangranSpace.resetOne();
         } catch (Throwable t) {
             BossLog.warn("还原阶段一挑战区域失败: " + t);
         }
@@ -600,20 +492,22 @@ public final class BossPhaseOne {
             BossArena.Region region = state.arena.oneRegion;
             if (world == null || region == null) return;
             Particle.DustOptions dust = new Particle.DustOptions(pointColor, 0.9f);
+            // 步长 2：每次 spawnParticle(…,1,…) 都是一次独立发包，激光晚期 5-7 条并发
+            // 时调用次数上万/秒。dust 半径 0.9 足够盖住 2 格间隔，视觉上仍是连续一条线。
             if ("v".equals(laser.kind)) {
-                for (int y = laser.yMin; y <= laser.yMax; y++) {
+                for (int y = laser.yMin; y <= laser.yMax; y += 2) {
                     world.spawnParticle(Particle.DUST,
                             laser.x + 0.5d, y + 0.5d, laser.z + 0.5d,
                             1, 0, 0, 0, 0, dust);
                 }
             } else if ("x".equals(laser.kind)) {
-                for (int x = region.minX(); x <= region.maxX(); x++) {
+                for (int x = region.minX(); x <= region.maxX(); x += 2) {
                     world.spawnParticle(Particle.DUST,
                             x + 0.5d, laser.y + 0.5d, laser.value + 0.5d,
                             1, 0, 0, 0, 0, dust);
                 }
             } else {
-                for (int z = region.minZ(); z <= region.maxZ(); z++) {
+                for (int z = region.minZ(); z <= region.maxZ(); z += 2) {
                     world.spawnParticle(Particle.DUST,
                             laser.value + 0.5d, laser.y + 0.5d, z + 0.5d,
                             1, 0, 0, 0, 0, dust);
@@ -1109,7 +1003,13 @@ public final class BossPhaseOne {
         }
     }
 
-    /** 挑战成功：写进度、停挑战、停 BGM、还原场地，然后等玩家缓降落地再进二阶段。 */
+    /**
+     * 挑战成功：写进度、停挑战、停 BGM，然后等玩家缓降落地再进二阶段。
+     *
+     * <p><b>不清一阶段场地</b>：专用世界没有地面，清掉后玩家的「缓降落地」会变成
+     * 坠入虚空；场地保留到本局收场（forceStop → restoreArena）再重置，
+     * 玩家始终站在一阶段场地里完成二阶段过场。</p>
+     */
     private static void handleSuccess(BossState state, Player player) {
         try {
             BossProgress.markPhaseCleared(state.playerName, 1);
@@ -1124,7 +1024,6 @@ public final class BossPhaseOne {
         } catch (Throwable ignored) {
             // 忽略
         }
-        restoreArena(state);
         state.phaseOne.active = false;
         try {
             if (state.bar != null) state.bar.setVisible(false);

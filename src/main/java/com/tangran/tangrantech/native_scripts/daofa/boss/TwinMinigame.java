@@ -321,7 +321,20 @@ public final class TwinMinigame {
             }
             // 挑战增益
             Player pl = (state.playerName == null) ? null : Bukkit.getPlayerExact(state.playerName);
-            if (pl != null) clearBuffs(pl);
+            if (pl != null) {
+                clearBuffs(pl);
+                // 天实商店还开着就关掉：账本是跨局保留的，收场后仍开着 GUI 继续点
+                // 就能在阶段外消费（含破法弓兑换）
+                TwinShop.closeFor(pl);
+            }
+            // 离线玩家的增益条目也要摘：BUFFS 按 UUID 记，只清在线者会留下离线条目
+            try {
+                if (state.summonerUuid != null) BUFFS.remove(UUID.fromString(state.summonerUuid));
+            } catch (Throwable ignored) {
+                // 忽略
+            }
+            // 储水炼药锅登记随局清空（与「重启丢失」同一口径，见 TwinShop.clearWaterSource）
+            TwinShop.clearWaterSource();
         } catch (Throwable t) {
             BossLog.warn("双子经营停止失败: " + t);
         }
@@ -547,6 +560,10 @@ public final class TwinMinigame {
             }
             ent.setCustomName(servantName(tierIdx, mob.name()));
             ent.setCustomNameVisible(true);
+            // persistent(false) + PDC 归属：崩溃/重启后不留名为虚仆的残留怪
+            // （metadata 活不过重启，isBossBody/cleanupStaleStartup 靠 PDC 标记仍能认出）
+            ent.setPersistent(false);
+            BossArena.tagEntity(ent);
             ent.setMetadata(SERVANT_META, new FixedMetadataValue(TT.plugin, tierIdx + 1));
             ent.setMetadata("Tr_xu_skill", new FixedMetadataValue(TT.plugin, mob.skill()));
             ent.setMetadata("Tr_xu_coin", new FixedMetadataValue(TT.plugin,
@@ -1059,6 +1076,14 @@ public final class TwinMinigame {
             BossState st = BossFight.bySummoner(player);
             Game g = (st != null) ? GAMES.get(st.key) : null;
             if (g == null) return;
+            // 区域闸：资源入账与补种只认本局经营区域内的方块。没有这道闸，
+            // 经营期间挖服务器任意矿石/原木/作物都会入账（ledgerFromBlock 只按材质
+            // 匹配，等于全服挖矿刷货币），场外破坏还会被无差别吞掉掉落。
+            if (g.world == null || g.region == null
+                    || !g.world.equals(block.getWorld())
+                    || !g.region.contains(block.getX(), block.getY(), block.getZ())) {
+                return;
+            }
             // 资源入账
             ledgerFromBlock(player, block);
             // 双子经营期间：破坏方块一律没有掉落物
@@ -1267,6 +1292,9 @@ public final class TwinMinigame {
                 if (!alive(rec.entity)) continue;
                 if (now - rec.born > CH_LIFE_SEC * 1000L) {
                     BossState.removeEntity(rec.entity);
+                    // 同步从二阶段地面掉落表摘除：这里不摘的话，过期实体引用会一直
+                    // 留到收场才清，三阶段决斗每秒扫 drops 时还会对它做 ItemMeta 克隆
+                    state.phaseTwo.drops.remove(rec.entity);
                     continue;
                 }
                 keep.add(rec);
@@ -1345,15 +1373,21 @@ public final class TwinMinigame {
             if (kind == null) return false;
             if (!(event.getEntity() instanceof Player player)) return false;
             event.setCancelled(true);
+            // 只有召唤者本人（且经营仍在进行）能捡：路人捡走等于把本局道具偷走，
+            // buffUntil 还会把增益错发给局外人
             BossState st = BossFight.bySummoner(player);
-            BossState.removeEntity(ent);
-            if (st != null) {
-                Game g = GAMES.get(st.key);
-                if (g != null) {
-                    g.challengeItems.removeIf(ci -> ci.entity == ent);
+            if (st == null || GAMES.get(st.key) == null) {
+                try {
+                    player.sendMessage("§7这个道具不属于你，无法拾取。");
+                } catch (Throwable ignored) {
+                    // 忽略
                 }
-                st.phaseTwo.drops.remove(ent);
+                return true;
             }
+            BossState.removeEntity(ent);
+            Game g = GAMES.get(st.key);
+            g.challengeItems.removeIf(ci -> ci.entity == ent);
+            st.phaseTwo.drops.remove(ent);
             applyChallengeItem(player, st, kind);
             return true;
         } catch (Throwable ignored) {

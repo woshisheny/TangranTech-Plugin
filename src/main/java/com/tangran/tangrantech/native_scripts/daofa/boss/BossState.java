@@ -292,6 +292,12 @@ public final class BossState {
         /** 一阶段避躲场区域（原 `arenaRegion`）。 */
         public BossArena.Region oneRegion;
 
+        /**
+         * 挑战者的回程位置：进入专用世界（tangran_space）前所站的位置。
+         * 收场（失败/退出/通关）时由 forceStop 送回这里；null 时退回主世界出生点。
+         */
+        public Location returnLoc;
+
         /** 二阶段石英场所在世界（原 `phaseTwoArenaWorld`）。 */
         public World twoWorld;
         /** 二阶段石英场区域（原 `phaseTwoArenaRegion`）。 */

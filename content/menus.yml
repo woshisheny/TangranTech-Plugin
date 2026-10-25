@@ -3063,17 +3063,21 @@ Tr_mgzj:
     5:
       name: "&a请在第五格放入命轨星屑"
       material: GREEN_STAINED_GLASS_PANE
-    6-8:
+    6-7:
       name: ""
       material: GRAY_STAINED_GLASS_PANE
-    45-48:
-      name: ""
-      material: GRAY_STAINED_GLASS_PANE
-    49:
+    8:
       name: "&b捕捞中..."
       material: BARRIER
       lore:
       - "&7▮▮▮▮▮"
+      progressbar: true
+    45-48:
+      name: ""
+      material: GRAY_STAINED_GLASS_PANE
+    49:
+      name: ""
+      material: GRAY_STAINED_GLASS_PANE
     50-53:
       name: ""
       material: GRAY_STAINED_GLASS_PANE
@@ -3087,9 +3091,13 @@ Tr_glsk:
     4:
       name: "&a&l开始凝聚"
       material: LIME_STAINED_GLASS_PANE
-    5-8:
+    5-7:
       name: ""
       material: BLACK_STAINED_GLASS_PANE
+    8:
+      name: "&b凝聚进度"
+      material: CLOCK
+      progressbar: true
     45-53:
       name: ""
       material: GRAY_STAINED_GLASS_PANE

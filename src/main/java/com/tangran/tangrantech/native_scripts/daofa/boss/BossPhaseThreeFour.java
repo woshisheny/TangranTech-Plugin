@@ -479,6 +479,10 @@ public final class BossPhaseThreeFour {
                             * state.tangran.duelBarHp));
                     state.tangran.hp = barHp;
                     BossPhaseTwo.refreshBar(state);
+                    // 先摘死引用再刷甘露：pruneDrops 只有 zqx/Katarina 的周期任务在调，
+                    // 三阶段决斗没人清——state.phaseTwo.drops 里的死 Item 引用会随
+                    // 决斗时长单调增长，spawnDuelNectar 每秒对全部死引用做 kindOf（ItemMeta 克隆）
+                    BossPhaseTwoItems.pruneDrops(state, state.phaseTwo.drops);
                     // 场上依旧随机刷新加强生命甘露（没了就换位置再刷一瓶）
                     BossKatarina.spawnDuelNectar(state);
                     // 技能每 6 秒一次（原脚本 d.tick % 6）
@@ -752,27 +756,21 @@ public final class BossPhaseThreeFour {
                 state.stand = null;
             }
             BossState.removeEntity(deadMob);
-            ArmorStand stand = world.spawn(loc, ArmorStand.class);
-            stand.setGravity(false);
-            stand.setBasePlate(false);
-            stand.setArms(true);
-            stand.setInvulnerable(true);
-            stand.setCustomName((name != null) ? name : "§c§l糖然");
-            stand.setCustomNameVisible(true);
-            // 跪姿：大腿前折、小腿回收，整体下压；头低下去
-            stand.setRightLegPose(new EulerAngle(-1.45, 0.15, 0.1));
-            stand.setLeftLegPose(new EulerAngle(-1.45, -0.15, -0.1));
-            stand.setBodyPose(new EulerAngle(0.42, 0, 0));
-            stand.setHeadPose(new EulerAngle(0.55, 0, 0));
-            stand.setRightArmPose(new EulerAngle(-0.35, 0, -0.25));
-            stand.setLeftArmPose(new EulerAngle(-0.35, 0, 0.25));
-            stand.teleport(loc.clone().add(0, -0.42, 0));
-            // 装备原封过渡
-            applyGear(stand, gear);
-            // ★ 装备槽全部禁用：跪像身上的糖然头颅/下界合金不能被玩家拿走
-            stand.setDisabledSlots(new EquipmentSlot[]{
-                    EquipmentSlot.HEAD, EquipmentSlot.CHEST, EquipmentSlot.LEGS,
-                    EquipmentSlot.FEET, EquipmentSlot.HAND, EquipmentSlot.OFF_HAND});
+            // 玩家模型优先（Tang_ran 档案），盔甲架回退；两种载体都在 loc 直立生成
+            Entity stand = TangranBody.spawn(world, loc, (name != null) ? name : "§c§l糖然");
+            applyGear((org.bukkit.entity.LivingEntity) stand, gear);
+            if (stand instanceof ArmorStand as) {
+                // 跪姿：大腿前折、小腿回收，整体下压；头低下去（玩家模型没有关节，动作舍去）
+                as.setRightLegPose(new EulerAngle(-1.45, 0.15, 0.1));
+                as.setLeftLegPose(new EulerAngle(-1.45, -0.15, -0.1));
+                as.setBodyPose(new EulerAngle(0.42, 0, 0));
+                as.setHeadPose(new EulerAngle(0.55, 0, 0));
+                as.setRightArmPose(new EulerAngle(-0.35, 0, -0.25));
+                as.setLeftArmPose(new EulerAngle(-0.35, 0, 0.25));
+                as.teleport(loc.clone().add(0, -0.42, 0));
+                // ★ 装备槽全部禁用：跪像身上的糖然头颅/下界合金不能被玩家拿走
+                TangranBody.lockArmorStandSlots(as);
+            }
             state.tangran.kneelStand = stand;
             try {
                 world.playSound(loc, "entity.wither.hurt", 1.0f, 0.6f);
