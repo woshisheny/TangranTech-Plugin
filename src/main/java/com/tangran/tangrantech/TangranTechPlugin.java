@@ -39,10 +39,27 @@ public final class TangranTechPlugin extends JavaPlugin implements SlimefunAddon
         if (!checkDependencies()) return;
         try {
             Setup.loadAll();
+            registerCommands();
             getLogger().info("糖然科技 加载成功");
         } catch (Throwable e) {
             getLogger().severe("糖然科技 加载过程中出现异常: " + e);
             e.printStackTrace();
+        }
+    }
+
+    /** 注册 {@code /tr} 管理指令（数据导入 / 存储状态）。 */
+    private void registerCommands() {
+        try {
+            var cmd = getCommand("tr");
+            if (cmd == null) {
+                getLogger().warning("plugin.yml 里没有 tr 指令定义，/tr import 不可用");
+                return;
+            }
+            var handler = new com.tangran.tangrantech.command.TrCommand();
+            cmd.setExecutor(handler);
+            cmd.setTabCompleter(handler);
+        } catch (Throwable t) {
+            getLogger().warning("注册 /tr 指令失败: " + t);
         }
     }
 
@@ -78,6 +95,12 @@ public final class TangranTechPlugin extends JavaPlugin implements SlimefunAddon
             com.tangran.tangrantech.native_scripts.NativeScriptRegistry.shutdown();
         } catch (Throwable ignored) {
             // 卸载阶段不应因清理失败而中断
+        }
+        // 关掉玩家数据库（SQLite 单连接；不关会留下 -wal/-shm 句柄）
+        try {
+            com.tangran.tangrantech.util.Store.shutdown();
+        } catch (Throwable ignored) {
+            // 同上
         }
         getLogger().info("糖然科技 已卸载");
     }

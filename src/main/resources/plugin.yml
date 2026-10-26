@@ -1,5 +1,5 @@
 name: TangranTech
-version: 2.0.0-standalone
+version: 2.1.0-standalone
 main: com.tangran.tangrantech.TangranTechPlugin
 api-version: '1.21'
 author: Tang_ran
@@ -11,4 +11,14 @@ depend: [Slimefun]
 #   MagicExpansion      FishKeys / Fish$WeightRarity（生物发电机的鱼）
 # 反射探测是「失败一次就记住不可用」，若它们在本插件之后加载就会永久判为不可用；
 # 列进 softdepend 保证它们先启动。三者都不是硬依赖（没装时功能静默退化，不影响加载）。
-softdepend: [LiteXpansion, DynaTech, InfinityExpansion, LogiTech, NetworksExpansion, MagicExpansion]
+#   LuckPerms          权限层：管理节点 tangrantech.admin.* 与玩法资格节点走它的 API，
+#                      缺失时自动回落 Bukkit 原生 hasPermission / isOp（功能不受影响）。
+softdepend: [LiteXpansion, DynaTech, InfinityExpansion, LogiTech, NetworksExpansion, MagicExpansion, LuckPerms]
+
+commands:
+  tr:
+    description: 糖然科技管理指令（RSC 玩家数据导入 / 存储维护）
+    usage: |
+      /tr import [--apply] [--source <目录>] [--only <命名空间,...>] [--overwrite]
+      默认只预览（dry-run），加 --apply 才真正写库
+    aliases: [tangrantech]

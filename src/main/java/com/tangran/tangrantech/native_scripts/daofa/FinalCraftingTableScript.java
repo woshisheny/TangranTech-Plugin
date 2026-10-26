@@ -485,14 +485,14 @@ public final class FinalCraftingTableScript implements NativeLifecycleScript {
             String name = player.getName();
 
             File proof = new File(AddonPaths.heavenProofDir(), name + ".json");
-            if (!proof.exists()) {
+            if (!AddonPaths.docExists(proof)) {
                 player.sendMessage("§c请先击败BOSS糖然");
                 return false;
             }
 
             // 目录 + 玩家存档：只补，不覆盖
             File f = saveFile(name);
-            if (!f.exists()) {
+            if (!AddonPaths.docExists(f)) {
                 Map<String, Object> init = new LinkedHashMap<>();
                 init.put("v", 1);
                 init.put("name", name);

@@ -59,6 +59,12 @@ public final class AddonPaths {
         return TT.plugin == null ? null : TT.plugin.getDataFolder();
     }
 
+    /** 玩家数据根目录（{@code addon_configs/糖然科技}，不创建）。 */
+    public static File configRoot() {
+        File root = dataFolder();
+        return root == null ? null : new File(root, CONFIG_ROOT);
+    }
+
     /** 取（并创建）玩家数据侧的子目录。 */
     public static File configDir(String sub) {
         return ensure(new File(dataFolder(), CONFIG_ROOT + "/" + sub));
@@ -107,11 +113,137 @@ public final class AddonPaths {
     }
 
     // ------------------------------------------------------------------
-    // JSON 文件读写
+    // 玩家数据文档（后端 = SQLite；不可用时回落文件）
     // ------------------------------------------------------------------
 
-    /** 读一个 JSON 对象文件；不存在或损坏时返回 null。 */
+    /**
+     * 读一份玩家数据文档。
+     *
+     * <p><b>路径即文档标识</b>：{@code addon_configs/糖然科技/<命名空间>/<键>.json}
+     * → 文档 {@code (ns=命名空间, key=键)}，存在 {@link Store}（SQLite）里；
+     * 其余路径（{@code addons/} 下的附属资源、{@code .txt} 标记文件）走真实文件。</p>
+     *
+     * <p>库可用但该键还没有文档时，会去读同名旧文件并<b>顺手入库</b>，
+     * 保证「先升级后导入」与「边跑边迁移」都不会读到空档。</p>
+     */
     public static Map<String, Object> readJson(File file) {
+        if (file == null) return null;
+        String[] doc = docParts(file);
+        if (doc != null) {
+            Map<String, Object> fromDb = Store.load(doc[0], doc[1]);
+            if (fromDb != null) return fromDb;
+            Map<String, Object> fromFile = readJsonFile(file);
+            if (fromFile != null) {
+                Store.save(doc[0], doc[1], fromFile);   // 惰性迁移：只补空缺，不覆盖
+            }
+            return fromFile;
+        }
+        return readJsonFile(file);
+    }
+
+    /**
+     * 写一份玩家数据文档（玩家数据目录下的 JSON → SQLite；其余 → 真实文件）。
+     *
+     * <p>文件后端的写入仍是「先写 .tmp 再原子替换」，避免进程被 kill 时留下半个 JSON。</p>
+     */
+    public static boolean writeJson(File file, Object data) {
+        if (file == null) return false;
+        String[] doc = docParts(file);
+        if (doc != null) {
+            if (Store.save(doc[0], doc[1], data)) return true;
+            // 库不可用 → 继续走文件
+        }
+        return writeJsonFile(file, data);
+    }
+
+    /** 文档是否存在（玩家数据目录下的 JSON 查库，其余查文件）。 */
+    public static boolean docExists(File file) {
+        if (file == null) return false;
+        String[] doc = docParts(file);
+        if (doc != null) {
+            if (Store.available()) return Store.exists(doc[0], doc[1]) || file.isFile();
+            return file.isFile();
+        }
+        return file.isFile();
+    }
+
+    /** 删一份文档（库里删不掉时再删文件）。 */
+    public static boolean deleteDoc(File file) {
+        if (file == null) return false;
+        String[] doc = docParts(file);
+        if (doc != null) {
+            boolean db = Store.delete(doc[0], doc[1]);
+            boolean fs = file.isFile() && file.delete();
+            return db || fs;
+        }
+        return file.isFile() && file.delete();
+    }
+
+    /**
+     * 列出一个玩家数据目录下的全部文档，返回<b>路径形状的虚拟 File</b>。
+     *
+     * <p>调用方（记录清理、备份枚举等）只用到 {@code getName()} / {@code readJson} /
+     * {@code deleteDoc} 这类操作，返回的 File 不保证在磁盘上真实存在 —— 它只是
+     * {@code (ns, key)} 的路径表达。真实存在但还没入库的旧文件也会一并列出，
+     * 保证迁移期间不漏。</p>
+     */
+    public static List<File> listDocs(File dir) {
+        List<File> out = new java.util.ArrayList<>();
+        if (dir == null) return out;
+        java.util.Set<String> seen = new java.util.LinkedHashSet<>();
+        String[] nsProbe = docParts(new File(dir, "probe.json"));
+        if (nsProbe != null && Store.available()) {
+            for (String key : Store.keys(nsProbe[0])) {
+                if (seen.add(key)) out.add(new File(dir, key + ".json"));
+            }
+        }
+        File[] files = dir.listFiles((d, n) -> n.toLowerCase(java.util.Locale.ROOT).endsWith(".json"));
+        if (files != null) {
+            for (File f : files) {
+                String key = f.getName().substring(0, f.getName().length() - 5);
+                if (seen.add(key)) out.add(f);
+            }
+        }
+        return out;
+    }
+
+    /** 文档最后写入时间（毫秒）；文件后端取 mtime。 */
+    public static long docUpdatedAt(File file) {
+        if (file == null) return 0L;
+        String[] doc = docParts(file);
+        if (doc != null) {
+            long t = Store.updatedAt(doc[0], doc[1]);
+            if (t > 0) return t;
+        }
+        return file.isFile() ? file.lastModified() : 0L;
+    }
+
+    /**
+     * 把路径拆成 {@code [命名空间, 键]}；不是「玩家数据目录下的 .json」时返回 null。
+     *
+     * <p>只认 {@code addon_configs/糖然科技/<一级子目录>/<名>.json} 这一种形状 ——
+     * 更深层、或不在该根目录下的文件一律当普通文件处理（附属资源、lang、临时件）。</p>
+     */
+    private static String[] docParts(File file) {
+        try {
+            String name = file.getName();
+            if (!name.toLowerCase(java.util.Locale.ROOT).endsWith(".json")) return null;
+            File root = configRoot();
+            File parent = file.getParentFile();
+            if (root == null || parent == null || parent.getParentFile() == null) return null;
+            if (!parent.getParentFile().toPath().normalize().equals(root.toPath().normalize())) {
+                return null;
+            }
+            String key = name.substring(0, name.length() - 5);
+            if (key.isEmpty()) return null;
+            return new String[]{parent.getName(), key};
+        } catch (Throwable t) {
+            return null;
+        }
+    }
+
+    /** 读真实 JSON 文件；不存在或损坏时返回 null。 */
+    private static Map<String, Object> readJsonFile(File file) {
         try {
             if (file == null || !file.exists()) return null;
             String text = new String(Files.readAllBytes(file.toPath()), StandardCharsets.UTF_8);
@@ -124,14 +256,14 @@ public final class AddonPaths {
     }
 
     /**
-     * 写一个 JSON 对象文件（2 空格缩进，与原脚本 {@code JSON.stringify(x, null, 2)} 一致）。
+     * 写真实 JSON 文件（2 空格缩进，与原脚本 {@code JSON.stringify(x, null, 2)} 一致）。
      *
      * <p><b>先写 {@code .tmp} 临时文件再替换</b>：直接覆写在进程崩溃 / 服务器被 kill 时
      * 会留下半个 JSON，下次读出来就是空的（调用方的缓存一旦以此为权威就会把玩家存档
      * 清零）。替换尽量走 {@link java.nio.file.StandardCopyOption#ATOMIC_MOVE}；
      * 文件系统不支持时退化为普通替换，仍优于直接覆写。失败时旧文件保持原样，返回 false。</p>
      */
-    public static boolean writeJson(File file, Object data) {
+    private static boolean writeJsonFile(File file, Object data) {
         try {
             if (file == null) return false;
             File parent = file.getParentFile();

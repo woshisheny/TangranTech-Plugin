@@ -338,7 +338,7 @@ public final class HeavenCurrencyScript implements NativeLifecycleScript {
             }
             bindCard(item, uuid);
             File dataFile = dataFile(name);
-            if (dataFile.exists()) {
+            if (AddonPaths.docExists(dataFile)) {
                 double old = getDaoyuan(name);
                 updateDaoyuanLore(item, name, old);
                 player.sendMessage(DY_PREFIX + "§a问天玉碟已重新绑定至 §e" + name

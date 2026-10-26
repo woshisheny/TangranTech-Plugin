@@ -4,6 +4,7 @@ import com.tangran.tangrantech.TT;
 import com.tangran.tangrantech.native_scripts.NativeLifecycleScript;
 import com.tangran.tangrantech.util.AddonPaths;
 import com.tangran.tangrantech.util.Colors;
+import com.tangran.tangrantech.util.Perms;
 import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItem;
 import java.io.File;
 import java.util.ArrayList;
@@ -270,7 +271,7 @@ public final class StorageSpaceScript implements NativeLifecycleScript {
         if (used == null) used = player.getInventory().getItemInMainHand();
         returnNjdContents(player, used);
 
-        if (!storageFile(player.getName()).exists()) {
+        if (!hasAccess(player)) {
             player.sendMessage(PREFIX + "§c你还没有开辟储物空间！请先使用储物空间开辟石。");
             return Boolean.FALSE;
         }
@@ -281,12 +282,26 @@ public final class StorageSpaceScript implements NativeLifecycleScript {
     /** 按钮组入口。 */
     private static Object openFromButton(Player player) {
         if (!player.isOnline()) return Boolean.FALSE;
-        if (!storageFile(player.getName()).exists()) {
+        if (!hasAccess(player)) {
             player.sendMessage("§c你还没有开辟储物空间！请先使用储物空间开辟石。");
             return Boolean.FALSE;
         }
         openMain(player);
         return Boolean.TRUE;
+    }
+
+    /**
+     * 储物空间准入：<b>权限节点或存档里的 unlocked 任一成立即放行</b>。
+     *
+     * <p>节点 {@code tangrantech.storage.unlocked} 由开辟石在使用成功时发放，
+     * 管理员因此可以用权限组批量发放/回收资格；而旧档（只有 JSON 里的 unlocked、
+     * 没有节点）依然能进 —— 权限插件缺失时 {@link Perms#has} 回落 Bukkit hasPermission，
+     * 也不会把老玩家挡在门外。</p>
+     */
+    private static boolean hasAccess(Player player) {
+        if (player == null) return false;
+        if (Perms.has(player, Perms.NODE_STORAGE)) return true;
+        return AddonPaths.docExists(storageFile(player.getName()));
     }
 
     @Override
@@ -329,7 +344,7 @@ public final class StorageSpaceScript implements NativeLifecycleScript {
      */
     private static Map<String, Object> load(String playerName) {
         File file = storageFile(playerName);
-        if (!file.exists()) return null;
+        if (!AddonPaths.docExists(file)) return null;
         Map<String, Object> data = AddonPaths.readJson(file);
         if (data == null) {
             // 文件损坏：原脚本会回落成一个带 unlocked 标记的空档。照做，避免此处直接判定「未开辟」。
@@ -366,23 +381,150 @@ public final class StorageSpaceScript implements NativeLifecycleScript {
         return created;
     }
 
-    // ---- 分类容器（物品类型 → 数量） ----
+    // ---- 分类容器（物品桶 → 数量） ----
+    //
+    // 存档形状（向后兼容）：
+    //   白板物品 / 旧档  → "STONE": 128               （只有 id + 数量，物品按 id 现造）
+    //   带数据物品       → "STONE#a1b2c3d4": {"count": 5, "nbt": "<base64 字节>"}
+    //
+    // 为什么要分桶：旧实现只按「材质 / 粘液 id」记数量，附魔、显示名、lore、损伤、
+    // 容器内容、PDC 全都会在存取之间被抹掉（存进去一把锋利 V 的剑，取出来是白板剑）。
+    // 现在把「与模板不一致」的物品按完整字节算指纹，单独成桶；取用时反序列化还原。
 
-    private static long count(Map<String, Object> data, String cat, String id) {
-        return asLong(child(data, cat).get(id));
+    /** 桶键分隔符：{@code id#指纹}。 */
+    private static final char BUCKET_SEP = '#';
+
+    /** 键里的分类 id（去掉 {@code #指纹}）。 */
+    private static String idOfKey(String key) {
+        if (key == null) return "";
+        int i = key.indexOf(BUCKET_SEP);
+        return i <= 0 ? key : key.substring(0, i);
     }
 
-    private static void setCount(Map<String, Object> data, String cat, String id, long n) {
+    /** 是不是「带完整物品数据」的桶键。 */
+    private static boolean hasNbt(String key) {
+        return key != null && key.indexOf(BUCKET_SEP) > 0;
+    }
+
+    /** 物品的完整字节（数量归一成 1，保证「同一物品不同堆叠数」是同一个桶）。 */
+    private static byte[] bytesOf(ItemStack item) {
+        if (item == null) return null;
+        try {
+            ItemStack copy = item.clone();
+            copy.setAmount(1);
+            return copy.serializeAsBytes();
+        } catch (Throwable t) {
+            return null;
+        }
+    }
+
+    /** 字节指纹（SHA-1 前 12 位十六进制）—— 只要物品数据有一处不同就不会同桶。 */
+    private static String fingerprint(byte[] raw) {
+        try {
+            byte[] dig = java.security.MessageDigest.getInstance("SHA-1").digest(raw);
+            StringBuilder sb = new StringBuilder(12);
+            // byte → 有符号，必须先 & 0xff 再格式化，否则 -1 会格式成 8 个 f
+            for (int i = 0; i < 6; i++) sb.append(String.format("%02x", dig[i] & 0xff));
+            return sb.toString();
+        } catch (Throwable t) {
+            return Integer.toHexString(java.util.Arrays.hashCode(raw));
+        }
+    }
+
+    /**
+     * 物品该进哪个桶：与「按 id 现造的同款白板物品」字节一致 → 用 id（与旧档合并）；
+     * 否则用 {@code id#指纹} 单独成桶。
+     */
+    private static String bucketKey(ItemStack item, String cat, String id) {
+        if (item == null || id == null) return id;
+        byte[] raw = bytesOf(item);
+        if (raw == null) return id;
+        byte[] clean = bytesOf(buildCleanStack(cat, id));
+        if (clean != null && java.util.Arrays.equals(raw, clean)) return id;
+        return id + BUCKET_SEP + fingerprint(raw);
+    }
+
+    /** 读一个桶的数量（兼容老格式的数字）。 */
+    private static long countOf(Object entry) {
+        if (entry instanceof Map<?, ?> m) return asLong(m.get("count"));
+        return asLong(entry);
+    }
+
+    private static long count(Map<String, Object> data, String cat, String key) {
+        return countOf(child(data, cat).get(key));
+    }
+
+    private static void setCount(Map<String, Object> data, String cat, String key, long n) {
         Map<String, Object> m = child(data, cat);
-        if (n <= 0) m.remove(id);
-        else m.put(id, n);
+        Object old = m.get(key);
+        if (n <= 0) {
+            m.remove(key);
+            return;
+        }
+        if (old instanceof Map<?, ?> om) {
+            Map<String, Object> bucket = new LinkedHashMap<>();
+            for (Map.Entry<?, ?> e : om.entrySet()) {
+                bucket.put(String.valueOf(e.getKey()), e.getValue());
+            }
+            bucket.put("count", n);
+            m.put(key, bucket);
+        } else {
+            m.put(key, n);
+        }
     }
 
-    /** 有库存的物品 id，按字典序（与原脚本 {@code keys.sort()} 一致）。 */
+    /** 存入：自动选桶；带数据的物品顺带把完整字节写进桶里（只写一次）。 */
+    private static void addStored(Map<String, Object> data, ItemStack item, long amount) {
+        if (item == null || amount <= 0) return;
+        ItemCat info = classify(item);
+        String key = bucketKey(item, info.cat(), info.id());
+        Map<String, Object> m = child(data, info.cat());
+        if (!hasNbt(key)) {
+            m.put(key, countOf(m.get(key)) + amount);
+            return;
+        }
+        Map<String, Object> bucket = new LinkedHashMap<>();
+        Object old = m.get(key);
+        if (old instanceof Map<?, ?> om) {
+            for (Map.Entry<?, ?> e : om.entrySet()) {
+                bucket.put(String.valueOf(e.getKey()), e.getValue());
+            }
+        }
+        if (!bucket.containsKey("nbt")) {
+            byte[] raw = bytesOf(item);
+            if (raw != null) {
+                bucket.put("nbt", java.util.Base64.getEncoder().encodeToString(raw));
+            }
+        }
+        bucket.put("count", countOf(bucket) + amount);
+        m.put(key, bucket);
+    }
+
+    /** 取一件原型物品：带数据的桶反序列化（失败退化白板）；白板桶按 id 现造。 */
+    private static ItemStack protoOf(String cat, String key, Object entry) {
+        if (entry instanceof Map<?, ?> m) {
+            Object nbt = m.get("nbt");
+            if (nbt != null) {
+                try {
+                    ItemStack it = ItemStack.deserializeBytes(
+                            java.util.Base64.getDecoder().decode(String.valueOf(nbt)));
+                    if (it != null && !it.getType().isAir()) {
+                        it.setAmount(1);
+                        return it;
+                    }
+                } catch (Throwable t) {
+                    TT.log("[储物空间] 还原物品失败（" + key + "），已按白板处理: " + t);
+                }
+            }
+        }
+        return buildCleanStack(cat, idOfKey(key));
+    }
+
+    /** 有库存的物品桶，按字典序（与原脚本 {@code keys.sort()} 一致）。 */
     private static List<String> sortedKeys(Map<String, Object> data, String cat) {
         Set<String> keys = new TreeSet<>();
         for (Map.Entry<String, Object> e : child(data, cat).entrySet()) {
-            if (asLong(e.getValue()) > 0) keys.add(e.getKey());
+            if (countOf(e.getValue()) > 0) keys.add(e.getKey());
         }
         return new ArrayList<>(keys);
     }
@@ -580,11 +722,14 @@ public final class StorageSpaceScript implements NativeLifecycleScript {
     }
 
     /** 分类界面里一格「储物展示」。 */
-    private static ItemStack storageDisplayItem(String cat, String id, long amount) {
-        ItemStack stack = buildCleanStack(cat, id);
+    /** 分类界面里一格「储物展示」；带数据的桶直接用存下来的物品当图标。 */
+    private static ItemStack storageDisplayItem(String cat, String key, Object entry, long amount) {
+        ItemStack stack = protoOf(cat, key, entry);
         if (stack == null) stack = new ItemStack(Material.STONE);
         stack.setAmount(1);
-        return named(stack, displayNameOf(cat, id), List.of(
+        // 名字优先取物品自己的（带 NBT 的桶才有自定义名），否则用模板名
+        String name = legacyNameOf(stack, displayNameOf(cat, idOfKey(key)));
+        return named(stack, name, List.of(
                 "§7库存数量: §f" + amount,
                 "§e左键取出 1 个",
                 "§e右键取出 64 个",
@@ -707,8 +852,9 @@ public final class StorageSpaceScript implements NativeLifecycleScript {
         for (int i = 0; i < ITEMS_PER_PAGE; i++) {
             int idx = start + i;
             if (idx < keys.size()) {
-                String id = keys.get(idx);
-                inv.setItem(i, storageDisplayItem(cat, id, count(data, cat, id)));
+                String key = keys.get(idx);
+                inv.setItem(i, storageDisplayItem(cat, key, child(data, cat).get(key),
+                        count(data, cat, key)));
             } else {
                 inv.setItem(i, placeholder());
             }
@@ -1496,7 +1642,7 @@ public final class StorageSpaceScript implements NativeLifecycleScript {
     /** {@code withdrawItem} 的特殊数量：尽量填满背包。 */
     private static final int FILL_AMOUNT = -1;
 
-    /** 把光标上的物品存入分类容器。 */
+    /** 把光标上的物品存入分类容器（按物品桶存，完整数据一起留下）。 */
     private static boolean depositCursorItem(Player player, Map<String, Object> data, String cat) {
         ItemStack cursor = player.getOpenInventory().getCursor();
         if (cursor == null || cursor.getType().isAir()) return false;
@@ -1506,7 +1652,7 @@ public final class StorageSpaceScript implements NativeLifecycleScript {
             player.sendMessage("§c这个物品不属于当前分类！");
             return false;
         }
-        setCount(data, cat, info.id(), count(data, cat, info.id()) + cursor.getAmount());
+        addStored(data, cursor, cursor.getAmount());
         player.getOpenInventory().setCursor(null);
         playSound(player, "entity.item.pickup", 1.0f, 1.2f);
         return true;
@@ -1518,11 +1664,12 @@ public final class StorageSpaceScript implements NativeLifecycleScript {
      * @param amount 取出数量；{@link #FILL_AMOUNT} 表示「尽量填满背包」
      */
     private static void withdrawItem(Player player, Map<String, Object> data,
-                                    String cat, String id, int amount) {
-        long have = count(data, cat, id);
+                                    String cat, String key, int amount) {
+        long have = count(data, cat, key);
         if (have <= 0) return;
 
-        ItemStack proto = buildCleanStack(cat, id);
+        // 带数据的桶（附魔/改名/损伤/容器内容…）按存下来的完整物品还原
+        ItemStack proto = protoOf(cat, key, child(data, cat).get(key));
         if (proto == null) return;
         int maxStack = Math.max(1, proto.getMaxStackSize());
 
@@ -1537,7 +1684,7 @@ public final class StorageSpaceScript implements NativeLifecycleScript {
             return;
         }
 
-        ItemStack give = buildCleanStack(cat, id);
+        ItemStack give = protoOf(cat, key, child(data, cat).get(key));
         if (give == null) return;
         give.setAmount((int) Math.min(Integer.MAX_VALUE, take));
 
@@ -1557,7 +1704,7 @@ public final class StorageSpaceScript implements NativeLifecycleScript {
             return;
         }
 
-        setCount(data, cat, id, have - actuallyGiven);
+        setCount(data, cat, key, have - actuallyGiven);
         playSound(player, "entity.item.pickup", 1.0f, 1.0f);
     }
 
@@ -1569,12 +1716,12 @@ public final class StorageSpaceScript implements NativeLifecycleScript {
     private static void performAutoDeposit(Player player, Map<String, Object> data, boolean leftClick) {
         PlayerInventory inv = player.getInventory();
 
-        // 已存储过的物品类型 → 本次最多还能收多少
+        // 已存储过的物品桶 → 本次最多还能收多少
         Map<String, Long> wanted = new LinkedHashMap<>();
         for (String cat : new String[]{"vanilla", "slimefun"}) {
-            for (String id : child(data, cat).keySet()) {
-                if (count(data, cat, id) <= 0) continue;
-                wanted.put(cat + "|" + id, leftClick ? 64L : 999_999L);
+            for (String key : child(data, cat).keySet()) {
+                if (count(data, cat, key) <= 0) continue;
+                wanted.put(cat + "|" + key, leftClick ? 64L : 999_999L);
             }
         }
 
@@ -1584,14 +1731,16 @@ public final class StorageSpaceScript implements NativeLifecycleScript {
             if (item == null || item.getType().isAir()) continue;
 
             ItemCat info = classify(item);
-            String mapKey = info.cat() + "|" + info.id();
+            // 先按完整数据算桶键：带 NBT 的物品不会和白板同 id 的桶混在一起
+            String bucket = bucketKey(item, info.cat(), info.id());
+            String mapKey = info.cat() + "|" + bucket;
             Long remain = wanted.get(mapKey);
             if (remain == null || remain <= 0) continue;
 
             long take = Math.min(item.getAmount(), remain);
             if (take <= 0) continue;
 
-            setCount(data, info.cat(), info.id(), count(data, info.cat(), info.id()) + take);
+            addStored(data, item, take);
             int newAmount = (int) (item.getAmount() - take);
             if (newAmount <= 0) inv.setItem(slot, null);
             else item.setAmount(newAmount);

@@ -2,6 +2,7 @@ package com.tangran.tangrantech.native_scripts.daofa;
 
 import com.tangran.tangrantech.TT;
 import com.tangran.tangrantech.native_scripts.NativeLifecycleScript;
+import com.tangran.tangrantech.util.AddonPaths;
 import com.tangran.tangrantech.util.Json;
 import com.tangran.tangrantech.util.Views;
 import java.io.File;
@@ -192,9 +193,9 @@ public final class AscensionPathScript implements NativeLifecycleScript {
         def.put("ascensionStage", 0);
         try {
             File file = taskFile(playerName);
-            if (!file.exists()) return def;
-            String text = new String(Files.readAllBytes(file.toPath()), StandardCharsets.UTF_8);
-            Map<String, Object> data = Json.parseObject(text);
+            if (!AddonPaths.docExists(file)) return def;
+            Map<String, Object> data = AddonPaths.readJson(file);
+            if (data == null) return def;
             if (!(data.get("completed") instanceof List)) data.put("completed", new ArrayList<Object>());
             if (data.get("ascensionStage") == null) data.put("ascensionStage", 0);
             return data;
@@ -205,11 +206,8 @@ public final class AscensionPathScript implements NativeLifecycleScript {
 
     private static void saveTaskData(String playerName, Map<String, Object> data) {
         try {
-            File file = taskFile(playerName);
-            Files.write(file.toPath(),
-                    Collections.singletonList(Json.writePretty(data)),
-                    StandardCharsets.UTF_8);
-        } catch (IOException e) {
+            AddonPaths.writeJson(taskFile(playerName), data);
+        } catch (Throwable e) {
             TT.log("任务存档写入失败 " + playerName + ": " + e);
         }
     }

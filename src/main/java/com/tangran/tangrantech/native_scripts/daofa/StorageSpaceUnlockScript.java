@@ -2,6 +2,8 @@ package com.tangran.tangrantech.native_scripts.daofa;
 
 import com.tangran.tangrantech.TT;
 import com.tangran.tangrantech.native_scripts.NativeLifecycleScript;
+import com.tangran.tangrantech.util.AddonPaths;
+import com.tangran.tangrantech.util.Perms;
 import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItem;
 import java.io.File;
 import java.io.IOException;
@@ -67,24 +69,24 @@ public final class StorageSpaceUnlockScript implements NativeLifecycleScript {
         }
 
         File file = new File(dir, player.getName() + ".json");
-        if (file.exists()) {
+        if (AddonPaths.docExists(file)) {
             player.sendMessage(PREFIX + "§c你已经开辟过储物空间了！");
             return;
         }
 
         // 先落盘再扣道具：原顺序是 consumeOne 之后才 Files.write，一旦写入抛
         // IOException（磁盘满/目录权限），开辟石已经被扣掉但开辟没生效 —— 吞物。
+        // 现在后端是 SQLite（写失败会返回 false），语义不变：写不进去就不扣道具。
         Map<String, Object> data = new LinkedHashMap<>();
         data.put("unlocked", Boolean.TRUE);
-        try {
-            Files.write(file.toPath(),
-                    Collections.singletonList(com.tangran.tangrantech.util.Json.write(data)),
-                    StandardCharsets.UTF_8);
-        } catch (IOException e) {
-            TT.log("储物空间存档写入失败: " + file.getAbsolutePath() + " -> " + e);
+        if (!AddonPaths.writeJson(file, data)) {
+            TT.log("储物空间存档写入失败: " + file.getAbsolutePath());
             player.sendMessage(PREFIX + "§c储物空间开辟失败，请联系管理！");
             return;
         }
+        // 玩法准入也发一枚权限节点：管理员可以用权限组批量发放/回收储物资格，
+        // 判定处（StorageSpaceScript#hasAccess）是「节点或存档」任一成立即放行。
+        Perms.grant(player, Perms.NODE_STORAGE, true);
 
         consumeOne(player);
 

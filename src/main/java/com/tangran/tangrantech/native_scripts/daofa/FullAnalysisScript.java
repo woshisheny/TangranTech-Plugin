@@ -197,7 +197,7 @@ public final class FullAnalysisScript implements NativeLifecycleScript {
     // 存档 / 消耗 / 提示
     // ------------------------------------------------------------------
 
-    /** 写出 {@code <dir>/<玩家名>.json}。 */
+    /** 写出 {@code <dir>/<玩家名>.json}（玩家数据 → 统一走 AddonPaths，落到 SQLite 后端）。 */
     private static boolean writeJson(String relDir, String playerName, Map<String, Object> data) {
         try {
             File dir = new File(TT.plugin.getDataFolder(), relDir);
@@ -205,13 +205,10 @@ public final class FullAnalysisScript implements NativeLifecycleScript {
                 log("目录创建失败: " + dir.getAbsolutePath());
                 return false;
             }
+            // ★ 不能直接 Files.write：玩家数据已迁到 SQLite，必须经 AddonPaths 才会写进库
             File file = new File(dir, playerName + ".json");
-            Files.write(file.toPath(),
-                    Collections.singletonList(Json.writePretty(data)),
-                    StandardCharsets.UTF_8);
-            return true;
-        } catch (IOException e) {
-            log("写入存档失败 " + playerName + " / " + relDir + ": " + e);
+            if (com.tangran.tangrantech.util.AddonPaths.writeJson(file, data)) return true;
+            log("写入存档失败 " + playerName + " / " + relDir);
             return false;
         } catch (Throwable t) {
             log("写入存档异常 " + playerName + " / " + relDir + ": " + t);

@@ -110,7 +110,7 @@ public final class TwinLedger {
         Map<String, Integer> led = blank();
         try {
             File f = fileOf(name);
-            if (!f.exists()) {
+            if (!AddonPaths.docExists(f)) {
                 // 首次玩家：还没有存档，全 0 即权威，必须缓存
                 CACHE.put(name, led);
                 return led;
@@ -338,7 +338,7 @@ public final class TwinLedger {
         try {
             CACHE.remove(playerName);
             File f = fileOf(playerName);
-            if (f.exists()) {
+            if (AddonPaths.docExists(f)) {
                 AddonPaths.writeJson(f, new LinkedHashMap<>(blank()));
             }
         } catch (Throwable ignored) {

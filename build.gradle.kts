@@ -7,7 +7,7 @@ plugins {
 }
 
 group = "com.tangran"
-version = "2.0.0-standalone"
+version = "2.1.0-standalone"
 
 java {
     toolchain.languageVersion.set(JavaLanguageVersion.of(21))
@@ -39,6 +39,13 @@ dependencies {
     compileOnly("org.jetbrains:annotations:24.1.0")
     // 本地 Slimefun 依赖（compileOnly，运行期由服务器提供）
     compileOnly(files("libs/Slimefun4-347d926-Beta.jar"))
+    // LuckPerms 官方 API：只编译用，运行期由服务端插件提供（plugin.yml 里 softdepend）
+    compileOnly("net.luckperms:api:5.4")
+    // SQLite JDBC：服务端不提供驱动，必须自带 → 打进产物（运行期用 DriverManager 连库）。
+    // slf4j 由服务端提供（Paper 自带 2.x），不打进产物以免与平台日志实现冲突。
+    implementation("org.xerial:sqlite-jdbc:3.47.1.0") {
+        exclude(group = "org.slf4j")
+    }
 }
 
 // paper-api 1.21.x 只发布 JVM 21 variant，显式指定以正常选中依赖。
@@ -68,7 +75,26 @@ tasks.jar {
     archiveBaseName.set("TangranTech")
     archiveVersion.set(project.version.toString())
     archiveClassifier.set("")
-    duplicatesStrategy = DuplicatesStrategy.INCLUDE
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+
+    // 把 sqlite-jdbc 的类与原生库打进产物（服务端不会提供 SQLite 驱动）。
+    // 原生库每个平台约 0.6 MB，这里只保留常见服务端/开发平台，冷门平台靠
+    // Store 的降级路径（驱动起不来就回落文件存储）兜底。
+    from({ configurations.runtimeClasspath.get().map { zipTree(it) } })
+    exclude(
+        "org/sqlite/native/Linux-Android/**",
+        "org/sqlite/native/FreeBSD/**",
+        "org/sqlite/native/Linux/arm/**",
+        "org/sqlite/native/Linux/armv7/**",
+        "org/sqlite/native/Linux/ppc64/**",
+        "org/sqlite/native/Linux/riscv64/**",
+        "org/sqlite/native/Linux/x86/**",
+        "org/sqlite/native/Linux-Musl/x86/**",
+        "org/sqlite/native/Windows/aarch64/**",
+        "META-INF/maven/**",
+        "META-INF/LICENSE*",
+        "META-INF/NOTICE*"
+    )
 }
 
 tasks.build {

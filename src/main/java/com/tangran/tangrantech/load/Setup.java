@@ -26,6 +26,13 @@ public final class Setup {
         // 「物品未找到」折叠上报：加载开始清零、结尾汇总
         MissingItems.reset();
 
+        // 玩家数据后端必须在任何脚本读档之前就绪：SQLite 建库建表 + 旧 JSON 一次性导入。
+        // 打不开库时内部自动回落为按玩家分文件（不影响功能），详见 util/Store。
+        com.tangran.tangrantech.util.Store.init();
+
+        // 权限层：有 LuckPerms 就 hook 它的 API，没有则内部回落 Bukkit hasPermission / isOp
+        com.tangran.tangrantech.util.Perms.init();
+
         // 脚本层必须在解析任何 script: 字段之前就绪
         NativeScriptRegistry.bootstrap();
 

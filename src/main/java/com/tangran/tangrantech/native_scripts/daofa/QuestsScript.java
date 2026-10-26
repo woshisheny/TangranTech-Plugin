@@ -136,8 +136,8 @@ public final class QuestsScript implements NativeLifecycleScript {
 
         list.add(new TaskDef("open_storage", "§d§l任务其二·开辟储物空间",
                 List.of("§7使用 §b储物空间开辟石", "§7开辟属于你的储物空间。"),
-                p -> new File(AddonPaths.configDir(AddonPaths.DIR_STORAGE),
-                        p.getName() + ".json").exists(),
+                p -> AddonPaths.docExists(new File(AddonPaths.configDir(AddonPaths.DIR_STORAGE),
+                        p.getName() + ".json")),
                 null,
                 p -> "您还未开辟储物空间",
                 null));

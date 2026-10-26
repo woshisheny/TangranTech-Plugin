@@ -2,6 +2,7 @@ package com.tangran.tangrantech.native_scripts.daofa;
 
 import com.tangran.tangrantech.util.AddonPaths;
 import com.tangran.tangrantech.util.Json;
+import com.tangran.tangrantech.util.Perms;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
@@ -11,6 +12,7 @@ import java.util.Map;
 import java.util.UUID;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
+import org.bukkit.Bukkit;
 import org.bukkit.NamespacedKey;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
@@ -209,12 +211,20 @@ public final class PlayerAssets {
         return out;
     }
 
+    /**
+     * 是否已掌握某种异火。
+     *
+     * <p><b>存档为主、权限为辅</b>：存档里记了就算有（旧档不受影响）；
+     * 没记但手里有 {@code tangrantech.yanhuo.<id>} 节点也算 —— 管理员因此可以
+     * 直接用权限组发放异火资格，不必改存档文件。</p>
+     */
     public static boolean hasYanhuo(String playerName, String id) {
         if (id == null) return false;
         for (String owned : ownedYanhuo(playerName)) {
             if (id.equalsIgnoreCase(owned)) return true;
         }
-        return false;
+        Player online = onlineOf(playerName);
+        return online != null && Perms.has(online, Perms.yanhuoNode(id));
     }
 
     /** 记录一个已掌握的异火（保留 {@code selected} 字段不动）。 */
@@ -236,6 +246,18 @@ public final class PlayerAssets {
         if (!found) owned.add(id);
         data.put("owned", owned);
         AddonPaths.writeJson(yanhuoFile(playerName), data);
+        // 资格同步到权限系统（在线才写；没装 LuckPerms 时是空操作，资格靠存档）
+        Player online = onlineOf(playerName);
+        if (online != null) Perms.grant(online, Perms.yanhuoNode(id), true);
+    }
+
+    /** 在线玩家（按游戏名精确匹配）；不在线返回 null。 */
+    private static Player onlineOf(String playerName) {
+        try {
+            return playerName == null ? null : Bukkit.getPlayerExact(playerName);
+        } catch (Throwable ignored) {
+            return null;
+        }
     }
 
     // ==================================================================
@@ -257,12 +279,14 @@ public final class PlayerAssets {
         return out;
     }
 
+    /** 是否已学会某种丹方（存档为主、权限为辅，口径同 {@link #hasYanhuo}）。 */
     public static boolean hasDanfang(String playerName, String id) {
         if (id == null) return false;
         for (String owned : ownedDanfang(playerName)) {
             if (id.equalsIgnoreCase(owned)) return true;
         }
-        return false;
+        Player online = onlineOf(playerName);
+        return online != null && Perms.has(online, Perms.danfangNode(id));
     }
 
     /** 记录一个已掌握的丹方（保留 {@code exp} 字段不动）。 */
@@ -288,6 +312,8 @@ public final class PlayerAssets {
         data.put("owned", owned);
         if (old != null && old.get("exp") != null) data.put("exp", old.get("exp"));
         AddonPaths.writeJson(danfangFile(playerName), data);
+        Player online = onlineOf(playerName);
+        if (online != null) Perms.grant(online, Perms.danfangNode(id), true);
     }
 
     // ==================================================================

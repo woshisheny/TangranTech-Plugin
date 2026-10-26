@@ -460,8 +460,7 @@ public final class BossArena {
     /** 按玩家 id 删记录。 */
     public static void deleteRecord(String id) {
         try {
-            File f = recordFile(id);
-            if (f.isFile()) f.delete();
+            AddonPaths.deleteDoc(recordFile(id));
         } catch (Throwable ignored) {
             // 忽略
         }
@@ -501,14 +500,12 @@ public final class BossArena {
         }
     }
 
-    /** 所有记录文件（供启动自清理遍历）。 */
+    /** 所有记录（供启动自清理遍历）。 */
     public static List<File> listRecords() {
         List<File> out = new ArrayList<>();
         try {
-            File[] files = recordDir().listFiles();
-            if (files == null) return out;
-            for (File f : files) {
-                if (f != null && f.isFile() && f.getName().startsWith("_arena_")) out.add(f);
+            for (File f : AddonPaths.listDocs(recordDir())) {
+                if (f != null && f.getName().startsWith("_arena_")) out.add(f);
             }
         } catch (Throwable ignored) {
             // 忽略
@@ -564,7 +561,7 @@ public final class BossArena {
                     // 单份失败不影响其它
                 }
                 try {
-                    f.delete();
+                    AddonPaths.deleteDoc(f);
                 } catch (Throwable ignored) {
                     // 忽略
                 }
@@ -572,10 +569,10 @@ public final class BossArena {
             // 旧版单文件记录：全场没挑战才走到这，一并清
             try {
                 File legacy = legacyRecordFile();
-                if (legacy.exists()) {
+                if (AddonPaths.docExists(legacy)) {
                     Map<String, Object> rec = readRecord(legacy);
                     if (rec != null) total += clearFromRecord(rec);
-                    legacy.delete();
+                    AddonPaths.deleteDoc(legacy);
                 }
             } catch (Throwable ignored) {
                 // 忽略

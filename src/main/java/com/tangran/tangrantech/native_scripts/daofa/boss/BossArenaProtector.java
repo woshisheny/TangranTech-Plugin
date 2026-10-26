@@ -71,9 +71,6 @@ public final class BossArenaProtector {
 
     private BossArenaProtector() {}
 
-    /** 管理员放行权限（配合 OP 判定）。 */
-    private static final String ADMIN_PERM = "tangrantech.admin";
-
     /** 保护提示限流（1.5 秒一条，与 BossEventRules.warnLock 同口径）。 */
     private static final java.util.Map<String, Long> WARN_AT = new java.util.concurrent.ConcurrentHashMap<>();
 
@@ -81,7 +78,8 @@ public final class BossArenaProtector {
     private static boolean allowed(Player player) {
         try {
             if (player == null || !player.isOnline()) return false;
-            if (player.isOp() || player.hasPermission(ADMIN_PERM)) return true;
+            // 场地保护放行：OP / tangrantech.admin.arena / tangrantech.admin 任一成立
+            if (com.tangran.tangrantech.util.Perms.arenaBypass(player)) return true;
             return BossFight.bySummoner(player) != null;
         } catch (Throwable ignored) {
             return false;

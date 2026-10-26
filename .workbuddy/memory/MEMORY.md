@@ -4,10 +4,22 @@
 糖然科技 TangranTech：RSC（RykenSlimefunCustomizer）附属 → 独立 Slimefun4 jar 插件。
 包名 `com.tangran.tangrantech`，主类 `TangranTechPlugin`，上下文 `TT`。
 目标 Paper 1.21.x + Slimefun4 Beta（`libs/Slimefun4-347d926-Beta.jar`，compileOnly）。
-产物 `TangranTech-2.0.0-standalone.jar`。构建：`./gradlew build`（JDK 21，见 gradle.properties 的 org.gradle.java.home，默认 JDK 25 会崩在配置阶段）。
+产物 `TangranTech-2.1.0-standalone.jar`（约 7.1 MB，含 xerial sqlite-jdbc 驱动与常用平台原生库）。构建：`./gradlew build`（JDK 21，见 gradle.properties 的 org.gradle.java.home，默认 JDK 25 会崩在配置阶段）。
 **发版流程**：改 `build.gradle.kts` 的 `version` + `src/main/resources/plugin.yml` 的 `version` + README 产物路径 → 构建 → 提交 → `git tag -a vX.Y.Z` → 推 main 与 tag → GitHub Release（本机无 gh CLI，走 REST API：`git credential fill` 取已缓存 token 后 curl POST `/releases`，再 POST `uploads.github.com/.../assets` 传 jar）。
 
 ## 架构要点（改代码前必读）
+
+- **玩家数据后端 = SQLite**（`plugins/TangranTech/data/tangran.db`，表 `player_doc(ns,key,doc,updated_at)`）。
+  **唯一路由点**是 `AddonPaths.readJson/writeJson`：`addon_configs/糖然科技/<一级子目录>/<名>.json`
+  → 文档 `(ns=子目录, key=文件名)` 进库，其余（`addons/**`、`.txt` 标记）走真实文件。
+  新增玩家数据请一律用 `AddonPaths.configDir(...) + readJson/writeJson`，并配 `docExists/deleteDoc/listDocs`；
+  **禁止** `Files.write` / `new File(...addon_configs...)` 裸写（会写进磁盘而模块读库 —— FullAnalysisScript 踩过）。
+  旧 JSON 首次启动自动导入（不覆盖）；库打不开时自动降级回文件后端。
+- **权限层** = `util/Perms`：有 LuckPerms 走其 API（softdepend + compileOnly），没有回落 Bukkit。
+  管理侧只认节点或 OP；玩法资格「存档为主、权限为辅」。节点前缀 `tangrantech.`（admin / admin.compiler /
+  admin.arena / command.import / storage.unlocked / yanhuo.<id> / danfang.<id>）。
+- **储物空间存档是「桶」模型**：白板物品/旧档 = `"ID": 数量`；带 NBT = `"ID#<sha1前12>": {count, nbt: base64}`，
+  白板判定 = 与 `buildCleanStack(cat,id)` 字节相等；取数一律走 `countOf(entry)`，别再直接 `asLong(value)`。
 - **内容加载**：`load/Setup.loadAll()` 编排，13 个 content/*.yml 打进 jar 根目录；`TT.preload`（大写 id→展示堆）打破跨文件前向引用；大小写规范：物品 id 一律 `TT.upper`、组 key 一律 `TT.lower`（Slimefun 注册要求大写，yml 键大小写敏感不能先大写再查）。
 - **脚本框架**：yml `script:` 绑定 → `ScriptItemListener` → `ScriptItem.onRightClick` → `NativeScript.invoke("onUse"/"tick"/"onButtonGroupClick")`。
   `NativeLifecycleScript.listeners()` 的注册由 `NativeScriptRegistry.registerLifecycleListeners` 统一负责（经 NativeLifecycle 幂等）。

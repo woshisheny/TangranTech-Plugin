@@ -536,13 +536,13 @@ public final class FinalCraftingCompilerScript implements NativeLifecycleScript 
     // 权限
     // ------------------------------------------------------------------
 
-    /** 只有 OP 能用；不是 OP 就提示 + 限流记日志 + 关界面。 */
+    /** 只有 OP 或 {@code tangrantech.admin.compiler}（/ {@code tangrantech.admin}）能用。 */
     private static boolean checkOp(Player player, String why) {
         try {
             if (player == null || !player.isOnline()) return false;
-            if (player.isOp()) return true;
+            if (com.tangran.tangrantech.util.Perms.compiler(player)) return true;
 
-            player.sendMessage("§c只有服务器 OP 才能使用终刻合成台编译器。");
+            player.sendMessage("§c需要管理员权限（tangrantech.admin.compiler）才能使用终刻合成台编译器。");
             long now = System.currentTimeMillis();
             String name = player.getName();
             if (now - BLOCK_LOG.getOrDefault(name, 0L) >= ZK_VERBOSE_LOG_INTERVAL_MS) {
@@ -656,10 +656,10 @@ public final class FinalCraftingCompilerScript implements NativeLifecycleScript 
                 if (!(event.getWhoClicked() instanceof Player player)) return;
                 int slot = event.getRawSlot();
 
-                // 非 OP：取消点击 + 立刻关掉界面
-                if (!player.isOp()) {
+                // 无管理员权限：取消点击 + 立刻关掉界面
+                if (!com.tangran.tangrantech.util.Perms.compiler(player)) {
                     event.setCancelled(true);
-                    checkOp(player, "非 OP 点进了编译器界面");
+                    checkOp(player, "无权限玩家点进了编译器界面");
                     return;
                 }
 

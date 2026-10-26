@@ -154,9 +154,9 @@ public final class BossInventory {
             } catch (Throwable ignored) {
                 // 忽略
             }
-            // 只有在「返还成功」之后才删文件 —— 顺序反了就是丢背包
-            if (!file.delete()) {
-                BossLog.warn("备份文件删除失败（下次启动会再还一次）: " + file.getAbsolutePath());
+            // 只有在「返还成功」之后才删档 —— 顺序反了就是丢背包
+            if (!AddonPaths.deleteDoc(file)) {
+                BossLog.warn("备份存档删除失败（下次启动会再还一次）: " + file.getAbsolutePath());
             }
             try {
                 player.sendMessage("§a备份背包已返还。");
@@ -191,10 +191,9 @@ public final class BossInventory {
             // 不该为了「什么都没发生」白扫一遍世界。
             List<File> candidates = new ArrayList<>();
             File dir = AddonPaths.configDir(BossProgress.DIR);
-            File[] files = dir.listFiles();
-            if (files == null) return 0;
-            for (File f : files) {
-                if (f == null || !f.isFile()) continue;
+            // 后端是 SQLite，枚举走文档 API（listDocs 会把库里与还没入库的旧文件一起列出）
+            for (File f : AddonPaths.listDocs(dir)) {
+                if (f == null) continue;
                 String name = f.getName();
                 if (!name.startsWith(PREFIX) || !name.endsWith(".json")) continue;
                 String who = name.substring(PREFIX.length(), name.length() - ".json".length());
