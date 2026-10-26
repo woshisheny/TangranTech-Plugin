@@ -326,14 +326,6 @@ public final class BossState {
             return twoRegion != null;
         }
 
-        /** 供「方块落在哪块场地里」查询用的区域列表。 */
-        public List<BossArena.Region> regions() {
-            List<BossArena.Region> out = new ArrayList<>(2);
-            if (oneRegion != null) out.add(oneRegion);
-            if (twoRegion != null) out.add(twoRegion);
-            return out;
-        }
-
         @Override
         public void cancel() {
             cancelTask(twoBuildTask);

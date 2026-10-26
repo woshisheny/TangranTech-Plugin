@@ -72,7 +72,6 @@ public final class BossBattleScript implements NativeLifecycleScript {
 
     @Override
     public void registerListeners(Plugin plugin) {
-        BossFight.init();
         // 护法注册表：zqx125（批次 2）+ Katarina（批次 5）+ 双子（批次 6）
         GuardianManager.register(BossState.GID_ZQX125, Zqx125Guardian::new);
         GuardianManager.register(BossState.GID_KATARINA, BossKatarina::new);

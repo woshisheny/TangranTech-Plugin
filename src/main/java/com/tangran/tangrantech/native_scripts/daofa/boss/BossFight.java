@@ -56,12 +56,12 @@ import org.bukkit.entity.Player;
  * 之所以不做「整表重建」，是因为绝大多数伤害事件的受害者<b>不是</b>我们的实体，
  * 整表重建会被高频的无关事件反复触发。</p>
  *
- * <h2>与场地层的接线</h2>
- * <p>{@link BossArena} 不反向依赖本类，它在启动时等待本类注册一个回调：
- * {@link BossArena#registerRegionSource}（「哪些方块落在进行中的场地里」）。</p>
- * <p>（原先还注册过 {@code registerFightPurger}（「收掉使用这块场地的战局」），
- * 只服务「挑战区域清除器」道具的 {@code fights} 计数；该道具随挑战场独立维度化删除后
- * 一并移除，2026-10-26。）</p>
+ * <h2>与场地层不再有回调接线</h2>
+ * <p>原先向 {@link BossArena} 注册过两个回调（{@code registerRegionSource} /
+ * {@code registerFightPurger}），分别服务「方块在不在进行中的场地里」与「收掉使用这块场地的战局」。
+ * 这两个查询的实际调用方都在 {@code BossEventRules} 里直接扫 {@link #all()}（区域快照只取一次更快），
+ * 而收战局只服务已删除的「挑战区域清除器」道具 → 2026-10-26 整条回调链与场地层的
+ * {@code inAnyFightArena} 一并移除，本类只保留战局表本身。</p>
  */
 public final class BossFight {
 
@@ -80,8 +80,6 @@ public final class BossFight {
      * 实体 UUID → 战局。是<b>缓存</b>不是真相来源 —— 未命中会现场扫，见类注释。
      */
     private static final Map<UUID, BossState> BY_ENTITY = new HashMap<>();
-
-    private static boolean callbacksRegistered;
 
     // ==================================================================
     // 生命周期
@@ -116,7 +114,6 @@ public final class BossFight {
     public static void put(BossState state) {
         if (state == null || state.key == null) return;
         synchronized (LOCK) {
-            ensureCallbacks();
             BY_KEY.put(state.key, state);
             reindexName(state);
             // 实体索引在 put 时不预建：此刻实体还没召唤出来，建了也是空的；
@@ -154,24 +151,6 @@ public final class BossFight {
         synchronized (LOCK) {
             BY_NAME.values().removeIf(v -> v == state);
             reindexName(state);
-        }
-    }
-
-    /** 把场地层需要的回调挂上（幂等）。 */
-    private static void ensureCallbacks() {
-        if (callbacksRegistered) return;
-        callbacksRegistered = true;
-        try {
-            BossArena.registerRegionSource(BossFight::activeRegions);
-        } catch (Throwable t) {
-            BossLog.warn("注册场地回调失败: " + t);
-        }
-    }
-
-    /** 显式初始化（供插件启动阶段调用，避免第一次查战局时才挂回调）。 */
-    public static void init() {
-        synchronized (LOCK) {
-            ensureCallbacks();
         }
     }
 
@@ -352,24 +331,6 @@ public final class BossFight {
         } catch (Throwable ignored) {
             return false;
         }
-    }
-
-    // ==================================================================
-    // 场地层回调
-    // ==================================================================
-
-    /** 当前所有进行中战局持有的区域（供 {@link BossArena#inAnyFightArena}）。 */
-    public static List<BossArena.Region> activeRegions() {
-        List<BossArena.Region> out = new ArrayList<>();
-        for (BossState st : all()) {
-            if (st == null) continue;
-            try {
-                out.addAll(st.arena.regions());
-            } catch (Throwable ignored) {
-                // 忽略
-            }
-        }
-        return out;
     }
 
     /** 供调试：一局的可读摘要。 */

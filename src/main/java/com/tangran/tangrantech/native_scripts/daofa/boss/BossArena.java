@@ -399,46 +399,6 @@ public final class BossArena {
     }
 
     // ==================================================================
-    // 区域判定
-    // ==================================================================
-
-    /** 这个方块是不是落在「某个进行中的战局的场地」里。 */
-    public static boolean inAnyFightArena(World world, int x, int y, int z) {
-        try {
-            if (world == null) return false;
-            for (Region r : activeRegions()) {
-                if (r.contains(x, y, z)) return true;
-            }
-        } catch (Throwable ignored) {
-            // 忽略
-        }
-        return false;
-    }
-
-    /** 由战局层注册进来的「当前所有进行中的场地」查询（未注册时返回空）。 */
-    public interface RegionSource {
-        List<Region> activeRegions();
-    }
-
-    private static volatile RegionSource regionSource;
-
-    /** 战局层注册（单向依赖：场地层不反向依赖战局层）。 */
-    public static void registerRegionSource(RegionSource src) {
-        regionSource = src;
-    }
-
-    private static List<Region> activeRegions() {
-        RegionSource src = regionSource;
-        if (src == null) return List.of();
-        try {
-            List<Region> list = src.activeRegions();
-            return list == null ? List.of() : list;
-        } catch (Throwable ignored) {
-            return List.of();
-        }
-    }
-
-    // ==================================================================
     // 落盘记录
     // ==================================================================
 
