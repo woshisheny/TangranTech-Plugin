@@ -211,6 +211,20 @@ public final class TwinMinigame {
             // 双子挑战阶段：不给饱和效果（原脚本注释「按需求删除」）
             BossPhaseTwo.clearSaturation(player);
 
+            // 周目 +1 + 回套账本里买过的增益（原脚本：week++ 写账本 → xuApplyUpgrades）
+            // 增益购买记录跨局保留，但收场时会 clearUpgrades 摘掉效果 ——这里必须重新套上，
+            // 否则「买过只在当次生效、下一局全失效」。
+            try {
+                int week = TwinLedger.incrementWeek(player);
+                TwinShop.applyUpgrades(player);
+                if (week > 0) {
+                    player.sendTitle("§c§l死亡回归！第" + week + "周目启动！", "", 5, 40, 10);
+                    player.sendMessage("§c§l死亡回归！§e§l第" + week + "周目启动！");
+                }
+            } catch (Throwable t) {
+                BossLog.warn("双子周目/增益回套失败: " + t);
+            }
+
             // 资源铺场：4 棵橡树（2×2）+ 一排土壤 + 1 格无限矿石，全排在天实左手边那侧
             try {
                 if (g.world != null && g.region != null) {

@@ -190,8 +190,8 @@ public final class BossPhaseOne {
      *       树/建筑/别人的机器挖掉；</li>
      *   <li><b>展示框/画 的占位格与依附格一律跳过</b>（见 {@link BossArena#collectDecorativeCells}）
      *       —— 方块一压就把框挤掉；</li>
-     *   <li><b>标记格上原本有装饰物时仍然放基岩</b>并写一条日志 —— 那个标记是
-     *       「清理挑战区域」反推整块场地的唯一依据，不能没有。</li>
+     *   <li><b>标记格上原本有装饰物时仍然放基岩</b>并写一条日志 —— 场地顶层正中那格是
+     *       「场地中轴」标记（模板一致性：{@code TangranSpace} 重建同一套模板）。</li>
      * </ol>
      */
     public static void buildArena(World world, Center center, BossState state) {

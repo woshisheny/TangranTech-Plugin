@@ -45,6 +45,9 @@ Tr_znq:
   lateInit: false
   item_group: Tr_cztsjq
   placeable: true
+  # 保留 tick: false（不是漏改）：注能器是纯「丢物品到机器上」交互，InjectionScript.invoke
+  # 恒返回 null，没有任何每刻逻辑；RSC 2026-10-24 删掉该字段只是让它每刻白跑一个空 ticker，
+  # 且 注能.js 自 2026-08-27 未变更、也不含 tick 逻辑。此处维持省掉每刻调度的优化。
   tick: false
   item:
     glow: false
@@ -131,6 +134,10 @@ Tr_glsk:
   lateInit: false
   item_group: Tr_zzjq
   placeable: true
+  # RSC 2026-10-24 新增：甘霖神龛改为能源网络消费者（capacity 1）
+  energy:
+    capacity: 1
+    type: CONSUMER
   item:
     glow: false
     material_type: mc
@@ -175,6 +182,10 @@ Tr_mgzj:
   lateInit: false
   item_group: Tr_zzjq
   placeable: true
+  # RSC 2026-10-24 新增：命轨织机改为能源网络消费者（capacity 1）
+  energy:
+    capacity: 1
+    type: CONSUMER
   item:
     glow: false
     material_type: mc

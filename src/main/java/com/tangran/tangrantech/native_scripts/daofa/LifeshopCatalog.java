@@ -67,8 +67,26 @@ public final class LifeshopCatalog {
     /** 每页商品数（第 2~5 行、每行 7 格）。 */
     public static final int PAGE_SIZE = 28;
 
-    /** 缓存版本；不符则重新生成。 */
-    private static final int CACHE_VERSION = 2;
+    /** 缓存版本；不符则重新生成。3：龙首/龙蛋改价后必须让旧缓存失效并重建（对齐 RSC 2026-10-24）。 */
+    private static final int CACHE_VERSION = 3;
+
+    /**
+     * 手动定价覆盖表（对齐 RSC {@code VANILLA_PRICE_OVERRIDE}）。
+     *
+     * <p>原脚本注释记载：龙首/龙蛋本来走自动定价，算出来龙首 0.2、龙蛋 10，明显偏低；
+     * 这里在 {@link #finalVanillaPrice} 最前面直接返回，绕过后面的 rarity × 倍率 × 成长倍率。
+     * {@code LEGACY_DRAGON_EGG} 是旧版材质，同为一个龙蛋，一并定价避免老存档钻空子。</p>
+     */
+    private static final Map<Material, Double> VANILLA_PRICE_OVERRIDE = buildPriceOverride();
+
+    private static Map<Material, Double> buildPriceOverride() {
+        Map<Material, Double> map = new HashMap<>();
+        map.put(Material.DRAGON_HEAD, 800.0d);
+        map.put(Material.DRAGON_EGG, 800.0d);
+        Material legacy = Material.matchMaterial("LEGACY_DRAGON_EGG");
+        if (legacy != null) map.put(legacy, 800.0d);
+        return map;
+    }
 
     /** 道源价格倍率（原脚本注释：在 50 倍基础上再翻 4 倍）。 */
     private static final double PRICE_MULTIPLIER = 200.0;
@@ -774,8 +792,11 @@ public final class LifeshopCatalog {
         return finalVanillaPrice(base, classifyVanilla(base)) * 9;
     }
 
-    /** 最终价：矿石 → 矿物块 → 基础物资直接定价 → 配方递归，四选一。 */
+    /** 最终价：手动覆盖 → 矿石 → 矿物块 → 基础物资直接定价 → 配方递归，五选一。 */
     private static double finalVanillaPrice(Material mat, String cat) {
+        // 手动定价优先（对齐 RSC：放在 getVanillaPrice 最前面直接返回）
+        Double override = VANILLA_PRICE_OVERRIDE.get(mat);
+        if (override != null) return override;
         double ore = orePrice(mat);
         if (!Double.isNaN(ore)) return ore;
         double block = storageBlockPrice(mat);

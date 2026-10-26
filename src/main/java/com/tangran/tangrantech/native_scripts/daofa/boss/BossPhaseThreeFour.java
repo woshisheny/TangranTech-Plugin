@@ -48,7 +48,10 @@ import com.tangran.tangrantech.native_scripts.daofa.TwinTools;
  * </ol>
  *
  * <h2>血量口径</h2>
- * <p>决斗体实体血量 = 血条剩余 ×100（双子打完剩 20 → 2000 血）；实体血量按比例折回血条读数。</p>
+ * <p>决斗体实体血量 = 血条剩余 ×100（原脚本口径：双子打完剩 20 → 想给 2000 血），
+ * 但原版生物 {@code MAX_HEALTH} 基础值上限只有 1024 —— 直接写 2000 会抛
+ * {@code IllegalArgumentException: Health value (2000.0) must be between 0 and 1024.0}，
+ * 所以这里按 1024 截断（剩 20 血条 → 实际 1024 血），实体血量再按比例折回血条读数。</p>
  */
 public final class BossPhaseThreeFour {
 
@@ -68,6 +71,17 @@ public final class BossPhaseThreeFour {
 
     /** 记录三阶段进度用：任务存档里「任务其八」的 id。 */
     private static final String TASK_FINAL_HOUR = "final_hour";
+
+    /**
+     * 原版生物 {@code Attribute.MAX_HEALTH} 基础值上限（1024）。
+     * <p>超过这个值 {@code setBaseValue} 会抛
+     * {@code IllegalArgumentException: Health value (x) must be between 0 and 1024.0}，
+     * 三阶段变身曾按「血条 20 ×100 = 2000」直接写死，导致变身直接失败。</p>
+     */
+    private static final double VANILLA_MAX_HEALTH_CAP = 1024.0d;
+
+    /** 血条每点折算的实体血量（原脚本口径 ×100，超过 1024 的部分按上限截断）。 */
+    private static final double DUEL_HP_PER_BAR = 100.0d;
 
     // ==================================================================
     // 入口（BossPhaseTwo 的钩子与读档路由调）
@@ -188,7 +202,7 @@ public final class BossPhaseThreeFour {
 
     /**
      * 清「场地内部」（作物、灵化方块、玩家放的东西），<b>不拆场地本身</b>：
-     * 屏障围墙/顶保留，顶层正中间的基岩标记保留（挑战区域清除器还要靠它反推）。
+     * 屏障围墙/顶保留，顶层正中间的基岩标记保留（场地模板的一部分）。
      */
     private static void clearArenaForDescent(BossState state) {
         try {
@@ -215,7 +229,7 @@ public final class BossPhaseThreeFour {
                                 if (t.equals("AIR") || t.equals("CAVE_AIR") || t.equals("VOID_AIR")) continue;
                                 // ★ 屏障围墙/顶保留（三阶段战斗还要围墙和顶）
                                 if (t.equals("BARRIER")) continue;
-                                // ★ 顶层正中间基岩标记保留（挑战区域清除器的落点）
+                                // ★ 顶层正中间基岩标记保留（场地模板的一部分，不随内部清空消失）
                                 if (t.equals("BEDROCK") && y == r.maxY()
                                         && x[0] == midX && z == midZ) {
                                     continue;
@@ -387,7 +401,7 @@ public final class BossPhaseThreeFour {
         }
     }
 
-    /** 糖然僵尸：血条剩余 ×100 = 身体血量。 */
+    /** 糖然僵尸：血条剩余 ×100 = 身体血量（超 1024 按原版上限截断，见 {@link #applyDuelHealth}）。 */
     private static void spawnTangranZombie(BossState state, Player player, Location loc,
                                            Map<String, ItemStack> gear, String name) {
         try {
@@ -404,17 +418,12 @@ public final class BossPhaseThreeFour {
             if (loc == null) return;
             double barHp = Math.max(1.0d, Math.min(BossState.PHASE_TWO_MAX_HP,
                     state.tangran.hp));
-            double mobHp = 100.0d * barHp;   // 剩余血条 ×100（双子打完剩 20 → 2000 血）
+            double wantedHp = DUEL_HP_PER_BAR * barHp;   // 原口径：剩 20 血条 → 2000 血
             Zombie ent = world.spawn(loc, Zombie.class);
             // 装备原封过渡（含糖然头颅 → 僵尸也长着糖然的头）
             applyGear(ent, gear);
-            try {
-                var attr = ent.getAttribute(org.bukkit.attribute.Attribute.MAX_HEALTH);
-                if (attr != null) attr.setBaseValue(mobHp);
-            } catch (Throwable ignored) {
-                // 忽略
-            }
-            ent.setHealth(mobHp);
+            // 血条 ×100 超过原版 MAX_HEALTH 上限（1024）会被拒，这里截断 + 回读真实上限
+            double mobHp = applyDuelHealth(ent, wantedHp);
             ent.setCustomName((name != null) ? name : "§c§l糖然");
             ent.setCustomNameVisible(true);
             ent.setRemoveWhenFarAway(false);
@@ -424,7 +433,11 @@ public final class BossPhaseThreeFour {
             state.tangran.duelBarHp = barHp;
             state.tangran.duelMaxHp = mobHp;
             BossLog.warn("糖然本体下场：血条 " + (int) barHp + "/" + (int) BossState.PHASE_TWO_MAX_HP
-                    + " → 实体 " + (int) mobHp);
+                    + " → 实体 " + (int) mobHp
+                    + ((mobHp < wantedHp)
+                            ? "（原口径 " + (int) wantedHp + " 超原版上限 "
+                                    + (int) VANILLA_MAX_HEALTH_CAP + "，已截断）"
+                            : ""));
             BossFx.updateBarPlayers(state, loc);
             try {
                 world.playSound(loc, "entity.wither.spawn", 1.0f, 0.8f);
@@ -443,6 +456,42 @@ public final class BossPhaseThreeFour {
         } catch (Throwable t) {
             BossLog.warn("糖然变身失败: " + t);
         }
+    }
+
+    /**
+     * 给决斗体写血量：按原版 {@code MAX_HEALTH} 上限（1024）截断，写完回读属性值当分母。
+     * <p><b>为什么不能直接写</b>：{@code AttributeInstance.setBaseValue} 对基础值有
+     * [0, 1024] 的硬校验，写 2000 会抛
+     * {@code IllegalArgumentException: Health value (2000.0) must be between 0 and 1024.0}，
+     * 原脚本在 RSC 版里被 try 吞掉后连 {@code setHealth(2000)} 一起失败，
+     * 变身出来的僵尸只有原版 20 血、血条却按 2000 当分母折算（读数恒为 1），
+     * 三阶段实际是「一刀就死」。原生版必须自己处理这个上限。</p>
+     *
+     * @param ent     决斗体
+     * @param wanted  期望血量（血条剩余 ×100，可能 > 1024）
+     * @return 实际生效的血量上限（决斗血条折算的分母，必须用它而不是 wanted）
+     */
+    private static double applyDuelHealth(Zombie ent, double wanted) {
+        double real = Math.min(VANILLA_MAX_HEALTH_CAP, Math.max(1.0d, wanted));
+        try {
+            var attr = ent.getAttribute(org.bukkit.attribute.Attribute.MAX_HEALTH);
+            if (attr != null) {
+                attr.setBaseValue(real);
+                // 回读：属性被别的插件/配置文件钳制时，以真实值为准，避免下面 setHealth 再炸
+                double got = attr.getValue();
+                if (got > 0) real = Math.min(real, got);
+            }
+        } catch (Throwable ignored) {
+            // 写属性失败 → 下面按实体当前上限兜底，绝不让 setHealth 抛同一类异常
+        }
+        try {
+            double cur = ent.getMaxHealth();
+            if (cur > 0 && cur < real) real = cur;
+            ent.setHealth(real);
+        } catch (Throwable ignored) {
+            // 忽略
+        }
+        return real;
     }
 
     // ==================================================================

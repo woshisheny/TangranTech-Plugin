@@ -285,7 +285,6 @@ Tr_rz23:
       - "&d&l修复原初刻印等显示名兜底产生的bug"
       - "&d&lBOSS战道具位置更明显，修复生命甘露失效的问题"
       - "&d&lBOSS战场地中央最上方屏障替换为基岩，使用新道具挑战区域清除器右键基岩可以清除该场地"
-      - "&d&l堆叠机尚未完工喵"
     material: name_tag
   recipe_type: NULL
 Tr_sugar:
@@ -2693,30 +2692,6 @@ Tr_zkhctbyq:
       - '&7管理员专用'
       - '&8中章管理员物品'
   recipe_type: TR_WFZZ_TYPE
-Tr_tzqyqcq:
-  lateInit: false
-  placeable: false
-  item_group: Tr_zzdj
-  script: 道法/清理挑战区域
-  item:
-    glow: true
-    material_type: mc
-    material: slime_ball
-    name: '{#a3e635}&l挑战区域清除器'
-    lore:
-      - '&7右键挑战区域最上层的基岩，将整个挑战区域清空'
-      - '&a一般在服务器意外重启，场地未能清除时使用'
-      - '&b当然，你也可以在上一次挑战区域旁再开启一场新挑战来清除上一次挑战区域残留'
-  recipe_type: TR_YGYLS_TYPE
-  recipe:
-    5:
-      material_type: mc
-      material: slime_ball
-    8:
-      material_type: slimefun
-      material: magic_sugar
-    
-
 # ===== 破法弓（双子经营小游戏的最终产物）=====
 Tr_pfg:
   lateInit: false

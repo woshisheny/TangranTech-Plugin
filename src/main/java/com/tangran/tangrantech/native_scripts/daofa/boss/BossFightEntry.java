@@ -199,6 +199,15 @@ public final class BossFightEntry {
             BossFight.put(state);
             setMarkedStand(player, stand);
 
+            // ★ 退出口令提示：开打前告诉玩家，聊天栏发「我不玩了」可随时中断并送回原位
+            //   （监听在 BossBattleScript.SurrenderChatListener；一/二阶段入口共用这段）
+            try {
+                player.sendMessage("§e[提示] 挑战期间随时在聊天栏发送 §f「我不玩了」§e，"
+                        + "即可中断挑战并送回原位。");
+            } catch (Throwable ignored) {
+                // 忽略
+            }
+
             if (startPhase == 2) {
                 // 二阶段入口：紫血条 + 注视/看门任务 + 按读档目标分派
                 // （构场 / 清背包上锁 / 召唤护法在 BossPhaseTwo）

@@ -380,7 +380,7 @@ public final class BossState {
         /** 决斗体血量折算用的「血条剩余值」（原 `tangranDuel.barHp`：实体血量 → 血条读数按比例折算）。 */
         public double duelBarHp = PHASE_TWO_MAX_HP;
 
-        /** 决斗体实体血量上限（原 `tangranDuel.maxHp`：血条剩余 ×100）。 */
+        /** 决斗体实体血量上限（原 `tangranDuel.maxHp`：血条剩余 ×100，受原版 MAX_HEALTH 上限 1024 截断）。 */
         public double duelMaxHp;
 
         /** 决斗主循环任务（原 `tangranDuel.task`）。 */

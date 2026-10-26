@@ -56,7 +56,9 @@ public final class TwinLedger {
             Map.entry("upAtk", "攻击力提升"),
             Map.entry("upArmor", "护甲值提升"),
             Map.entry("upLs", "吸血效果"),
-            Map.entry("upBuff4", "四重祝福"));
+            Map.entry("upBuff4", "四重祝福"),
+            // 双子挑战周目（第几次）：与账本同文件存储，不作为货币显示、不入账播报
+            Map.entry("week", "周目"));
 
     /** 显示名（未知键原样返回）。 */
     public static String name(String key) {
@@ -206,6 +208,30 @@ public final class TwinLedger {
     public static int count(Player player, String key) {
         try {
             return of(player).getOrDefault(key, 0);
+        } catch (Throwable ignored) {
+            return 0;
+        }
+    }
+
+    /** 双子挑战周目（第几次挑战双子）。 */
+    public static int week(Player player) {
+        return count(player, "week");
+    }
+
+    /**
+     * 周目 +1 并返回新值（进双子阶段时调，对齐原脚本 {@code xuTwinRecSave(player, {week})}）。
+     *
+     * <p>不走 {@link #add}：周目不是货币，不该触发入账播报。</p>
+     */
+    public static int incrementWeek(Player player) {
+        try {
+            if (player == null) return 0;
+            ensureFlushTask();
+            Map<String, Integer> led = of(player);
+            int next = led.getOrDefault("week", 0) + 1;
+            led.put("week", next);
+            DIRTY.put(player.getName(), Boolean.TRUE);
+            return next;
         } catch (Throwable ignored) {
             return 0;
         }
@@ -393,7 +419,7 @@ public final class TwinLedger {
             Map<String, Integer> led = of(player);
             StringBuilder sb = new StringBuilder();
             for (Map.Entry<String, Integer> e : led.entrySet()) {
-                if (e.getValue() <= 0 || e.getKey().startsWith("up")) continue;
+                if (e.getValue() <= 0 || e.getKey().startsWith("up") || "week".equals(e.getKey())) continue;
                 if (sb.length() > 0) sb.append("，");
                 sb.append(name(e.getKey())).append("×").append(e.getValue());
             }

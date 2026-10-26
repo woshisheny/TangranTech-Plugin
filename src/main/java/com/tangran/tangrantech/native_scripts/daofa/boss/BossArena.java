@@ -23,19 +23,21 @@ import org.bukkit.entity.Player;
 import org.bukkit.util.BoundingBox;
 
 /**
- * 「道法/BOSS战」的场地层：尺寸表、按标记反推、落盘记录、清场。
+ * 「道法/BOSS战」的场地层：区域几何、装饰保护、清场、落盘记录。
  *
- * <p>对应原脚本的 {@code ARENA_SIZES} / {@code arenaRegionOfSize} / {@code detectArenaByMarker} /
- * {@code collectDecorativeCells} / {@code purgeArenaEntities} / {@code clearArenaRegionAll} /
- * {@code clearArenaRegion} / {@code getArenaRecordDir} / {@code saveArenaRecord} /
- * {@code loadArenaRecord} / {@code deleteArenaRecordsForMarker} /
- * {@code globalThis.tangranPurgeArenaByMarker}。</p>
+ * <p>对应原脚本的 {@code ARENA_SIZES}（区域常量已改由 {@link TangranSpace} 固定给出）/
+ * {@code collectDecorativeCells} / {@code clearArenaRegionAll} / {@code clearArenaRegion} /
+ * {@code getArenaRecordDir} / {@code saveArenaRecord} / {@code loadArenaRecord}。</p>
  *
- * <h2>四条「绝不动手」的纪律（原脚本注释里的原话）</h2>
+ * <p><b>「按标记反推场地 + 右键基岩清场」这一整套已删除</b>（2026-10-26）：挑战场改为
+ * 常驻的独立世界 {@code tangran_space} 后，场地不再「在玩家身边选址建造」，也就不需要
+ * 反推；对应道具 {@code Tr_tzqyqcq}（挑战区域清除器）一并移除。原脚本的
+ * {@code detectArenaByMarker} / {@code deleteArenaRecordsForMarker} /
+ * {@code tangranPurgeArenaByMarker} 在原生版里已无对应实现。</p>
+ *
+ * <h2>三条「绝不动手」的纪律（原脚本注释里的原话）</h2>
  * <ol>
- *   <li><b>场地只有两种尺寸，靠标记格坐标反推 + 取样核对；认不出来绝不动手</b>
- *       —— 防止把别人家的石英平台当场地清掉。</li>
- *   <li><b>只清反推出来的那块区域</b>，区域外的方块 / 实体一律不碰。</li>
+ *   <li><b>只清目标区域</b>，区域外的方块 / 实体一律不碰。</li>
  *   <li><b>展示框 / 发光展示框 / 画 及其依附方块保留</b>（见 {@link #collectDecorativeCells}）。</li>
  *   <li><b>血条只摘「这块场地那个玩家」的</b>，绝不 clearAll（多玩家并行安全）。</li>
  * </ol>
@@ -51,20 +53,8 @@ public final class BossArena {
     private BossArena() {}
 
     // ==================================================================
-    // 尺寸
+    // 区域
     // ==================================================================
-
-    /** 一种场地尺寸。 */
-    public record Size(int half, int height, Material floor, String name) {}
-
-    /**
-     * 两种场地尺寸。
-     *
-     * <p>顺序即「反推时的打分候选顺序」——评分相同取先出现的（先大后小）。</p>
-     */
-    public static final List<Size> SIZES = List.of(
-            new Size(25, 20, Material.QUARTZ_BLOCK, "51x51x20（二阶段大场地）"),
-            new Size(10, 12, Material.STONE_BRICKS, "21x21x12（一阶段飞猪躲避场地）"));
 
     /** 场地格坐标范围（闭区间）。 */
     public record Region(int minX, int maxX, int minY, int maxY, int minZ, int maxZ) {
@@ -87,92 +77,6 @@ public final class BossArena {
         public long volume() {
             return (long) (maxX - minX + 1) * (maxY - minY + 1) * (maxZ - minZ + 1);
         }
-    }
-
-    /**
-     * 按尺寸与「标记格坐标」推出区域。
-     *
-     * <p>标记格 = <b>最上层屏障正中间的那块基岩</b>，所以它是区域的
-     * 「顶面中心」：{@code y} 就是 {@code maxY}，X/Z 就是中心。</p>
-     */
-    public static Region regionOfSize(Size size, int x, int y, int z) {
-        return new Region(
-                x - size.half(), x + size.half(),
-                y - (size.height() - 1), y,
-                z - size.half(), z + size.half());
-    }
-
-    /** 反推结果。 */
-    public record Found(Size size, Region region, int floorHit, int topHit, int score) {}
-
-    /**
-     * 从「顶层正中间那格基岩」反推是哪块场地；认不出来返回 {@code null}。
-     *
-     * <p>取样 9 个点（中心 + 4 角 + 4 边中点）：</p>
-     * <ul>
-     *   <li>地板：{@code (px, minY, pz)} 是不是该尺寸的地板材质；</li>
-     *   <li>顶层：{@code (px, y, pz)} —— 中心必须是基岩，其它必须是屏障。</li>
-     * </ul>
-     * <p>两者各命中 ≥4 才算认出。<b>不通过就返回 null</b>（调用方必须当成「这里不是标记格」）。</p>
-     */
-    public static Found detectByMarker(Block block) {
-        try {
-            if (block == null || block.getType() != Material.BEDROCK) return null;
-            World world = block.getWorld();
-            if (world == null) return null;
-            int x = block.getX();
-            int y = block.getY();
-            int z = block.getZ();
-
-            Found best = null;
-            for (Size size : SIZES) {
-                Region region = regionOfSize(size, x, y, z);
-                int floorHit = 0;
-                int topHit = 0;
-                for (int[] pt : samplePoints(size.half())) {
-                    int px = x + pt[0];
-                    int pz = z + pt[1];
-                    try {
-                        if (world.getBlockAt(px, region.minY(), pz).getType() == size.floor()) {
-                            floorHit++;
-                        }
-                    } catch (Throwable ignored) {
-                        // 单点失败不影响其它点
-                    }
-                    try {
-                        Material topType = world.getBlockAt(px, y, pz).getType();
-                        boolean isCenter = (pt[0] == 0 && pt[1] == 0);
-                        if (isCenter ? (topType == Material.BEDROCK) : (topType == Material.BARRIER)) {
-                            topHit++;
-                        }
-                    } catch (Throwable ignored) {
-                        // 同上
-                    }
-                }
-                int score = floorHit + topHit;
-                if (best == null || score > best.score()) {
-                    best = new Found(size, region, floorHit, topHit, score);
-                }
-            }
-            if (best == null) return null;
-            // 地板与顶层都要对得上才算认出来（不然谁在自家石英平台上摆块基岩都会被误清）
-            if (best.topHit() < MIN_HIT || best.floorHit() < MIN_HIT) return null;
-            return best;
-        } catch (Throwable t) {
-            BossLog.warn("反推挑战场地失败: " + t);
-            return null;
-        }
-    }
-
-    /** 反推时要求的最低命中点数。 */
-    private static final int MIN_HIT = 4;
-
-    /** 9 个取样点（中心 + 4 角 + 4 边中点）。 */
-    private static int[][] samplePoints(int half) {
-        return new int[][]{
-                {0, 0},
-                {-half, -half}, {half, -half}, {-half, half}, {half, half},
-                {0, -half}, {0, half}, {-half, 0}, {half, 0}};
     }
 
     // ==================================================================
@@ -428,50 +332,6 @@ public final class BossArena {
     // ==================================================================
 
     /**
-     * 清掉区域内的实体。
-     *
-     * <p>玩家不碰；展示框 / 画 保留；其余（生物 / 盔甲架 / 展示实体 / 掉落物 / 箭 / 铁砧…）全清。</p>
-     *
-     * @return 清掉的实体数
-     */
-    public static int purgeEntities(World world, Region region) {
-        int n = 0;
-        try {
-            if (world == null || region == null) return 0;
-            double cx = (region.minX() + region.maxX()) / 2.0 + 0.5;
-            double cy = (region.minY() + region.maxY()) / 2.0 + 0.5;
-            double cz = (region.minZ() + region.maxZ()) / 2.0 + 0.5;
-            Collection<Entity> list = world.getNearbyEntities(new Location(world, cx, cy, cz),
-                    (region.maxX() - region.minX()) / 2.0 + 1.5,
-                    (region.maxY() - region.minY()) / 2.0 + 1.5,
-                    (region.maxZ() - region.minZ()) / 2.0 + 1.5);
-            for (Entity e : list) {
-                if (e == null || !e.isValid()) continue;
-                if (e instanceof Player) continue;
-                if (isDecorative(e)) continue;
-                try {
-                    Location el = e.getLocation();
-                    if (el != null && el.getWorld() == world
-                            && !region.contains(el.getBlockX(), el.getBlockY(), el.getBlockZ())) {
-                        continue;   // 碰撞箱贴着边界、实体实际在外面 → 不动它
-                    }
-                } catch (Throwable ignored) {
-                    // 取不到位置就按「在区域内」处理
-                }
-                try {
-                    e.remove();
-                    n++;
-                } catch (Throwable ignored) {
-                    // 单个失败不影响其它
-                }
-            }
-        } catch (Throwable t) {
-            BossLog.warn("清理场地实体失败: " + t);
-        }
-        return n;
-    }
-
-    /**
      * 把区域内所有非空气方块清成空气（跳过保护格）。
      *
      * <p><b>性能提醒</b>：51×51×20 = 52020 格，逐格 {@code getBlockAt} 是几万个方块访问。
@@ -512,8 +372,8 @@ public final class BossArena {
     /**
      * 只清场地特征方块（屏障 / 石英 / 基岩）。
      *
-     * <p>还原与「启动自清理」共用。★ 基岩也要一起清：顶层正中间那一格是<b>挑战区域标记</b>，
-     * 不清会留一块基岩在残场里，下次反推时就会误命中。</p>
+     * <p>还原与「启动自清理」共用。<b>基岩也一起清</b>：顶层正中间那格是场地模板里的
+     * 基岩标记，残场里留一块基岩会让「这块地是不是已经拆干净了」的判断失真。</p>
      */
     public static int clearRegion(World world, Region region) {
         int n = 0;
@@ -575,29 +435,6 @@ public final class BossArena {
             return list == null ? List.of() : list;
         } catch (Throwable ignored) {
             return List.of();
-        }
-    }
-
-    /** 由战局层注册进来的「收掉使用这块场地的战局」（未注册时返回 0）。 */
-    public interface FightPurger {
-        int purge(World world, Region region);
-    }
-
-    private static volatile FightPurger fightPurger;
-
-    /** 战局层注册。 */
-    public static void registerFightPurger(FightPurger purger) {
-        fightPurger = purger;
-    }
-
-    private static int purgeLiveFights(World world, Region region) {
-        FightPurger p = fightPurger;
-        if (p == null) return 0;
-        try {
-            return p.purge(world, region);
-        } catch (Throwable t) {
-            BossLog.warn("收掉场地战局失败: " + t);
-            return 0;
         }
     }
 
@@ -670,41 +507,6 @@ public final class BossArena {
         }
     }
 
-    /**
-     * 删掉与这块场地标记对得上的记录（重启自清理不会再清一次）。
-     *
-     * @return 删掉的文件数
-     */
-    public static int deleteRecordsForMarker(World world, int x, int y, int z) {
-        int n = 0;
-        try {
-            if (world == null) return 0;
-            File dir = recordDir();
-            File[] files = dir.listFiles();
-            if (files == null) return 0;
-            for (File f : files) {
-                try {
-                    if (f == null || !f.isFile()) continue;
-                    if (!f.getName().startsWith("_arena_")) continue;
-                    Map<String, Object> rec = readRecord(f);
-                    if (rec == null) continue;
-                    if (!world.getName().equals(asString(rec.get("world")))) continue;
-                    if (asInt(rec.get("cx")) != x
-                            || asInt(rec.get("maxY")) != y
-                            || asInt(rec.get("cz")) != z) {
-                        continue;
-                    }
-                    if (f.delete()) n++;
-                } catch (Throwable ignored) {
-                    // 单个文件失败不影响其它
-                }
-            }
-        } catch (Throwable t) {
-            BossLog.warn("删除场地记录失败: " + t);
-        }
-        return n;
-    }
-
     /** 按记录清掉一块残留场地，返回清掉的方块数。 */
     public static int clearFromRecord(Map<String, Object> rec) {
         try {
@@ -719,48 +521,6 @@ public final class BossArena {
         } catch (Throwable t) {
             BossLog.warn("按记录清场失败: " + t);
             return 0;
-        }
-    }
-
-    // ==================================================================
-    // 入口：按标记清场
-    // ==================================================================
-
-    /**
-     * 右键「挑战区域标记（最上层屏障正中间的基岩）」→ 清空这块场地。
-     *
-     * <p>执行顺序与原脚本一致，<b>不能调换</b>：</p>
-     * <ol>
-     *   <li>反推场地（认不出就返回 {@code not_marker}，什么都不做）；</li>
-     *   <li>收集装饰保护格（<b>必须在清方块之前</b>，否则展示框/画已经被拆了）；</li>
-     *   <li>收掉使用这块场地的战局（先收战局，避免它的 tick 又把方块建回来）；</li>
-     *   <li>删记录（避免重启自清理再清一次）；</li>
-     *   <li>清实体；</li>
-     *   <li>清方块（跳过保护格）。</li>
-     * </ol>
-     */
-    public static BossBattleBridge.PurgeResult purgeByMarker(Player player, Block block) {
-        try {
-            Found found = detectByMarker(block);
-            if (found == null) {
-                return new BossBattleBridge.PurgeResult(false, "not_marker", "", 0, 0, 0, 0);
-            }
-            World world = block.getWorld();
-            Region region = found.region();
-            Set<String> protectedCells = collectDecorativeCells(world, region);
-            int fights = purgeLiveFights(world, region);
-            int records = deleteRecordsForMarker(world, block.getX(), block.getY(), block.getZ());
-            int entities = purgeEntities(world, region);
-            int blocks = clearAll(world, region, protectedCells);
-            BossLog.warn("挑战区域清除器：" + (player == null ? "?" : player.getName())
-                    + " 清空 " + found.size().name()
-                    + "（方块 " + blocks + " / 实体 " + entities + " / 战局 " + fights
-                    + " / 记录 " + records + "，保留装饰保护格 " + protectedCells.size() + "）");
-            return new BossBattleBridge.PurgeResult(true, "ok", found.size().name(),
-                    blocks, entities, fights, protectedCells.size());
-        } catch (Throwable t) {
-            BossLog.warn("清场失败: " + t);
-            return new BossBattleBridge.PurgeResult(false, "error: " + t, "", 0, 0, 0, 0);
         }
     }
 
@@ -818,7 +578,9 @@ public final class BossArena {
      * 什么都不清</b> —— 服务器 reload 会丢内存战局但场地和本体还在原地，
      * 那是「重载残留的活战局」，清掉等于把正在挑战的玩家脚下地板拆了。</p>
      *
-     * <p>新挑战开场前的强制清理走 {@code purgeByMarker}（那条路知道自己要建哪块场）。</p>
+     * <p>这条路径只服务<b>旧版本在主世界建场</b>留下的记录（专用世界 tangran_space 的场地
+     * 常驻、每场结束就地重置，不写记录）。原来的「按标记清场」入口（挑战区域清除器道具）
+     * 已随独立维度化删除，新挑战开场不再走清场。</p>
      *
      * @return 清掉的场地方块 + 残留实体总数
      */

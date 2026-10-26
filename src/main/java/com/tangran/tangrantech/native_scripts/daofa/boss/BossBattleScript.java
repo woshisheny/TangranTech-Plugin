@@ -16,6 +16,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
+import org.bukkit.event.player.AsyncPlayerChatEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.event.player.PlayerTeleportEvent;
 import org.bukkit.event.player.PlayerToggleFlightEvent;
@@ -131,7 +132,8 @@ public final class BossBattleScript implements NativeLifecycleScript {
         //         不要重复注册（Katarina 的规则见 BossKatarina 类注释）。
         return List.of(new JoinListener(), new ItemInteractListener(),
                 new ArenaListener(), new ChoiceCommandListener(), new KatarinaListener(),
-                new TwinMinigameListener(), new TwinShop.ShopListener(), new BossEventRules.Rules());
+                new TwinMinigameListener(), new TwinShop.ShopListener(), new BossEventRules.Rules(),
+                new BossArenaProtector.Rules(), new SurrenderChatListener());
     }
 
     @Override
@@ -484,6 +486,56 @@ public final class BossBattleScript implements NativeLifecycleScript {
                 }
             } catch (Throwable t) {
                 BossLog.warn("点击命令派发失败: " + t);
+            }
+        }
+    }
+
+    /**
+     * 聊天投降口令：「我不玩了」→ 终止挑战并送回原位。
+     *
+     * <p>开局时（{@link BossFightEntry#start}）会提示这条口令。匹配口径：整条消息
+     * 去掉首尾空白后<b>全等</b>「我不玩了」——不做包含匹配，聊天里聊到这四个字
+     * 不能把人踢出场。没有战局的玩家发送时按普通聊天原样放行。</p>
+     *
+     * <p>收场统一走 {@link #forceStop}：它自带「专用世界 → 回程位置（returnLoc）」
+     * 的传送，本监听不重复搬人。聊天事件在异步线程触发，实体收场与传送必须回主线程，
+     * 回主线程时按 key 重查战局表——异步窗口内战局可能已被其它路径收掉，
+     * 拿旧对象强收会绕过幂等标记 {@code removing} 的自检。</p>
+     */
+    private static final class SurrenderChatListener implements Listener {
+
+        private static final String PHRASE = "我不玩了";
+
+        @EventHandler(priority = EventPriority.NORMAL)
+        @SuppressWarnings("deprecation")
+        public void onChat(AsyncPlayerChatEvent event) {
+            try {
+                String msg = event.getMessage();
+                if (msg == null || !PHRASE.equals(msg.trim())) return;
+                Player player = event.getPlayer();
+                BossState st = BossFight.bySummoner(player);
+                if (st == null) st = BossFight.byName(player.getName());
+                if (st == null) return;      // 没在挑战：普通聊天放行
+                event.setCancelled(true);
+                player.sendMessage("§e[糖然科技] §f已收到，正在为你终止挑战并送回原位...");
+                String key = st.key;
+                String name = st.playerName;
+                com.tangran.tangrantech.native_scripts.NativePluginHelper.runOnMain(() -> {
+                    try {
+                        BossState live = BossFight.byKey(key);
+                        if (live != null) {
+                            BossBattleScript.forceStop(live, "玩家在聊天栏发送「我不玩了」主动放弃");
+                        }
+                        Player back = (name == null) ? null : Bukkit.getPlayerExact(name);
+                        if (back != null && back.isOnline()) {
+                            back.sendMessage("§a[糖然科技] 挑战已终止，你已被送回原位。");
+                        }
+                    } catch (Throwable t) {
+                        BossLog.warn("聊天投降收场失败: " + t);
+                    }
+                });
+            } catch (Throwable ignored) {
+                // 聊天处理失败不能让异常冒到事件总线
             }
         }
     }
@@ -877,12 +929,6 @@ public final class BossBattleScript implements NativeLifecycleScript {
         @Override
         public void log(String message) {
             BossLog.warn(message);
-        }
-
-        @Override
-        public BossBattleBridge.PurgeResult purgeArenaByMarker(Player player,
-                                                              org.bukkit.block.Block marker) {
-            return BossArena.purgeByMarker(player, marker);
         }
 
         // ------------------------------------------------------------------

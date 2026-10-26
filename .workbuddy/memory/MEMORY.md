@@ -42,6 +42,17 @@
    347d926 反编译显示 wrapper 缓存真实 meta（看似无问题）——**运行时构建行为不同，
    静态分析不可替代实测**。配方匹配语义：材质 + sf_id（PDC），不比完整 NBT。
 
+⑩ **原版属性有硬上限**：`Attribute.MAX_HEALTH.setBaseValue` 只接受 [0, 1024]，超了抛
+   `IllegalArgumentException: Health value (x) must be between 0 and 1024.0`；紧跟的
+   `setHealth(超上限)` 同样会抛。写血量必须 `min(1024, wanted)` 并**回读 `attr.getValue()`**
+   当折算分母（三阶段糖然决斗体「血条 20 ×100 = 2000 血」致变身整段中断案，
+   `BossPhaseThreeFour.applyDuelHealth`）。RSC 原脚本两处都 try 吞掉 → 身体只有原版 20 血、
+   血条却按 2000 折算（读数恒 1，一刀通关），这类**静默错比报错更该查**。
+
+⑪ **BOSS 挑战场已是常驻独立世界** `tangran_space`（`TangranSpace`：两座固定模板 + 每场就地重置，
+不再「在玩家身边选址建场」）→ 「按标记反推场地 + 右键基岩清场」整条链路与道具 `Tr_tzqyqcq`
+已于 2026-10-26 删除；场地保护走 `BossArenaProtector`（Dominion 式，整个世界即领地）。
+
 ## 部署与协作约定
 - jar 由用户手动拷到测试服，AI 不写测试服目录。
 - 用户协作风格：迭代式验证（重启服务端→反馈日志路径→定位 WARN/error），要求根因分析附源码实证（文件:行号）。

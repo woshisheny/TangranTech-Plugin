@@ -44,7 +44,6 @@ public final class ScriptIds {
     public static final String AUTO_TAIXU_HUB = "道法/自动太虚枢机";
     public static final String EQUIPMENT = "道法/装备";
     public static final String EXOTIC_FLAME_CHOICE = "道法/异火选择";
-    public static final String CLEAR_CHALLENGE_AREA = "道法/清理挑战区域";
 
     /** 全部脚本名（用于日志与自检）。 */
     public static String[] all() {
@@ -57,7 +56,7 @@ public final class ScriptIds {
                 FULL_ANALYSIS, ASCENSION_PATH, STACK_MACHINE, REALM,
                 LARGE_STRUCTURE_FILL, HEAVEN_CURRENCY_EXCHANGE, FLOATING_PAWN_SHOP,
                 SPIRIT_CRYSTAL, FINAL_CRAFTING_TABLE, FINAL_CRAFTING_COMPILER,
-                AUTO_TAIXU_HUB, EQUIPMENT, EXOTIC_FLAME_CHOICE, CLEAR_CHALLENGE_AREA,
+                AUTO_TAIXU_HUB, EQUIPMENT, EXOTIC_FLAME_CHOICE,
         };
     }
 }

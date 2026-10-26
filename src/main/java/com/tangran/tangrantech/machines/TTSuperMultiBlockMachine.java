@@ -168,7 +168,28 @@ public class TTSuperMultiBlockMachine extends TTRecipeMachine {
             String got = com.tangran.tangrantech.native_scripts.SlimefunBridge.blockId(actual);
             return expect.sfId().equalsIgnoreCase(got);
         }
-        return actual.getType() == expect.material();
+        Material want = expect.material();
+        // 液体格（结构里的 a6: material: water）：要的是「这个位置有水」，不是「放了水方块物品」。
+        // 水源与流动水都算（浇筑时先落下的往往是流动水），含水方块（水logged）同样算有水。
+        if (want == Material.WATER || want == Material.LAVA) {
+            return isLiquidAt(actual, want);
+        }
+        return actual.getType() == want;
+    }
+
+    /** 该格是否含期望的液体。 */
+    private static boolean isLiquidAt(Block block, Material want) {
+        if (block == null) return false;
+        if (block.getType() == want) return true;
+        if (want == Material.WATER) {
+            try {
+                return block.getBlockData() instanceof org.bukkit.block.data.Waterlogged wl
+                        && wl.isWaterlogged();
+            } catch (Throwable ignored) {
+                return false;
+            }
+        }
+        return false;
     }
 
     /**

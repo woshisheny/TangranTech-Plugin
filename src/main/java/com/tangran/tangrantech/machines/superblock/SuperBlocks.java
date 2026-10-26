@@ -11,11 +11,15 @@ import org.bukkit.Location;
 import org.bukkit.NamespacedKey;
 import org.bukkit.World;
 import org.bukkit.block.Block;
+import org.bukkit.Material;
 import org.bukkit.entity.BlockDisplay;
 import org.bukkit.entity.Display;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
+import org.bukkit.entity.ItemDisplay;
 import org.bukkit.entity.Player;
+import org.bukkit.scoreboard.Scoreboard;
+import org.bukkit.scoreboard.Team;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
@@ -382,8 +386,8 @@ public final class SuperBlocks implements Listener {
         } else {
             inst.correct.remove(loc);
         }
-        Display proj = inst.projectiles.get(loc);
-        if (proj != null && proj.isValid()) proj.setGlowing(!ok);
+        // 投影随放对/放错即时变化：放对撤掉投影，放错红色发光，仍空着保持白色发光
+        refreshCellSync(inst, loc);
 
         boolean now = inst.isFormedNow();
 
@@ -435,8 +439,8 @@ public final class SuperBlocks implements Listener {
                 boolean ok = cellMatches(inst, l);
                 if (ok) inst.correct.add(l);
                 else inst.correct.remove(l);
-                Display p = inst.projectiles.get(l);
-                if (p != null && p.isValid()) p.setGlowing(!ok);
+                // 自愈时同步刷新投影（放对的撤掉、放错的转红、缺失的保持白色发光）
+                refreshCellSync(inst, l);
             }
             boolean now = inst.isFormedNow();
             boolean before = inst.formed;
@@ -565,7 +569,7 @@ public final class SuperBlocks implements Listener {
             boolean visible = index == DISPLAY_ALL
                     || (index >= 0 && index < inst.layerYs.length
                         && en.getKey().getBlockY() == inst.layerYs[index]);
-            d.setTransformation(visible ? defaultTransformation() : invisibleTransformation());
+            d.setTransformation(visible ? visibleTransformation(d) : invisibleTransformation());
         }
     }
 
@@ -577,6 +581,18 @@ public final class SuperBlocks implements Listener {
         float offset = (1.0f - DISPLAY_SCALE) / 2f;
         return new Transformation(new Vector3f(offset, offset, offset),
                 new AxisAngle4f(0, 0, 0, 0), new Vector3f(DISPLAY_SCALE, DISPLAY_SCALE, DISPLAY_SCALE),
+                new AxisAngle4f(0, 0, 0, 0));
+    }
+
+    /**
+     * 物品投影（水桶等贴图）的可见变换。
+     *
+     * <p>物品贴图本身只有约四分之一格大，按方块的 0.8 缩放几乎看不见；这里放大到 1.5 倍
+     * （约 0.4 格）且不做平移，保证「一格内一个显眼的水桶」又不至于突出到相邻格子。</p>
+     */
+    private static Transformation itemTransformation() {
+        return new Transformation(new Vector3f(0, 0, 0),
+                new AxisAngle4f(0, 0, 0, 0), new Vector3f(1.5f, 1.5f, 1.5f),
                 new AxisAngle4f(0, 0, 0, 0));
     }
 
@@ -593,27 +609,19 @@ public final class SuperBlocks implements Listener {
     private static void spawnProjectilesSync(Inst inst) {
         World w = inst.core.getWorld();
         for (Location l : inst.cellLocs) {
-            TTSuperMultiBlockMachine.Expect expect = inst.cells.get(new Off(
-                    l.getBlockX() - inst.core.getBlockX(),
-                    l.getBlockY() - inst.core.getBlockY(),
-                    l.getBlockZ() - inst.core.getBlockZ()));
-            if (expect == null || expect.sfId() != null || !expect.material().isBlock()) continue;   // 非原版方块不给投影，对齐 RSC
+            TTSuperMultiBlockMachine.Expect expect = expectOf(inst, l);
+            if (expect == null) continue;
+
+            // 档案建立时已经摆好的格子不需要投影（对齐「放对了投影就消失」）
+            if (inst.correct.contains(l)) continue;
 
             // 重启后世界里的旧投影还活着——按 PDC 收养，避免重复生成（对齐 RSC addProjectile 收养分支）
             Display existing = findAdoptable(w, l);
-            if (existing != null) {
-                inst.projectiles.put(l, existing);
-                continue;
-            }
-
-            BlockDisplay d = (BlockDisplay) w.spawnEntity(l, EntityType.BLOCK_DISPLAY);
-            d.setBlock(expect.material().createBlockData());
-            d.setTransformation(defaultTransformation());
-            d.getPersistentDataContainer().set(DISPLAY_KEY, PersistentDataType.BOOLEAN, true);
-            d.setGlowing(!inst.correct.contains(l));
-            d.setBrightness(new Display.Brightness(15, 15));
-            d.setCustomNameVisible(false);
+            Display d = (existing != null) ? existing : createDisplay(w, l, expect);
+            if (d == null) continue;
             inst.projectiles.put(l, d);
+            applyLayerVisibility(inst, l, d);
+            applyGlow(d, isWrongBlock(l));
         }
         // 初始只显示核心所在层（对齐 RSC addProjectiles 末尾）
         int coreIdx = 0;
@@ -626,6 +634,138 @@ public final class SuperBlocks implements Listener {
         } catch (Throwable ignored) {
         }
     }
+
+    /** 该格的期望（旋转后的结构表）；不在结构里返回 null。 */
+    private static TTSuperMultiBlockMachine.Expect expectOf(Inst inst, Location loc) {
+        return inst.cells.get(new Off(
+                loc.getBlockX() - inst.core.getBlockX(),
+                loc.getBlockY() - inst.core.getBlockY(),
+                loc.getBlockZ() - inst.core.getBlockZ()));
+    }
+
+    /**
+     * 按期望创建一个投影实体。
+     *
+     * <p>原版方块用 {@link BlockDisplay} 直接渲染方块；<b>液体格用 {@link ItemDisplay} 渲染对应的桶</b>
+     * ——BlockDisplay 画不出流体，结构里的 {@code a6: water} 若按方块投影会完全看不见，
+     * 玩家根本不知道那里要放水。粘液物品、空气、非方块原版物品不投影（对齐 RSC）。</p>
+     */
+    private static Display createDisplay(World w, Location l, TTSuperMultiBlockMachine.Expect expect) {
+        if (expect.sfId() != null) return null;
+        Material m = expect.material();
+        Display d = null;
+        if (m == Material.WATER || m == Material.LAVA) {
+            ItemStack icon = new ItemStack(m == Material.WATER ? Material.WATER_BUCKET : Material.LAVA_BUCKET);
+            ItemDisplay item = (ItemDisplay) w.spawnEntity(l, EntityType.ITEM_DISPLAY);
+            item.setItemStack(icon);
+            item.setItemDisplayTransform(ItemDisplay.ItemDisplayTransform.FIXED);
+            d = item;
+        } else if (m.isBlock()) {
+            BlockDisplay block = (BlockDisplay) w.spawnEntity(l, EntityType.BLOCK_DISPLAY);
+            block.setBlock(m.createBlockData());
+            d = block;
+        }
+        if (d == null) return null;
+        d.setTransformation(visibleTransformation(d));
+        d.getPersistentDataContainer().set(DISPLAY_KEY, PersistentDataType.BOOLEAN, true);
+        d.setBrightness(new Display.Brightness(15, 15));
+        d.setCustomNameVisible(false);
+        return d;
+    }
+
+    /** 「可见」状态的变换：方块投影 0.8 格居中，物品（水桶）投影放大到半格。 */
+    private static Transformation visibleTransformation(Display d) {
+        return (d instanceof ItemDisplay) ? itemTransformation() : defaultTransformation();
+    }
+
+    /** 该格是不是「放了东西但不是要的那个」——放错才会显示红色发光（空气/洞穴空气都算空）。 */
+    private static boolean isWrongBlock(Location loc) {
+        try {
+            return !loc.getBlock().getType().isAir();
+        } catch (Throwable ignored) {
+            return false;
+        }
+    }
+
+    /**
+     * 刷新单格投影：放对了 → 投影消失；放错了 → 红色发光；还空着 → 白色发光提示。
+     *
+     * <p>主线程内联（脏队列由主线程定时任务消费；tick 通道进来时经 {@link #runSync} 调度）。</p>
+     */
+    private static void refreshCell(Inst inst, Location loc) {
+        if (!inst.machine.flags().displayProjectiles()) return;
+        if (Bukkit.isPrimaryThread()) refreshCellSync(inst, loc);
+        else runSync(() -> refreshCellSync(inst, loc));
+    }
+
+    private static void refreshCellSync(Inst inst, Location loc) {
+        if (CORE.get(inst.core) != inst) return;          // 实例已被重建/销毁
+        if (!inst.machine.flags().displayProjectiles()) return;
+        Display d = inst.projectiles.get(loc);
+
+        if (inst.correct.contains(loc)) {
+            // 放对了：撤掉该格投影
+            if (d != null) {
+                clearGlowTeam(d);
+                if (d.isValid()) d.remove();
+                inst.projectiles.remove(loc);
+            }
+            return;
+        }
+
+        TTSuperMultiBlockMachine.Expect expect = expectOf(inst, loc);
+        if (expect == null) return;
+        if (d == null || !d.isValid()) {
+            d = createDisplay(loc.getWorld(), loc, expect);
+            if (d == null) return;
+            inst.projectiles.put(loc, d);
+            applyLayerVisibility(inst, loc, d);
+        }
+        applyGlow(d, isWrongBlock(loc));
+    }
+
+    /** 按当前显示层决定该投影可见与否（越界/全部层可见的语义与 {@link #setLayer} 一致）。 */
+    private static void applyLayerVisibility(Inst inst, Location loc, Display d) {
+        if (d == null || !d.isValid()) return;
+        int index = inst.layerIndex;
+        boolean visible = index == DISPLAY_ALL
+                || (index >= 0 && index < inst.layerYs.length && loc.getBlockY() == inst.layerYs[index]);
+        d.setTransformation(visible ? visibleTransformation(d) : invisibleTransformation());
+    }
+
+    /**
+     * 设置投影发光：缺失格白色发光、放错格<b>红色</b>发光。
+     *
+     * <p>MC 的发光颜色由记分板队伍颜色决定，所以「红色」必须靠队伍：把实体加进一个
+     * {@link org.bukkit.ChatColor#RED} 的队伍即可；移出队伍即回到默认白色。</p>
+     */
+    private static void applyGlow(Display d, boolean wrong) {
+        if (d == null || !d.isValid()) return;
+        d.setGlowing(true);
+        try {
+            Team team = wrongTeam();
+            String entry = d.getUniqueId().toString();
+            boolean in = team.hasEntry(entry);
+            if (wrong && !in) team.addEntry(entry);
+            else if (!wrong && in) team.removeEntry(entry);
+        } catch (Throwable t) {
+            TT.log("[超多方块] 投影发光着色失败: " + t);
+        }
+    }
+
+    /** 「放错」专用的记分板队伍（红色发光）。 */
+    private static Team wrongTeam() {
+        Scoreboard board = Bukkit.getScoreboardManager().getMainScoreboard();
+        Team team = board.getTeam(WRONG_TEAM);
+        if (team == null) {
+            team = board.registerNewTeam(WRONG_TEAM);
+            team.setColor(org.bukkit.ChatColor.RED);
+            team.setCanSeeFriendlyInvisibles(false);
+        }
+        return team;
+    }
+
+    private static final String WRONG_TEAM = "tt_superblock_wrong";
 
     private static Display findAdoptable(World w, Location l) {
         for (Entity e : w.getNearbyEntities(l, 0.1, 0.1, 0.1)) {
@@ -642,10 +782,22 @@ public final class SuperBlocks implements Listener {
         runSync(() -> {
             for (Map.Entry<Location, Display> en : inst.projectiles.entrySet()) {
                 Display d = en.getValue();
+                clearGlowTeam(d);
                 if (d != null && !d.isDead() && d.isValid()) d.remove();
             }
             inst.projectiles.clear();
         });
+    }
+
+    /** 把实体从「放错」队伍里摘掉（实体移除后队伍条目不会自动消失，留着会无限累积）。 */
+    private static void clearGlowTeam(Display d) {
+        if (d == null) return;
+        try {
+            Team team = Bukkit.getScoreboardManager().getMainScoreboard().getTeam(WRONG_TEAM);
+            if (team != null) team.removeEntry(d.getUniqueId().toString());
+        } catch (Throwable ignored) {
+            // 记分板不可用时忽略
+        }
     }
 
     // ==================================================================

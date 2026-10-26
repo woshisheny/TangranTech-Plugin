@@ -66,20 +66,6 @@ public final class BossBattleBridge {
         public record Member(String title, String id) {}
     }
 
-    /**
-     * 一次清场的结果。
-     *
-     * @param ok             是否真的清了
-     * @param reason         失败原因（{@code not_marker} 表示「这里不是区域标记格」）
-     * @param size           区域尺寸的可读描述
-     * @param blocks         清除的方块数
-     * @param entities       清除的实体数
-     * @param fights         一并收掉的战局数
-     * @param protectedCells 被保留的装饰格数（展示框 / 画 及其依附方块）
-     */
-    public record PurgeResult(boolean ok, String reason, String size,
-                              int blocks, int entities, int fights, int protectedCells) {}
-
     /** BOSS战 侧需要提供的能力。 */
     public interface Provider {
 
@@ -112,15 +98,6 @@ public final class BossBattleBridge {
 
         /** 写一条 BOSS战 的日志。 */
         void log(String message);
-
-        /**
-         * 按「挑战区域标记（最上层屏障正中间的基岩）」清空整块挑战区域。
-         *
-         * @return 清场结果；未实现时返回 null
-         */
-        default PurgeResult purgeArenaByMarker(Player player, org.bukkit.block.Block marker) {
-            return null;
-        }
 
         // ------------------------------------------------------------------
         // 以下是「装备」侧回调 BOSS战 的能力。
@@ -287,12 +264,6 @@ public final class BossBattleBridge {
     public static boolean xuStageActive(Player player) {
         Provider impl = p();
         return impl != null && safe(() -> impl.xuStageActive(player), false);
-    }
-
-    /** 按挑战区域标记清场。 */
-    public static PurgeResult purgeArenaByMarker(Player player, org.bukkit.block.Block marker) {
-        Provider impl = p();
-        return impl == null ? null : safe(() -> impl.purgeArenaByMarker(player, marker), null);
     }
 
     /** 把收割到的作物记进天实账本。 */

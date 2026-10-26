@@ -81,7 +81,7 @@ public final class BossTwin implements BossGuardian {
     /** 双子登场时糖然血条（已打完 zqx125 + Katarina）。 */
     private static final double ARRIVAL_HP = 60.0d;
 
-    /** 双子全灭时糖然血条再扣（60 → 20；决斗时 ×100 变 2000，批次 7）。 */
+    /** 双子全灭时糖然血条再扣（60 → 20；决斗时 ×100 想给 2000 血，但原版上限 1024，实际按 1024 截断）。 */
     private static final double DEFEAT_HP_DROP = 40.0d;
 
     // ==================================================================

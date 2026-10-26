@@ -6,42 +6,42 @@ import com.tangran.tangrantech.native_scripts.NativePluginHelper;
 import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItem;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import java.util.UUID;
-import java.util.concurrent.ConcurrentHashMap;
 import org.bukkit.Location;
-import org.bukkit.Material;
 import org.bukkit.World;
+import org.bukkit.block.Block;
+import org.bukkit.entity.Entity;
 import org.bukkit.entity.Item;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerDropItemEvent;
-import org.bukkit.event.player.PlayerItemHeldEvent;
-import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.scheduler.BukkitTask;
 
 /**
- * 「粗糖水获取」的原生实现（对应 {@code scripts/粗糖水获取.js}）。
+ * 「粗糖水获取」的原生实现（对应 2026-10-24 重写后的 {@code scripts/粗糖水获取.js}）。
  *
- * <p>玩法：站/走到水边并手持「糖」({@code TR_TZ}) 或「瓶子」({@code TR_BOTTLE})，
- * 把它们丢出去；脚本按「4 个糖 + 1 个瓶子 = 1 瓶粗糖水」的比例结算，
- * 直接在第一个瓶子的位置掉落 {@code TR_CTS}。每第 10 次结算保底产出 4 个沉重核心
- * （原脚本的整蛊设定，这里原样保留）。</p>
+ * <p>玩法：把「糖渣」({@code TR_TZ}) 与「万用瓶」({@code TR_BOTTLE}) 丢进水里，
+ * 按 4 糖渣 + 1 万用瓶 = 1 瓶粗糖水 立即结算，产物在第一个万用瓶的位置掉落。</p>
  *
- * <p>两个实现细节：</p>
- * <ul>
- *   <li>「观察者」有 200 刻（10 秒）无操作超时，超时即清空累计；
- *       原脚本在玩家退出时没有清理遗留任务，这里补了 {@code PlayerQuitEvent} 清理。</li>
- *   <li>掉落物实体在丢出瞬间可能还没生成，原脚本靠外层
- *       {@code PlayerDropItemEvent} 直接拿到了实体，这里保持一致，
- *       但消耗前会校验实体仍然有效。</li>
- * </ul>
+ * <h2>为什么是「实扫世界」而不是「累加计数」</h2>
+ * <p>旧实现（以及我们上一版移植）在 {@code PlayerDropItemEvent} 里按玩家累加
+ * {@code tzCount/bottleCount}，并保留丢出瞬间的物品实体引用。这条链路有两个致命问题：</p>
+ * <ol>
+ *   <li><b>物品实体会被合并</b>：连续丢同类物品时原版会把它们并进一个实体、删掉被并的那个，
+ *       我们记录的 Entry 指向的实体失效 → 消耗时全部跳过 → 计数够但「一件也扣不掉」，
+ *       表现为<b>材料充足却永远合成不出来</b>；</li>
+ *   <li>计数与真实世界脱节：掉进水里飘走/被别人捡走/被水冲走的物品仍然留在计数里。</li>
+ * </ol>
+ * <p>重写后的脚本改为：丢出后延时 1 刻（等实体登记/合并完成），<b>实扫</b>落点周围
+ * {@link #SCAN_RADIUS} 格内的掉落物，现算现扣；能凑几份就合几份。这样合并、飘移、
+ * 分多次丢都不影响判定。</p>
+ *
+ * <h2>材料必须在水中</h2>
+ * <p>按需求只统计<b>泡在液体里</b>的掉落物（{@link #inWater}）：糖渣和万用瓶都进了水
+ * 才会结算，丢在岸上不算。原脚本判的是「玩家附近有水」，玩家站在岸上/高处往水里丢时
+ * 会被误拒，这里改为判物品自身位置。</p>
  */
 public final class RawSugarWaterScript implements NativeLifecycleScript {
 
@@ -49,63 +49,141 @@ public final class RawSugarWaterScript implements NativeLifecycleScript {
     private static final String BOTTLE_ID = "TR_BOTTLE";
     private static final String CTS_ID = "TR_CTS";
 
-    /** 兑换比：4 个糖 → 1 瓶粗糖水。 */
+    /** 兑换比：4 个糖渣 + 1 个万用瓶 → 1 瓶粗糖水。 */
     private static final int TZ_PER_BOTTLE = 4;
-    /** 保底周期：每 10 次结算出一次沉重核心。 */
-    private static final int GUARANTEE_EVERY = 10;
-    /** 沉重核心保底数量。 */
-    private static final int HEAVY_CORE_AMOUNT = 4;
-    /** 无操作超时（刻）。 */
-    private static final long INACTIVITY_TICKS = 200L;
-    /** 水检测范围：以玩家所在格为中心的 4×4×4。 */
-    private static final int WATER_SCAN = 2;
-
-    /** 正在观察中的玩家 UUID。 */
-    private static final Set<UUID> ACTIVE =
-            Collections.newSetFromMap(new ConcurrentHashMap<>());
-
-    /** 玩家 UUID → 累计状态。 */
-    private static final Map<UUID, PlayerState> STATES = new ConcurrentHashMap<>();
+    /** 统计掉落物的搜索半径（格），以最后丢出的物品的落点为中心。 */
+    private static final double SCAN_RADIUS = 4.0d;
+    /** 单次触发最多合成的份数（防异常情况下死循环）。 */
+    private static final int CRAFT_GUARD = 64;
+    /**
+     * 入水判定重试时刻（刻）：丢出瞬间物品还在玩家手边/半空，等它落进水里再结算。
+     * 每一刻都重扫一遍世界，先到的先结算；结算会消耗材料，后面的重试自然不再出货。
+     */
+    private static final long[] WATER_PROBE_DELAYS = {1L, 4L, 8L, 16L};
 
     /**
-     * 玩家 UUID → 保底计数（累计成功结算次数，每满 {@link #GUARANTEE_EVERY} 次出保底）。
+     * 玩家 → 最近一次「已排好探测」的丢出位置。
      *
-     * <p>跨局保留：{@code stopWatcher} 只清单轮累计状态，不清保底计数（对应原脚本
-     * 全局对象的跨局语义）。</p>
+     * <p>连续快速丢出（按住 Ctrl+Q 或连点）会产生大量 {@code PlayerDropItemEvent}，
+     * 若每件都排 4 次世界扫描就是无谓开销。落点仍在探测半径内的后续丢出会被
+     * 已排队的重试一并扫到，因此直接跳过、不重复排队。</p>
      */
-    private static final Map<UUID, Integer> SETTLEMENTS = new ConcurrentHashMap<>();
+    private static final java.util.Map<java.util.UUID, Location> PENDING =
+            new java.util.concurrent.ConcurrentHashMap<>();
 
     @Override
     public Object invoke(String fn, Object... args) {
         return null;
     }
 
-    /** 玩家丢出物品的入口。 */
+    /**
+     * 玩家丢出物品的入口。
+     *
+     * <p>只认糖渣/万用瓶；真正的入水判定与水中的批量结算延后到
+     * {@link #WATER_PROBE_DELAYS} 里的时刻执行。</p>
+     */
     public static void handleDrop(Player player, Item dropped) {
         if (dropped == null || !player.isOnline()) return;
-
         ItemStack item = dropped.getItemStack();
         if (item == null) return;
-        int amount = item.getAmount();
+        if (!isTrItem(item, TZ_ID) && !isTrItem(item, BOTTLE_ID)) return;
 
-        boolean tz = isTrItem(item, TZ_ID);
-        boolean bottle = isTrItem(item, BOTTLE_ID);
-        if (!tz && !bottle) return;
-        if (!isNearWater(player.getLocation())) return;
-
-        tryStartWatcher(player);
-
-        PlayerState state = getState(player);
-        if (tz) {
-            state.tzCount += amount;
-            state.tzEntries.add(new Entry(dropped, amount));
-        } else {
-            state.bottleCount += amount;
-            state.bottleEntries.add(new Entry(dropped, amount));
+        Location fallback = dropped.getLocation().clone();
+        java.util.UUID uuid = player.getUniqueId();
+        Location previous = PENDING.put(uuid, fallback);
+        if (previous != null && previous.getWorld() == fallback.getWorld()
+                && previous.distanceSquared(fallback) <= SCAN_RADIUS * SCAN_RADIUS) {
+            return;     // 附近的这次丢出会被已排队的探测扫到
         }
 
-        resetInactivityTimer(player);
-        tryGenerate(player);
+        for (int i = 0; i < WATER_PROBE_DELAYS.length; i++) {
+            long delay = WATER_PROBE_DELAYS[i];
+            boolean last = i == WATER_PROBE_DELAYS.length - 1;
+            NativePluginHelper.runLater(() -> {
+                try {
+                    if (last) PENDING.remove(uuid);
+                    if (!player.isOnline()) return;
+                    // 实体被合并/捡走时退回丢出瞬间的位置判断，避免整条链路空转
+                    Location center = dropped.isValid() ? dropped.getLocation() : fallback;
+                    if (!inWater(center)) return;
+                    tryGenerate(player, center);
+                } catch (Throwable t) {
+                    TT.log("粗糖水获取处理出错: " + t);
+                }
+            }, delay);
+        }
+    }
+
+    /**
+     * 扫描 {@code center} 周围水中的糖渣/万用瓶，按 4:1 结算并掉落产物。
+     *
+     * <p>循环结算到凑不出下一份为止：材料多时一次丢出即可全部合成
+     * （对齐原脚本 {@code Tr_tryGenerate} 的 {@code crafted += pairs} 语义）。</p>
+     *
+     * @return 是否有产出
+     */
+    public static boolean tryGenerate(Player player, Location center) {
+        if (player == null || center == null) return false;
+        World world = center.getWorld();
+        if (world == null) return false;
+        SlimefunItem cts = SlimefunItem.getById(CTS_ID);
+        if (cts == null) return false;
+
+        int crafted = 0;
+        for (int guard = 0; guard < CRAFT_GUARD; guard++) {
+            List<Item> tz = new ArrayList<>();
+            List<Item> bottle = new ArrayList<>();
+            scanDrops(center, tz, bottle);
+
+            int pairs = Math.min(totalAmount(tz) / TZ_PER_BOTTLE, totalAmount(bottle));
+            if (pairs <= 0) break;
+
+            List<Consumed> tzUsed = planConsumption(tz, pairs * TZ_PER_BOTTLE);
+            List<Consumed> bottleUsed = planConsumption(bottle, pairs);
+            if (tzUsed == null || bottleUsed == null) break;
+
+            Location spawnLoc = bottleUsed.get(0).entity.getLocation();
+            ItemStack reward = cts.getItem().clone();
+            reward.setAmount(pairs);
+            world.dropItemNaturally(spawnLoc, reward);
+
+            applyConsumption(tzUsed);
+            applyConsumption(bottleUsed);
+            crafted += pairs;
+        }
+
+        if (crafted <= 0) return false;
+        playFishingSound(player, center);
+        return true;
+    }
+
+    /** 实扫：只收「泡在液体里」的掉落物——糖渣与万用瓶都进了水才参与结算。 */
+    private static void scanDrops(Location center, List<Item> tz, List<Item> bottle) {
+        World world = center.getWorld();
+        if (world == null) return;
+        for (Entity entity : world.getNearbyEntities(center, SCAN_RADIUS, SCAN_RADIUS, SCAN_RADIUS)) {
+            if (!(entity instanceof Item item)) continue;
+            if (!item.isValid() || item.isDead()) continue;
+            ItemStack stack = item.getItemStack();
+            if (stack == null || stack.getType().isAir()) continue;
+            if (!inWater(item.getLocation())) continue;
+            if (isTrItem(stack, TZ_ID)) tz.add(item);
+            else if (isTrItem(stack, BOTTLE_ID)) bottle.add(item);
+        }
+    }
+
+    /**
+     * 该位置是否泡在液体里。
+     *
+     * <p>先看物品所在格；物品在水面上下浮动时可能刚好越过水块上沿，再补看下方一格。</p>
+     */
+    public static boolean inWater(Location loc) {
+        if (loc == null) return false;
+        World world = loc.getWorld();
+        if (world == null) return false;
+        Block block = loc.getBlock();
+        if (block.isLiquid()) return true;
+        return block.getRelative(0, -1, 0).isLiquid();
     }
 
     /** 判断物品是否为指定 id 的糖然物品。 */
@@ -119,140 +197,22 @@ public final class RawSugarWaterScript implements NativeLifecycleScript {
         return template != null && template.getItem().isSimilar(item);
     }
 
-    /** 检测坐标附近是否有液体（原脚本扫 4×4×4）。 */
-    public static boolean isNearWater(Location loc) {
-        if (loc == null) return false;
-        World world = loc.getWorld();
-        if (world == null) return false;
-        int bx = (int) Math.floor(loc.getX());
-        int by = (int) Math.floor(loc.getY());
-        int bz = (int) Math.floor(loc.getZ());
-        for (int dy = -WATER_SCAN; dy <= WATER_SCAN - 1; dy++) {
-            for (int dx = -WATER_SCAN; dx <= WATER_SCAN - 1; dx++) {
-                for (int dz = -WATER_SCAN; dz <= WATER_SCAN - 1; dz++) {
-                    if (world.getBlockAt(bx + dx, by + dy, bz + dz).isLiquid()) return true;
-                }
-            }
+    private static int totalAmount(List<Item> items) {
+        int sum = 0;
+        for (Item item : items) {
+            if (item == null || !item.isValid()) continue;
+            ItemStack stack = item.getItemStack();
+            if (stack != null) sum += stack.getAmount();
         }
-        return false;
-    }
-
-    private static PlayerState getState(Player player) {
-        return STATES.computeIfAbsent(player.getUniqueId(), k -> new PlayerState());
-    }
-
-    private static void clearState(Player player) {
-        PlayerState state = STATES.remove(player.getUniqueId());
-        if (state != null) state.cancelInactivity();
-    }
-
-    /** 停止观察：复位标记、移出活跃集合、清空累计。 */
-    private static void stopWatcher(Player player) {
-        PlayerState state = STATES.get(player.getUniqueId());
-        if (state != null) state.watchHandPreviously = false;
-        ACTIVE.remove(player.getUniqueId());
-        clearState(player);
-    }
-
-    private static void tryStartWatcher(Player player) {
-        if (!player.isOnline()) return;
-        UUID uuid = player.getUniqueId();
-        PlayerState state = getState(player);
-
-        if (!hasWatchItemInHand(player)) {
-            state.watchHandPreviously = false;
-            return;
-        }
-        if (ACTIVE.contains(uuid)) return;
-        if (!isNearWater(player.getLocation())) return;
-        if (state.watchHandPreviously) return;
-
-        ACTIVE.add(uuid);
-        state.watchHandPreviously = true;
-        resetInactivityTimer(player);
-    }
-
-    private static void resetInactivityTimer(Player player) {
-        PlayerState state = getState(player);
-        state.cancelInactivity();
-        state.inactivityTask = NativePluginHelper.runLater(() -> {
-            ACTIVE.remove(player.getUniqueId());
-            clearState(player);
-        }, INACTIVITY_TICKS);
-    }
-
-    private static boolean hasWatchItemInHand(Player player) {
-        ItemStack held = player.getInventory().getItemInMainHand();
-        return isTrItem(held, TZ_ID) || isTrItem(held, BOTTLE_ID);
-    }
-
-    /** 按累计数量结算并掉落产物；成功返回 true。 */
-    public static boolean tryGenerate(Player player) {
-        PlayerState state = getState(player);
-        int pairs = Math.min(state.tzCount / TZ_PER_BOTTLE, state.bottleCount);
-        if (pairs <= 0) return false;
-
-        SlimefunItem cts = SlimefunItem.getById(CTS_ID);
-        if (cts == null) return false;
-
-        List<Consumed> tzUsed = planConsumption(state.tzEntries, pairs * TZ_PER_BOTTLE);
-        List<Consumed> bottleUsed = planConsumption(state.bottleEntries, pairs);
-        if (tzUsed == null || bottleUsed == null) return false;
-
-        Location spawnLoc = bottleUsed.get(0).entity.getLocation();
-        ItemStack reward = cts.getItem().clone();
-        reward.setAmount(pairs);
-        player.getWorld().dropItemNaturally(spawnLoc, reward);
-
-        applyConsumption(tzUsed);
-        applyConsumption(bottleUsed);
-
-        state.tzCount -= pairs * TZ_PER_BOTTLE;
-        state.bottleCount -= pairs;
-        if (state.tzCount < 0) state.tzCount = 0;
-        if (state.bottleCount < 0) state.bottleCount = 0;
-
-        settleGuarantee(player, spawnLoc);
-
-        playFishingSound(player);
-        stopWatcher(player);
-        return true;
-    }
-
-    /**
-     * 每第 {@link #GUARANTEE_EVERY} 次结算保底：在产物位置额外掉落
-     * {@link #HEAVY_CORE_AMOUNT} 个沉重核心（原脚本的整蛊设定）。
-     *
-     * <p>计数器按玩家维度累计，跨局不清；与单轮累计状态（{@code STATES}）解耦，
-     * 避免 {@code stopWatcher} 把保底进度一起抹掉。</p>
-     */
-    private static void settleGuarantee(Player player, Location loc) {
-        UUID id = player.getUniqueId();
-        int count = SETTLEMENTS.getOrDefault(id, 0) + 1;
-        if (count < GUARANTEE_EVERY) {
-            SETTLEMENTS.put(id, count);
-            return;
-        }
-        SETTLEMENTS.put(id, 0);
-        try {
-            World world = player.getWorld();
-            if (world == null) return;
-            ItemStack core = new ItemStack(Material.HEAVY_CORE, HEAVY_CORE_AMOUNT);
-            world.dropItemNaturally(loc, core);
-            player.sendMessage("§d§l第 " + GUARANTEE_EVERY
-                    + " 次结算保底：§f§l沉重核心 x" + HEAVY_CORE_AMOUNT);
-        } catch (Throwable t) {
-            TT.log("粗糖水保底产出出错: " + t);
-        }
+        return sum;
     }
 
     /** 规划消耗：数量不够则整体返回 null，不做部分消耗。 */
-    private static List<Consumed> planConsumption(List<Entry> entries, int required) {
+    private static List<Consumed> planConsumption(List<Item> entities, int required) {
         List<Consumed> out = new ArrayList<>();
         int remain = required;
-        for (Entry entry : entries) {
+        for (Item entity : entities) {
             if (remain <= 0) break;
-            Item entity = entry.entity;
             if (entity == null || !entity.isValid()) continue;
             ItemStack stack = entity.getItemStack();
             if (stack == null) continue;
@@ -282,20 +242,22 @@ public final class RawSugarWaterScript implements NativeLifecycleScript {
         }
     }
 
-    /** 播放入水音效；失败时退回 {@code player.playSound}。 */
-    private static void playFishingSound(Player player) {
+    /** 播放入水音效。 */
+    private static void playFishingSound(Player player, Location loc) {
         try {
-            player.getWorld().playSound(player.getLocation(),
-                    "entity.fishing_bobber.splash", 1.0f, 1.0f);
+            World world = loc.getWorld();
+            if (world != null) {
+                world.playSound(loc, "entity.fishing_bobber.splash", 1.0f, 1.0f);
+                return;
+            }
         } catch (Throwable ignored) {
             // 音效资源缺失时静默
         }
-    }
-
-    /** 玩家退出时清理遗留状态。 */
-    public static void cleanup(Player player) {
-        clearState(player);
-        ACTIVE.remove(player.getUniqueId());
+        try {
+            player.playSound(player.getLocation(), "entity.fishing_bobber.splash", 1.0f, 1.0f);
+        } catch (Throwable ignored) {
+            // 静默
+        }
     }
 
     @Override
@@ -303,7 +265,7 @@ public final class RawSugarWaterScript implements NativeLifecycleScript {
         return Collections.singletonList(new DropListener());
     }
 
-    /** 丢出 / 移动 / 切物品：后两者只用于刷新无操作超时。 */
+    /** 只监听丢出事件：入水判定与结算都在延时任务里做，不需要移动/切物品事件。 */
     private static final class DropListener implements Listener {
 
         @EventHandler(priority = EventPriority.NORMAL, ignoreCancelled = true)
@@ -313,43 +275,6 @@ public final class RawSugarWaterScript implements NativeLifecycleScript {
             } catch (Throwable t) {
                 TT.log("粗糖水获取处理出错: " + t);
             }
-        }
-
-        @EventHandler(priority = EventPriority.NORMAL, ignoreCancelled = true)
-        public void onMove(PlayerMoveEvent event) {
-            try {
-                if (event.getFrom().getBlockX() == event.getTo().getBlockX()
-                    && event.getFrom().getBlockY() == event.getTo().getBlockY()
-                    && event.getFrom().getBlockZ() == event.getTo().getBlockZ()) {
-                    return; // 只转视角不算操作
-                }
-                tryStartWatcher(event.getPlayer());
-                resetInactivityTimer(event.getPlayer());
-            } catch (Throwable t) {
-                TT.log("粗糖水观察刷新出错: " + t);
-            }
-        }
-
-        @EventHandler(priority = EventPriority.NORMAL, ignoreCancelled = true)
-        public void onHeld(PlayerItemHeldEvent event) {
-            try {
-                Player player = event.getPlayer();
-                tryStartWatcher(player);
-                resetInactivityTimer(player);
-            } catch (Throwable t) {
-                TT.log("粗糖水切物品刷新出错: " + t);
-            }
-        }
-    }
-
-    /** 单个掉落物的累计记录。 */
-    private static final class Entry {
-        final Item entity;
-        final int amount;
-
-        Entry(Item entity, int amount) {
-            this.entity = entity;
-            this.amount = amount;
         }
     }
 
@@ -361,27 +286,6 @@ public final class RawSugarWaterScript implements NativeLifecycleScript {
         Consumed(Item entity, int used) {
             this.entity = entity;
             this.used = used;
-        }
-    }
-
-    /** 玩家维度的累计状态。 */
-    private static final class PlayerState {
-        int tzCount;
-        int bottleCount;
-        final List<Entry> tzEntries = Collections.synchronizedList(new ArrayList<>());
-        final List<Entry> bottleEntries = Collections.synchronizedList(new ArrayList<>());
-        BukkitTask inactivityTask;
-        boolean watchHandPreviously;
-
-        void cancelInactivity() {
-            if (inactivityTask != null) {
-                try {
-                    inactivityTask.cancel();
-                } catch (Throwable ignored) {
-                    // 已结束
-                }
-                inactivityTask = null;
-            }
         }
     }
 }

@@ -8,7 +8,7 @@ TR_YTC_RECIPE_TYPE:
   name: "&d&l冶糖厂"
   material: BLAST_FURNACE
 TR_CTS_RECIPE_TYPE:
-  name: "&f&l向水中丢入4n+1/4n个{#4dc9ff}&l糖渣&f&l与n/n+1个{#c1fafb}&l万用瓶&f&l获取n瓶{#78a1f2}&l粗糖水"
+  name: "&f&l向水中丢入4n个{#4dc9ff}&l糖渣&f&l与n个{#c1fafb}&l万用瓶&f&l获取n瓶{#78a1f2}&l粗糖水"
   material: WATER_BUCKET
 TR_CJHNSCYQ_RECIPE_TYPE:
   name: "{#8dddd8}&l初{#6fbeb9}&l级{#685a5a}&l黑奴{#8d1c1c}&l生产园区"

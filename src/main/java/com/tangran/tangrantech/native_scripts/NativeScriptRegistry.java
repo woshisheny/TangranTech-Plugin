@@ -11,7 +11,6 @@ import org.bukkit.plugin.Plugin;
 import org.jetbrains.annotations.Nullable;
 import com.tangran.tangrantech.native_scripts.daofa.AscensionPathScript;
 import com.tangran.tangrantech.native_scripts.daofa.AutoTaixuHubScript;
-import com.tangran.tangrantech.native_scripts.daofa.ClearChallengeAreaScript;
 import com.tangran.tangrantech.native_scripts.daofa.DivineCrystalScript;
 import com.tangran.tangrantech.native_scripts.daofa.EquipmentScript;
 import com.tangran.tangrantech.native_scripts.daofa.FinalCraftingCompilerScript;
@@ -162,7 +161,6 @@ public final class NativeScriptRegistry {
         register(ScriptIds.STORAGE_SPACE, new com.tangran.tangrantech.native_scripts.daofa.StorageSpaceScript());
         register(ScriptIds.FLOATING_PAWN_SHOP, new com.tangran.tangrantech.native_scripts.daofa.LifeshopScript());
         register(ScriptIds.EQUIPMENT, new com.tangran.tangrantech.native_scripts.daofa.EquipmentScript());
-        register(ScriptIds.CLEAR_CHALLENGE_AREA, new com.tangran.tangrantech.native_scripts.daofa.ClearChallengeAreaScript());
         register(ScriptIds.STACK_MACHINE, new com.tangran.tangrantech.native_scripts.daofa.StackMachineScript());
         register(ScriptIds.BOSS_BATTLE, new com.tangran.tangrantech.native_scripts.daofa.boss.BossBattleScript());
     }

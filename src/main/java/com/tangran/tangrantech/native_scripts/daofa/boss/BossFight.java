@@ -57,10 +57,11 @@ import org.bukkit.entity.Player;
  * 整表重建会被高频的无关事件反复触发。</p>
  *
  * <h2>与场地层的接线</h2>
- * <p>{@link BossArena} 不反向依赖本类，它在启动时等待本类注册两个回调：
- * {@link BossArena#registerRegionSource}（「哪些方块落在进行中的场地里」）与
- * {@link BossArena#registerFightPurger}（「收掉使用这块场地的战局」）。
- * 注册之后，「道法/清理挑战区域」的 {@code fights} 计数才不是恒为 0。</p>
+ * <p>{@link BossArena} 不反向依赖本类，它在启动时等待本类注册一个回调：
+ * {@link BossArena#registerRegionSource}（「哪些方块落在进行中的场地里」）。</p>
+ * <p>（原先还注册过 {@code registerFightPurger}（「收掉使用这块场地的战局」），
+ * 只服务「挑战区域清除器」道具的 {@code fights} 计数；该道具随挑战场独立维度化删除后
+ * 一并移除，2026-10-26。）</p>
  */
 public final class BossFight {
 
@@ -156,13 +157,12 @@ public final class BossFight {
         }
     }
 
-    /** 把场地层需要的两个回调挂上（幂等）。 */
+    /** 把场地层需要的回调挂上（幂等）。 */
     private static void ensureCallbacks() {
         if (callbacksRegistered) return;
         callbacksRegistered = true;
         try {
             BossArena.registerRegionSource(BossFight::activeRegions);
-            BossArena.registerFightPurger(BossFight::purge);
         } catch (Throwable t) {
             BossLog.warn("注册场地回调失败: " + t);
         }
@@ -370,58 +370,6 @@ public final class BossFight {
             }
         }
         return out;
-    }
-
-    /**
-     * 收掉「用的就是这块场地」的全部战局（供清场器用）。
-     *
-     * <p><b>判定口径与原脚本逐字一致</b>：比「中心 X/Z 相等 且 顶面 Y 相等」
-     * （原脚本是 {@code round((minX+maxX)/2) === x && ... && rA.maxY === y}）。</p>
-     *
-     * <p>这里<b>故意不用「区域相交」</b>：相交会误伤隔壁玩家。两位玩家的场地
-     * 在几何上完全可能部分重叠（场地是「玩家视线前方 6 格」建的），
-     * 用相交判定就会「清 A 的场地顺手把 B 的战局收了」—— 这正是原脚本
-     * 场地记录改成「每人一份」时要躲开的坑。</p>
-     *
-     * @return 收掉的战局数
-     */
-    public static int purge(World world, BossArena.Region region) {
-        if (world == null || region == null) return 0;
-        List<BossState> hits = new ArrayList<>();
-        for (BossState st : all()) {
-            if (st == null) continue;
-            try {
-                if (sameArenaAnchor(world, st.arena.oneWorld, st.arena.oneRegion, region)
-                        || sameArenaAnchor(world, st.arena.twoWorld, st.arena.twoRegion, region)
-                        || sameArenaAnchor(world, st.minigame.world, st.minigame.region, region)) {
-                    hits.add(st);
-                }
-            } catch (Throwable ignored) {
-                // 忽略
-            }
-        }
-        for (BossState st : hits) {
-            try {
-                BossBattleScript.forceStop(st, "场地被清理");
-            } catch (Throwable t) {
-                BossLog.warn("收掉战局失败（" + st.playerName + "）: " + t);
-            }
-        }
-        if (!hits.isEmpty()) {
-            BossLog.warn("清场收掉 " + hits.size() + " 局挑战");
-        }
-        return hits.size();
-    }
-
-    /** 是不是同一块场地：中心 X/Z 与顶面 Y 都相等（原脚本的比对口径）。 */
-    private static boolean sameArenaAnchor(World world, World arenaWorld, BossArena.Region r,
-                                           BossArena.Region target) {
-        if (r == null || target == null) return false;
-        // 原脚本是 `if (rA && (!wA || wA === world))` —— 世界为空时不做世界比对
-        if (arenaWorld != null && !sameWorld(world, arenaWorld)) return false;
-        return r.centerX() == target.centerX()
-                && r.centerZ() == target.centerZ()
-                && r.maxY() == target.maxY();
     }
 
     /** 供调试：一局的可读摘要。 */
