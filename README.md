@@ -16,7 +16,7 @@ RSC（RykenSlimefunCustomizer）附属项目 **糖然科技 TangranTech**[tangra
 - 目标环境：Paper 1.21.x（编译期对齐 1.21.11 API），Slimefun4 4.9.x（`Slimefun4-*-Beta.jar`）
 - 包名根：`com.tangran.tangrantech`
 - 主类：`com.tangran.tangrantech.TangranTechPlugin`
-- 输出：`build/libs/TangranTech-1.0.0-standalone.jar`
+- 输出：`build/libs/TangranTech-2.0.0-standalone.jar`
 
 ---
 
