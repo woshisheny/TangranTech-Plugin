@@ -1,5 +1,6 @@
 package com.tangran.tangrantech.native_scripts.daofa.boss;
 
+import com.tangran.tangrantech.util.PlayerKeys;
 import com.tangran.tangrantech.util.AddonPaths;
 import com.tangran.tangrantech.util.Json;
 import java.io.File;
@@ -165,7 +166,7 @@ public final class BossBattleBridge {
     /** 读玩家的 BOSS战 通关进度；文件缺失或损坏时返回空进度。 */
     public static Progress readProgress(String playerName) {
         try {
-            File f = new File(AddonPaths.configDir("BOSS战"), playerName + ".json");
+            File f = new File(AddonPaths.configDir("BOSS战"), PlayerKeys.key(playerName) + ".json");
             Map<String, Object> data = AddonPaths.readJson(f);
             if (data == null) return new Progress(new ArrayList<>());
             List<Integer> cleared = new ArrayList<>();

@@ -1,5 +1,6 @@
 package com.tangran.tangrantech.native_scripts.daofa;
 
+import com.tangran.tangrantech.util.PlayerKeys;
 import com.tangran.tangrantech.TT;
 import com.tangran.tangrantech.native_scripts.NativeLifecycleScript;
 import com.tangran.tangrantech.native_scripts.NativePluginHelper;
@@ -187,7 +188,7 @@ public final class RealmScript implements NativeLifecycleScript {
     // ------------------------------------------------------------------
 
     private static File realmFile(Player player) {
-        return new File(AddonPaths.configDir(AddonPaths.DIR_REALM), player.getName() + ".json");
+        return new File(AddonPaths.configDir(AddonPaths.DIR_REALM), PlayerKeys.key(player) + ".json");
     }
 
     /** 读境界存档；不存在返回 null（表示未开辟）。 */

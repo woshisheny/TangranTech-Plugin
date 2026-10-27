@@ -1,5 +1,6 @@
 package com.tangran.tangrantech.native_scripts.daofa;
 
+import com.tangran.tangrantech.util.PlayerKeys;
 import com.tangran.tangrantech.TT;
 import com.tangran.tangrantech.native_scripts.NativeLifecycleScript;
 import com.tangran.tangrantech.native_scripts.NativePluginHelper;
@@ -402,7 +403,7 @@ public final class FinalCraftingTableScript implements NativeLifecycleScript {
     }
 
     private static File saveFile(String name) {
-        return new File(AddonPaths.finalCraftSaveDir(), name + ".json");
+        return new File(AddonPaths.finalCraftSaveDir(), PlayerKeys.key(name) + ".json");
     }
 
     /** 把 {@code {槽位: {kind,id,amount}}} 摆回界面（只允许 1-7 列与第 9 列）。 */
@@ -484,7 +485,7 @@ public final class FinalCraftingTableScript implements NativeLifecycleScript {
             if (player == null || !player.isOnline()) return false;
             String name = player.getName();
 
-            File proof = new File(AddonPaths.heavenProofDir(), name + ".json");
+            File proof = new File(AddonPaths.heavenProofDir(), PlayerKeys.key(name) + ".json");
             if (!AddonPaths.docExists(proof)) {
                 player.sendMessage("§c请先击败BOSS糖然");
                 return false;

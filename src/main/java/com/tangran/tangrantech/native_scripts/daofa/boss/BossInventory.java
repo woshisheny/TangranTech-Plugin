@@ -1,5 +1,6 @@
 package com.tangran.tangrantech.native_scripts.daofa.boss;
 
+import com.tangran.tangrantech.util.PlayerKeys;
 import com.tangran.tangrantech.util.AddonPaths;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -51,7 +52,7 @@ public final class BossInventory {
     /** 备份文件（与进度存档同目录）。 */
     public static File backupFile(String playerName) {
         String who = (playerName == null || playerName.isEmpty()) ? "unknown" : playerName;
-        return new File(AddonPaths.configDir(BossProgress.DIR), PREFIX + who + ".json");
+        return new File(AddonPaths.configDir(BossProgress.DIR), PREFIX + PlayerKeys.key(who) + ".json");
     }
 
     /**
@@ -211,7 +212,7 @@ public final class BossInventory {
                 try {
                     String name = f.getName();
                     String who = name.substring(PREFIX.length(), name.length() - ".json".length());
-                    Player p = Bukkit.getPlayerExact(who);
+                    Player p = resolveOnline(who);
                     if (p == null) continue;
                     // 正在挑战的人：这份备份还要用，收场时才返还
                     if (BossFight.isActive(p)) continue;
@@ -227,5 +228,19 @@ public final class BossInventory {
             BossLog.warn("启动扫描备份失败: " + t);
         }
         return done;
+    }
+
+    /**
+     * 备份键 → 在线玩家：新键是 uuid（{@link java.util.UUID#fromString} 能解析就按 uuid 找），
+     * 旧名键兜底按名字找（迁移期两种文件可能并存）。
+     */
+    private static Player resolveOnline(String key) {
+        try {
+            return Bukkit.getPlayer(java.util.UUID.fromString(key));
+        } catch (IllegalArgumentException notUuid) {
+            return Bukkit.getPlayerExact(key);
+        } catch (Throwable t) {
+            return null;
+        }
     }
 }

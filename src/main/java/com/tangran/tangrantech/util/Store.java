@@ -11,6 +11,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.TreeMap;
+import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * 玩家数据文档库（SQLite）。
@@ -52,6 +53,30 @@ public final class Store {
     private static boolean schemaReady;
 
     // ==================================================================
+    // 写后缓存：save() 先进内存，每 5 分钟由定时任务统一落库
+    // ==================================================================
+
+    /**
+     * 待落库的文档（组合键 {@code ns + '\u0000' + key} → 序列化后的 JSON）。
+     *
+     * <p>高频写入（灵圃每秒刷新、倒计时推进等）不再逐条打 SQLite，而是先攒在这里；
+     * 每 5 分钟由 {@link #flush()} 一次性写库并在后台打印一条提示。内存里的最新值
+     * 对本进程的读取永远可见（{@link #load}/{@link #exists} 都先查这里），
+     * 所以业务逻辑感知不到延迟。</p>
+     *
+     * <p><b>代价</b>：服务器进程被强杀 / 崩溃时最多丢最近 5 分钟的进度；
+     * 正常停服走 {@link #shutdown()} 会先落库再关。组合键用 {@code '\u0000'} 分隔
+     * —— 命名空间与键都是玩家数据里的目录名 / 文件名，不可能含 NUL。</p>
+     */
+    private static final ConcurrentHashMap<String, String> PENDING = new ConcurrentHashMap<>();
+
+    /** 落库周期：5 分钟 = 6000 刻。 */
+    private static final long FLUSH_PERIOD_TICKS = 6000L;
+
+    /** 防止定时任务与停服同时 flush 造成重复写（SQLite 本身有锁，这里只是省一遍空转）。 */
+    private static final Object FLUSH_LOCK = new Object();
+
+    // ==================================================================
     // 生命周期
     // ==================================================================
 
@@ -68,13 +93,124 @@ public final class Store {
             schemaReady = true;
             TT.log("[存储] SQLite 就绪: " + db.getAbsolutePath());
             autoImportLegacyOnce();
+            startFlushTask();
+            startKeyMigration();
         } catch (Throwable t) {
             TT.log("[存储] 初始化失败，回落文件存储: " + t);
         }
     }
 
-    /** 卸载时关库。 */
+    /**
+     * 把「玩家名当键」的旧文档迁到「UUID 当键」（异步）。
+     *
+     * <p>2.1.0 早期用玩家名当数据键，玩家改名会丢档；这里把还能解析出 UUID 的旧键
+     * 平移过去。规则：<b>只在 uuid 键不存在时复制</b>，复制成功才删旧键 —— 两边都有
+     * 时保留 uuid 键（它是新数据），旧名键原样留下（下次启动还会尝试，不会重复写）。</p>
+     */
+    private static void startKeyMigration() {
+        try {
+            if (TT.plugin == null) return;
+            org.bukkit.Bukkit.getScheduler().runTaskAsynchronously(TT.plugin, () -> {
+                try {
+                    int moved = migrateNameKeysToUuid();
+                    if (moved > 0) {
+                        TT.log("[存储] 旧「玩家名键」文档已迁移为 UUID 键：" + moved + " 份");
+                    }
+                } catch (Throwable t) {
+                    TT.log("[存储] 玩家名键 → UUID 键迁移失败（不影响运行，可下次启动重试）: " + t);
+                }
+            });
+        } catch (Throwable ignored) {
+            // 调度器不可用（极端时序）→ 跳过，下次启动再迁
+        }
+    }
+
+    /** 执行迁移，返回迁移的文档数。公开给 /tr（想手动触发时）。 */
+    public static int migrateNameKeysToUuid() {
+        if (!available()) return 0;
+        int moved = 0;
+        for (Map.Entry<String, Integer> nsEntry : namespaces().entrySet()) {
+            String ns = nsEntry.getKey();
+            for (String key : keys(ns)) {
+                if (key == null || key.isEmpty()) continue;
+                if (key.matches("[0-9a-fA-F-]{36}")) continue;   // 已经是 uuid 键
+                String uuidKey = PlayerKeys.key(key);
+                if (uuidKey == null || uuidKey.equals(key)) continue;   // 解析不出，保留原名键
+                if (exists(ns, uuidKey)) continue;   // uuid 键已有数据（新数据优先），旧键留着
+                Map<String, Object> doc = load(ns, key);
+                if (doc == null) continue;
+                if (save(ns, uuidKey, doc)) {
+                    delete(ns, key);
+                    moved++;
+                }
+            }
+        }
+        flush();
+        return moved;
+    }
+
+    /**
+     * 启动「每 5 分钟落库一次」的异步定时任务，每次落库后在后台打印提示。
+     *
+     * <p>异步跑：SQLite 有全局锁，主线程读档只会在 flush 瞬间短暂等待。</p>
+     */
+    private static void startFlushTask() {
+        try {
+            if (TT.plugin == null) return;
+            org.bukkit.Bukkit.getScheduler().runTaskTimerAsynchronously(TT.plugin, () -> {
+                try {
+                    int n = flush();
+                    TT.log("[存储] 定时保存完成：写入 " + n + " 份文档"
+                            + (n == 0 ? "（无变更）" : ""));
+                } catch (Throwable t) {
+                    TT.log("[存储] 定时保存失败（文档仍在缓存中，下个周期重试）: " + t);
+                }
+            }, FLUSH_PERIOD_TICKS, FLUSH_PERIOD_TICKS);
+        } catch (Throwable t) {
+            TT.log("[存储] 定时保存任务启动失败（改为每次写都直接落库）: " + t);
+        }
+    }
+
+    /**
+     * 把缓存里的待写文档一次性落库。
+     *
+     * @return 实际写入的文档数
+     */
+    public static int flush() {
+        if (!available() || PENDING.isEmpty()) return 0;
+        synchronized (FLUSH_LOCK) {
+            if (PENDING.isEmpty()) return 0;
+            int n = 0;
+            long now = System.currentTimeMillis();
+            for (Map.Entry<String, String> e : PENDING.entrySet()) {
+                int sep = e.getKey().indexOf('\u0000');
+                if (sep <= 0) {
+                    PENDING.remove(e.getKey());
+                    continue;
+                }
+                String ns = e.getKey().substring(0, sep);
+                String key = e.getKey().substring(sep + 1);
+                int r = Sqlite.exec("INSERT INTO " + TABLE + " (ns, key, doc, updated_at) "
+                                + "VALUES (?,?,?,?) ON CONFLICT(ns, key) DO UPDATE "
+                                + "SET doc=excluded.doc, updated_at=excluded.updated_at",
+                        ns, key, e.getValue(), now);
+                if (r >= 0) {
+                    // 只在文档仍是这一版时移除：flush 期间又写了一笔的话，留给下一轮
+                    PENDING.remove(e.getKey(), e.getValue());
+                    n++;
+                }
+            }
+            return n;
+        }
+    }
+
+    /** 卸载时先落库再关库。 */
     public static void shutdown() {
+        try {
+            flush();
+        } catch (Throwable ignored) {
+            // 关闭阶段尽力而为
+        }
         schemaReady = false;
         Sqlite.close();
     }
@@ -115,6 +251,16 @@ public final class Store {
     @SuppressWarnings("unchecked")
     public static Map<String, Object> load(String ns, String key) {
         if (!available() || ns == null || key == null) return null;
+        // 先查写后缓存：save() 之后、flush() 之前，读取必须看到最新值
+        String pending = PENDING.get(pendingKey(ns, key));
+        if (pending != null) {
+            try {
+                Object parsed = Json.parse(pending);
+                if (parsed instanceof Map<?, ?> m) return (Map<String, Object>) m;
+            } catch (Throwable ignored) {
+                // 缓存坏了就回落查库
+            }
+        }
         String text = Sqlite.select("SELECT doc FROM " + TABLE + " WHERE ns=? AND key=?",
                 rs -> rs.next() ? rs.getString(1) : null, null, ns, key);
         if (text == null || text.isBlank()) return null;
@@ -131,7 +277,13 @@ public final class Store {
         }
     }
 
-    /** 写一份文档（UPSERT）。 */
+    /**
+     * 写一份文档。
+     *
+     * <p><b>写后缓存语义</b>：只进内存（{@link #PENDING}），由每 5 分钟的定时任务
+     * {@link #flush()} 统一落库；本进程的读取即时可见（{@link #load} 先查缓存）。
+     * 返回 true 表示「已安全接下这份文档」，不代表已写盘。</p>
+     */
     public static boolean save(String ns, String key, Object doc) {
         if (!available() || ns == null || key == null) return false;
         String text;
@@ -141,29 +293,29 @@ public final class Store {
             TT.log("[存储] 文档序列化失败 " + ns + "/" + key + ": " + t);
             return false;
         }
-        long now = System.currentTimeMillis();
-        int n = Sqlite.exec("INSERT INTO " + TABLE + " (ns, key, doc, updated_at) VALUES (?,?,?,?) "
-                + "ON CONFLICT(ns, key) DO UPDATE SET doc=excluded.doc, updated_at=excluded.updated_at",
-                ns, key, text, now);
-        return n >= 0;
+        PENDING.put(pendingKey(ns, key), text);
+        return true;
     }
 
-    /** 删一份文档。 */
+    /** 删一份文档（缓存里的待写版本一并作废）。 */
     public static boolean delete(String ns, String key) {
         if (!available() || ns == null || key == null) return false;
+        PENDING.remove(pendingKey(ns, key));
         return Sqlite.exec("DELETE FROM " + TABLE + " WHERE ns=? AND key=?", ns, key) >= 0;
     }
 
-    /** 文档是否存在。 */
+    /** 文档是否存在（含缓存中尚未落库的）。 */
     public static boolean exists(String ns, String key) {
         if (!available() || ns == null || key == null) return false;
+        if (PENDING.containsKey(pendingKey(ns, key))) return true;
         Integer one = Sqlite.select("SELECT 1 FROM " + TABLE + " WHERE ns=? AND key=? LIMIT 1",
                 rs -> rs.next() ? 1 : 0, 0, ns, key);
         return one != null && one == 1;
     }
 
-    /** 某命名空间下的全部键（字典序）。 */
+    /** 某命名空间下的全部键（字典序）。先落库，保证统计看到的是全量。 */
     public static List<String> keys(String ns) {
+        flush();
         List<String> out = Sqlite.select("SELECT key FROM " + TABLE + " WHERE ns=? ORDER BY key",
                 rs -> {
                     List<String> list = new ArrayList<>();
@@ -175,6 +327,7 @@ public final class Store {
 
     /** 某命名空间的文档数。 */
     public static int count(String ns) {
+        flush();
         Integer n = Sqlite.select("SELECT COUNT(*) FROM " + TABLE + " WHERE ns=?",
                 rs -> rs.next() ? rs.getInt(1) : 0, 0, ns);
         return n == null ? 0 : n;
@@ -189,6 +342,7 @@ public final class Store {
 
     /** 全部命名空间（按文档数降序）。 */
     public static Map<String, Integer> namespaces() {
+        flush();
         Map<String, Integer> out = Sqlite.select(
                 "SELECT ns, COUNT(*) FROM " + TABLE + " GROUP BY ns ORDER BY COUNT(*) DESC",
                 rs -> {
@@ -216,6 +370,19 @@ public final class Store {
                 + "ON CONFLICT(k) DO UPDATE SET v=excluded.v", k, v);
     }
 
+    /** 按前缀取一批元数据（k → v，含前缀全名）。 */
+    public static Map<String, String> metaByPrefix(String prefix) {
+        if (!available() || prefix == null) return new LinkedHashMap<>();
+        flush();
+        Map<String, String> out = Sqlite.select("SELECT k, v FROM " + META + " WHERE k LIKE ?",
+                rs -> {
+                    Map<String, String> m = new LinkedHashMap<>();
+                    while (rs.next()) m.put(rs.getString(1), rs.getString(2));
+                    return m;
+                }, new LinkedHashMap<>(), prefix + "%");
+        return out == null ? new LinkedHashMap<>() : out;
+    }
+
     // ==================================================================
     // 旧 JSON 导入
     // ==================================================================
@@ -224,7 +391,8 @@ public final class Store {
      * 导入结果。
      *
      * @param dryRun      是不是预览（true 时什么都没写）
-     * @param perNs       命名空间 → 导入（或将要导入）的文档数
+     * @param perNs       命名空间 → <b>扫到的文件数</b>（含跳过的；没用 --only 时这就是
+     *                    源目录里该命名空间的全部玩家档数）
      * @param created     新建的文档数
      * @param overwritten 覆盖的文档数
      * @param skipped     库里已有、本次跳过的文档数
@@ -242,7 +410,8 @@ public final class Store {
         /** 面向指令输出的一行摘要。 */
         public String summary() {
             return (dryRun ? "预览" : "导入完成") + "：共 " + total() + " 份（新建 " + created
-                    + " / 覆盖 " + overwritten + " / 跳过 " + skipped + " / 失败 " + failed + "）";
+                    + " / 覆盖 " + overwritten + " / 跳过·库内已有 " + skipped
+                    + " / 失败 " + failed + "）";
         }
     }
 
@@ -260,6 +429,9 @@ public final class Store {
                 setMeta(META_LEGACY, "skip:no-file");
                 return;
             }
+            // 导入的文档此刻还在写后缓存里：先落库再写标记，
+            // 否则启动后立刻崩溃会导致「标记已打、数据没进库」且不再重导。
+            flush();
             setMeta(META_LEGACY, "done:" + rep.created() + "/" + rep.skipped() + "/" + rep.failed());
             TT.log("[存储] 旧 JSON 导入 " + rep.summary());
             for (Map.Entry<String, Integer> e : rep.perNs().entrySet()) {
@@ -297,12 +469,23 @@ public final class Store {
             File[] files = dir.listFiles((d, n) -> n.toLowerCase(Locale.ROOT).endsWith(".json"));
             if (files == null || files.length == 0) continue;
             for (File f : files) {
-                String key = f.getName().substring(0, f.getName().length() - 5);
+                String rawKey = f.getName().substring(0, f.getName().length() - 5);
+                // RSC 旧档以「玩家名」为键 → 统一升级成 UUID 键（离线服本地派生，不联网）。
+                // 特例：<玩家名>_编译器.json（终刻合成台编译器草稿）→ uuid(<玩家名>) + 后缀
+                String key;
+                if (rawKey.endsWith("_编译器")) {
+                    key = PlayerKeys.key(rawKey.substring(0, rawKey.length() - "_编译器".length()))
+                            + "_编译器";
+                } else {
+                    key = PlayerKeys.key(rawKey);
+                }
                 try {
                     boolean exists = available() && exists(ns, key);
                     if (exists && !overwrite) {
                         skipped++;
-                        perNs.merge(ns, 0, Integer::sum);
+                        // 记「扫到了几个文件」而不是 0 —— 否则报告里 ×0 看起来像没扫到，
+                        // 用户会误以为「数据没被导入」（2026-10-27 实测踩过）
+                        perNs.merge(ns, 1, Integer::sum);
                         continue;
                     }
                     Map<String, Object> doc = readJsonFile(f);
@@ -319,8 +502,9 @@ public final class Store {
                     if (exists) overwritten++;
                     else created++;
                     perNs.merge(ns, 1, Integer::sum);
-                    if (samples.size() < 12 && key.length() > 0) {
-                        String line = ns + "/" + key;
+                    if (samples.size() < 12 && rawKey.length() > 0) {
+                        String line = ns + "/" + rawKey
+                                + (key.equals(rawKey) ? "" : " → " + key);
                         if (!samples.contains(line)) samples.add(line);
                     }
                 } catch (Throwable t) {
@@ -341,5 +525,10 @@ public final class Store {
         } catch (Throwable t) {
             return null;
         }
+    }
+
+    /** 写后缓存的组合键。 */
+    private static String pendingKey(String ns, String key) {
+        return ns + "\u0000" + key;
     }
 }

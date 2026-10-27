@@ -1,5 +1,6 @@
 package com.tangran.tangrantech.native_scripts.daofa;
 
+import com.tangran.tangrantech.util.PlayerKeys;
 import com.tangran.tangrantech.TT;
 import com.tangran.tangrantech.native_scripts.NativeLifecycleScript;
 import com.tangran.tangrantech.native_scripts.NativePluginHelper;
@@ -461,7 +462,7 @@ public final class FinalCraftingCompilerScript implements NativeLifecycleScript 
     // ------------------------------------------------------------------
 
     private static File draftFile(String name) {
-        return new File(AddonPaths.finalCraftDraftDir(), name + "_编译器.json");
+        return new File(AddonPaths.finalCraftDraftDir(), PlayerKeys.key(name) + "_编译器.json");
     }
 
     /** 把草稿里记的槽位还原到界面上。 */

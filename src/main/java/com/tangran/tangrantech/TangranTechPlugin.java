@@ -37,6 +37,12 @@ public final class TangranTechPlugin extends JavaPlugin implements SlimefunAddon
         TT.plugin = this;
         getLogger().info("糖然科技 开始加载（独立版）...");
         if (!checkDependencies()) return;
+        // 玩家键索引：进服即记 名字→UUID（之后所有解析走缓存，零成本）
+        try {
+            com.tangran.tangrantech.util.PlayerKeys.register();
+        } catch (Throwable e) {
+            getLogger().warning("玩家键索引监听注册失败: " + e);
+        }
         try {
             Setup.loadAll();
             registerCommands();

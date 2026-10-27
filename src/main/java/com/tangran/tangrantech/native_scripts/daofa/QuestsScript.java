@@ -1,5 +1,6 @@
 package com.tangran.tangrantech.native_scripts.daofa;
 
+import com.tangran.tangrantech.util.PlayerKeys;
 import com.tangran.tangrantech.TT;
 import com.tangran.tangrantech.native_scripts.NativeLifecycleScript;
 import com.tangran.tangrantech.util.AddonPaths;
@@ -137,7 +138,7 @@ public final class QuestsScript implements NativeLifecycleScript {
         list.add(new TaskDef("open_storage", "§d§l任务其二·开辟储物空间",
                 List.of("§7使用 §b储物空间开辟石", "§7开辟属于你的储物空间。"),
                 p -> AddonPaths.docExists(new File(AddonPaths.configDir(AddonPaths.DIR_STORAGE),
-                        p.getName() + ".json")),
+                        PlayerKeys.key(p.getName()) + ".json")),
                 null,
                 p -> "您还未开辟储物空间",
                 null));
@@ -519,7 +520,7 @@ public final class QuestsScript implements NativeLifecycleScript {
     // ------------------------------------------------------------------
 
     private static Map<String, Object> readPlayerDir(String dirName, String playerName) {
-        File f = new File(AddonPaths.configDir(dirName), playerName + ".json");
+        File f = new File(AddonPaths.configDir(dirName), PlayerKeys.key(playerName) + ".json");
         Map<String, Object> data = AddonPaths.readJson(f);
         return data == null ? new LinkedHashMap<>() : data;
     }
@@ -537,7 +538,7 @@ public final class QuestsScript implements NativeLifecycleScript {
             if (have < amount) return false;
             data.put("gongde", have - amount);
             data.putIfAbsent("daoyuan", 0);
-            AddonPaths.writeJson(new File(AddonPaths.configDir("天道货币"), name + ".json"), data);
+            AddonPaths.writeJson(new File(AddonPaths.configDir("天道货币"), PlayerKeys.key(name) + ".json"), data);
             updateGongdeLore(player, have - amount);
             return true;
         } catch (Throwable ignored) {
@@ -610,7 +611,7 @@ public final class QuestsScript implements NativeLifecycleScript {
     // ------------------------------------------------------------------
 
     private static File taskFile(String playerName) {
-        return new File(AddonPaths.configDir(AddonPaths.DIR_TASKS), playerName + ".json");
+        return new File(AddonPaths.configDir(AddonPaths.DIR_TASKS), PlayerKeys.key(playerName) + ".json");
     }
 
     private static Map<String, Object> loadTaskData(String playerName) {

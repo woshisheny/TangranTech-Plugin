@@ -1,5 +1,6 @@
 package com.tangran.tangrantech.native_scripts.daofa;
 
+import com.tangran.tangrantech.util.PlayerKeys;
 import com.tangran.tangrantech.TT;
 import com.tangran.tangrantech.native_scripts.NativeLifecycleScript;
 import com.tangran.tangrantech.util.AddonPaths;
@@ -182,7 +183,7 @@ public final class AscensionPathScript implements NativeLifecycleScript {
         if (!dir.exists() && !dir.mkdirs()) {
             TT.log("任务存档目录创建失败: " + dir.getAbsolutePath());
         }
-        return new File(dir, playerName + ".json");
+        return new File(dir, PlayerKeys.key(playerName) + ".json");
     }
 
     /** 读任务存档；缺失或损坏时返回「未完成任何任务、阶段 0」的默认值。 */

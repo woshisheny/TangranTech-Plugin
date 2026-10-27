@@ -1,5 +1,6 @@
 package com.tangran.tangrantech.native_scripts.daofa;
 
+import com.tangran.tangrantech.util.PlayerKeys;
 import com.tangran.tangrantech.TT;
 import com.tangran.tangrantech.native_scripts.NativeLifecycleScript;
 import com.tangran.tangrantech.util.AddonPaths;
@@ -333,7 +334,7 @@ public final class StorageSpaceScript implements NativeLifecycleScript {
             "§f[§x§B§8§E§3§F§F储§x§7§F§C§9§E§8物§x§4§A§A§3§C§7空§x§D§4§F§1§F§9间§f] ";
 
     private static File storageFile(String playerName) {
-        return new File(AddonPaths.configDir(AddonPaths.DIR_STORAGE), playerName + ".json");
+        return new File(AddonPaths.configDir(AddonPaths.DIR_STORAGE), PlayerKeys.key(playerName) + ".json");
     }
 
     /**
@@ -802,6 +803,58 @@ public final class StorageSpaceScript implements NativeLifecycleScript {
         if (inv == null) return;
         holder.inv = inv;
         openMenu(player, inv);
+        startLingpuRefresh(player, holder);
+    }
+
+    /**
+     * 灵圃界面的实时刷新任务（玩家名 → 任务）。
+     *
+     * <p>打开界面期间每 20 刻（1 秒）原地重画一次格子，倒计时与事件进度实时可见；
+     * 玩家下线 / 关界面 / 切到别的菜单时任务自动停。写档走 Store 的写后缓存，
+     * 每秒一次只是内存标记，落库仍按 5 分钟周期，无性能压力。</p>
+     */
+    private static final Map<String, org.bukkit.scheduler.BukkitTask> LINGPU_REFRESH =
+            new ConcurrentHashMap<>();
+
+    /** 打开灵圃界面时启动（替换同名旧任务，幂等）。 */
+    private static void startLingpuRefresh(Player player, MenuHolder holder) {
+        stopLingpuRefresh(player.getName());
+        try {
+            LINGPU_REFRESH.put(player.getName(), org.bukkit.Bukkit.getScheduler().runTaskTimer(
+                    TT.plugin, () -> {
+                        try {
+                            if (!player.isOnline()) {
+                                stopLingpuRefresh(player.getName());
+                                return;
+                            }
+                            Inventory top = player.getOpenInventory().getTopInventory();
+                            if (holderOf(top) != holder) {
+                                // 已切到别的菜单或关掉了
+                                stopLingpuRefresh(player.getName());
+                                return;
+                            }
+                            refreshLingpuMenu(top, player.getName(), holder.page);
+                            player.updateInventory();
+                        } catch (Throwable t) {
+                            TT.log("[储物空间] 灵圃实时刷新异常（任务已停）: " + t);
+                            stopLingpuRefresh(player.getName());
+                        }
+                    }, 20L, 20L));
+        } catch (Throwable t) {
+            TT.log("[储物空间] 灵圃实时刷新任务启动失败: " + t);
+        }
+    }
+
+    /** 停掉某玩家的实时刷新任务。 */
+    private static void stopLingpuRefresh(String name) {
+        org.bukkit.scheduler.BukkitTask task = LINGPU_REFRESH.remove(name);
+        if (task != null) {
+            try {
+                task.cancel();
+            } catch (Throwable ignored) {
+                // 已取消/已运行完都无所谓
+            }
+        }
     }
 
     private static void openFruitStorage(Player player, String playerName, int page) {
@@ -825,10 +878,9 @@ public final class StorageSpaceScript implements NativeLifecycleScript {
 
         for (CatDef cat : CATEGORIES) {
             Material mat = Material.matchMaterial(cat.icon());
+            // 储物空间已是「桶」模型：带 NBT 的物品独立成桶完整保存，无需再警告
             List<String> lore = new ArrayList<>();
             lore.add(cat.lore());
-            if ("vanilla".equals(cat.id())) lore.add("§c不要存入带有NBT的原版物品");
-            if ("slimefun".equals(cat.id())) lore.add("§c不要存入带有NBT的粘液科技物品");
             lore.add("§e点击进入");
             inv.setItem(cat.slot(), named(new ItemStack(mat == null ? Material.STONE : mat), cat.name(), lore));
         }
@@ -1094,7 +1146,7 @@ public final class StorageSpaceScript implements NativeLifecycleScript {
             lore.add("§7未种植");
             lore.add("§7将灵植种子拖到此处种植");
         }
-        lore.add("§7蹲下右键取下灵圃");
+        lore.add("§7右键直接取下灵圃（种植进度不会保留）");
         return named(base, soil == null ? String.valueOf(plot.soilId) : soil.name(), lore);
     }
 
@@ -1362,13 +1414,14 @@ public final class StorageSpaceScript implements NativeLifecycleScript {
     private static void handleLingpuClick(Player player, InventoryClickEvent event,
                                           Inventory top, MenuHolder holder, int slot) {
         String playerName = player.getName();
+        // 先原地刷新一次进度（原脚本同样如此），再取档 —— 顺序反了的话，
+        // 后面点击保存的会是刷新推进之前的旧倒计时，进度会被回拨。
+        refreshLingpuMenu(top, playerName, holder.page);
         Map<String, Object> data = load(playerName);
         if (data == null) {
             player.sendMessage("§c尚未开辟储物空间！");
             return;
         }
-        // 打开的那一刻先原地刷新一次进度显示（原脚本同样如此）
-        refreshLingpuMenu(top, playerName, holder.page);
 
         if (slot == LINGPU_BACK_SLOT) {
             openDongtian(player);
@@ -1418,8 +1471,10 @@ public final class StorageSpaceScript implements NativeLifecycleScript {
         if (cursor == null || cursor.getType().isAir()) {
             ClickType click = event.getClick();
 
-            // 蹲下右键：取下灵圃，返还灵圃与已种下的种子
-            if (plot != null && click == ClickType.SHIFT_RIGHT) {
+            // 右键（含蹲下右键）：直接取下灵圃，返还灵圃与已种下的种子。
+            // 返还的是按 id 现造的干净物品（buildCleanStack），不携带任何灵植数据等附加 NBT；
+            // 种植进度（农事事件 / 倒计时）随取下一并丢弃，重新放回即从零开始。
+            if (plot != null && (click == ClickType.RIGHT || click == ClickType.SHIFT_RIGHT)) {
                 giveOrDrop(player, buildCleanStack("slimefun", plot.soilId));
                 if (plot.planted()) giveOrDrop(player, buildCleanStack("slimefun", plot.seedId));
                 removePlot(data, index);
@@ -1429,17 +1484,7 @@ public final class StorageSpaceScript implements NativeLifecycleScript {
                 player.updateInventory();
                 return;
             }
-            // 右键空地：收回灵圃
-            if (plot != null && !plot.planted() && click == ClickType.RIGHT) {
-                giveOrDrop(player, buildCleanStack("slimefun", plot.soilId));
-                removePlot(data, index);
-                save(playerName, data);
-                top.setItem(slot, glass("§7[灵圃未解锁，请将灵圃拖在上面点击]", "GRAY_STAINED_GLASS_PANE"));
-                playSound(player, "entity.item.pickup", 0.8f, 1.0f);
-                player.updateInventory();
-                return;
-            }
-            // 空手点击成熟地块：收获
+            // 其余空手点击（左键）：收获成熟灵植
             if (plot != null && plot.planted() && plot.harvestable() && harvest(data, plot)) {
                 putPlot(data, index, plot);
                 save(playerName, data);
@@ -1452,6 +1497,22 @@ public final class StorageSpaceScript implements NativeLifecycleScript {
         }
 
         // ---- 光标上有东西 ----
+
+        // 农事事件材料是原版物品（水桶 / 锄头 / 骨粉），lingpuItemId（= slimefunIdOf）
+        // 对它们返回 null —— 必须在 id 判空之前处理，否则「灵植事件介绍」里的
+        // 浇水 / 翻耕 / 施肥三类操作永远走不到（实测 bug：事件无法按介绍复现）。
+        if (plot != null && plot.planted()) {
+            Material type = cursor.getType();
+            String evType = null;
+            if (type == Material.WATER_BUCKET) evType = LingpuPlot.EVENT_WATER;
+            else if (type.name().contains("HOE")) evType = LingpuPlot.EVENT_HOE;
+            else if (type == Material.BONE_MEAL) evType = LingpuPlot.EVENT_BONE;
+            if (evType != null) {
+                handleFarmEvent(player, playerName, data, plot, index, slot, top, cursor, evType);
+                return;
+            }
+        }
+
         String cursorId = lingpuItemId(cursor);
         if (cursorId == null) return;
 
@@ -1501,37 +1562,39 @@ public final class StorageSpaceScript implements NativeLifecycleScript {
             }
             return;
         }
+    }
 
-        // 农事事件：浇水 / 翻耕 / 施肥
-        if (plot != null && plot.planted()) {
-            Material type = cursor.getType();
-            String evType = null;
-            if (type == Material.WATER_BUCKET) evType = LingpuPlot.EVENT_WATER;
-            else if (type.name().contains("HOE")) evType = LingpuPlot.EVENT_HOE;
-            else if (type == Material.BONE_MEAL) evType = LingpuPlot.EVENT_BONE;
-            if (evType == null) return;
+    /**
+     * 处理一次农事事件（浇水 / 翻耕 / 施肥）。
+     *
+     * <p>三种事件的收尾差异，逐字对应原脚本（即「灵植事件介绍」承诺的行为）：</p>
+     * <ul>
+     *   <li>浇水 —— 水桶点击，<b>不消耗</b>；</li>
+     *   <li>翻耕 —— 任意锄头点击，耐久 -1~10（不消耗物品）；</li>
+     *   <li>施肥 —— 骨粉点击，<b>消耗 1 份</b>。</li>
+     * </ul>
+     * <p>没有对应待办时 {@link LingpuPlot#consumeEvent} 返回 false，这里直接返回，
+     * 不扣玩家手上的工具 / 材料。</p>
+     */
+    private static void handleFarmEvent(Player player, String playerName, Map<String, Object> data,
+                                        LingpuPlot plot, int index, int slot, Inventory top,
+                                        ItemStack cursor, String evType) {
+        if (!plot.consumeEvent(evType)) return;
 
-            if (!plot.consumeEvent(evType)) return;
-
-            // 三种事件各自的收尾差异，逐字对应原脚本：
-            //   浇水 —— 水桶不消耗
-            //   翻耕 —— 锄头耐久 -1~10（不消耗物品）
-            //   施肥 —— 消耗 1 份骨粉
-            if (LingpuPlot.EVENT_WATER.equals(evType)) {
-                playSound(player, "entity.player.splash", 0.8f, 1.2f);
-            } else if (LingpuPlot.EVENT_HOE.equals(evType)) {
-                damageHoe(cursor);
-                playSound(player, "block.grass.break", 0.8f, 1.0f);
-            } else {
-                consumeOneFromCursor(player, cursor);
-                playSound(player, "entity.experience_orb.pickup", 0.8f, 1.4f);
-            }
-            putPlot(data, index, plot);
-            save(playerName, data);
-            // 原地刷新，不重开菜单 —— 这样光标上的工具/材料还在，可以连续操作
-            top.setItem(slot, buildPlotItem(plot));
-            player.updateInventory();
+        if (LingpuPlot.EVENT_WATER.equals(evType)) {
+            playSound(player, "entity.player.splash", 0.8f, 1.2f);
+        } else if (LingpuPlot.EVENT_HOE.equals(evType)) {
+            damageHoe(cursor);
+            playSound(player, "block.grass.break", 0.8f, 1.0f);
+        } else {
+            consumeOneFromCursor(player, cursor);
+            playSound(player, "entity.experience_orb.pickup", 0.8f, 1.4f);
         }
+        putPlot(data, index, plot);
+        save(playerName, data);
+        // 原地刷新，不重开菜单 —— 这样光标上的工具/材料还在，可以连续操作
+        top.setItem(slot, buildPlotItem(plot));
+        player.updateInventory();
     }
 
     // ---- 果实仓库 ----
@@ -2129,9 +2192,12 @@ public final class StorageSpaceScript implements NativeLifecycleScript {
         }
     }
 
-    /** 供调试/卸载使用：清掉自动收获名单与首次扫描标记。 */
+    /** 供调试/卸载使用：清掉自动收获名单、实时刷新任务与首次扫描标记。 */
     public static void shutdown() {
         AUTO_PLAYERS.clear();
+        for (String name : new ArrayList<>(LINGPU_REFRESH.keySet())) {
+            stopLingpuRefresh(name);
+        }
         autoInited = false;
     }
 

@@ -1,5 +1,6 @@
 package com.tangran.tangrantech.native_scripts.daofa.boss;
 
+import com.tangran.tangrantech.util.PlayerKeys;
 import com.tangran.tangrantech.util.AddonPaths;
 import com.tangran.tangrantech.util.Json;
 import java.io.File;
@@ -43,7 +44,7 @@ public final class BossProgress {
     /** 玩家进度文件。 */
     public static File fileOf(String playerName) {
         String name = (playerName == null || playerName.isEmpty()) ? "unknown" : playerName;
-        return new File(AddonPaths.configDir(DIR), name + ".json");
+        return new File(AddonPaths.configDir(DIR), PlayerKeys.key(name) + ".json");
     }
 
     /**

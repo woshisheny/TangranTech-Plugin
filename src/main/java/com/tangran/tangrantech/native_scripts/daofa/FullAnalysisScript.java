@@ -1,5 +1,6 @@
 package com.tangran.tangrantech.native_scripts.daofa;
 
+import com.tangran.tangrantech.util.PlayerKeys;
 import com.tangran.tangrantech.TT;
 import com.tangran.tangrantech.native_scripts.NativeLifecycleScript;
 import com.tangran.tangrantech.util.Json;
@@ -206,7 +207,7 @@ public final class FullAnalysisScript implements NativeLifecycleScript {
                 return false;
             }
             // ★ 不能直接 Files.write：玩家数据已迁到 SQLite，必须经 AddonPaths 才会写进库
-            File file = new File(dir, playerName + ".json");
+            File file = new File(dir, PlayerKeys.key(playerName) + ".json");
             if (com.tangran.tangrantech.util.AddonPaths.writeJson(file, data)) return true;
             log("写入存档失败 " + playerName + " / " + relDir);
             return false;

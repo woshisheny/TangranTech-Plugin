@@ -1,5 +1,6 @@
 package com.tangran.tangrantech.native_scripts.daofa;
 
+import com.tangran.tangrantech.util.PlayerKeys;
 import com.tangran.tangrantech.TT;
 import com.tangran.tangrantech.native_scripts.NativeLifecycleScript;
 import com.tangran.tangrantech.util.AddonPaths;
@@ -68,7 +69,7 @@ public final class StorageSpaceUnlockScript implements NativeLifecycleScript {
             return;
         }
 
-        File file = new File(dir, player.getName() + ".json");
+        File file = new File(dir, PlayerKeys.key(player) + ".json");
         if (AddonPaths.docExists(file)) {
             player.sendMessage(PREFIX + "§c你已经开辟过储物空间了！");
             return;

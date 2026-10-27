@@ -1,5 +1,6 @@
 package com.tangran.tangrantech.native_scripts.daofa.boss;
 
+import com.tangran.tangrantech.util.PlayerKeys;
 import com.tangran.tangrantech.TT;
 import com.tangran.tangrantech.util.AddonPaths;
 import java.io.File;
@@ -85,7 +86,7 @@ public final class TwinLedger {
     private static volatile boolean gainTaskStarted;
 
     private static File fileOf(String playerName) {
-        return new File(AddonPaths.configDir("双子账本"), playerName + ".json");
+        return new File(AddonPaths.configDir("双子账本"), PlayerKeys.key(playerName) + ".json");
     }
 
     private static Map<String, Integer> blank() {

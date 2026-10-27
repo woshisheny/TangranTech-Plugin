@@ -1,5 +1,6 @@
 package com.tangran.tangrantech.native_scripts.daofa;
 
+import com.tangran.tangrantech.util.PlayerKeys;
 import com.tangran.tangrantech.TT;
 import com.tangran.tangrantech.native_scripts.NativeLifecycleScript;
 import com.tangran.tangrantech.util.AddonPaths;
@@ -475,7 +476,7 @@ public final class PillsScript implements NativeLifecycleScript {
     // ------------------------------------------------------------------
 
     private static File danfangFile(String playerName) {
-        return new File(AddonPaths.configDir(AddonPaths.DIR_DANFANG), playerName + ".json");
+        return new File(AddonPaths.configDir(AddonPaths.DIR_DANFANG), PlayerKeys.key(playerName) + ".json");
     }
 
     private static List<String> loadOwned(String playerName) {
@@ -1617,7 +1618,7 @@ public final class PillsScript implements NativeLifecycleScript {
     /** 当前选中的异火名；未选中返回 null。挑战期间由境界侧判定为未选中。 */
     private static String selectedYanhuoName(String playerName) {
         try {
-            File f = new File(AddonPaths.configDir(AddonPaths.DIR_YANHUO), playerName + ".json");
+            File f = new File(AddonPaths.configDir(AddonPaths.DIR_YANHUO), PlayerKeys.key(playerName) + ".json");
             Map<String, Object> data = AddonPaths.readJson(f);
             if (data == null) return null;
             Object sel = data.get("selected");

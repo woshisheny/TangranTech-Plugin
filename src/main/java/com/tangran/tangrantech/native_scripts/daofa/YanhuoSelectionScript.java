@@ -1,5 +1,6 @@
 package com.tangran.tangrantech.native_scripts.daofa;
 
+import com.tangran.tangrantech.util.PlayerKeys;
 import com.tangran.tangrantech.TT;
 import com.tangran.tangrantech.native_scripts.NativeLifecycleScript;
 import com.tangran.tangrantech.util.AddonPaths;
@@ -312,7 +313,7 @@ public final class YanhuoSelectionScript implements NativeLifecycleScript {
     // ------------------------------------------------------------------
 
     private static File yanhuoFile(String playerName) {
-        return new File(AddonPaths.configDir(AddonPaths.DIR_YANHUO), playerName + ".json");
+        return new File(AddonPaths.configDir(AddonPaths.DIR_YANHUO), PlayerKeys.key(playerName) + ".json");
     }
 
     /** 玩家已拥有的异火 id 列表。 */

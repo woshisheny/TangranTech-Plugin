@@ -1,5 +1,6 @@
 package com.tangran.tangrantech.native_scripts.daofa.boss;
 
+import com.tangran.tangrantech.util.PlayerKeys;
 import com.tangran.tangrantech.TT;
 import com.tangran.tangrantech.util.AddonPaths;
 import java.util.ArrayList;
@@ -738,7 +739,7 @@ public final class BossPhaseThreeFour {
         try {
             if (player == null || taskId == null) return;
             Map<String, Object> data = AddonPaths.readJson(
-                    new java.io.File(AddonPaths.configDir("任务"), player.getName() + ".json"));
+                    new java.io.File(AddonPaths.configDir("任务"), PlayerKeys.key(player) + ".json"));
             boolean has = false;
             List<Object> completed = new ArrayList<>();
             if (data != null && data.get("completed") instanceof List<?> list) {
@@ -754,7 +755,7 @@ public final class BossPhaseThreeFour {
                 }
                 data.put("completed", completed);
                 AddonPaths.writeJson(
-                        new java.io.File(AddonPaths.configDir("任务"), player.getName() + ".json"), data);
+                        new java.io.File(AddonPaths.configDir("任务"), PlayerKeys.key(player) + ".json"), data);
             }
             BossLog.warn("任务进度：已完成 " + taskId + "（" + player.getName() + "）"
                     + (has ? "（本来就有）" : ""));
@@ -777,7 +778,7 @@ public final class BossPhaseThreeFour {
             data.put("finalHour", true);
             data.put("time", System.currentTimeMillis());
             AddonPaths.writeJson(
-                    new java.io.File(AddonPaths.configDir("天道证明"), player.getName() + ".json"), data);
+                    new java.io.File(AddonPaths.configDir("天道证明"), PlayerKeys.key(player) + ".json"), data);
         } catch (Throwable t) {
             BossLog.warn("天道证明写入失败: " + t);
         }

@@ -1,5 +1,6 @@
 package com.tangran.tangrantech.native_scripts.daofa;
 
+import com.tangran.tangrantech.util.PlayerKeys;
 import com.tangran.tangrantech.util.AddonPaths;
 import com.tangran.tangrantech.util.Json;
 import com.tangran.tangrantech.util.Perms;
@@ -89,7 +90,7 @@ public final class PlayerAssets {
     // ==================================================================
 
     public static File currencyFile(String playerName) {
-        return new File(AddonPaths.configDir(DIR_CURRENCY), playerName + ".json");
+        return new File(AddonPaths.configDir(DIR_CURRENCY), PlayerKeys.key(playerName) + ".json");
     }
 
     private static Map<String, Object> load(String playerName) {
@@ -197,7 +198,7 @@ public final class PlayerAssets {
     // ==================================================================
 
     private static File yanhuoFile(String playerName) {
-        return new File(AddonPaths.configDir(AddonPaths.DIR_YANHUO), playerName + ".json");
+        return new File(AddonPaths.configDir(AddonPaths.DIR_YANHUO), PlayerKeys.key(playerName) + ".json");
     }
 
     /** 玩家已掌握的异火 id（可能为空）。 */
@@ -265,7 +266,7 @@ public final class PlayerAssets {
     // ==================================================================
 
     private static File danfangFile(String playerName) {
-        return new File(AddonPaths.configDir(AddonPaths.DIR_DANFANG), playerName + ".json");
+        return new File(AddonPaths.configDir(AddonPaths.DIR_DANFANG), PlayerKeys.key(playerName) + ".json");
     }
 
     /** 玩家已掌握的丹方 id（可能为空）。 */

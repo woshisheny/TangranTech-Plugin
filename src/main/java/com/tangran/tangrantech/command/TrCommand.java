@@ -37,11 +37,37 @@ import org.bukkit.entity.Player;
  */
 public final class TrCommand implements CommandExecutor, TabCompleter {
 
-    /** RSC 插件名（数据目录 {@code plugins/RykenSlimeCustomizer}）。 */
-    private static final String RSC_PLUGIN = "RykenSlimeCustomizer";
+    /** RSC 插件目录名（实测拼写是 RykenSlimefunCustomizer，带 fun；旧拼写兜底）。 */
+    private static final String RSC_PLUGIN = "RykenSlimefunCustomizer";
+
+    /** RSC 插件目录的旧拼写兜底。 */
+    private static final String RSC_PLUGIN_ALT = "RykenSlimeCustomizer";
 
     /** RSC 数据在插件目录下的相对路径。 */
     private static final String RSC_DATA = "addon_configs/糖然科技";
+
+    /**
+     * 候选源目录（按优先级）：
+     * <ol>
+     *   <li>{@code plugins/RykenSlimefunCustomizer/addon_configs/糖然科技} —— RSC 装在本服时的标准位置；</li>
+     *   <li>{@code plugins/RykenSlimeCustomizer/addon_configs/糖然科技} —— 旧拼写兜底；</li>
+     *   <li>{@code plugins/TangranTech/addon_configs/糖然科技} —— 本插件自己的旧数据目录
+     *       （把 RSC 数据拷进来也行，但注意启动自动导入读的也是这里）；</li>
+     *   <li>{@code plugins/糖然科技} —— 把 RSC 数据整个文件夹直接丢进 plugins 的情形。</li>
+     * </ol>
+     * 第一个存在的胜出。
+     */
+    private static List<File> sourceCandidates() {
+        List<File> out = new ArrayList<>();
+        File plugins = TT.plugin() == null ? null : TT.plugin().getDataFolder().getParentFile();
+        if (plugins != null) {
+            out.add(new File(plugins, RSC_PLUGIN + "/" + RSC_DATA));
+            out.add(new File(plugins, RSC_PLUGIN_ALT + "/" + RSC_DATA));
+            out.add(new File(plugins, "TangranTech/" + RSC_DATA));
+            out.add(new File(plugins, "糖然科技"));
+        }
+        return out;
+    }
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
@@ -85,7 +111,7 @@ public final class TrCommand implements CommandExecutor, TabCompleter {
     private boolean importData(CommandSender sender, String label, String[] args) {
         boolean apply = false;
         boolean overwrite = false;
-        File source = defaultSource();
+        File source = resolveSource();
         Set<String> only = new LinkedHashSet<>();
         for (int i = 1; i < args.length; i++) {
             String a = args[i];
@@ -124,8 +150,12 @@ public final class TrCommand implements CommandExecutor, TabCompleter {
             return true;
         }
         if (source == null || !source.isDirectory()) {
-            sender.sendMessage("§c源目录不存在：" + (source == null ? "?" : source.getAbsolutePath()));
-            sender.sendMessage("§7若 RSC 数据不在默认位置，用 §f--source <目录> §7指定。");
+            sender.sendMessage("§c没有找到 RSC 玩家数据目录，以下位置都试过了：");
+            for (File c : sourceCandidates()) {
+                sender.sendMessage("§8 - §7" + c.getAbsolutePath() + " §8(" + (c.isDirectory() ? "存在" : "不存在") + ")");
+            }
+            sender.sendMessage("§7把 RSC 数据文件夹放到上面任一位置，或用 §f--source <目录> §7直接指定"
+                    + "（目录结构须为 §f<命名空间>/<玩家名>.json§7）。");
             return true;
         }
 
@@ -149,12 +179,12 @@ public final class TrCommand implements CommandExecutor, TabCompleter {
                         sender.sendMessage("§c[导入] 失败：" + t));
                 return;
             }
-            Bukkit.getScheduler().runTask(TT.plugin(), () -> report(sender, rep, doApply));
+            Bukkit.getScheduler().runTask(TT.plugin(), () -> report(sender, rep, doApply, onlyNs));
         });
         return true;
     }
 
-    private void report(CommandSender sender, Store.ImportReport rep, boolean applied) {
+    private void report(CommandSender sender, Store.ImportReport rep, boolean applied, Set<String> onlyNs) {
         if (rep.total() == 0) {
             sender.sendMessage("§7[导入] 源目录里没有可导入的玩家数据（*.json）。");
             return;
@@ -167,7 +197,19 @@ public final class TrCommand implements CommandExecutor, TabCompleter {
                 parts.add(e.getKey() + " ×" + e.getValue());
                 if (++shown >= 15) break;
             }
-            sender.sendMessage("§7[导入] 命名空间：" + String.join(" §8| §7", parts));
+            sender.sendMessage("§7[导入] 命名空间（扫到的文件数）：" + String.join(" §8| §7", parts));
+        }
+        // --only 点名的命名空间在源目录里一个文件都没扫到 → 明确说出来，别让用户猜
+        if (onlyNs != null && !onlyNs.isEmpty()) {
+            List<String> missing = new ArrayList<>();
+            for (String ns : onlyNs) {
+                if (!rep.perNs().containsKey(ns)) missing.add(ns);
+            }
+            if (!missing.isEmpty()) {
+                sender.sendMessage("§e[导入] 这些命名空间在源目录里没有扫到任何文件："
+                        + String.join(", ", missing));
+                sender.sendMessage("§e      请确认源目录下是否存在 §f<命名空间>/<玩家名>.json§e。");
+            }
         }
         if (!rep.samples().isEmpty()) {
             sender.sendMessage("§7[导入] 样例：" + String.join(", ", rep.samples()));
@@ -175,7 +217,12 @@ public final class TrCommand implements CommandExecutor, TabCompleter {
         if (rep.failed() > 0) {
             sender.sendMessage("§c[导入] " + rep.failed() + " 份文件解析/写入失败，已跳过（原文件未动）。");
         }
+        if (rep.skipped() > 0 && rep.created() == 0 && rep.overwritten() == 0) {
+            sender.sendMessage("§e[导入] 库内已有同名文档，默认跳过（保护现有进度）。");
+            sender.sendMessage("§e      如需用 RSC 数据覆盖库内进度，请加 §f--overwrite §e重新执行。");
+        }
         if (applied) {
+            Store.flush();   // 立刻落库，别等 5 分钟周期 —— 导入是显式管理动作
             sender.sendMessage("§a[导入] 已写入 SQLite。当前库内："
                     + describeNamespaces(Store.namespaces()));
         } else {
@@ -194,10 +241,12 @@ public final class TrCommand implements CommandExecutor, TabCompleter {
         return String.join(" §8| §7", parts);
     }
 
-    /** 默认源目录：{@code plugins/RykenSlimeCustomizer/addon_configs/糖然科技}。 */
-    private static File defaultSource() {
-        File plugins = TT.plugin() == null ? null : TT.plugin().getDataFolder().getParentFile();
-        return plugins == null ? null : new File(plugins, RSC_PLUGIN + "/" + RSC_DATA);
+    /** 按候选顺序解析默认源目录；都不存在返回 null。 */
+    private static File resolveSource() {
+        for (File c : sourceCandidates()) {
+            if (c.isDirectory()) return c;
+        }
+        return null;
     }
 
     @Override

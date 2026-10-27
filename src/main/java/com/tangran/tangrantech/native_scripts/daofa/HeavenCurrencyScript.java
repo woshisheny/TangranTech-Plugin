@@ -1,5 +1,6 @@
 package com.tangran.tangrantech.native_scripts.daofa;
 
+import com.tangran.tangrantech.util.PlayerKeys;
 import com.tangran.tangrantech.TT;
 import com.tangran.tangrantech.native_scripts.NativeLifecycleScript;
 import com.tangran.tangrantech.util.AddonPaths;
@@ -365,7 +366,7 @@ public final class HeavenCurrencyScript implements NativeLifecycleScript {
     // ------------------------------------------------------------------
 
     private static File dataFile(String playerName) {
-        return new File(AddonPaths.configDir("天道货币"), playerName + ".json");
+        return new File(AddonPaths.configDir("天道货币"), PlayerKeys.key(playerName) + ".json");
     }
 
     private static Map<String, Object> loadData(String playerName) {
