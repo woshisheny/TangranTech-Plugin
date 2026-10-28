@@ -1,5 +1,7 @@
 # TangranTech（糖然科技）
 
+<img width="1280" height="1280" alt="Tangran" src="https://github.com/user-attachments/assets/fa5332cf-0c4f-40ad-ab85-a92097298592" />
+
 >糖丸了
 
 [糖王](https://github.com/tangran666)一大*力♂作*！
