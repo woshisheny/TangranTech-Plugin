@@ -915,6 +915,9 @@ public final class StackMachineScript implements NativeLifecycleScript {
             Inventory top = topOf(event);
             if (top == null) return;
             if (!(event.getWhoClicked() instanceof Player player)) return;
+            // 不是本脚本的界面就直接放行：否则下面的「禁双击」会在任何容器里生效，
+            // 导致全服所有箱子/熔炉/潜影盒/其他插件界面里的双击堆叠全部失效。
+            if (!isParent(top) && !isConfig(top) && !isRecipeMenu(top)) return;
             int slot = event.getRawSlot();
 
             if (isParent(top) || isConfig(top)) saveMenuLater(player);
