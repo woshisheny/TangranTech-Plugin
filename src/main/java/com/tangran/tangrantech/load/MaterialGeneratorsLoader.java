@@ -16,8 +16,9 @@ import org.bukkit.inventory.ItemStack;
 /**
  * 加载 mat_generators.yml（造物匣，130 条）→ {@link TTMaterialGenerator}。
  *
- * <p>字段：{@code item_group / item / capacity / per / status / tickRate / output(槽位) /
- * outputItem 或 outputs(产出)}。机器无输入槽，按 {@code tickRate} 周期消耗 {@code per} 点能量产出。</p>
+ * <p>字段：{@code item_group / item / capacity / per / tickRate / output(槽位) /
+ * outputItem 或 outputs(产出)}（{@code status} 槽位即菜单装饰板，已忽略）。机器无输入槽，
+ * 按 {@code tickRate} 周期消耗 {@code per} 点能量产出。</p>
  */
 public final class MaterialGeneratorsLoader {
 
@@ -55,8 +56,9 @@ public final class MaterialGeneratorsLoader {
                         Math.max(0, s.getInt("per", 0)),
                         1,
                         TT.menus.get(id.toUpperCase(java.util.Locale.ROOT)),
-                        s.getBoolean("hideAllRecipes", false),
-                        s.getInt("status", -1));
+                        s.getBoolean("hideAllRecipes", false));
+                // 配置里的 status 槽位即 menus.yml 装饰板，不参与任何逻辑（曾因计入破坏掉落
+                // 导致拆机器掉绿玻璃板，2026-10-29 移除），故不再读取。
                 machine.register(TT.plugin);
                 ok++;
             } catch (Exception e) {

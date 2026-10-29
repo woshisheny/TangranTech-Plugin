@@ -250,23 +250,3 @@ Tr_bkmnq:
       material: Tr_cjsmhhw
   output: [11,15,20,24,29,33,38,42]
   script: 宝库模拟器
-Tr_trpddj:
-  lateInit: false
-  placeable: true
-  item_group: Tr_zzjq
-  item:
-    glow: true
-    material_type: mc
-    material: beehive
-    name: "&b&l糖然牌堆叠机"
-    lore:
-      - '&7初始堆叠效率: &b2.0'
-      - '&7产物优先自动进入&d网络&7中设置有产物的最大存储'
-      - '&7适配&d网络量子存储&7与&d网络抽屉'
-      - '&7也支持逻辑的堆叠特性'
-  recipe_type: TR_FSDP
-  recipe:
-    5:
-      material_type: slimefun
-      material: Tr_tssj
-  script: 道法/堆叠机

@@ -68,7 +68,7 @@ public final class LifeshopCatalog {
     public static final int PAGE_SIZE = 28;
 
     /** 缓存版本；不符则重新生成。3：龙首/龙蛋改价后必须让旧缓存失效并重建（对齐 RSC 2026-10-24）。 */
-    private static final int CACHE_VERSION = 3;
+    private static final int CACHE_VERSION = 4;
 
     /**
      * 手动定价覆盖表（对齐 RSC {@code VANILLA_PRICE_OVERRIDE}）。
@@ -433,9 +433,7 @@ public final class LifeshopCatalog {
         // —— 机器类 ——
         CATALOG.put("machine", List.of(
                 sfGoods("TR_MGZJ", "命轨织机").gongde(5000)
-                        .needs(needs("TR_MGXX", 64, "TR_TXSJ", 64, "TR_SPSJ", 64)).give(1),
-                sfGoods("TR_TRPDDJ", "§b§l糖然牌堆叠机").dao(1000).gongde(1000)
-                        .needs(needs("TR_XPSJ", 2)).give(1)));
+                        .needs(needs("TR_MGXX", 64, "TR_TXSJ", 64, "TR_SPSJ", 64)).give(1)));
 
         // —— 灵圃 ——
         CATALOG.put("lingpu", List.of(

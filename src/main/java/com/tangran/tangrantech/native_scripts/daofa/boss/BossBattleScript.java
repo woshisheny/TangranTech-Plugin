@@ -25,7 +25,6 @@ import org.bukkit.plugin.Plugin;
 import org.bukkit.potion.PotionEffectType;
 import com.tangran.tangrantech.native_scripts.daofa.EquipmentScript;
 import com.tangran.tangrantech.native_scripts.daofa.LuxianSword;
-import com.tangran.tangrantech.native_scripts.daofa.StackMachineScript;
 
 /**
  * 「道法/BOSS战」的门面（原脚本 13452 行 / 465 个函数）。

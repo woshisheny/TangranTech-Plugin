@@ -1963,7 +1963,7 @@ public final class PillsScript implements NativeLifecycleScript {
         public void onDrag(InventoryDragEvent event) {
             // 拖拽是独立于 InventoryClickEvent 的一条通路：onClick 里 setCancelled 管不到它。
             // 不拦的话玩家把物品拖进菜单 → refresh() 重建时直接被抹掉 / 关闭时随界面丢弃，
-            // 都等于凭空消失。与其余 8 个脚本菜单（异火选择 / 浮生当铺 / 堆叠机…）保持一致。
+            // 都等于凭空消失。与其余脚本菜单（异火选择 / 浮生当铺…）保持一致。
             try {
                 Inventory top = Views.top(event.getView());
                 if (top != null && ACTIVE.contains(top)) event.setCancelled(true);

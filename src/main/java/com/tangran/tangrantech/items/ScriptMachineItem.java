@@ -68,7 +68,7 @@ public class ScriptMachineItem extends SlimefunItem implements EnergyNetComponen
      * 先按方块坐标取菜单，取不到就本轮跳过（机器被破坏/未加载）。</p>
      *
      * <p><b>例外</b>：脚本若声明 {@link NativeScript#needsMenu()} 为 {@code false}
-     * （如「糖然牌堆叠机」—— 它没有 menus.yml 条目、界面自建），
+     * （界面自建、没有 menus.yml 条目的脚本机器），
      * 那么取不到菜单时<b>照样把 tick 递下去</b>，菜单参数传 {@code null}。
      * 否则这类机器一旦没被建出 BlockMenu 就会彻底不工作。</p>
      */

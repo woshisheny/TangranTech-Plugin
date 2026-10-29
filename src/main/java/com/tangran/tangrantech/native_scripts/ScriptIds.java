@@ -33,7 +33,6 @@ public final class ScriptIds {
     public static final String STORAGE_SPACE_OPEN = "道法/储物空间开辟";
     public static final String FULL_ANALYSIS = "道法/全解";
     public static final String ASCENSION_PATH = "道法/升维之路";
-    public static final String STACK_MACHINE = "道法/堆叠机";
     public static final String REALM = "道法/境界";
     public static final String LARGE_STRUCTURE_FILL = "道法/大型结构填充";
     public static final String HEAVEN_CURRENCY_EXCHANGE = "道法/天道货币兑换";
@@ -53,7 +52,7 @@ public final class ScriptIds {
                 TANGRAN_BASIC_MATTER, SACCHARIN, LAOWU_SUMMONER, LETHAL_SUGAR_WATER,
                 RAW_SUGAR_WATER,
                 BOSS_BATTLE, PILLS, QUESTS, STORAGE_SPACE, STORAGE_SPACE_OPEN,
-                FULL_ANALYSIS, ASCENSION_PATH, STACK_MACHINE, REALM,
+                FULL_ANALYSIS, ASCENSION_PATH, REALM,
                 LARGE_STRUCTURE_FILL, HEAVEN_CURRENCY_EXCHANGE, FLOATING_PAWN_SHOP,
                 SPIRIT_CRYSTAL, FINAL_CRAFTING_TABLE, FINAL_CRAFTING_COMPILER,
                 AUTO_TAIXU_HUB, EQUIPMENT, EXOTIC_FLAME_CHOICE,

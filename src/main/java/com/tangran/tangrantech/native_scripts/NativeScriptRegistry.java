@@ -22,7 +22,6 @@ import com.tangran.tangrantech.native_scripts.daofa.LifeshopScript;
 import com.tangran.tangrantech.native_scripts.daofa.PillsScript;
 import com.tangran.tangrantech.native_scripts.daofa.QuestsScript;
 import com.tangran.tangrantech.native_scripts.daofa.RealmScript;
-import com.tangran.tangrantech.native_scripts.daofa.StackMachineScript;
 import com.tangran.tangrantech.native_scripts.daofa.StorageSpaceScript;
 import com.tangran.tangrantech.native_scripts.daofa.StorageSpaceUnlockScript;
 import com.tangran.tangrantech.native_scripts.daofa.YanhuoSelectionScript;
@@ -161,7 +160,6 @@ public final class NativeScriptRegistry {
         register(ScriptIds.STORAGE_SPACE, new com.tangran.tangrantech.native_scripts.daofa.StorageSpaceScript());
         register(ScriptIds.FLOATING_PAWN_SHOP, new com.tangran.tangrantech.native_scripts.daofa.LifeshopScript());
         register(ScriptIds.EQUIPMENT, new com.tangran.tangrantech.native_scripts.daofa.EquipmentScript());
-        register(ScriptIds.STACK_MACHINE, new com.tangran.tangrantech.native_scripts.daofa.StackMachineScript());
         register(ScriptIds.BOSS_BATTLE, new com.tangran.tangrantech.native_scripts.daofa.boss.BossBattleScript());
     }
 
