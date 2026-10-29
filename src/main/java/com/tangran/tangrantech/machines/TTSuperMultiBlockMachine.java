@@ -107,6 +107,23 @@ public class TTSuperMultiBlockMachine extends TTRecipeMachine {
     }
 
     /**
+     * 多方块核心<b>不参与</b>「逻辑工艺」堆叠机对接。
+     *
+     * <p>堆叠机的工作方式是「把一台机器原地复制成 N 台并行」——它只认
+     * 「输入槽 + 配方 + 每 tick 耗电」，完全不知道结构成形、核心朝向、投影与
+     * {@code SuperBlocks} 的成形缓存。若把核心机器登记进去，玩家可以在核心未成形
+     * 的情況下用堆叠机凭空产出（结构校验被完全绕过），或让 {@code SuperBlocks}
+     * 里那份「一处成形状态」被 N 份并行产出共用而错乱。</p>
+     *
+     * <p>因此这里返回 {@code false}：{@code getMachineRecipes()} 会给逻辑工艺
+     * 返回空列表，既不会进入堆叠表，也不会被其自动扫描收编。</p>
+     */
+    @Override
+    public boolean supportsLogiTechStacking() {
+        return false;
+    }
+
+    /**
      * 核心被破坏：先销毁超多方块实例与投影（对齐 RSC destroySuperMultiBlock），
      * 再走基类的掉落/停机清理。
      */

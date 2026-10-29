@@ -45,6 +45,9 @@ public final class TangranTechPlugin extends JavaPlugin implements SlimefunAddon
         }
         try {
             Setup.loadAll();
+            // 必须在全部机器注册完成之后：把糖然的机器登记进逻辑工艺的堆叠表并修正耗电
+            // （未装 LogiTech 时内部静默跳过，见 compat/LogiTechStackBridge）
+            com.tangran.tangrantech.compat.LogiTechStackBridge.registerAll();
             registerCommands();
             getLogger().info("糖然科技 加载成功");
         } catch (Throwable e) {

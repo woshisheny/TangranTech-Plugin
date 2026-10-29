@@ -183,6 +183,49 @@ public class TTRecipeMachine extends AContainer implements RecipeDisplayItem, Po
     /** 全部配方（供大配方菜单展示与运行期筛选）。 */
     public List<TTRecipe> getRecipes() { return recipes; }
 
+    /** 交给「逻辑工艺（LogiTech）」堆叠机的配方形态（惰性缓存；未装 LogiTech 时为空表）。 */
+    private volatile List<me.mrCookieSlime.Slimefun.Objects.SlimefunItem.abstractItems.MachineRecipe>
+            logiTechRecipes;
+
+    /**
+     * 本机是否允许被「逻辑工艺（LogiTech）」堆叠机对接。
+     *
+     * <p>默认放行；<b>依赖方块上下文</b>的子类必须返回 {@code false}——
+     * 目前只有多方块核心机器（{@link TTSuperMultiBlockMachine}）属于这一类：
+     * 它的产能取决于结构是否成形、核心朝向与 {@code SuperBlocks} 的成形缓存，
+     * 而堆叠机只认「输入槽 + 配方 + 每 tick 耗电」，登录进去等于绕过结构校验。</p>
+     *
+     * <p>注意：脚本机器（{@code items/ScriptMachineItem}）继承的是 {@code SlimefunItem}
+     * 而非本类，天然不在对接范围，不需要在这里处理。</p>
+     */
+    public boolean supportsLogiTechStacking() { return true; }
+
+    /**
+     * 覆写父类：{@code AContainer} 默认返回空的 {@code machineRecipes}（本类配方自管），
+     * 这会让逻辑工艺的堆叠扫描把本机器当成「无配方」而完全忽略。
+     * 这里改为返回按语义转换后的配方（详见 {@link com.tangran.tangrantech.compat.LogiTechStackBridge}）：
+     * 纯生成语义 → {@code MGeneratorRecipe}；其余 → 保留概率 / noConsume 的堆叠配方。
+     *
+     * <p>本附属运行期不使用该方法（{@link #tick(Block)} 读的是 {@code recipes} 字段），
+     * 因此覆写不影响自身产能与界面。</p>
+     *
+     * <p>两条排除规则：① {@link #supportsLogiTechStacking()} 为 {@code false} 的机器
+     * （多方块核心）直接给空表；② 桥接层尚未就绪（未装 LogiTech，或正处在对方静态初始化
+     * 的重入期）时返回空表且<b>不写缓存</b>，避免把「暂时不可用」固化成一辈子的空配方。</p>
+     */
+    @Override
+    public List<me.mrCookieSlime.Slimefun.Objects.SlimefunItem.abstractItems.MachineRecipe> getMachineRecipes() {
+        if (!supportsLogiTechStacking()) return java.util.Collections.emptyList();
+        var cached = logiTechRecipes;
+        if (cached != null) return cached;
+        List<me.mrCookieSlime.Slimefun.Objects.SlimefunItem.abstractItems.MachineRecipe> built =
+                com.tangran.tangrantech.compat.LogiTechStackBridge.buildRecipes(recipes);
+        if (!com.tangran.tangrantech.compat.LogiTechStackBridge.ready()) return built;
+        logiTechRecipes = built;
+        return built;
+    }
+
+
     @Override
     public String getMachineIdentifier() { return getId(); }
 
