@@ -30,6 +30,7 @@ RSC（RykenSlimefunCustomizer）附属项目 **糖然科技 TangranTech**[tangra
 
 1. 将构建出的 jar放入服务器的 `plugins/` 目录。
 2. 重启服务器。
+
 ---
 
 ## 📊数据存储
@@ -52,6 +53,8 @@ player_doc(ns TEXT, key TEXT, doc TEXT, updated_at INTEGER, PRIMARY KEY (ns, key
   「按玩家分文件」，功能不受影响，只是少了事务与集中管理。
 - 数据库文件与 `tangran.db-wal` / `-shm` 请一起备份。
 
+---
+
 ### 🖊️从 RSC 导入
 
 ```bash
@@ -62,8 +65,10 @@ player_doc(ns TEXT, key TEXT, doc TEXT, updated_at INTEGER, PRIMARY KEY (ns, key
 /tr import --overwrite        # 库里已有同名文档时用 RSC 数据覆盖（默认跳过）
 ```
 
-默认源目录是 `plugins/RykenSlimeCustomizer/addon_configs/糖然科技`。
+默认源目录是 `plugins/RykenSlimeCustomizer/addon_configs/糖然科技`。  
 权限：`tangrantech.command.import` &op。
+
+---
 
 ## ❗权限（LuckPerms 可选）
 
