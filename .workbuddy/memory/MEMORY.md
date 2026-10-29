@@ -4,7 +4,7 @@
 糖然科技 TangranTech：RSC（RykenSlimefunCustomizer）附属 → 独立 Slimefun4 jar 插件。
 包名 `com.tangran.tangrantech`，主类 `TangranTechPlugin`，上下文 `TT`。
 目标 Paper 1.21.x + Slimefun4 Beta（`libs/Slimefun4-347d926-Beta.jar`，compileOnly）。
-产物 `TangranTech-2.1.1-standalone.jar`（约 7.1 MB，含 xerial sqlite-jdbc 驱动与常用平台原生库）。构建：`./gradlew build`（JDK 21，见 gradle.properties 的 org.gradle.java.home，默认 JDK 25 会崩在配置阶段）。
+产物 `TangranTech-2.1.2-standalone.jar`（约 7.1 MB，含 xerial sqlite-jdbc 驱动与常用平台原生库）。构建：`./gradlew build`（JDK 21，见 gradle.properties 的 org.gradle.java.home，默认 JDK 25 会崩在配置阶段）。
 **发版流程**：改 `build.gradle.kts` 的 `version` + `src/main/resources/plugin.yml` 的 `version` + README 产物路径 → 构建 → 提交 → `git tag -a vX.Y.Z` → 推 main 与 tag → GitHub Release（本机无 gh CLI，走 REST API：`git credential fill` 取已缓存 token 后 curl POST `/releases`，再 POST `uploads.github.com/.../assets` 传 jar）。
 
 ## 架构要点（改代码前必读）
@@ -65,6 +65,15 @@
 ⑪ **BOSS 挑战场已是常驻独立世界** `tangran_space`（`TangranSpace`：两座固定模板 + 每场就地重置，
 不再「在玩家身边选址建场」）→ 「按标记反推场地 + 右键基岩清场」整条链路与道具 `Tr_tzqyqcq`
 已于 2026-10-26 删除；场地保护走 `BossArenaProtector`（Dominion 式，整个世界即领地）。
+
+⑫ **外部兼容层必须「双向关死」**（LogiTech 堆叠对接，v2.1.2）：`compat/LogiTechStackBridge` 反射写
+`RecipeSupporter` 的三张表，但 LogiTech 自己也会在静态初始化里遍历所有 `AContainer` 调
+`getMachineRecipes()`，非空就收编 → **想在登记阶段排除某类机器是挡不住自动扫描的**，
+必须让 `getMachineRecipes()` 本身返回空（`TTRecipeMachine.supportsLogiTechStacking()`，
+多方块核心 `TTSuperMultiBlockMachine` 返回 false；脚本机 `ScriptMachineItem` 继承 `SlimefunItem`
+天然不在范围）。三条纪律：只追加不重排（删条目会让 `craftType` 下标串机）、耗电
+`ceil(energy/minTicks)`、探测重入（对方静态 init 会回调我们）用 `resolving` 标记 + `ready()`，
+未就绪结果不缓存。已知限制：0 输入配方在堆叠机侧因 `matchMultiRecipe` 空输入返回 null 需占位物。
 
 ## 部署与协作约定
 - jar 由用户手动拷到测试服，AI 不写测试服目录。
