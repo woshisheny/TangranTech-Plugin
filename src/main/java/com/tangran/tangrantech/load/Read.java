@@ -31,6 +31,9 @@ public final class Read {
 
     private static final Pattern HEX64 = Pattern.compile("^[0-9A-Fa-f]{64}$");
 
+    /** 从 RSC 的 base64 皮肤串里抓 SKIN 贴图地址。 */
+    private static final Pattern SKIN_URL = Pattern.compile("\"url\"\\s*:\\s*\"(https?://[^\"]+)\"");
+
     /**
      * 头颅贴图（{@link PlayerSkin}）去重缓存，按类型分表。
      * 加载后由 {@code Setup#loadAll()} 调用 {@link #clearSkinCache()} 释放。
@@ -80,18 +83,34 @@ public final class Read {
                 return new ItemStack(Material.AIR);
             case "skull_hash": {
                 PlayerSkin skin = HASH_SKINS.get(material);
-                if (skin == null) { skin = PlayerSkin.fromHashCode(material); HASH_SKINS.put(material, skin); }
+                if (skin == null) {
+                    // dough 的 fromHashCode 内部拼的是 http://textures.minecraft.net/...，
+                    // 而 1.20.5+ 客户端只接受 https 的贴图地址，http 一律不加载（头颅显示空白）。
+                    skin = PlayerSkin.fromURL(skinUuid(material),
+                            "https://textures.minecraft.net/texture/" + material);
+                    HASH_SKINS.put(material, skin);
+                }
                 return PlayerHead.getItemStack(skin);
             }
             case "skull":
             case "skull_base64": {
                 PlayerSkin skin = BASE64_SKINS.get(material);
-                if (skin == null) { skin = PlayerSkin.fromBase64(material); BASE64_SKINS.put(material, skin); }
+                if (skin == null) {
+                    // RSC 老数据里 base64 内嵌的贴图地址同样是 http://，统一纠正为 https
+                    String url = skinUrlFromBase64(material);
+                    skin = url != null
+                            ? PlayerSkin.fromURL(skinUuid(material), https(url))
+                            : PlayerSkin.fromBase64(material);
+                    BASE64_SKINS.put(material, skin);
+                }
                 return PlayerHead.getItemStack(skin);
             }
             case "skull_url": {
                 PlayerSkin skin = URL_SKINS.get(material);
-                if (skin == null) { skin = PlayerSkin.fromURL(material); URL_SKINS.put(material, skin); }
+                if (skin == null) {
+                    skin = PlayerSkin.fromURL(skinUuid(material), https(material));
+                    URL_SKINS.put(material, skin);
+                }
                 return PlayerHead.getItemStack(skin);
             }
             case "slimefun": {
@@ -139,6 +158,43 @@ public final class Read {
                 return Material.matchMaterial("CHAIN");
             }
             default: return Material.matchMaterial(name.replace('-', '_'));
+        }
+    }
+
+    /**
+     * 与 dough 的 {@code PlayerSkin.fromXxx(String)} 完全一致的 UUID 推导方式：
+     * {@code UUID.nameUUIDFromBytes(原输入串.getBytes(UTF_8))}。
+     *
+     * <p><b>必须沿用原推导方式</b>：UUID 一变，世界里已存在的头颅与新生成的同名头颅
+     * 在 {@code ItemStack.isSimilar()} 上就不再相等，玩家手上「同一种」头颅会裂成两堆。</p>
+     */
+    private static java.util.UUID skinUuid(String original) {
+        return java.util.UUID.nameUUIDFromBytes(
+                original.getBytes(java.nio.charset.StandardCharsets.UTF_8));
+    }
+
+    /** 现代客户端只接受 https 的贴图地址；RSC 老数据与 dough 默认都写 http。 */
+    private static String https(String url) {
+        if (url == null) return null;
+        return url.startsWith("http://") ? "https://" + url.substring(7) : url;
+    }
+
+    /**
+     * 从 RSC 的 base64 皮肤串里取出 SKIN 贴图 URL。
+     * 解析失败返回 {@code null}，调用方回退到 dough 原逻辑，行为不退化。
+     */
+    private static String skinUrlFromBase64(String base64) {
+        if (base64 == null || base64.isEmpty()) return null;
+        try {
+            String normalized = base64.replace('-', '+').replace('_', '/');
+            int pad = (4 - normalized.length() % 4) % 4;
+            if (pad > 0) normalized = normalized + "=".repeat(pad);
+            String json = new String(java.util.Base64.getDecoder().decode(normalized),
+                    java.nio.charset.StandardCharsets.UTF_8);
+            java.util.regex.Matcher m = SKIN_URL.matcher(json);
+            return m.find() ? m.group(1) : null;
+        } catch (Throwable t) {
+            return null;
         }
     }
 
